@@ -4,9 +4,7 @@ export default function Home() {
   return (
     <main className="max-w-4xl mx-auto px-6 py-16 text-center">
       <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-6">
-        Game Programmer.
-        Maker.
-        Problem Solver.
+        Game Programmer. Maker. Problem Solver.
       </h1>
 
       <p className="text-lg text-gray-700 mb-8 leading-relaxed">
