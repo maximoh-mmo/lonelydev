@@ -1,6 +1,11 @@
 import { Link } from 'react-router-dom';
 
 export default function ProjectCard({ title, description, imageUrl, link }) {
+    const isAbsoluteUrl = /^(https?:)?\/\//.test(imageUrl);
+    const fullImageUrl = isAbsoluteUrl
+      ? imageUrl
+      : `${import.meta.env.BASE_URL}${imageUrl.replace(/^\/+/, '')}`;
+
     return (
       <div className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition">
         <img
