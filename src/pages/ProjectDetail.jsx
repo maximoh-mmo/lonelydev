@@ -65,7 +65,7 @@ export default function ProjectDetail() {
   const isAbsoluteUrl = /^(https?:)?\/\//.test(project.imageUrl);
   const fullImageUrl = isAbsoluteUrl
     ? project.imageUrl
-    : `${import.meta.env.BASE_URL}${imageUrl.replace(/^\/+/, '')}`;
+    : `${import.meta.env.BASE_URL}${project.imageUrl.replace(/^\/+/, '')}`;
 
   return (
     <main className="max-w-4xl mx-auto p-6">
