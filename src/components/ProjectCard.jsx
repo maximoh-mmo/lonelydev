@@ -9,7 +9,7 @@ export default function ProjectCard({ title, description, imageUrl, link }) {
     return (
       <div className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition">
         <img
-          src={imageUrl}
+          src={fullImageUrl}
           alt={title}
           className="w-full h-48 object-cover"
         />
