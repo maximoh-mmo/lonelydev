@@ -62,6 +62,10 @@ export default function ProjectDetail() {
   if (!project) {
     return <div className="p-6 text-center text-gray-500">Project not found.</div>;
   }
+  const isAbsoluteUrl = /^(https?:)?\/\//.test(project.imageUrl);
+  const fullImageUrl = isAbsoluteUrl
+    ? project.imageUrl
+    : `${import.meta.env.BASE_URL}${imageUrl.replace(/^\/+/, '')}`;
 
   return (
     <main className="max-w-4xl mx-auto p-6">
@@ -79,7 +83,7 @@ export default function ProjectDetail() {
       )}
       {!project.videoId && (
         <img
-          src={project.imageUrl}
+          src={project.fullImageUrl}
           alt={project.title}
           className="rounded-lg shadow-md w-full h-auto"
         />
