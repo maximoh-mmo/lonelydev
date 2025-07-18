@@ -83,7 +83,7 @@ export default function ProjectDetail() {
       )}
       {!project.videoId && (
         <img
-          src={project.fullImageUrl}
+          src={fullImageUrl}
           alt={project.title}
           className="rounded-lg shadow-md w-full h-auto"
         />
