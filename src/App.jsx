@@ -17,6 +17,7 @@ function App() {
         <main className="max-w-4xl mx-auto p-6 text-center mt-20">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/lonelydev" element={<Home />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
