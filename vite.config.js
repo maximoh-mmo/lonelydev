@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/lonelydev/',
+  base: '/',
   server: {
     historyApiFallback: true, // ✅ allows SPA routing
   }
