@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar'; // adjust if needed
 import Home from './pages/Home';
 import Projects from './pages/Projects';
@@ -7,11 +7,9 @@ import Contact from './pages/Contact';
 import ProjectDetail from './pages/ProjectDetail';
 import Kumiko from './pages/Kumiko';
 import Keyboard from './pages/Keyboard';
-import React from 'react';
 
 function App() {
   return (
-    <Router>
       <div className="bg-gray-100 min-h-screen">
         <Navbar />
         <main className="max-w-4xl mx-auto p-6 text-center mt-20">
@@ -27,7 +25,6 @@ function App() {
           </Routes>
         </main>
       </div>
-    </Router>
   );
 }
 
