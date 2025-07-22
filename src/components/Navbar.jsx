@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { Menu, X } from 'lucide-react';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,11 +22,11 @@ export default function Navbar() {
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
         >
-          {isOpen ? (
-            <svg className="w-6 h-6" /* ... */>/* X icon */</svg>
-          ) : (
-            <svg className="w-6 h-6" /* ... */>/* Hamburger icon */</svg>
-          )}
+           {isOpen ? (
+             <X className="w-6 h-6" />
+           ) : (
+             <Menu className="w-6 h-6" />
+           )}
         </button>
       </div>
 
