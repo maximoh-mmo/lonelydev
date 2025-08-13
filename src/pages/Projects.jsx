@@ -13,7 +13,7 @@ export default function Projects() {
           />
           <ProjectCard
             title="Untitled"
-            description="A stylized 3D platform adventure inspired by Zelda, focused on environmental puzzles and exploration. Currently in development in Unreal Engine 5.6.” 
+            description="A stylized 3D platform adventure inspired by Zelda, focused on environmental puzzles and exploration. Currently in development in Unreal Engine 5.6."
             imageUrl="/images/prophecy-of-ash.png"
             link="/projects/prophecy-of-ash"
           />
