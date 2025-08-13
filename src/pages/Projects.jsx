@@ -24,7 +24,7 @@ export default function Projects() {
           
           <ProjectCard
             title="Kyoto Conflict"
-            description="A fast-paced online FPS set in a futuristic Japanese suburb, blending advanced movement mechanics with tactical capture-and-defend gameplay. Built in Unreal Engine 5.5. *
+            description="A fast-paced online FPS set in a futuristic Japanese suburb, blending advanced movement mechanics with tactical capture-and-defend gameplay. Built in Unreal Engine 5.5."
             imageUrl="/images/kyoto-conflict.png"
             link="/projects/kyoto-conflict"
           />
