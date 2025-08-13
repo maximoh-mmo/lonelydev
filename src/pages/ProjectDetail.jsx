@@ -33,11 +33,7 @@ const projectData = {
   'trippy-stargnome': {
     title: 'Trippy Stargnome',
     imageUrl: '/images/trippy-stargnome.png',
-    description: `Trippy StarGnome is a 3D sci-fi rail shooter where the player embarks on a psychedelic journey to fend off increasingly powerful waves of alien invaders.
-
-By honing his skills in maintaining a kill streak, the player gradually enhances his arsenal of weapons to eventually defeat them all and liberate his planet.
-
-`,
+    description: `Trippy Stargnome is a fast-paced, 3D sci-fi rail shooter where players blast through vibrant, surreal landscapes on a mission to repel waves of alien invaders. While the player’s path through the level is tethered to a predefined route, movement remains free within the rail’s boundaries, allowing for precise aiming, evasive maneuvers, and obstacle avoidance. Gameplay combines quick reflexes with tactical weapon use, offering a diverse arsenal including rapid-fire projectiles, guided missiles, and high-energy lasers. Levels feature dynamic enemy formations, environmental hazards, and collectible power-ups to keep the action unpredictable and engaging.`,
     roles: ['Character movement', 'Camera system', 'Puzzle design'],
     tech: ['Unity', 'C#', 'Trello', 'Git'],
     githubLink: 'https://github.com/maximoh-mmo/trippy-gnome',
