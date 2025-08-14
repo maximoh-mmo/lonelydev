@@ -69,7 +69,6 @@ const projectData = {
     videoId: 'YzwHw-e1L8w'
   }
 };
-};
 
 export default function ProjectDetail() {
   const { projectId } = useParams();
