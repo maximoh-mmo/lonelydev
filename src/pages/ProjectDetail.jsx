@@ -14,9 +14,9 @@ const projectData = {
     ],
     roles: [],
     tech: ['Unreal Engine 5', 'Blueprints', 'Multiplayer Replication', 'First-Person Systems', 'Network Programming'],
-    githubLink: '',
+    githubLink: 'https://github.com/IISkullsII/kyoto_conflict',
     itchLink: 'https://games-academy.itch.io/kyoto-conflict',
-    videoId: ''
+    videoId: 'jWcOfbf_yOU'
   },
   'steambrawl': {
     title: 'SteamBrawl',
@@ -31,9 +31,9 @@ const projectData = {
     ],
     roles: [],
     tech: ['Unreal Engine 5', 'Steam Online Subsystem', 'Blueprints', 'Multiplayer Networking', 'AI Behavior Trees'],
-    githubLink: '',
+    githubLink: 'https://github.com/Atzimilian/AMB',
     itchLink: 'https://games-academy.itch.io/steambrawl',
-    videoId: ''
+    videoId: 'eoslJcxZ5fQ'
   },
   'prophecy-of-ash': {
     title: 'Prophecy of Ash',
@@ -47,9 +47,9 @@ const projectData = {
     ],
     roles: [],
     tech: ['Unreal Engine 4', 'Blueprint Scripting', 'Cinematic Tools', 'Quest System Integration'],
-    githubLink: '',
+    githubLink: 'https://github.com/maximoh-mmo/Prophecy-of-Ash',
     itchLink: 'https://games-academy.itch.io/prophecy-of-ash',
-    videoId: ''
+    videoId: 'kJjXn4JBC5A'
   },
   'trippy-stargnome': {
     title: 'Trippy Stargnome',
