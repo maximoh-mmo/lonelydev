@@ -12,10 +12,10 @@ export default function Projects() {
             link="/projects/prophecy-of-ash"
           />
           <ProjectCard
-            title="Untitled"
+            title="Lost Keepers"
             description="A stylized 3D platform adventure inspired by Zelda, focused on environmental puzzles and exploration. Currently in development in Unreal Engine 5.6."
-            imageUrl="/images/prophecy-of-ash.png"
-            link="/projects/prophecy-of-ash"
+            imageUrl="/images/lost-keepers.png"
+            link="/projects/lost-keepers"
           />
         </div>
         <br></br>
