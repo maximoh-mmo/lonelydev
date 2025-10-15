@@ -163,3 +163,64 @@ export default function Keyboard() {
           <h3>Broader lessons</h3>
           <ul className="list-disc ml-6">
             <li>Iterative problem solving and design refinement</li>
+            <li>Patience with hardware debugging</li>
+            <li>Bridging the physical and digital — from keypress to user experience</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Where It’s At Now</h2>
+          <p>
+            My <strong>wireless, per-key RGB Charybdis</strong> is fully functional and my daily driver. The trackball remains a work in progress, waiting for a new sensor and another PCB revision.
+          </p>
+          <p>Even without it, the project achieved its core goals:</p>
+          <ul className="list-disc ml-6">
+            <li>Fully wireless Bluetooth connectivity</li>
+            <li>Battery operation</li>
+            <li>Per-key RGB lighting</li>
+            <li>Modular, upgradable hardware</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Why It Matters</h2>
+          <p>
+            For me, this project sits right at the intersection of <strong>engineering, design, and interactivity</strong> — the same intersection that defines great game programming. It’s about
+            building systems that respond to input, managing complexity, and refining performance — whether that’s pixels on a screen or electrons on a PCB.
+          </p>
+        </section>
+
+        <section>
+          <h2>Gallery</h2>
+          <figure className="my-6">
+            <img
+              src="/images/final-keyboard.jpg"
+              alt="Finished wireless RGB Charybdis keyboard"
+              className="rounded-lg shadow-md mx-auto"
+            />
+            <figcaption className="text-sm text-gray-400 text-center">
+              The finished wireless, per-key RGB Charybdis — functional, bright, and entirely untethered.
+            </figcaption>
+          </figure>
+          <figure className="my-6">
+            <img
+              src="/images/debugging-session.jpg"
+              alt="Firmware debugging output"
+              className="rounded-lg shadow-md mx-auto"
+            />
+            <figcaption className="text-sm text-gray-400 text-center">
+              Firmware debugging session during custom SPI driver development.
+            </figcaption>
+          </figure>
+        </section>
+
+        <footer className="mt-10 text-gray-500 italic">
+          <p>
+            What started as “can I make this keyboard wireless?” evolved into writing my own firmware drivers, rethinking power design, and bridging hardware with software — exactly the kind of
+            curiosity and persistence I aim to bring to game development.
+          </p>
+        </footer>
+      </article>
+    </section>
+  );
+}
