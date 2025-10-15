@@ -28,7 +28,7 @@ export default function Home() {
           🕹️ <Link to="/Projects" className="inline-block transition-transform duration-200 hover:scale-[1.03]"><strong>Explore</strong></Link> semester games that simulate real studio workflows.
         </p>
         <p className="text-gray-800 text-base">
-          🔧 <Link to="/Keyboards" className="inline-block transition-transform duration-200 hover:scale-[1.03]"><strong>Peek behind the curtain</strong></Link> into hardware builds and custom electronics.
+          🔧 <Link to="/Keyboard" className="inline-block transition-transform duration-200 hover:scale-[1.03]"><strong>Peek behind the curtain</strong></Link> into hardware builds and custom electronics.
         </p>
         <p className="text-gray-800 text-base">
           🧗 <strong>Discover</strong> how climbing, coding, and crafting converge.
