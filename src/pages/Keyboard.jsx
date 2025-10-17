@@ -192,12 +192,32 @@ export default function Keyboard() {
           </figure>
           <figure>
             <img
-              src="images/debugging-session.jpg"
+              src="images/keyboard-main-pcb.png"
               alt="Firmware debugging output"
-              className="rounded-xl shadow-md mx-auto"
+              className="rounded-xl shadow-md mx-auto transform transition-transform duration-300 hover:scale-105"
             />
             <figcaption className="text-sm text-gray-500 mt-2 text-center">
-              Firmware debugging session during custom SPI driver development.
+              Keyboard PCB Design.
+            </figcaption>
+          </figure>
+          <figure>
+            <img
+              src="images/keyboard-wiring.jpg"
+              alt="Firmware debugging output"
+              className="rounded-xl shadow-md mx-auto transform transition-transform duration-300 hover:scale-105"
+            />
+            <figcaption className="text-sm text-gray-500 mt-2 text-center">
+              Wired up PCB with RGB and key switch connections
+            </figcaption>
+          </figure>
+          <figure>
+            <img
+              src="images/trackball-prototype.jpg"
+              alt="Firmware debugging output"
+              className="rounded-xl shadow-md mx-auto transform transition-transform duration-300 hover:scale-105"
+            />
+            <figcaption className="text-sm text-gray-500 mt-2 text-center">
+              Trackball WIP Prototype
             </figcaption>
           </figure>
         </div>
