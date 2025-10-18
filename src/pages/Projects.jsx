@@ -29,7 +29,7 @@ export default function Projects() {
               <div className="w-full md:max-w-md">
                 <ProjectCard
                   title={project.title}
-                  description={project.shortDescription || project.description}
+                  description={project.shortDescription}
                   imageUrl={project.imageUrl}
                   link={`/projects/${project.id}`}
                 />
