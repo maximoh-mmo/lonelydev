@@ -11,20 +11,22 @@ export default function Projects() {
     const isOdd = projectArray.length % 2 !== 0;
 
     return (
-      <div className="grid md:grid-cols-2 gap-8 justify-items-center">
+      <div className="grid md:grid-cols-2 gap-8 justify-center">
         {projectArray.map((project, index) => {
           const isFirst = index === 0;
+          const shouldCenter = isOdd && isFirst;
 
           return (
             <div
               key={project.id}
               className={
-                isOdd && isFirst
-                  ? 'md:col-span-2 flex justify-center w-full'
-                  : 'w-full flex justify-center'
+                shouldCenter
+                  ? "md:col-span-2 flex justify-center"
+                  : "flex justify-center"
               }
             >
-              <div className="max-w-lg w-full">
+              {/* Keep consistent width across all cards */}
+              <div className="w-full md:max-w-md">
                 <ProjectCard
                   title={project.title}
                   description={project.shortDescription || project.description}
