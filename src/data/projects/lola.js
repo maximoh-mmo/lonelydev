@@ -2,6 +2,7 @@ export default {
     id: 'lola',
     title: 'Lola',
     imageUrl: '/images/lola.png',
+    shortdescription: "A stylized exploration prototype focused on emotional storytelling, puzzles, and environmental design.",
     description: `Stylized narrative prototype with a focus on story, exploration, and emotion.`,
     team: '',
     contributions: [],

@@ -1,56 +1,50 @@
 import ProjectCard from '../components/ProjectCard';
+import projects from '../data/projects';
 
 export default function Projects() {
+
+  const projectList = Object.values(projects);
+  
+  const featuredProjects = projectList.filter(project => project.featured);
+  const otherProjects = projectList.filter(project => !project.featured);
+
   return (
-    <section className="mt-20 text-center">
-      
-        <div className="grid md:grid-cols-2 gap-8">
-          <ProjectCard
-            title="Prophecy of Ash"
-            description="A third-person adventure set in the desert canyons of Solmora, where players battle corrupted creatures and explore the last refuge of the desert elves. Built in Unreal Engine 5.5 over 8 weeks."
-            imageUrl="/images/prophecy-of-ash.png"
-            link="/projects/prophecy-of-ash"
-          />
-          <ProjectCard
-            title="Lost Keepers"
-            description="A stylized 3D platform adventure inspired by Zelda, focused on environmental puzzles and exploration. Currently in development in Unreal Engine 5.6."
-            imageUrl="/images/lost-keepers.png"
-            link="/projects/lost-keepers"
-          />
-        </div>
-        <br></br>
-      <h1 className="text-3xl font-semibold mb-6">Previous Projects</h1>
-      <div className="grid md:grid-cols-2 gap-8">
-          
-          <ProjectCard
-            title="Kyoto Conflict"
-            description="A fast-paced online FPS set in a futuristic Japanese suburb, blending advanced movement mechanics with tactical capture-and-defend gameplay. Built in Unreal Engine 5.5."
-            imageUrl="/images/kyoto-conflict.png"
-            link="/projects/kyoto-conflict"
-          />
+   <section className="mt-20 text-center">
+      {/* Featured Projects */}
+      {featuredProjects.length > 0 && (
+        <>
+          <h1 className="text-3xl font-semibold mb-6">Featured Projects</h1>
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
+            {featuredProjects.map((project) => (
+              <ProjectCard
+                key={project.id}
+                title={project.title}
+                description={project.shortDescription || project.description}
+                imageUrl={project.imageUrl}
+                link={`/projects/${project.id}`}
+              />
+            ))}
+          </div>
+        </>
+      )}
 
-          <ProjectCard
-            title="SteamBrawl"
-            description="An 8-player online auto-battler set in a post-apocalyptic steampunk world, where players recruit, upgrade, and position units before clashing in tactical duels. Built in Unreal Engine 5.4 over 10 weeks."
-            imageUrl="/images/steambrawl.png"
-            link="/projects/steambrawl"
-          />
-
-          <ProjectCard
-            title="Trippy Stargnome"
-            description="A psychedelic 3D sci-fi rail shooter where players battle waves of alien invaders, upgrading their arsenal through kill streaks to liberate their home planet."
-            imageUrl="/images/trippy-stargnome.png"
-            link="/projects/trippy-stargnome"
-          />
-
-          <ProjectCard
-            title="Lola"
-            description="A stylized exploration prototype focused on emotional storytelling, puzzles, and environmental design."
-            imageUrl="/images/lola.png"
-            link="/projects/lola"
-          />
-        </div>
-      
+      {/* Previous Projects */}
+      {previousProjects.length > 0 && (
+        <>
+          <h1 className="text-3xl font-semibold mb-6">Previous Projects</h1>
+          <div className="grid md:grid-cols-2 gap-8">
+            {previousProjects.map((project) => (
+              <ProjectCard
+                key={project.id}
+                title={project.title}
+                description={project.shortDescription || project.description}
+                imageUrl={project.imageUrl}
+                link={`/projects/${project.id}`}
+              />
+            ))}
+          </div>
+        </>
+      )}
     </section>
   );
 }

@@ -3,6 +3,7 @@ export default {
     title: 'Kyoto Conflict',
     imageUrl: '/images/kyoto-conflict.png',
     description: `Step into the pulsating heart of a futuristic Japanese suburb...`,
+    shortdescription: "A fast-paced online FPS set in a futuristic Japanese suburb, blending advanced movement mechanics with tactical capture-and-defend gameplay. Built in Unreal Engine 5.5.",
     team: `Developed by a Games Academy student team...`,
     contributions: [
       ['Advanced Movement System', 'Implemented fluid first-person movement mechanics...'],
