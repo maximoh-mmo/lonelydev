@@ -13,3 +13,5 @@ export const projects = {
   [lola.id]: lola,
   [lostKeepers.id]: lostKeepers
 };
+
+export default projects;
