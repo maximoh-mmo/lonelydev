@@ -81,6 +81,14 @@ export default function ProjectDetail() {
         </>
       )}
 
+      {/* Reflections */}
+      {project.reflections && (
+        <>
+          <h2 className="text-2xl font-semibold mb-2">Reflections</h2>
+          <p className="text-gray-700 mb-6">{project.reflections}</p>
+        </>
+      )}
+
       {/* Tech */}
       <h2 className="text-2xl font-semibold mb-2">Technologies</h2>
       <ul className="list-disc list-inside mb-6 text-gray-600">

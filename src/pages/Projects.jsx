@@ -25,7 +25,6 @@ export default function Projects() {
                   : "flex justify-center"
               }
             >
-              {/* Keep consistent width across all cards */}
               <div className="w-full md:max-w-md">
                 <ProjectCard
                   title={project.title}
