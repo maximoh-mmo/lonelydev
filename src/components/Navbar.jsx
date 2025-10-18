@@ -8,6 +8,7 @@ export default function Navbar() {
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        <span className="text-xl font-bold text-gray-800">Max Heinze</span>
         <ul className="hidden md:flex gap-6 text-gray-700 font-medium">
           <li><Link to="/" className="hover:text-blue-600 transition">Home</Link></li>
           <li><Link to="/projects" className="hover:text-blue-600 transition">Projects</Link></li>
