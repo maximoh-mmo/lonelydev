@@ -48,7 +48,7 @@ export default function Projects() {
         <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4">
           Projects
         </h1>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+        <p className="text-lg text-gray-600 mx-auto">
           Current and previous selected Game projects. Additional projects can be found on my <a
           href="https://github.com/maximoh-mmo"
           target="_blank"
