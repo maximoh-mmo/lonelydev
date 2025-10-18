@@ -43,10 +43,20 @@ export default function Projects() {
 
   return (
     <section className="mt-20 text-center">
+      {/* Header */}
+      <header className="text-center mb-12">
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4">
+          Projects
+        </h1>
+        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          Current and previous selected Game projects. Additional projects can be found on my <a href="https://github.com/maximoh-mmo" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-semibold">GitHub profile</a>.
+        </p>
+      </header>
+
       {/* Featured Projects */}
       {featuredProjects.length > 0 && (
         <>
-          <h1 className="text-3xl font-semibold mb-6">Featured Projects</h1>
+          <h2 className="text-2xl font-semibold mb-6">Active Development:</h2>
           {renderProjectGrid(featuredProjects)}
           <div className="my-12" />
         </>
@@ -55,7 +65,7 @@ export default function Projects() {
       {/* Previous Projects */}
       {previousProjects.length > 0 && (
         <>
-          <h1 className="text-3xl font-semibold mb-6">Previous Projects</h1>
+          <h2 className="text-2xl font-semibold mb-6">Previous Projects:</h2>
           {renderProjectGrid(previousProjects)}
         </>
       )}
