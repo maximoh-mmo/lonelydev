@@ -6,7 +6,7 @@ export default function Projects() {
   const projectList = Object.values(projects);
   
   const featuredProjects = projectList.filter(project => project.featured);
-  const otherProjects = projectList.filter(project => !project.featured);
+  const previousProjects = projectList.filter(project => !project.featured);
 
   return (
    <section className="mt-20 text-center">
