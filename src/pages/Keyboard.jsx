@@ -1,6 +1,6 @@
 export default function Keyboard() {
   return (
-    <main className="max-w-4xl mx-auto px-6 py-16 text-gray-700 leading-relaxed">
+    <main className="max-w-4xl mx-auto px-6 py-16 text-left">
       <header className="text-center mb-12">
         <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4">
           Making the Charybdis Wireless — and Then Taking It Further

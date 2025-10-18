@@ -44,7 +44,7 @@ export default function Projects() {
   return (
     <section className="mt-20 text-center">
       {/* Header */}
-      <header className="text-center mb-12">
+      <header className="max-w-4xl mx-auto px-6 py-16 text-left">
         <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4">
           Projects
         </h1>
