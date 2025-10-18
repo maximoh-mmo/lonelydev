@@ -19,7 +19,7 @@ export default function Home() {
 
       <p className="text-lg text-gray-700 mb-8 leading-relaxed">
         I pivoted from leading teams in hospitality and public service into the world of game development,
-        earning fluency in <strong>C++</strong>, <strong>C#</strong>, and <strong>Unreal Engine</strong> at Games Academy Berlin.
+        earning fluency in <strong>C++</strong>, <strong>C#</strong>, proficiency working in both <strong>Unity</strong> and <strong>Unreal</strong> at Games Academy Berlin.
         Now, I apply precision and creativity across digital and physical projects that challenge both logic and design.
       </p>
 
@@ -31,7 +31,7 @@ export default function Home() {
           🔧 <Link to="/Keyboard" className="inline-block transition-transform duration-200 hover:scale-[1.03]"><strong>Peek behind the curtain</strong></Link> into hardware builds and custom electronics.
         </p>
         <p className="text-gray-800 text-base">
-          🧗 <strong>Discover</strong> how climbing, coding, and crafting converge.
+          🧗 <Link to="/Climbing" className="inline-block transition-transform duration-200 hover:scale-[1.03]"><strong>Discover</strong></Link> how climbing, coding, and crafting converge.
         </p>
       </div>
 
