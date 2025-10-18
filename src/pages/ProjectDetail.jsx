@@ -12,8 +12,7 @@ const projectData = {
       ['Multiplayer Respawn Systems', 'Developed robust respawn mechanics for the online-only multiplayer environment, managing player spawning logic, team balance, and strategic spawn point selection to maintain competitive flow during intense capture/defend scenarios.'],
       ['User Interface Design', 'Created comprehensive UI systems for this competitive FPS, including HUD elements for health, ammunition, objective status, team information, and real-time match progression feedback essential for the capture/defend gameplay mode.']
     ],
-    roles: [],
-    tech: ['Unreal Engine 5', 'Blueprints', 'Multiplayer Replication', 'First-Person Systems', 'Network Programming'],
+    tech: ['Unreal Engine 5.4', 'Blueprints', 'Multiplayer Replication', 'First-Person Systems', 'Network Programming'],
     githubLink: 'https://github.com/IISkullsII/kyoto_conflict',
     itchLink: 'https://games-academy.itch.io/kyoto-conflict',
     videoId: 'jWcOfbf_yOU'
@@ -30,7 +29,7 @@ const projectData = {
       ['Result Computation Systems', 'Built robust systems for calculating battle outcomes, tracking player progression through rounds, managing Battle Royale mechanics, and determining final victory conditions across the 8-player competitive structure.']
     ],
     roles: [],
-    tech: ['Unreal Engine 5', 'Steam Online Subsystem', 'Blueprints', 'Multiplayer Networking', 'AI Behavior Trees'],
+    tech: ['Unreal Engine 5.3', 'Steam Online Subsystem', 'Blueprints', 'Multiplayer Networking', 'AI Behavior Trees'],
     githubLink: 'https://github.com/Atzimilian/AMB',
     itchLink: 'https://games-academy.itch.io/steambrawl',
     videoId: 'eoslJcxZ5fQ'
@@ -46,7 +45,7 @@ const projectData = {
       ['Interaction Systems', 'Created robust player interaction frameworks for NPCs, objects, and quest elements, enabling seamless gameplay flow between exploration, combat, and story progression.']
     ],
     roles: [],
-    tech: ['Unreal Engine 4', 'Blueprint Scripting', 'Cinematic Tools', 'Quest System Integration'],
+    tech: ['Unreal Engine 5.5', 'Blueprint Scripting', 'Cinematic Tools', 'Quest System Integration'],
     githubLink: 'https://github.com/maximoh-mmo/Prophecy-of-Ash',
     itchLink: 'https://games-academy.itch.io/prophecy-of-ash',
     videoId: 'kJjXn4JBC5A'
@@ -62,7 +61,7 @@ const projectData = {
     tech: ['Unreal Engine 5.6', 'Blueprint Scripting', 'Cinematic Tools', 'Quest System Integration'],
     githubLink: 'https://github.com/maximoh-mmo/Prophecy-of-Ash',
     itchLink: 'https://games-academy.itch.io/prophecy-of-ash',
-    videoId: 'kJjXn4JBC5A'
+    videoId: ''
   },
   'trippy-stargnome': {
     title: 'Trippy Stargnome',
@@ -142,14 +141,6 @@ export default function ProjectDetail() {
       {/* Description */}
       <p className="text-gray-700 mb-6">{project.description}</p>
 
-      {/* Team Info (if present) */}
-      {project.team && (
-        <>
-          <h2 className="text-2xl font-semibold mb-2">Team</h2>
-          <p className="text-gray-700 mb-6">{project.team}</p>
-        </>
-      )}
-
       {/* Contributions (if present) */}
       {project.contributions && project.contributions.length > 0 && (
         <>
@@ -161,6 +152,14 @@ export default function ProjectDetail() {
               </li>
             ))}
           </ul>
+        </>
+      )}
+
+      {/* Team Info (if present) */}
+      {project.team && (
+        <>
+          <h2 className="text-2xl font-semibold mb-2">Team</h2>
+          <p className="text-gray-700 mb-6">{project.team}</p>
         </>
       )}
 
