@@ -3,7 +3,7 @@
     title: 'Trippy Stargnome',
     imageUrl: '/images/trippy-stargnome.png',
     description: `Trippy Stargnome is a fast-paced, 3D sci-fi rail shooter where players blast through vibrant, surreal landscapes on a mission to repel waves of alien invaders. While the player's path through the level is tethered to a predefined route, movement remains free within the rail's boundaries, allowing for precise aiming, evasive maneuvers, and obstacle avoidance. Gameplay combines quick reflexes with tactical weapon use, offering a diverse arsenal including rapid-fire projectiles, guided missiles, and high-energy lasers. Levels feature dynamic enemy formations, environmental hazards, and collectible power-ups to keep the action unpredictable and engaging.`,
-    shortdescription: "A psychedelic 3D sci-fi rail shooter where players battle waves of alien invaders, upgrading their arsenal through kill streaks to liberate their home planet.",
+    shortDescription: "A psychedelic 3D sci-fi rail shooter where players battle waves of alien invaders, upgrading their arsenal through kill streaks to liberate their home planet.",
     team: `Developed by a 7-person team: one producer, three designers, two artists, and myself as the sole programmer. My work encompassed all gameplay programming, UI design and implementation, AI systems, audio integration, and gameplay polish.`,
     contributions: [
       ['Waypoint-Based Rail System','Engineered a fully editable waypoint system, enabling level designers to easily define and adjust the player\'s route within the Unreal Engine editor. This approach streamlined iteration and allowed for rapid level design experimentation.'],

@@ -3,7 +3,7 @@ export default {
     title: 'Lost Keepers',
     imageUrl: '/images/lost-keepers.png',
     description: `A stylized 3D platform adventure inspired by Zelda, focused on environmental puzzles and exploration. Currently in development in Unreal Engine 5.6.`,
-    shortdescription: "A stylized 3D platform adventure inspired by Zelda, focused on environmental puzzles and exploration. Currently in development in Unreal Engine 5.6.", 
+    shortDescription: "A stylized 3D platform adventure inspired by Zelda, focused on environmental puzzles and exploration. Currently in development in Unreal Engine 5.6.", 
     team: ``,
     contributions: [
     ],
