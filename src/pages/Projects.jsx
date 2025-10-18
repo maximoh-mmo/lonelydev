@@ -49,7 +49,12 @@ export default function Projects() {
           Projects
         </h1>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-          Current and previous selected Game projects. Additional projects can be found on my <a href="https://github.com/maximoh-mmo" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-semibold">GitHub profile</a>.
+          Current and previous selected Game projects. Additional projects can be found on my <a
+          href="https://github.com/maximoh-mmo"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline"
+        >GitHub</a>.
         </p>
       </header>
 
