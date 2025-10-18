@@ -181,16 +181,27 @@ export default function ProjectDetail() {
       </ul>
 
       {/* External Links */}
-      {project.githubLink && (
-        <a
-          href={project.githubLink}
-          target="_blank"
-          rel="noopener noreferrer"
+      <div className="grid sm:grid-cols-2 gap-6 mb-12">
+          {project.githubLink && (
+            <a href={project.githubLink}
+            target="_blank"
+            rel="noopener noreferrer"
           className="inline-block mt-4 px-6 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition"
         >
           View on GitHub
         </a>
       )}
+      {project.itchLink && (
+        <a
+          href={project.itchLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block mt-4 px-6 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition"
+        >
+          View on Itch.io
+        </a>
+      )}
+      </div>
     </main>
   );
 }
