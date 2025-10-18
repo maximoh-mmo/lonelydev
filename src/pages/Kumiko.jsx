@@ -125,13 +125,11 @@ export default function Kumiko() {
         one clean final form.
       </p>
 
-      <div className="grid sm:grid-cols-2 gap-6 mb-12">
         <img
           src="/images/small-frame.jpg"
           alt="Custom frame assembly — miter joints and color contrast."
           className="rounded-xl shadow-md mx-auto transform transition-transform duration-300 hover:scale-105"
         />
-      </div>
 
       <figure className="mb-12">
         <img
@@ -143,7 +141,7 @@ export default function Kumiko() {
           Final framed Kumiko panel — precise geometry and warm tone balance.
         </figcaption>
       </figure>
-
+      
       {/* --- Larger Wall Panel --- */}
       <h2 className="text-2xl font-bold text-gray-900 mb-4">
         Scaling Up — A Larger Wall Panel
@@ -212,6 +210,16 @@ export default function Kumiko() {
         <img
           src="/images/box-lid-wip.jpg"
           alt="Box lid — adding contrasting elements."
+          className="rounded-xl shadow-md mx-auto transform transition-transform duration-300 hover:scale-105"
+        />
+        <img
+          src="/images/box-kumiko-wip.jpg"
+          alt="Box body — work in progress, kumiko pattern."
+          className="rounded-xl shadow-md mx-auto transform transition-transform duration-300 hover:scale-105"
+        />
+        <img
+          src="/images/box-finished.jpg"
+          alt="Box finished — kumiko pattern on lid, box body."
           className="rounded-xl shadow-md mx-auto transform transition-transform duration-300 hover:scale-105"
         />
       </div>
