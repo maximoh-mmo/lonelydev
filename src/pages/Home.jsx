@@ -13,7 +13,7 @@ export default function Home() {
 
 >
   <strong>Kumiko panels</strong>
-</Link> and <Link to="/Keyboard" className="inline-block transition-transform duration-200 hover:scale-[1.03]">split ergonomic keyboards</Link> —
+</Link> and <Link to="/Keyboard" className="inline-block transition-transform duration-200 hover:scale-[1.03]"><strong>split ergonomic keyboards</strong></Link> —
         <br></br>I build things that work beautifully.
       </p>
 
