@@ -142,8 +142,7 @@ export default function Climbing() {
           {[
             { id: 'climb1', src: '/images/climb1.jpg', alt: 'Climbing 1' },
             { id: 'climb2', src: '/images/climb2.jpg', alt: 'Climbing 2' },
-            { id: 'climb3', src: '/images/climb3.jpg', alt: 'Climbing 3' },
-            { id: 'climb4', src: '/images/climb4.jpg', alt: 'Climbing 4' }
+            { id: 'climb3', src: '/images/climb3.jpg', alt: 'Climbing 3' }
           ].map((image) => (
             imageErrors[image.id] ? (
               <div 
