@@ -96,7 +96,7 @@ export default function ProjectDetail() {
       </ul>
 
       {/* External Links */}
-      <div className={`flex gap-6 mb-12 ${ (project.githubLink && !project.itchLink) || (!project.githubLink && project.itchLink) ? "justify-center" : "justify-start sm:justify-start"} flex-wrap`}>
+      <div className="flex justify-center gap-6 mb-12 flex-wrap">
           {project.githubLink && (
             <a href={project.githubLink}
             target="_blank"
