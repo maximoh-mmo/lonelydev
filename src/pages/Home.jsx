@@ -14,7 +14,7 @@ export default function Home() {
 >
   <strong>Kumiko panels</strong>
 </Link> and <Link to="/Keyboard" className="inline-block transition-transform duration-200 hover:scale-[1.03]">split ergonomic keyboards</Link> —
-        I build things that work beautifully.
+        <br></br>I build things that work beautifully.
       </p>
 
       <p className="text-lg text-gray-700 mb-8 leading-relaxed">
