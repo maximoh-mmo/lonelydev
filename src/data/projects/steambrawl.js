@@ -12,7 +12,7 @@ export default {
       ['Result Computation Systems', 'Built robust systems for calculating battle outcomes, tracking player progression through rounds, managing Battle Royale mechanics, and determining final victory conditions across the 8-player competitive structure.']
     ],
     roles: [],
-    reflection: `Steambrawl was a rewarding learning experience that tested both my technical skills and collaborative abilities. 
+    reflections: `Steambrawl was a rewarding learning experience that tested both my technical skills and collaborative abilities. 
     I contributed to UI production, AI movement and combat logic, animation, visual effects, audio integration, and battle result calculations, 
     quickly adapting to Unreal Engine and Blueprints. One major challenge was managing time and scope, especially with late-arriving assets, 
     while also navigating self-doubt and refining how I communicated ideas within the team. Reflecting on the project, I learned the importance 

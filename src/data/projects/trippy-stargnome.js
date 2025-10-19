@@ -14,7 +14,7 @@
       ['Technical Support & Git Management','Maintained the project’s Git workflow and provided technical support to the team, resolving issues with builds, version control, and Unreal Engine project setup.'],
       ['Visual Effects & Shaders','Explored and implemented visual effects using Shader Graph and particle systems to enhance the psychedelic aesthetic of the world and weapon interactions.']
     ],
-    reflection: `Trippy Stargnome was an incredible learning experience that tested both my technical and collaborative abilities. 
+    reflections: `Trippy Stargnome was an incredible learning experience that tested both my technical and collaborative abilities. 
     As the sole programmer, I was responsible for implementing all gameplay systems, from player movement and weapon mechanics 
     to enemy spawning and UI functionality. Our team managed time effectively, avoiding crunch by maintaining strong communication and clear deliverables before each gate. 
   

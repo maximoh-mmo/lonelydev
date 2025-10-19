@@ -122,12 +122,16 @@ export default function Kumiko() {
         prototype come together — all the tiny adjustments and tests aligning in
         one clean final form.
       </p>
-
+      <figure className="mb-12">
         <img
           src="/images/small-frame.jpg"
           alt="Custom frame assembly — miter joints and color contrast."
           className="rounded-xl shadow-md mx-auto transform transition-transform duration-300 hover:scale-105"
         />
+            <figcaption className="text-sm text-gray-500 mt-2">
+          Finished Frame, ready for Kumiko panel.
+        </figcaption>
+      </figure>
 
       <figure className="mb-12">
         <img

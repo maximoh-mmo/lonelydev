@@ -11,7 +11,7 @@ export default {
       ['Interaction Systems', 'Created robust player interaction frameworks for NPCs, objects, and quest elements, enabling seamless gameplay flow between exploration, combat, and story progression.']
     ],
     roles: [],
-    reflection: `Prophecy of Ash was an ambitious and highly demanding learning experience that tested both my technical and leadership skills. As the lead programmer and vision keeper, I was responsible for guiding the programming team, implementing AI, gameplay systems, and ensuring a robust and scalable core loop. I also coached less experienced programmers, providing daily support and knowledge transfer while maintaining active development on the game’s key systems.
+    reflections: `Prophecy of Ash was an ambitious and highly demanding learning experience that tested both my technical and leadership skills. As the lead programmer and vision keeper, I was responsible for guiding the programming team, implementing AI, gameplay systems, and ensuring a robust and scalable core loop. I also coached less experienced programmers, providing daily support and knowledge transfer while maintaining active development on the game’s key systems.
 
 One major challenge was navigating a lack of design clarity and limited production planning. Incomplete feature definitions, unreliable design input, and outsourced components forced me to prioritize development and problem-solving under tight deadlines. Managing these responsibilities on top of technical implementation created significant stress, particularly when integrating complex systems like enemy scaling, loot, and the Day-Night cycle.
 
