@@ -12,7 +12,7 @@ export default {
       ['Puzzle & Object Interactions', 'Developed systems for object pickup, carry, and placement mechanics, enabling puzzles and progression throughout the levels.']
     ],
     tech: ['Unity', 'Timeline', 'Shader Graph'],
-    githubLink: 'https://github.com/yourusername/lola',
+    githubLink: '',
     itchLink: '',
     videoId: 'YzwHw-e1L8w'
   }
