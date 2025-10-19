@@ -12,7 +12,8 @@ export default function About() {
 
       <p className="text-lg text-gray-700 mb-10 leading-relaxed">
         I’m a game programmer who loves building things — whether that’s a
-        gameplay system, a hand-cut Kumiko panel, or a custom Bluetooth keyboard.
+        gameplay system, a hand-cut <Link to="/Kumiko" className="inline-block transition-transform duration-200 hover:scale-[1.03]">
+        <strong>Kumiko</strong></Link> panel, or a custom <Link to="/Keyboard" className="inline-block transition-transform duration-200 hover:scale-[1.03]"><strong>Bluetooth keyboards</strong></Link>.
         For me, the joy is in seeing something move from concept to working reality,
         understanding the systems beneath the surface, and refining them until they
         feel effortless.
@@ -28,7 +29,7 @@ export default function About() {
       </p>
 
       <p className="text-lg text-gray-700 mb-10 leading-relaxed">
-        I trained at Games Academy Berlin, focusing on C++, C#, and Unreal Engine,
+        I trained at Games Academy Berlin, focusing on C# C++, Unity and Unreal,
         learning not only how to write clean, performant code but also how to think
         like a developer in a multidisciplinary team. That environment taught me
         how to connect technical work with creative goals — to make code serve the
