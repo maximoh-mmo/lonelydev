@@ -31,7 +31,7 @@ export default function About() {
       </p>
 
       <p className="text-lg text-gray-700 mb-10 leading-relaxed">
-        I trained at Games Academy Berlin, focusing on C# C++, Unity and Unreal,
+        I trained at <a href = "https://games-academy.de/" className="inline-block transition-transform duration-200 hover:scale-[1.03]"><strong>Games Academy</strong></a> Berlin, focusing on C# C++, Unity and Unreal,
         learning not only how to write clean, performant code but also how to think
         like a developer in a multidisciplinary team. That environment taught me
         how to connect technical work with creative goals — to make code serve the
