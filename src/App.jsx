@@ -22,6 +22,7 @@ function App() {
             <Route path="/projects/:projectId" element={<ProjectDetail />} />
             <Route path="/kumiko" element={<Kumiko />} />
             <Route path="/keyboard" element={<Keyboard />} />
+            <Route path="/climbing" element={<Climbing />} />
           </Routes>
         </main>
       </div>
