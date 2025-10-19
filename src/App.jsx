@@ -7,6 +7,7 @@ import Contact from './pages/Contact';
 import ProjectDetail from './pages/ProjectDetail';
 import Kumiko from './pages/Kumiko';
 import Keyboard from './pages/Keyboard';
+import Climbing from './pages/Climbing';
 
 function App() {
   return (
