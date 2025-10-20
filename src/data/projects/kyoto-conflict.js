@@ -23,7 +23,6 @@ export default {
     and prioritizing effectively in the face of shifting responsibilities strengthened the team and enhanced the overall project outcome. Despite the 
     challenges, I am proud of the systems I implemented, the teamwork fostered, and the lessons learned, which will guide my approach to future projects.`,
     tech: ['Unreal Engine 5.4', 'Blueprints', 'Multiplayer Replication', 'First-Person Systems', 'Network Programming'],
-    githubLink: 'https://github.com/IISkullsII/kyoto_conflict',
     itchLink: 'https://games-academy.itch.io/kyoto-conflict',
     videoId: 'jWcOfbf_yOU'
 };

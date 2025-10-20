@@ -13,7 +13,6 @@ export default {
     ],
     roles: [],
     tech: ['Unreal Engine 5.6', 'Blueprint Scripting', 'Cinematic Tools', 'Quest System Integration'],
-    githubLink: 'https://github.com/Ju-Ju13/GhostGame',
     videoId: '',
     featured: true
 }
