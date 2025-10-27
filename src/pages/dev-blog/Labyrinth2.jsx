@@ -150,7 +150,7 @@ public class TileType : ScriptableObject
  
  {/* Class diagram image */}
       <img
-        src="/images/tile-classes.png"
+        src="/images/labyrinth-tiles.png"
         alt="Tile class diagram"
         className="rounded-lg shadow-lg mb-10 w-full object-contain"
       />
@@ -228,7 +228,7 @@ public class TileType : ScriptableObject
       <div className="aspect-video mb-10 rounded-lg overflow-hidden shadow-lg">
         <video
           className="w-full h-full object-cover"
-          src="/video/tile-anim.mp4"
+          src="/video/grid-anim.mp4"
           autoPlay
           loop
           muted

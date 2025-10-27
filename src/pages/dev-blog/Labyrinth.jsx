@@ -48,7 +48,7 @@ export default function Labyrinth() {
           represent tiles by the sides they connect to — for example:
         </p>
 
-        <pre className="bg-gray-900 text-gray-100 rounded-xl p-4 text-sm overflow-x-auto">
+      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-lg mb-6 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed">
 {`[Flags]
 public enum TileConnection
 {
