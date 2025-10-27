@@ -225,7 +225,7 @@ public class TileType : ScriptableObject
       </p>
 
       {/* Animated video */}
-      <div className="aspect-video mb-10 rounded-lg overflow-hidden shadow-lg">
+      <div className="aspect-square mb-10 rounded-lg overflow-hidden shadow-lg">
         <video
           className="w-full h-full object-cover"
           src="/video/grid-anim.mp4"
