@@ -11,7 +11,7 @@ export default function Navbar() {
         <span className="text-xl font-bold text-gray-800">Max Heinze</span>
         <ul className="hidden md:flex gap-6 text-gray-700 font-medium">
           <li><Link to="/" className="hover:text-blue-600 transition">Home</Link></li>
-          <li><Link to="/DevBlogIndex" className="hover:text-blue-600 transition">Dev-Blog</Link></li>
+          <li><Link to="/dev-blog" className="hover:text-blue-600 transition">Dev-Blog</Link></li>
           <li><Link to="/projects" className="hover:text-blue-600 transition">Projects</Link></li>
           <li><Link to="/about" className="hover:text-blue-600 transition">About</Link></li>
           <li><Link to="/contact" className="hover:text-blue-600 transition">Contact</Link></li>
@@ -33,7 +33,7 @@ export default function Navbar() {
       {isOpen && (
         <ul className="md:hidden bg-white px-4 pb-4 space-y-2 shadow-md">
           <li><Link to="/" className="block py-2 text-gray-700 hover:text-blue-600">Home</Link></li>
-          <li><Link to="/DevBlogIndex" className="block py-2 text-gray-700 hover:text-blue-600">Dev-Blog</Link></li>
+          <li><Link to="/dev-blog" className="block py-2 text-gray-700 hover:text-blue-600">Dev-Blog</Link></li>
           <li><Link to="/projects" className="block py-2 text-gray-700 hover:text-blue-600">Projects</Link></li>
           <li><Link to="/about" className="block py-2 text-gray-700 hover:text-blue-600">About</Link></li>
           <li><Link to="/contact" className="block py-2 text-gray-700 hover:text-blue-600">Contact</Link></li>
