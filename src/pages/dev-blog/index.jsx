@@ -21,7 +21,11 @@ export default function DevBlogIndex() {
                 {post.title}
               </h2>
               <p className="text-gray-500 text-sm mb-3">
-                {new Date(post.date).toLocaleDateString()}
+                {new Date(post.date).toLocaleDateString('en-GB', {
+                  day: '2-digit',
+                  month: 'short',
+                  year: 'numeric',
+                })}
               </p>
               <p className="text-gray-700 mb-3">{post.summary}</p>
               <span className="inline-block text-sm text-blue-600 font-semibold">
