@@ -37,7 +37,7 @@ export default function Labyrinth3() {
         about tile positions and equality checks without relying on raw integers.
       </p>
 
-      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-lg mb-8 overflow-x-auto font-mono whitespace-pre">
+      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-lg mb-6 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed">
 {`public struct GridPosition : IEquatable<GridPosition>
 {
     private readonly int _x;
@@ -56,7 +56,7 @@ export default function Labyrinth3() {
       <h2 className="text-2xl font-semibold mb-4">🧭 Input and Movement</h2>
       <p className="mb-6">For player control, we’re using Unity’s Input System directly — just simple key bindings for now:</p>
 
-      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-lg mb-6 overflow-x-auto font-mono whitespace-pre">
+      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-lg mb-6 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed">
 {`_shiftUp = new InputAction("Shift Up");
 _shiftUp.AddBinding("<Keyboard>/W");
 _shiftUp.Enable();`}
@@ -64,7 +64,7 @@ _shiftUp.Enable();`}
 
       <p className="mb-6">When one of these is pressed, we insert the spare tile into the corresponding edge:</p>
 
-      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-lg mb-8 overflow-x-auto font-mono whitespace-pre">
+      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-lg mb-6 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed">
 {`if (_shiftUp.WasPerformedThisFrame())
     InsertTile(new GridPosition(3, 0));`}
       </pre>
@@ -74,7 +74,7 @@ _shiftUp.Enable();`}
         When we insert a tile, we determine which direction the shift should occur — up, down, left, or right — and perform the array manipulation:
       </p>
 
-      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-lg mb-8 overflow-x-auto font-mono whitespace-pre">
+      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-lg mb-6 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed">
 {`private Tile ShiftRowRight(int row)
 {
     var ejected = _tiles[gridSize - 1, row];
@@ -95,7 +95,7 @@ _shiftUp.Enable();`}
         Instead of running dozens of separate coroutines, we batch the updates into one smooth
         animation coroutine:      </p>
 
-      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-lg mb-8 overflow-x-auto font-mono whitespace-pre">
+      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-lg mb-6 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed">
 {`private IEnumerator AnimateAllTiles(float duration = 0.5f)
 {
     var startPositions = new Dictionary<Tile, Vector3>();
@@ -144,7 +144,7 @@ _shiftUp.Enable();`}
         Unity’s <code>[ContextMenu]</code> allows triggering functions from the Inspector — no runtime code required. We applied it to <code>InitializeGrid()</code>:
       </p>
 
-      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-lg mb-8 overflow-x-auto font-mono whitespace-pre">
+      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-lg mb-6 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed">
 {`[ContextMenu("Rebuild Grid")]
 private void InitializeGrid() { ... }`}
       </pre>
