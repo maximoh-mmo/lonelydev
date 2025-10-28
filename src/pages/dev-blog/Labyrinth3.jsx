@@ -1,21 +1,23 @@
 export default function Labyrinth3() {
   return (
-    <article className="prose prose-invert mx-auto">
-      <h1>Making the Labyrinth Shift!</h1>
-      <p>
+    <main className="max-w-3xl mx-auto px-6 py-12 text-gray-800">
+      <h1 className="text-4xl font-bold mb-2">Making the Labyrinth Shift!</h1>
+      <p className="text-gray-500 mb-8">Posted on October 28, 2025</p>
+
+      <p className="mb-6">
         Last time, we laid the groundwork for our digital version of <em>The Crazy Labyrinth</em> —
-        building the concept of a grid, tiles, and a spare tile that can slide into the maze to
-        change its layout.
+        building the concept of a grid, tiles, and a spare tile that can slide into the maze to change its layout.
       </p>
-      <p>
+
+      <p className="mb-8">
         This week, we bring that concept to life. We now have a working Labyrinth grid in Unity,
         complete with tile movement, grid shifting, and a simple input system to control it — all in
         preparation for the procedural generation and gameplay phases ahead.
       </p>
 
-      <h2>🎯 The Goal for This Phase</h2>
-      <p>Our objectives for this step were:</p>
-      <ul>
+      <h2 className="text-2xl font-semibold mb-4">🎯 The Goal for This Phase</h2>
+      <p className="mb-6">Our objectives for this step were:</p>
+      <ul className="list-disc list-inside mb-8 space-y-1">
         <li>Generate a grid of random tile types (Straight, Bend, or T-junction)</li>
         <li>Keep track of the spare tile (the “one out” tile that will be pushed in)</li>
         <li>Allow inserting the spare tile from any valid side of the grid</li>
@@ -23,25 +25,20 @@ export default function Labyrinth3() {
         <li>Animate tile movement to visually represent the shifting labyrinth</li>
         <li>Set up basic keyboard controls for shifting (W, A, S, D)</li>
       </ul>
-      <p>
-        It’s a deceptively simple mechanic, but it’s the foundation that the whole labyrinth
-        gameplay sits on.
+      <p className="mb-8">It’s a deceptively simple mechanic, but it’s the foundation that the whole labyrinth gameplay sits on.</p>
+
+      <h2 className="text-2xl font-semibold mb-4">🧩 Structuring the System</h2>
+      <p className="mb-6">
+        The core of the project is the <code>LabyrinthGrid</code> component, managing a 2D array of <code>Tile</code> objects
+        and the spare tile, along with logic to insert and shift them around the board.
+      </p>
+      <p className="mb-6">
+        We also introduced a lightweight <code>GridPosition</code> struct to represent coordinates — making it easier to reason
+        about tile positions and equality checks without relying on raw integers.
       </p>
 
-      <h2>🧩 Structuring the System</h2>
-      <p>
-        The core of the project is the new <code>LabyrinthGrid</code> component. It manages a 2D
-        array of <code>Tile</code> objects and the spare tile, along with the logic to insert and
-        shift them around the board.
-      </p>
-      <p>
-        We also introduced a lightweight <code>GridPosition</code> struct to represent coordinates —
-        making it easier to reason about tile positions and equality checks without relying on raw
-        integers.
-      </p>
-
-      <pre>
-        <code className="language-csharp">{`public struct GridPosition : IEquatable<GridPosition>
+      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-lg mb-8 overflow-x-auto font-mono whitespace-pre">
+{`public struct GridPosition : IEquatable<GridPosition>
 {
     private readonly int _x;
     private readonly int _y;
@@ -53,70 +50,53 @@ export default function Labyrinth3() {
     // Custom operators for clarity and convenience
     public static GridPosition operator +(GridPosition a, GridPosition b) =>
         new GridPosition(a._x + b._x, a._y + b._y);
-}`}</code>
+}`}
       </pre>
 
-      <p>
-        It’s small, but it keeps our grid logic clean and clear, especially when preventing illegal
-        or reversed moves.
-      </p>
+      <h2 className="text-2xl font-semibold mb-4">🧭 Input and Movement</h2>
+      <p className="mb-6">For player control, we’re using Unity’s Input System directly — just simple key bindings for now:</p>
 
-      <h2>🧭 Input and Movement</h2>
-      <p>For player control, we’re using Unity’s Input System directly — just simple key bindings for now:</p>
-
-      <pre>
-        <code className="language-csharp">{`_shiftUp = new InputAction("Shift Up");
+      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-lg mb-6 overflow-x-auto font-mono whitespace-pre">
+{`_shiftUp = new InputAction("Shift Up");
 _shiftUp.AddBinding("<Keyboard>/W");
-_shiftUp.Enable();`}</code>
+_shiftUp.Enable();`}
       </pre>
 
-      <p>When one of these is pressed, we insert the spare tile into the corresponding edge:</p>
+      <p className="mb-6">When one of these is pressed, we insert the spare tile into the corresponding edge:</p>
 
-      <pre>
-        <code className="language-csharp">{`if (_shiftUp.WasPerformedThisFrame())
-    InsertTile(new GridPosition(3, 0));`}</code>
+      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-lg mb-8 overflow-x-auto font-mono whitespace-pre">
+{`if (_shiftUp.WasPerformedThisFrame())
+    InsertTile(new GridPosition(3, 0));`}
       </pre>
 
-      <p>
-        Later on, we’ll expand this to handle all valid insert points and UI interaction (think
-        glowing arrows you can click or tap).
+      <h2 className="text-2xl font-semibold mb-4">🔄 Shifting the Grid</h2>
+      <p className="mb-6">
+        When we insert a tile, we determine which direction the shift should occur — up, down, left, or right — and perform the array manipulation:
       </p>
 
-      <h2>🔄 Shifting the Grid</h2>
-      <p>
-        Here’s where the fun happens. When we insert a tile, we determine which direction the shift
-        should occur — up, down, left, or right — and perform the appropriate array manipulation:
-      </p>
-
-      <pre>
-        <code className="language-csharp">{`private Tile ShiftRowRight(int row)
+      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-lg mb-8 overflow-x-auto font-mono whitespace-pre">
+{`private Tile ShiftRowRight(int row)
 {
     var ejected = _tiles[gridSize - 1, row];
     for (var x = gridSize - 1; x > 0; x--)
         _tiles[x, row] = _tiles[x - 1, row];
     _tiles[0, row] = _spareTile;
     return ejected;
-}`}</code>
+}`}
       </pre>
 
-      <p>
-        This same pattern applies for shifting left or vertically — the tile on the opposite side is
-        “ejected,” becoming the new spare tile.
-      </p>
-      <p>
-        To prevent the player from just undoing their last move (as per the board game’s rules), we
-        also store the last insertion point and disallow a direct reversal.
+      <p className="mb-8">
+        This pattern applies for all directions, ejecting the opposite tile and updating the spare. To prevent undoing the last move, we track the previous insertion and disallow reversals.
       </p>
 
-      <h2>🌀 Visual Movement with Animation</h2>
-      <p>
+      <h2 className="text-2xl font-semibold mb-4">🌀 Visual Movement with Animation</h2>
+      <p className="mb-6">
         We now animate every tile when the labyrinth shifts, so it looks fluid and satisfying.
         Instead of running dozens of separate coroutines, we batch the updates into one smooth
-        animation coroutine:
-      </p>
+        animation coroutine:      </p>
 
-      <pre>
-        <code className="language-csharp">{`private IEnumerator AnimateAllTiles(float duration = 0.5f)
+      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-lg mb-8 overflow-x-auto font-mono whitespace-pre">
+{`private IEnumerator AnimateAllTiles(float duration = 0.5f)
 {
     var startPositions = new Dictionary<Tile, Vector3>();
     var targetPositions = new Dictionary<Tile, Vector3>();
@@ -130,7 +110,7 @@ _shiftUp.Enable();`}</code>
                 targetPositions[_tiles[x, y]] = new Vector3(x - _offset, y - _offset, 0);
             }
 
-    // Smoothly interpolate positions
+    // Smooth interpolation
     float elapsed = 0f;
     while (elapsed < duration)
     {
@@ -141,17 +121,12 @@ _shiftUp.Enable();`}</code>
         yield return null;
     }
 
-    // Snap to final position
     foreach (var kvp in targetPositions)
         kvp.Key.transform.position = kvp.Value;
-}`}</code>
+}`}
       </pre>
 
-      <p>
-        This gives us a smooth sliding motion for every tile in the grid, while keeping everything
-        perfectly aligned at the end.
-      </p>
-
+      {/* Video */}
       <div className="aspect-square mb-10 rounded-lg overflow-hidden shadow-lg">
         <video
           className="w-full h-full object-cover"
@@ -163,52 +138,42 @@ _shiftUp.Enable();`}</code>
         />
       </div>
 
-      <h2>🧱 Quality of Life Additions</h2>
-      <h3>[ContextMenu] for Quick Testing</h3>
-      <p>
-        Unity has a neat feature called <code>[ContextMenu]</code>, which lets you trigger functions
-        right from the Inspector — no runtime code needed.
+      <h2 className="text-2xl font-semibold mb-4">🧱 Quality of Life Additions</h2>
+      <h3 className="text-xl font-semibold mb-2">[ContextMenu] for Quick Testing</h3>
+      <p className="mb-6">
+        Unity’s <code>[ContextMenu]</code> allows triggering functions from the Inspector — no runtime code required. We applied it to <code>InitializeGrid()</code>:
       </p>
-      <p>We added this to <code>InitializeGrid()</code> so we can rebuild the maze instantly in edit mode:</p>
 
-      <pre>
-        <code className="language-csharp">{`[ContextMenu("Rebuild Grid")]
-private void InitializeGrid() { ... }`}</code>
+      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-lg mb-8 overflow-x-auto font-mono whitespace-pre">
+{`[ContextMenu("Rebuild Grid")]
+private void InitializeGrid() { ... }`}
       </pre>
 
-      <p>
-        Now we can quickly test random layouts or new tile sets without restarting Play Mode — a big
-        time-saver during iteration.
-      </p>
-
-      <h2>🧩 The Result</h2>
+      <h2 className="text-2xl font-semibold mb-4">🧩 The Result</h2>
       <div className="w-full mb-10 rounded-lg overflow-hidden shadow-lg">
         <img src="/images/shifting-grid.png" alt="Labyrinth grid shifting preview" />
       </div>
-      <p>At this stage, the labyrinth:</p>
-      <ul>
+
+      <p className="mb-6">At this stage, the labyrinth:</p>
+      <ul className="list-disc list-inside mb-8 space-y-1">
         <li>Randomly generates a full grid of tiles</li>
         <li>Has a spare tile ready for insertion</li>
         <li>Responds to keyboard input (W, A, S, D)</li>
         <li>Smoothly shifts tiles with animation</li>
         <li>Prevents illegal reverse insertions</li>
       </ul>
-      <p>
-        It’s starting to feel like the real <em>Labyrinth</em> — and seeing the maze physically move
-        around as you press the keys is pretty magical.
-      </p>
 
-      <h2>🔮 Next Steps</h2>
-      <p>In the next phase, we’ll focus on:</p>
-      <ul>
-        <li>Introducing fixed tiles (like the corners in the board game)</li>
+      <h2 className="text-2xl font-semibold mb-4">🔮 Next Steps</h2>
+      <p className="mb-6">In the next phase, we’ll focus on:</p>
+      <ul className="list-disc list-inside mb-8 space-y-1">
+        <li>Introducing fixed tiles (corners)</li>
         <li>Adding visual insertion indicators (clickable entry points)</li>
         <li>Tracking paths and connectivity between tiles</li>
       </ul>
-      <p>
-        Once those pieces are in place, we’ll finally be able to introduce player tokens and
-        objectives, and start turning this from a grid demo into a real game.
+
+      <p className="mb-8">
+        Once these pieces are in place, we can add player tokens and objectives, transforming this demo into a playable Labyrinth game.
       </p>
-    </article>
+    </main>
   );
 }
