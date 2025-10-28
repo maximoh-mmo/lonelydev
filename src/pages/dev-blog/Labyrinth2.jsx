@@ -4,7 +4,7 @@ export default function Labyrinth2() {
       <h1 className="text-4xl font-bold mb-2">
         Designing a Dynamic Maze Tile System in Unity
       </h1>
-      <p className="text-gray-500 mb-8">Posted on October 20, 2025</p>
+      <p className="text-gray-500 mb-8">Posted on October 27, 2025</p>
 
       <p className="mb-6">
         In the previous post, I introduced the idea of recreating{" "}

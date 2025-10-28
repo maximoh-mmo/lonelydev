@@ -5,7 +5,7 @@ export default function Labyrinth() {
         <h1 className="text-4xl font-extrabold text-gray-900 mb-2">
           🌀 Building a Living Labyrinth: Procedural Mazes Inspired by <em>Verrückte Labyrinth</em>
         </h1>
-        <p className="text-sm text-gray-500 mb-10">Posted on 27-10-2025</p>
+        <p className="text-gray-500 mb-8">Posted on October 27, 2025</p>
 
         <h2 className="text-2xl font-semibold mt-10 mb-4">🧩 A Classic Game Meets Code</h2>
         <p>
