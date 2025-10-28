@@ -140,7 +140,7 @@ private void InitializeGrid() { ... }`}
       <h2 className="text-2xl font-semibold mb-4">🧩 The Result</h2>
 
 {/* Video */}
-      <div className="aspect-square mb-10 rounded-lg overflow-hidden shadow-lg">
+      <div className="aspect-[4/3] mb-10 rounded-lg overflow-hidden shadow-lg">
         <video
           className="w-full h-full object-cover"
           src="/video/grid-shift.mp4"
