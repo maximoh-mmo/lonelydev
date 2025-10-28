@@ -126,18 +126,6 @@ _shiftUp.Enable();`}
 }`}
       </pre>
 
-      {/* Video */}
-      <div className="aspect-square mb-10 rounded-lg overflow-hidden shadow-lg">
-        <video
-          className="w-full h-full object-cover"
-          src="/videos/grid-shift.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-        />
-      </div>
-
       <h2 className="text-2xl font-semibold mb-4">🧱 Quality of Life Additions</h2>
       <h3 className="text-xl font-semibold mb-2">[ContextMenu] for Quick Testing</h3>
       <p className="mb-6">
@@ -150,10 +138,19 @@ private void InitializeGrid() { ... }`}
       </pre>
 
       <h2 className="text-2xl font-semibold mb-4">🧩 The Result</h2>
-      <div className="w-full mb-10 rounded-lg overflow-hidden shadow-lg">
-        <img src="/images/shifting-grid.png" alt="Labyrinth grid shifting preview" />
-      </div>
 
+{/* Video */}
+      <div className="aspect-square mb-10 rounded-lg overflow-hidden shadow-lg">
+        <video
+          className="w-full h-full object-cover"
+          src="/videos/grid-shift.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          alt="Labyrinth grid shifting preview"
+        />
+      </div>
       <p className="mb-6">At this stage, the labyrinth:</p>
       <ul className="list-disc list-inside mb-8 space-y-1">
         <li>Randomly generates a full grid of tiles</li>
