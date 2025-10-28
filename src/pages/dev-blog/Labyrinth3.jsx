@@ -143,7 +143,7 @@ private void InitializeGrid() { ... }`}
       <div className="aspect-square mb-10 rounded-lg overflow-hidden shadow-lg">
         <video
           className="w-full h-full object-cover"
-          src="/videos/grid-shift.mp4"
+          src="/video/grid-shift.mp4"
           autoPlay
           loop
           muted
