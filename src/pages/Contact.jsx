@@ -29,6 +29,16 @@ export default function Contact() {
       <p className="text-gray-600">
         If you’d like a more casual chat, I’m also on Discord: <strong>maximoh</strong>.
       </p>
+      <p className="text-gray-600">
+        You can also download my CV below.
+      </p>
+      <a
+        href="/CV_Max_Heinze.pdf"
+        download
+        className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition"
+      >
+        Download My CV
+      </a>
     </section>
   );
 }
