@@ -26,10 +26,10 @@ export default function Contact() {
           LinkedIn
         </a>.
       </p>
-      <p className="text-gray-600">
-        If you’d like a more casual chat, I’m also on Discord: <strong>maximoh</strong>.
+      <p className="text-gray-600 mb-4">
+        If you'd like a more casual chat, I'm also on Discord: <strong>maximoh</strong>.
       </p>
-      <p className="text-gray-600">
+      <p className="text-gray-600 mb-4">
         You can also download my CV below.
       </p>
       <p>
