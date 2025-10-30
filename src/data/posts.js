@@ -1,5 +1,13 @@
 export const posts = [
   {
+  id: 'labyrinth4',
+  title: '🧠 From Random Chaos to Structured Generation',
+  date: '2025-11-02',
+  summary: 'Refactoring the labyrinth generator into a modular, rule-driven system built on constraints.',
+  category: 'Game Dev',
+  component: () => import('../pages/dev-blog/Labyrinth4.jsx'),
+  },
+  {
     id: 'labyrinth3',
     title: '🌀 Making the Labyrinth Shift!',
     date: '2025-10-28',
