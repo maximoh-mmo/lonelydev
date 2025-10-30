@@ -4,7 +4,7 @@ export default function Labyrinth4() {
       <h1 className="text-4xl font-bold mb-2">
         Phase 3: From Random Chaos to Structured Generation — Evolving the Labyrinth System
       </h1>
-      <p className="text-gray-500 mb-8">Posted on November 2, 2025</p>
+      <p className="text-gray-500 mb-8">Posted on October 29, 2025</p>
 
       <p className="mb-6">
         Following the progress in Phase 2, where the labyrinth grid first took shape through random
