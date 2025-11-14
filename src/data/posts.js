@@ -5,7 +5,7 @@ export const posts = [
   date: '2025-11-14',
   summary: 'Building a proper constraint-based reasoning system for the labyrinth generator — introducing a unified validation pipeline, tile feasibility evaluation, and the foundations of a real constraint solver.',
   category: 'Game Dev',
-  component: () => import('../pages/dev-blog/Labyrinth4>
+  component: () => import('../pages/dev-blog/Labyrinth5.jsx'),
   },
   {
   id: 'labyrinth4',
