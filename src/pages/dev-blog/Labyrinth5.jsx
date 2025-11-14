@@ -4,7 +4,7 @@ export default function Labyrinth5() {
       <h1 className="text-4xl font-bold mb-2">
         🧠 Phase 4 — Building a Real Constraint Solver for the Labyrinth
       </h1>
-      <p className="text-gray-500 mb-8">Posted on November XX, 2025</p>
+      <p className="text-gray-500 mb-8">Posted on November 14, 2025</p>
 
       <p className="mb-6">
         After several phases of visual output, shifting tiles, and gameplay
