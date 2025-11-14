@@ -1,4 +1,4 @@
-export default function Labyrinth4() {
+export default function Labyrinth5() {
   return (
     <main className="max-w-3xl mx-auto px-6 py-12 text-gray-800">
       <h1 className="text-4xl font-bold mb-2">
