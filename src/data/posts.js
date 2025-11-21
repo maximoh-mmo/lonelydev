@@ -1,5 +1,13 @@
 export const posts = [
   {
+  id: 'labyrinth5',
+  title: '🧠 Building a Real Constraint Solver for the Labyrinth.',
+  date: '2025-11-14',
+  summary: 'Building a proper constraint-based reasoning system for the labyrinth generator — introducing a unified validation pipeline, tile feasibility evaluation, and the foundations of a real constraint solver.',
+  category: 'Game Dev',
+  component: () => import('../pages/dev-blog/Labyrinth5.jsx'),
+  },
+  {
   id: 'labyrinth4',
   title: '🧠 From Random Chaos to Structured Generation',
   date: '2025-10-29',
