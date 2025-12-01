@@ -12,7 +12,7 @@ export default function Labyrinth5() {
         what the labyrinth <em>looks</em> like, the work shifted toward
         understanding how the generator <em>thinks</em>. This phase marked the
         beginning of a more deliberate approach to the problem — treating the
-        Labyrinth as a <strong>constraint satisfaction problem</strong> 
+        Labyrinth as a <strong>constraint satisfaction problem </strong> 
         rather than a random tile arranger.
       </p>
 
