@@ -62,7 +62,7 @@ export default function PhotoLibrary5() {
 
       {/* Placeholder image */}
       <img
-        src="/images/pipeline-cache-stage.png"
+        src="/images/photoboss/pipeline-cache-stage.png"
         alt="Image processing pipeline showing cache lookup stage before hashing"
         className="rounded-lg shadow-lg mb-10 w-full object-contain"
       />

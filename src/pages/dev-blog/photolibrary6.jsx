@@ -69,30 +69,12 @@ export default function PhotoLibrary6() {
         Results are injected directly back into the pipeline.
       </p>
 
-      {/* Placeholder code snippet */}
-      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-lg mb-10 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed">
-{`// SQLite schema or cache lookup implementation
-
-CREATE TABLE files (
-  id INTEGER PRIMARY KEY,
-  path TEXT NOT NULL,
-  size INTEGER NOT NULL,
-  mtime INTEGER NOT NULL
-);
-
-CREATE TABLE hash_methods (
-  id INTEGER PRIMARY KEY,
-  name TEXT NOT NULL,
-  version INTEGER NOT NULL
-);
-
-CREATE TABLE hashes (
-  file_id INTEGER NOT NULL,
-  method_id INTEGER NOT NULL,
-  value TEXT NOT NULL,
-  PRIMARY KEY (file_id, method_id)
-);`}
-      </pre>
+{/* Placeholder image */}
+      <img
+        src="/images/photoboss/sql-schema.png"
+        alt="SQLite schema for the hash cache"
+        className="rounded-lg shadow-lg mb-10 w-full object-contain"
+      />
     </main>
   );
 }

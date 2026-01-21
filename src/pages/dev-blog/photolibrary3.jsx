@@ -88,6 +88,12 @@ QObject::connect(worker, &Worker::finished,
 
 workerThread->start();`}
       </pre>
+      {/* Placeholder image */}
+      <img
+        src="/images/photoboss/parallel-working.png"
+        alt="Diagram showing multiple hash workers working in parallel on disk I/O results"
+        className="rounded-lg shadow-lg mb-10 w-full object-contain"
+      />
     </main>
   );
 }

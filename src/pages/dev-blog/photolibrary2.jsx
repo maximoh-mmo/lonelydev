@@ -92,7 +92,7 @@ export default function PhotoLibrary2() {
 
       {/* Placeholder image */}
       <img
-        src="/images/image-pipeline-diagram.png"
+        src="/images/photoboss/pipeline-diagram.png"
         alt="High-level image processing pipeline showing stages and data flow"
         className="rounded-lg shadow-lg mb-10 w-full object-contain"
       />

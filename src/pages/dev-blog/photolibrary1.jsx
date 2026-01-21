@@ -122,7 +122,7 @@ export default function PhotoLibrary1() {
 
       {/* Placeholder image */}
       <img
-        src="/images/photo-library-sprawl.png"
+        src="/images/photoboss/photo-library-sprawl.png"
         alt="Messy photo library with duplicated directories"
         className="rounded-lg shadow-lg mb-10 w-full object-contain"
       />
