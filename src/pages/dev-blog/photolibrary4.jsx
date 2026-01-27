@@ -75,7 +75,7 @@ export default function PhotoLibrary4() {
 
       {/* Placeholder image */}
       <img
-        src="/images/hash-worker-pool-diagram.png"
+        src="/images/photoboss/hash-worker-pool-diagram.png"
         alt="Worker pool layout for image hashing stage"
         className="rounded-lg shadow-lg mb-10 w-full object-contain"
       />
