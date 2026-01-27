@@ -4,7 +4,7 @@ export default function PhotoLibrary3() {
       <h1 className="text-4xl font-bold mb-2">
         Learning Qt by Building: Threads, Signals, and Ownership
       </h1>
-      <p className="text-gray-500 mb-8">Posted on {/* insert date */}</p>
+      <p className="text-gray-500 mb-8">Posted on 2025-12-10</p>
 
       <h2 className="text-2xl font-semibold mb-4">Why Qt?</h2>
       <p className="mb-6">

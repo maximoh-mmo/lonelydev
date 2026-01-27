@@ -1,6 +1,14 @@
 export const posts = [
   {
     id: 'photoboss6',
+    title: '📸 Short-Circuiting Work: Introducing a Persistent Hash Cache',
+    date: '2026-01-27',
+    summary: 'Adding a versioned, persistent hash cache to avoid recomputing expensive perceptual hashes. This entry covers file identity, cache-first pipeline design, SQLite persistence, and how treating cached results as first-class pipeline outputs dramatically reduces unnecessary work.',
+    category: 'Software Engineering',
+    component: () => import('../pages/dev-blog/photolibrary7.jsx'),
+  },
+  {
+    id: 'photoboss6',
     title: '📸 Designing a Persistent Hash Cache with SQLite',
     date: '2026-01-21',
     summary: 'Building a first-class cache stage using SQLite: identifying files, storing multiple hash algorithms, and injecting results back into the pipeline to skip redundant work.',

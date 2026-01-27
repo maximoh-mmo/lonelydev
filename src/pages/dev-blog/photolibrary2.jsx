@@ -4,7 +4,7 @@ export default function PhotoLibrary2() {
       <h1 className="text-4xl font-bold mb-2">
         From Idea to Architecture: Designing a Scalable Image Processing Pipeline
       </h1>
-      <p className="text-gray-500 mb-8">Posted on {/* insert date */}</p>
+      <p className="text-gray-500 mb-8">Posted on 2025-11-26</p>
 
       <h2 className="text-2xl font-semibold mb-4">Starting With Constraints</h2>
       <p className="mb-6">

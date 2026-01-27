@@ -4,7 +4,7 @@ export default function PhotoLibrary1() {
       <h1 className="text-4xl font-bold mb-2">
         The Problem Nobody Talks About: Photo Libraries at Scale
       </h1>
-      <p className="text-gray-500 mb-8">Posted on {/* insert date */}</p>
+      <p className="text-gray-500 mb-8">Posted on 2025-11-12</p>
 
       <h2 className="text-2xl font-semibold mb-4">Introduction</h2>
       <p className="mb-6">

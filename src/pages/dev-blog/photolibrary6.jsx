@@ -4,7 +4,7 @@ export default function PhotoLibrary6() {
       <h1 className="text-4xl font-bold mb-2">
         Designing a Persistent Hash Cache with SQLite
       </h1>
-      <p className="text-gray-500 mb-8">Posted on {/* insert date */}</p>
+      <p className="text-gray-500 mb-8">Posted on 2026-01-21</p>
 
       <h2 className="text-2xl font-semibold mb-4">
         File Identity

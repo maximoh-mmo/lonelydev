@@ -4,7 +4,7 @@ export default function PhotoLibrary5() {
       <h1 className="text-4xl font-bold mb-2">
         The Realisation: Recomputing Everything Is Wasteful
       </h1>
-      <p className="text-gray-500 mb-8">Posted on {/* insert date */}</p>
+      <p className="text-gray-500 mb-8">Posted on 2026-01-07</p>
 
       <h2 className="text-2xl font-semibold mb-4">
         The Problem With Repeated Scans
