@@ -13,33 +13,33 @@ import { posts } from './data/posts';
 
 function App() {
   return (
-      <div className="bg-gray-100 min-h-screen">
-        <Navbar />
-        <main className="max-w-4xl mx-auto p-6 text-center mt-20">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/lonelydev/" element={<Home />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/projects/:projectId" element={<ProjectDetail />} />
-            <Route path="/kumiko" element={<Kumiko />} />
-            <Route path="/keyboard" element={<Keyboard />} />
-            <Route path="/climbing" element={<Climbing />} />
-            <Route path="/dev-blog" element={<DevBlogIndex />} />
-            {/* Dynamically generate routes for each post */}
-            {posts.map((post) => (
-              <Route
-                key={post.id}
-                path={`/dev-blog/${post.id}`}
-                element={
-                  <AsyncComponent loader={post.component} />
-                }
-              />
-            ))}
-          </Routes>
-        </main>
-      </div>
+    <div className="bg-gray-100 min-h-screen">
+      <Navbar />
+      <main className="max-w-4xl mx-auto p-6 text-center mt-20">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/lonelydev/" element={<Home />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/projects/:projectId" element={<ProjectDetail />} />
+          <Route path="/kumiko" element={<Kumiko />} />
+          <Route path="/keyboard" element={<Keyboard />} />
+          <Route path="/climbing" element={<Climbing />} />
+          <Route path="/dev-blog" element={<DevBlogIndex />} />
+          {/* Dynamically generate routes for each post */}
+          {posts.map((post) => (
+            <Route
+              key={post.id}
+              path={`/dev-blog/${post.id}`}
+              element={
+                <AsyncComponent loader={post.component} />
+              }
+            />
+          ))}
+        </Routes>
+      </main>
+    </div>
   );
 }
 // Helper for lazy-loaded components
