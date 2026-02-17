@@ -1,6 +1,15 @@
 export const posts = [
   {
-    id: 'photoboss6',
+    id: 'photoboss8',
+    title: '📸 Finding the Needle in the Haystack: Similarity Search & Grouping',
+    date: '2026-02-17',
+    category: 'C++ & Qt',
+    summary:
+      'Implementing a similarity engine with weighted scoring (pHash, dHash, aHash) to group near-duplicate images, and refactoring the pipeline for pragmatism.',
+    component: () => import('../pages/dev-blog/photolibrary8.jsx'),
+  },
+  {
+    id: 'photoboss7',
     title: '📸 Short-Circuiting Work: Introducing a Persistent Hash Cache',
     date: '2026-01-27',
     summary: 'Adding a versioned, persistent hash cache to avoid recomputing expensive perceptual hashes. This entry covers file identity, cache-first pipeline design, SQLite persistence, and how treating cached results as first-class pipeline outputs dramatically reduces unnecessary work.',
