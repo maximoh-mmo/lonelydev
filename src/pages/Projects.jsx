@@ -41,19 +41,19 @@ export default function Projects() {
   };
 
   return (
-    <section className="mt-20 text-center">
+    <section className="text-center">
       {/* Header */}
-      <header className="max-w-4xl mx-auto px-6 py-16 text-left">
-        <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4">
+      <header className="max-w-4xl mx-auto px-6 py-16 text-center">
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-10">
           Projects
         </h1>
         <p className="text-lg text-gray-600 mx-auto">
           Current and previous selected Game projects. Additional projects can be found on my <a
-          href="https://github.com/maximoh-mmo"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="underline"
-        >GitHub</a>.
+            href="https://github.com/maximoh-mmo"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline"
+          >GitHub</a>.
         </p>
       </header>
 

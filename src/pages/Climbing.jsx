@@ -42,7 +42,7 @@ export default function Climbing() {
 
       {/* Intro */}
       <section className="text-center mb-12">
-        <h1 className="text-4xl sm:text-5xl font-extrabold mb-4 text-gray-900">
+        <h1 className="text-4xl sm:text-5xl font-extrabold mb-10 text-gray-900">
           Climbing: Craft, Challenge, and Creative Flow
         </h1>
         <p className="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto">
@@ -145,9 +145,9 @@ export default function Climbing() {
             { id: 'climb3', src: '/images/climb3.jpg', alt: 'Climbing 3' }
           ].map((image) => (
             imageErrors[image.id] ? (
-              <div 
+              <div
                 key={image.id}
-                style={fallbackImageStyle} 
+                style={fallbackImageStyle}
                 className="rounded-lg shadow-md w-full h-64 flex items-center justify-center"
               >
                 <p>{image.alt} unavailable</p>

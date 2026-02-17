@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 export default function About() {
   return (
     <main className="max-w-4xl mx-auto px-6 py-16 text-left">
-      <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-6">
+      <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-10 text-center">
         About Me
       </h1>
 
@@ -15,7 +15,7 @@ export default function About() {
       <p className="text-lg text-gray-700 mb-10 leading-relaxed">
         I’m a game programmer who loves building things — whether that’s a
         gameplay system, a hand-cut <Link to="/Kumiko" className="inline-block transition-transform duration-200 hover:scale-[1.03]">
-        <strong>Kumiko</strong></Link> panel, or a custom <Link to="/Keyboard" className="inline-block transition-transform duration-200 hover:scale-[1.03]"><strong>Bluetooth keyboards</strong></Link>.
+          <strong>Kumiko</strong></Link> panel, or a custom <Link to="/Keyboard" className="inline-block transition-transform duration-200 hover:scale-[1.03]"><strong>Bluetooth keyboards</strong></Link>.
         For me, the joy is in seeing something move from concept to working reality,
         understanding the systems beneath the surface, and refining them until they
         feel effortless.
@@ -31,7 +31,7 @@ export default function About() {
       </p>
 
       <p className="text-lg text-gray-700 mb-10 leading-relaxed">
-        I trained at <a href = "https://games-academy.de/" className="inline-block transition-transform duration-200 hover:scale-[1.03]"><strong>Games Academy</strong></a> Berlin, focusing on C# C++, Unity and Unreal,
+        I trained at <a href="https://games-academy.de/" className="inline-block transition-transform duration-200 hover:scale-[1.03]"><strong>Games Academy</strong></a> Berlin, focusing on C# C++, Unity and Unreal,
         learning not only how to write clean, performant code but also how to think
         like a developer in a multidisciplinary team. That environment taught me
         how to connect technical work with creative goals — to make code serve the

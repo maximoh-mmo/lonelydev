@@ -1,7 +1,7 @@
 export default function Contact() {
   return (
-    <section className="mt-20 text-center">
-      <h2 className="text-3xl font-semibold mb-6">Contact</h2>
+    <main className="max-w-4xl mx-auto px-6 py-16 text-center">
+      <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-10">Contact</h1>
       <p className="text-gray-600 mb-4">
         I’d love to hear from you! Reach out via email{" "}
         <a href="mailto:maxheinze@googlemail.com" className="underline">
@@ -27,7 +27,7 @@ export default function Contact() {
         </a>.
       </p>
       <p className="text-gray-600 mb-4">
-        If you'd like a more casual chat, I'm also on Discord: <strong>maximoh</strong>.
+        If you'd like a more casual chat, I'm also on Discord: <strong><a href="https://discord.com/users/845675651315007549">maximoh</a></strong>.
       </p>
       <p className="text-gray-600 mb-4">
         You can also download my CV below.
@@ -38,9 +38,9 @@ export default function Contact() {
           download
           className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition"
         >
-        Download My CV
+          Download My CV
         </a>
       </p>
-    </section>
+    </main>
   );
 }

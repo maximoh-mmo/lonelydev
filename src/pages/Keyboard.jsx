@@ -2,7 +2,7 @@ export default function Keyboard() {
   return (
     <main className="max-w-4xl mx-auto px-6 py-16 text-left">
       <header className="text-center mb-12">
-        <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4">
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-10">
           Making the Charybdis Wireless — and Then Taking It Further
         </h1>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -12,8 +12,8 @@ export default function Keyboard() {
 
       <section className="space-y-6 mb-12">
         <p>
-          I’ve always liked to tinker with the tools I use every day, and the keyboard is one of the most hands-on pieces of hardware we interact with. When I discovered the open-source 
-          <strong> bastardkb Charybdis</strong> split ergonomic keyboard, I saw a perfect opportunity to merge my interests in 
+          I’ve always liked to tinker with the tools I use every day, and the keyboard is one of the most hands-on pieces of hardware we interact with. When I discovered the open-source
+          <strong> bastardkb Charybdis</strong> split ergonomic keyboard, I saw a perfect opportunity to merge my interests in
           <strong> hardware, firmware, and software design</strong>.
         </p>
         <p>
@@ -24,9 +24,9 @@ export default function Keyboard() {
       <section className="mb-12">
         <h2 className="text-2xl font-semibold text-gray-900 mb-4">Rebuilding the Charybdis in EasyEDA</h2>
         <p>
-          The original Charybdis design was wired, relying on a USB connection and a controller that wasn’t meant for Bluetooth. 
-          I redesigned the electronics in <strong>EasyEDA</strong>, replacing the controller with a 
-          <strong> SuperMini nRF52840</strong> module — a compact board with built-in 
+          The original Charybdis design was wired, relying on a USB connection and a controller that wasn’t meant for Bluetooth.
+          I redesigned the electronics in <strong>EasyEDA</strong>, replacing the controller with a
+          <strong> SuperMini nRF52840</strong> module — a compact board with built-in
           Bluetooth 5.0, Li-ion charging, and power management.
         </p>
         <ul className="list-disc list-inside my-4 space-y-1">
@@ -44,7 +44,7 @@ export default function Keyboard() {
             PCB layout in EasyEDA showing the SuperMini nRF52840 pinout schematic and connections.
           </figcaption>
         </figure>
-         <figure className="my-6">
+        <figure className="my-6">
           <img
             src="images/trackball-schematic.png"
             alt="EasyEDA PCB view of the Trackball redesign"
@@ -59,7 +59,7 @@ export default function Keyboard() {
       <section className="mb-12">
         <h2 className="text-2xl font-semibold text-gray-900 mb-4">Lighting It Up — Per-Key RGB</h2>
         <p>
-          Each switch got its own <strong>SK6812 Mini-E</strong> LED, daisy-chained across the board. That meant juggling power constraints 
+          Each switch got its own <strong>SK6812 Mini-E</strong> LED, daisy-chained across the board. That meant juggling power constraints
           and logic level mismatches, since the LEDs expect 5V but the keyboard runs from a 3.3V Li-ion setup.
         </p>
         <ul className="list-disc list-inside my-4 space-y-1">
@@ -104,11 +104,11 @@ export default function Keyboard() {
       <section className="mb-12">
         <h2 className="text-2xl font-semibold text-gray-900 mb-4">Going Further — The Trackball Experiment</h2>
         <p>
-          With the keyboard working perfectly, I wanted to add an integrated <strong>trackball</strong>, similar to the higher-end BastardKB models. 
+          With the keyboard working perfectly, I wanted to add an integrated <strong>trackball</strong>, similar to the higher-end BastardKB models.
           Because my board runs at 3.3V, not 5V like the original wired Charybdis, the existing sensor setup wasn’t directly compatible.
         </p>
         <p className="mt-4">
-          I sourced a new optical sensor that supported 3.3V, redesigned the PCB to simplify the circuitry — and then hit the real challenge: 
+          I sourced a new optical sensor that supported 3.3V, redesigned the PCB to simplify the circuitry — and then hit the real challenge:
           <strong> there were no working firmware drivers for this sensor.</strong>
         </p>
       </section>
@@ -158,7 +158,7 @@ export default function Keyboard() {
       <section className="mb-12">
         <h2 className="text-2xl font-semibold text-gray-900 mb-4">Where It’s At Now</h2>
         <p>
-          My <strong>wireless, per-key RGB Charybdis</strong> is fully functional and my daily driver. 
+          My <strong>wireless, per-key RGB Charybdis</strong> is fully functional and my daily driver.
           The trackball remains a work in progress, waiting for a new sensor and another PCB revision.
         </p>
         <ul className="list-disc list-inside my-4 space-y-1">
@@ -172,7 +172,7 @@ export default function Keyboard() {
       <section className="mb-12">
         <h2 className="text-2xl font-semibold text-gray-900 mb-4">Why It Matters</h2>
         <p>
-          This project sits right at the intersection of <strong>engineering, design, and interactivity</strong> — the same intersection that defines great game programming. 
+          This project sits right at the intersection of <strong>engineering, design, and interactivity</strong> — the same intersection that defines great game programming.
           It’s about building systems that respond to input, managing complexity, and refining performance — whether that’s pixels on a screen or electrons on a PCB.
         </p>
       </section>
@@ -225,7 +225,7 @@ export default function Keyboard() {
 
       <footer className="border-t border-gray-200 pt-8 mt-12 text-center">
         <p className="italic text-gray-600">
-          What started as “can I make this keyboard wireless?” evolved into writing my own firmware drivers, 
+          What started as “can I make this keyboard wireless?” evolved into writing my own firmware drivers,
           rethinking power design, and bridging hardware with software — exactly the kind of curiosity and persistence I aim to bring to game development.
         </p>
       </footer>

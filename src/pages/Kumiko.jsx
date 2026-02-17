@@ -1,11 +1,11 @@
 export default function Kumiko() {
   return (
-    <main className="max-w-4xl mx-auto px-6 py-16 text-left">
-      <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-6">
+    <main className="max-w-4xl mx-auto px-6 py-16 text-center">
+      <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-10">
         Precision in Pattern: Exploring Kumiko Joinery
       </h1>
 
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed italic">
+      <p className="text-lg text-gray-700 mb-8 leading-relaxed italic text-left">
         A study in patience, precision, and the quiet intersection of craft and code.
       </p>
 
@@ -128,7 +128,7 @@ export default function Kumiko() {
           alt="Custom frame assembly — miter joints and color contrast."
           className="rounded-xl shadow-md mx-auto transform transition-transform duration-300 hover:scale-105"
         />
-            <figcaption className="text-sm text-gray-500 mt-2">
+        <figcaption className="text-sm text-gray-500 mt-2">
           Finished Frame, ready for Kumiko panel.
         </figcaption>
       </figure>
@@ -143,7 +143,7 @@ export default function Kumiko() {
           Final framed Kumiko panel — precise geometry and warm tone balance.
         </figcaption>
       </figure>
-      
+
       {/* --- Larger Wall Panel --- */}
       <h2 className="text-2xl font-bold text-gray-900 mb-4">
         Scaling Up — A Larger Wall Panel
@@ -165,7 +165,7 @@ export default function Kumiko() {
           Larger wall panel — work in progress, sub-grids preparation for assembly.
         </figcaption>
       </figure>
-      
+
       <figure className="mb-12">
         <img
           src="/images/wall-panel-detail.jpg"
@@ -176,7 +176,7 @@ export default function Kumiko() {
           Larger wall panel — detail view.
         </figcaption>
       </figure>
-      
+
       <figure className="mb-12">
         <img
           src="/images/wall-panel.jpg"
@@ -193,7 +193,7 @@ export default function Kumiko() {
         A Different Form — The Kumiko Box
       </h2>
       <p className="text-gray-700 mb-6 leading-relaxed">
-        Once I’d mastered the basic patterns, I wanted to bring the technique into another direction. 
+        Once I’d mastered the basic patterns, I wanted to bring the technique into another direction.
         That led to a <strong>small Kumiko box</strong>, combining
         traditional joinery for the structure with fine decorative patterned panels on
         the lid.

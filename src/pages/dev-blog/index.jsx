@@ -30,7 +30,7 @@ export default function DevBlogIndex() {
 
   return (
     <main className="max-w-4xl mx-auto px-6 py-16">
-      <h1 className="text-4xl font-extrabold mb-10 text-center">
+      <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-10 text-center">
         Developer Blog
       </h1>
 
@@ -84,15 +84,10 @@ export default function DevBlogIndex() {
               to={`/dev-blog/${post.id}`}
               className="block p-6 rounded-2xl border border-gray-200 hover:shadow-lg transform hover:-translate-y-1 transition duration-300 bg-white"
             >
-              <div className="flex justify-between items-start mb-2">
+              <div>
                 <h2 className="text-2xl font-semibold text-gray-900">
                   {post.title}
                 </h2>
-                {post.project && (
-                  <span className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full font-medium">
-                    {post.project}
-                  </span>
-                )}
               </div>
 
               <p className="text-gray-500 text-sm mb-3">

@@ -1,40 +1,40 @@
 export default function Labyrinth2() {
   return (
-    <main className="max-w-3xl mx-auto px-6 py-12 text-gray-800">
-      <h1 className="text-4xl font-bold mb-2">
+    <main className="max-w-4xl mx-auto px-6 py-16 text-left">
+      <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-10 text-center">
         Designing a Dynamic Maze Tile System in Unity
       </h1>
-      <p className="text-gray-500 mb-8">Posted on October 27, 2025</p>
+      <p className="text-gray-500 mb-8 text-center italic">Posted on October 27, 2025</p>
 
-      <p className="mb-6">
+      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
         In the previous post, I introduced the idea of recreating{" "}
         <em>Verrückte Labyrinth</em> in Unity — a living, shifting maze that
         we can use to explore procedural generation.
       </p>
 
-      <p className="mb-8">
+      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
         Today, we start building it for real. Phase 1 is all about data and
         representation — defining what a tile is, how it connects to its
         neighbors, and making it appear in the scene as a small piece of a
         larger, living system.
       </p>
 
-      <h2 className="text-2xl font-semibold mb-4">🧩 What We’re Building</h2>
-      <ul className="list-disc list-inside mb-6 space-y-1">
+      <h2 className="text-2xl font-semibold text-gray-900 mb-4">🧩 What We’re Building</h2>
+      <ul className="list-disc list-inside mb-8 text-lg text-gray-700 leading-relaxed space-y-2">
         <li>Three tile archetypes: Straight, Corner, and T-Junction</li>
         <li>Rotations that affect connectivity</li>
         <li>A simple grid of randomized tiles displayed in Unity</li>
       </ul>
 
-      <h2 className="text-2xl font-semibold mb-4">Step 1 – Representing Tile Connections</h2>
-      <p className="mb-6">
+      <h2 className="text-2xl font-semibold text-gray-900 mb-4">Step 1 – Representing Tile Connections</h2>
+      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
         The magic of the physical Labyrinth board is that each tile connects to
         others along its open paths. To capture that in code, we can use an enum
         with bit flags, one for each direction:
       </p>
 
-      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-lg mb-6 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed">
-{`[Flags]
+      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-xl mb-8 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed shadow-md">
+        {`[Flags]
 public enum TileConnection
 {
     None  = 0,
@@ -45,33 +45,33 @@ public enum TileConnection
 }`}
       </pre>
 
-      <p className="mb-4">
+      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
         This lets us describe any tile shape compactly, for example:
       </p>
 
-      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-lg mb-6 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed">
-{`// A corner piece connecting Up and Right
+      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-xl mb-8 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed shadow-md">
+        {`// A corner piece connecting Up and Right
 TileConnection.Up | TileConnection.Right`}
       </pre>
 
-      <p className="mb-4">It’s efficient to test:</p>
+      <p className="text-lg text-gray-700 mb-8 leading-relaxed">It’s efficient to test:</p>
 
-      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-lg mb-8 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed">
-{`bool connectsUp = (connections & TileConnection.Up) != 0;`}
+      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-xl mb-8 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed shadow-md">
+        {`bool connectsUp = (connections & TileConnection.Up) != 0;`}
       </pre>
 
-      <p className="mb-8">
+      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
         …and easy to rotate — which we’ll handle next.
       </p>
 
-      <h2 className="text-2xl font-semibold mb-4">Step 2 – Rotating Tiles</h2>
-      <p className="mb-6">
+      <h2 className="text-2xl font-semibold text-gray-900 mb-4">Step 2 – Rotating Tiles</h2>
+      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
         Since each tile can be rotated 90° at a time, I wrote a simple helper to
         rotate the connection mask clockwise:
       </p>
 
-      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-lg mb-8 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed">
-{`public static class TileConnectionHelpers
+      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-xl mb-8 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed shadow-md">
+        {`public static class TileConnectionHelpers
 {
     public static TileConnection Rotate(this TileConnection c)
     {
@@ -87,21 +87,21 @@ TileConnection.Up | TileConnection.Right`}
 }`}
       </pre>
 
-      <p className="mb-8">
+      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
         Now every tile can easily adjust its connectivity when rotated in the
         scene.
       </p>
 
-      <h2 className="text-2xl font-semibold mb-4">Step 3 – Defining Tile Types</h2>
-      <p className="mb-6">
+      <h2 className="text-2xl font-semibold text-gray-900 mb-4">Step 3 – Defining Tile Types</h2>
+      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
         Each type of tile (Straight, Corner, T-Junction) can be represented by a{" "}
         <strong>ScriptableObject</strong> that defines its base shape and visual
         prefab. This way we can tweak them in the editor instead of hardcoding
         data.
       </p>
 
-      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-lg mb-8 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed">
-{`[CreateAssetMenu(menuName = "Labyrinth/TileType")]
+      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-xl mb-8 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed shadow-md">
+        {`[CreateAssetMenu(menuName = "Labyrinth/TileType")]
 public class TileType : ScriptableObject
 {
     public string displayName;
@@ -110,21 +110,21 @@ public class TileType : ScriptableObject
 }`}
       </pre>
 
-      <p className="mb-6">Example setup:</p>
-      <ul className="list-disc list-inside mb-8 space-y-1">
+      <p className="text-lg text-gray-700 mb-8 leading-relaxed">Example setup:</p>
+      <ul className="list-disc list-inside mb-8 text-lg text-gray-700 leading-relaxed space-y-2">
         <li>Straight: Up + Down</li>
         <li>Corner: Up + Right</li>
         <li>T-Junction: Up + Left + Right</li>
       </ul>
 
-      <h2 className="text-2xl font-semibold mb-4">Step 4 – Creating the Tile Instance</h2>
-      <p className="mb-6">
+      <h2 className="text-2xl font-semibold text-gray-900 mb-4">Step 4 – Creating the Tile Instance</h2>
+      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
         Each tile on the board is an instance of one of those TileTypes, with a
         rotation applied and a position in the grid:
       </p>
 
-      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-lg mb-8 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed">
-{`public class Tile : MonoBehaviour
+      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-xl mb-8 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed shadow-md">
+        {`public class Tile : MonoBehaviour
 {
     public TileType type;
     public int rotationSteps; // 0–3, each step = +90°
@@ -147,22 +147,22 @@ public class TileType : ScriptableObject
     }
 }`}
       </pre>
- 
- {/* Class diagram image */}
+
+      {/* Class diagram image */}
       <img
         src="/images/labyrinth-tiles.png"
         alt="Tile class diagram"
-        className="rounded-lg shadow-lg mb-10 w-full object-contain"
+        className="rounded-xl shadow-md mx-auto transform transition-transform duration-300 hover:scale-105 mb-10 w-full object-contain"
       />
 
-      <h2 className="text-2xl font-semibold mb-4">Step 5 – Generating a Random Grid</h2>
-      <p className="mb-6">
+      <h2 className="text-2xl font-semibold text-gray-900 mb-4">Step 5 – Generating a Random Grid</h2>
+      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
         To quickly test the system, create a small script that spawns a random
         layout:
       </p>
 
-      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-lg mb-8 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed">
-{`public class TileGridTest : MonoBehaviour
+      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-xl mb-8 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed shadow-md">
+        {`public class TileGridTest : MonoBehaviour
 {
     public int gridSize = 7;
     public TileType[] tileTypes;
@@ -215,17 +215,17 @@ public class TileType : ScriptableObject
 }`}
       </pre>
 
-      <p className="mb-8">
+      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
         When you press Play, you should see a 7×7 grid of randomly oriented
         tiles — your first procedural labyrinth taking shape.
       </p>
 
-      <p className="mb-8">
+      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
         Here’s a quick look at what my prototype currently generates:
       </p>
 
       {/* Animated video */}
-      <div className="aspect-square mb-10 rounded-lg overflow-hidden shadow-lg">
+      <div className="aspect-square mb-10 rounded-xl overflow-hidden shadow-md">
         <video
           className="w-full h-full object-cover"
           src="/video/grid-anim.mp4"
@@ -236,14 +236,14 @@ public class TileType : ScriptableObject
         />
       </div>
 
-      <h2 className="text-2xl font-semibold mb-4">Step 6 – Reflections and Next Steps</h2>
-      <p className="mb-6">
+      <h2 className="text-2xl font-semibold text-gray-900 mb-4">Step 6 – Reflections and Next Steps</h2>
+      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
         It’s always satisfying to get that first visual confirmation that the
         system is working. Seeing the random grid appear in Unity makes it feel
         tangible — and more importantly, we now have the foundation to build on.
       </p>
 
-      <p className="mb-8">
+      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
         Next time, I’ll be focusing on Phase 2: the grid logic — adding the
         classic Verrückte Labyrinth mechanic of pushing rows, tracking the spare
         tile, and watching the maze shift dynamically.
