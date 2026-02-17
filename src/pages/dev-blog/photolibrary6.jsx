@@ -6,67 +6,57 @@ export default function PhotoLibrary6() {
       </h1>
       <p className="text-gray-500 mb-8 text-center italic">Posted on 2026-01-21</p>
 
+      <h2 className="text-2xl font-semibold text-gray-900 mb-4">Identity without Reading</h2>
+      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+        The core challenge of a cache is trust. If I ask the database <em>"Do you know the hash for Photo.jpg?"</em>, and it says <em>"Yes,"</em> I need to be 100% certain that <code>Photo.jpg</code> hasn't changed since that hash was calculated.
+      </p>
+
+      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+        But I can't read the file to check, because reading the file is the exact thing I'm trying to avoid.
+      </p>
+
+      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+        The solution is a proxy identity. I assume a file is unchanged if three values remain constant:
+      </p>
+
+      <ul className="list-disc list-inside mb-8 text-lg text-gray-700 leading-relaxed space-y-2">
+        <li><strong>Absolute Path</strong> (Location)</li>
+        <li><strong>Size in Bytes</strong> (Magnitude)</li>
+        <li><strong>Last Modified Time</strong> (History)</li>
+      </ul>
+
+      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+        Is it theoretically possible to modify a file while keeping its size and timestamp exactly the same? Yes. Is it likely to happen to my family vacation photos? No.
+      </p>
+
+      <h2 className="text-2xl font-semibold text-gray-900 mb-4">The Schema</h2>
+      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+        Designing the database felt like putting together a puzzle. I didn't want a single flat table. I wanted a system that could handle multiple hash algorithms (MD5, pHash, BlockMean) for the same file.
+      </p>
+
+      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+        I settled on a normalised 3-table structure:
+      </p>
+
+      <ul className="list-disc list-inside mb-8 text-lg text-gray-700 leading-relaxed space-y-2">
+        <li><strong>Files Table:</strong> Stores the Path, Size, and MTime. This is the "Key".</li>
+        <li><strong>Methods Table:</strong> Stores the name of the algorithm (e.g., "pHash") and its <em>Version</em>.</li>
+        <li><strong>Hashes Table:</strong> The glue. It links a File to a Method and stores the Blob data.</li>
+      </ul>
+
+      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+        This separation is powerful. If I update my pHash calculation code, I just bump the version number in the Methods table. The app will see the version mismatch and automatically re-compute the new hashes, while leaving the MD5 hashes untouched.
+      </p>
+
       <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-        File Identity
+        The Cache as a Pipeline Member
       </h2>
       <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        A file is identified by:
-      </p>
-
-      <ul className="list-disc list-inside mb-8 text-lg text-gray-700 leading-relaxed space-y-2">
-        <li>Path</li>
-        <li>Size</li>
-        <li>Modification time</li>
-      </ul>
-
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        If all three match, the file is assumed unchanged.
-      </p>
-
-      <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-        Schema Design
-      </h2>
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        The database schema includes:
-      </p>
-
-      <ul className="list-disc list-inside mb-8 text-lg text-gray-700 leading-relaxed space-y-2">
-        <li><strong>files</strong> — file identity and metadata</li>
-        <li><strong>hash_methods</strong> — algorithm name and version</li>
-        <li><strong>hashes</strong> — computed values</li>
-        <li><strong>meta</strong> — schema versioning</li>
-      </ul>
-
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        This allows:
-      </p>
-
-      <ul className="list-disc list-inside mb-8 text-lg text-gray-700 leading-relaxed space-y-2">
-        <li>Safe upgrades</li>
-        <li>Algorithm invalidation</li>
-        <li>Fine-grained cache hits</li>
-      </ul>
-
-      <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-        Cache as a Pipeline Stage
-      </h2>
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        The cache isn’t a bolt-on optimisation — it’s a first-class pipeline
-        stage.
+        The best part of this design? The cache isn't some side-car process. It’s just another stage in the pipeline.
       </p>
 
       <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        If all required hashes are present:
-      </p>
-
-      <ul className="list-disc list-inside mb-8 text-lg text-gray-700 leading-relaxed space-y-2">
-        <li>Disk IO is skipped</li>
-        <li>Decoding is skipped</li>
-        <li>Hashing is skipped entirely</li>
-      </ul>
-
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        Results are injected directly back into the pipeline.
+        The <strong>CacheLookup</strong> stage sits right after the Scanner. It checks the DB. If it gets a hit, it sends the result directly to the UI, bypassing the heavy "loading" and "hashing" stages entirely. It feels like cheating.
       </p>
 
       {/* Placeholder image */}
