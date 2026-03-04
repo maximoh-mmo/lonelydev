@@ -40,12 +40,16 @@ Large, readable text with relaxed line height.
 *For introductory paragraphs, you may use `text-center` or italics if appropriate.*
 
 ### Links
-Standard text links within paragraphs should use the blue style.
+Standard text links within paragraphs should use the stylized blue style. For consistency, use the `<TextLink />` component.
+
 ```jsx
-<Link to="/target" className="text-blue-700 hover:text-blue-900 font-bold hover:underline">
+<TextLink to="/target">
   Link Text
-</Link>
+</TextLink>
 ```
+
+**Styling Classes:**
+`inline-block text-blue-700 hover:text-blue-900 font-bold border-b-2 border-transparent hover:border-blue-700 transition-all duration-300 hover:scale-[1.02]`
 
 ## Images & Media
 Images should pop off the page slightly with a shadow and subtle zoom effect on hover.

@@ -1,204 +1,155 @@
+import { useTranslation, Trans } from 'react-i18next';
+
 export default function Labyrinth4() {
+  const { t } = useTranslation();
+
   return (
-    <main className="max-w-4xl mx-auto px-6 py-16 text-left">
+    <main className="max-w-4xl mx-auto px-6 py-16 text-left text-lg text-gray-700 leading-relaxed">
       <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-10 text-center">
-        Phase 3: From Random Chaos to Structured Generation — Evolving the Labyrinth System
+        {t('blog.posts.labyrinth4.page.title')}
       </h1>
-      <p className="text-gray-500 mb-8 text-center italic">Posted on October 29, 2025</p>
-
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        Following the progress in Phase 2, where the labyrinth grid first took shape through random
-        tile placement and basic connection validation, the focus of this phase shifted toward
-        structure, extensibility, and control. This was less about visual output, and more about
-        engineering the system into something robust, testable, and expressive.
+      <p className="text-gray-500 mb-8 text-center italic">
+        {t('blog.posts.labyrinth4.page.postedOn', { date: 'October 29, 2025' })}
       </p>
 
-      <h2 className="text-2xl font-semibold text-gray-900 mb-4">🧱 Reassessing the Foundation</h2>
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        The earlier implementation achieved visual results quickly — it could fill a grid with tile
-        prefabs and apply rotations to approximate connectivity. However, it became clear that the
-        underlying design was too rigid. The generator’s logic was buried inside monolithic methods
-        that directly instantiated <code>GameObjects</code>, which made experimentation difficult.
-        Each design tweak risked breaking the system because generation, validation, and
-        presentation were tightly coupled.
+      <p className="mb-8">
+        {t('blog.posts.labyrinth4.page.sec1Para1')}
       </p>
 
-      <blockquote className="border-l-4 border-gray-400 pl-4 italic mb-8 text-lg text-gray-700">
-        “Stop building tiles; start defining rules.”
+      <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+        {t('blog.posts.labyrinth4.page.sec2Title')}
+      </h2>
+      <p className="mb-8">
+        <Trans
+          i18nKey="blog.posts.labyrinth4.page.sec2Para1"
+          components={{ code1: <code /> }}
+        />
+      </p>
+      <blockquote className="border-l-4 border-blue-500 pl-4 italic text-gray-600 mb-8">
+        {t('blog.posts.labyrinth4.page.sec2Quote')}
       </blockquote>
 
-      <h2 className="text-2xl font-semibold text-gray-900 mb-4">🧩 Introducing the Constraint System</h2>
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        The first major architectural shift came with the introduction of the{" "}
-        <code>ILabyrinthConstraint</code> interface — a lightweight abstraction that represents a
-        rule applied during generation.
+      <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+        {t('blog.posts.labyrinth4.page.sec3Title')}
+      </h2>
+      <p className="mb-8">
+        <Trans
+          i18nKey="blog.posts.labyrinth4.page.sec3Para1"
+          components={{ code1: <code /> }}
+        />
       </p>
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        Instead of hardcoding adjacency logic, the generator now queries a set of constraint objects
-        that each implement a single validation rule. This approach allows constraints to be added,
-        removed, or replaced without modifying the core generator.
+      <p className="mb-8">
+        {t('blog.posts.labyrinth4.page.sec3Para2')}
+      </p>
+      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-xl mb-8 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed shadow-md">
+        {t('blog.posts.labyrinth4.page.sec3Code1')}
+      </pre>
+      <p className="mb-8">
+        <Trans
+          i18nKey="blog.posts.labyrinth4.page.sec3Para3"
+          components={{ code1: <code /> }}
+        />
+      </p>
+      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-xl mb-8 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed shadow-md">
+        {t('blog.posts.labyrinth4.page.sec3Code2')}
+      </pre>
+      <p className="mb-8">
+        {t('blog.posts.labyrinth4.page.sec3Para4')}
       </p>
 
+      <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+        {t('blog.posts.labyrinth4.page.sec4Title')}
+      </h2>
+      <p className="mb-8">
+        <Trans
+          i18nKey="blog.posts.labyrinth4.page.sec4Para1"
+          components={{ code1: <code /> }}
+        />
+      </p>
+      <p className="mb-8">
+        {t('blog.posts.labyrinth4.page.sec4Para2')}
+      </p>
+      <p className="mb-8">
+        {t('blog.posts.labyrinth4.page.sec4Para3')}
+      </p>
       <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-xl mb-8 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed shadow-md">
-        {`public interface ILabyrinthConstraint
-{
-    bool Validate(TileConnection[,] grid, int x, int y, TileType type, int rotation, TileConnection mask);
-}`}
+        {t('blog.posts.labyrinth4.page.sec4Code')}
+      </pre>
+      <p className="mb-8">
+        {t('blog.posts.labyrinth4.page.sec4Para4')}
+      </p>
+
+      <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+        {t('blog.posts.labyrinth4.page.sec5Title')}
+      </h2>
+      <p className="mb-8">
+        {t('blog.posts.labyrinth4.page.sec5Para1')}
+      </p>
+      <p className="mb-8">
+        {t('blog.posts.labyrinth4.page.sec5Para2')}
+      </p>
+      <p className="mb-8">
+        <Trans
+          i18nKey="blog.posts.labyrinth4.page.sec5Para3"
+          components={{ code1: <code />, code2: <code /> }}
+        />
+      </p>
+      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-xl mb-8 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed shadow-md">
+        {t('blog.posts.labyrinth4.page.sec5Code')}
+      </pre>
+      <p className="mb-8">
+        {t('blog.posts.labyrinth4.page.sec5Para4')}
+      </p>
+
+      <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+        {t('blog.posts.labyrinth4.page.sec6Title')}
+      </h2>
+      <p className="mb-8">
+        <Trans
+          i18nKey="blog.posts.labyrinth4.page.sec6Para1"
+          components={{ code1: <code />, code2: <code /> }}
+        />
+      </p>
+      <p className="mb-8">
+        <Trans
+          i18nKey="blog.posts.labyrinth4.page.sec6Para2"
+          components={{
+            kbd1: <kbd className="bg-gray-100 border border-gray-300 px-1 rounded shadow-sm" />,
+            kbd2: <kbd className="bg-gray-100 border border-gray-300 px-1 rounded shadow-sm" />,
+            kbd3: <kbd className="bg-gray-100 border border-gray-300 px-1 rounded shadow-sm" />,
+            kbd4: <kbd className="bg-gray-100 border border-gray-300 px-1 rounded shadow-sm" />,
+          }}
+        />
+      </p>
+      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-xl mb-8 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed shadow-md">
+        {t('blog.posts.labyrinth4.page.sec6Code')}
       </pre>
 
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        The simplest example is the <code>ConnectionConstraint</code>, which ensures that each tile
-        aligns correctly with its neighbors’ open paths:
+      <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+        {t('blog.posts.labyrinth4.page.sec7Title')}
+      </h2>
+      <p className="mb-8">
+        {t('blog.posts.labyrinth4.page.sec7Para1')}
       </p>
-
-      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-xl mb-8 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed shadow-md">
-        {`public class ConnectionConstraint : ILabyrinthConstraint
-{
-    public bool Validate(TileConnection[,] grid, int x, int y, TileType type, int rotation, TileConnection mask)
-    {
-        if (x > 0 && grid[x - 1, y] != 0)
-        {
-            var left = grid[x - 1, y];
-            if (HasConnection(left, TileConnection.Right) != HasConnection(mask, TileConnection.Left))
-                return false;
-        }
-
-        if (y > 0 && grid[x, y - 1] != 0)
-        {
-            var down = grid[x, y - 1];
-            if (HasConnection(down, TileConnection.Up) != HasConnection(mask, TileConnection.Down))
-                return false;
-        }
-
-        return true;
-    }
-
-    private static bool HasConnection(TileConnection mask, TileConnection dir)
-        => (mask & dir) == dir;
-}`}
-      </pre>
-
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        With this in place, adjacency checks are no longer special-case logic inside the generator —
-        they’re just one of many possible constraints. This unlocks powerful future flexibility:
-        tile distribution rules, symmetry constraints, difficulty scaling, or even narrative layout
-        logic can all be defined the same way.
-      </p>
-
-      <h2 className="text-2xl font-semibold text-gray-900 mb-4">⚙️ A Cleaner API Layer</h2>
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        A second improvement came with the introduction of a dedicated entry point — the{" "}
-        <code>LabyrinthGeneratorAPI</code>.
-      </p>
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        Previously, generating a labyrinth required manually constructing the generator, adding
-        constraints, and invoking its methods directly. That cluttered the gameplay code and made it
-        harder to swap generation strategies later.
-      </p>
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        The new API wraps this into a single clean call:
-      </p>
-
-      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-xl mb-8 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed shadow-md">
-        {`public static Tile[,] Generate(
-    int gridSize, 
-    TileType[] tileTypes, 
-    Func<TileType, Tile> spawnTile, 
-    params ILabyrinthConstraint[] constraints)
-{
-    var generator = new LabyrinthGenerator(tileTypes, gridSize);
-    foreach (var c in constraints) generator.AddConstraint(c);
-    generator.AddConstraint(new Constraints.ConnectionConstraint());
-    return generator.Generate(gridSize, tileTypes, spawnTile);
-}`}
-      </pre>
-
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        This pattern — lightweight factory on top of a modular generator — strikes a strong balance
-        between ease of use and extensibility.
-      </p>
-
-      <h2 className="text-2xl font-semibold text-gray-900 mb-4">🧠 Logical Generation Before Physical Instantiation</h2>
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        A key strength of the earlier implementation was that tile prefabs were never instantiated
-        until the full grid was completed. This design already avoided one of Unity’s most common
-        procedural pitfalls — the performance cost of constant creation and destruction cycles.
-      </p>
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        However, even with that optimization, the process still treated visual tiles as the primary
-        representation of the labyrinth. This phase introduced a conceptual shift: separating the
-        logical grid from its visual layer.
-      </p>
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        Now, the generator first operates on an abstract data structure of{" "}
-        <code>TileConnection</code> masks. Each potential placement is validated purely in logic —
-        applying constraints, rotations, and adjacency checks — before any GameObjects are spawned.
-        Only once a tile type and rotation have been selected does the generator call the provided{" "}
-        <code>spawnTile</code> delegate to create the prefab:
-      </p>
-
-      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-xl mb-8 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed shadow-md">
-        {`var (type, rotation, connectionMask) = PickValidTile(x, y, logicalGrid, tileTypes);
-logicalGrid[x, y] = connectionMask;
-
-var tile = spawnTile(type);
-tile.type = type;
-tile.name = $"{type.name}_{x}_{y}";
-tile.SetRotation(rotation);`}
-      </pre>
-
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        This dramatically reduces overhead, allowing the generator to scale up to larger grids or
-        more complex constraint sets without performance issues.
-      </p>
-
-      <h2 className="text-2xl font-semibold text-gray-900 mb-4">🎮 Integration with the Gameplay Layer</h2>
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        On the gameplay side, the <code>LabyrinthGrid</code> <code>MonoBehaviour</code> was updated
-        to integrate seamlessly with the new generation pipeline. It now uses the API directly,
-        manages the spare tile mechanic, and handles shifting rows and columns with smooth
-        coroutine-driven animation.
-      </p>
-
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        A simple keyboard control scheme (<kbd>W</kbd>/<kbd>A</kbd>/<kbd>S</kbd>/<kbd>D</kbd>)
-        triggers the grid shifts, and the system now tracks previous moves to prevent immediate
-        reversals — a subtle but meaningful gameplay rule that enhances puzzle flow.
-      </p>
-
-      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-xl mb-8 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed shadow-md">
-        {`if (_hasPreviousMove && entryPoint == GetOppositePosition(_lastInsertPos))
-{
-    Debug.LogWarning("Cannot reverse previous insertion directly!");
-    return;
-}`}
-      </pre>
-
-      <h2 className="text-2xl font-semibold text-gray-900 mb-4">🪞 Design Reflections</h2>
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        Phase 3 marks a clear evolution from procedural enthusiasm to intentional architecture.
-      </p>
-
-      <div className="bg-gray-100 text-gray-800 p-6 rounded-xl shadow-md mb-8">
-        <p className="font-semibold mb-2">Before → Now</p>
-        <ul className="list-disc list-inside space-y-1">
-          <li>
-            <strong>Before:</strong> Generation was random, reactive, and hard to control.<br />
-            <strong>Now:</strong> Generation is rule-based, modular, and extensible.
-          </li>
-          <li>
-            <strong>Before:</strong> Gameplay and generation logic were intertwined.<br />
-            <strong>Now:</strong> The generator is a self-contained system that can serve multiple
-            gameplay contexts.
-          </li>
-        </ul>
-      </div>
-
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        This phase also laid the foundation for more advanced features — dynamic difficulty
-        adjustment, thematic tile grouping, or even procedural level progression. By framing
-        everything around constraints and rules, future expansion becomes a matter of composition,
-        not refactoring.
+      <h3 className="text-xl font-medium text-gray-900 mb-2">
+        {t('blog.posts.labyrinth4.page.sec7TitleSub')}
+      </h3>
+      <ul className="list-disc list-inside mb-8 space-y-2">
+        <li>
+          <Trans
+            i18nKey="blog.posts.labyrinth4.page.sec7List1"
+            components={{ strong1: <strong />, strong2: <strong /> }}
+          />
+        </li>
+        <li>
+          <Trans
+            i18nKey="blog.posts.labyrinth4.page.sec7List2"
+            components={{ strong1: <strong />, strong2: <strong /> }}
+          />
+        </li>
+      </ul>
+      <p className="mb-8">
+        {t('blog.posts.labyrinth4.page.sec7Para2')}
       </p>
     </main>
   );

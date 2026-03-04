@@ -1,195 +1,144 @@
+import { useTranslation, Trans } from 'react-i18next';
+
 export default function Labyrinth5() {
+  const { t } = useTranslation();
+
   return (
-    <main className="max-w-4xl mx-auto px-6 py-16 text-left">
+    <main className="max-w-4xl mx-auto px-6 py-16 text-left text-lg text-gray-700 leading-relaxed">
       <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-10 text-center">
-        🧠 Phase 4 — Building a Real Constraint Solver for the Labyrinth
+        {t('blog.posts.labyrinth5.page.title')}
       </h1>
-      <p className="text-gray-500 mb-8 text-center italic">Posted on November 14, 2025</p>
-
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        After several phases of visual output, shifting tiles, and gameplay
-        mechanics, this week took a different turn. Instead of focusing on
-        what the labyrinth <em>looks</em> like, the work shifted toward
-        understanding how the generator <em>thinks</em>. This phase marked the
-        beginning of a more deliberate approach to the problem — treating the
-        Labyrinth as a <strong>constraint satisfaction problem </strong>
-        rather than a random tile arranger.
+      <p className="text-gray-500 mb-8 text-center italic">
+        {t('blog.posts.labyrinth5.page.postedOn', { date: 'November 14, 2025' })}
       </p>
 
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        The goal? To create a robust system that can evaluate whether a tile
-        placement is valid under a growing collection of rules, and eventually
-        allow the labyrinth to be generated with intent, structure, and even
-        difficulty.
+      <p className="mb-8">
+        <Trans
+          i18nKey="blog.posts.labyrinth5.page.sec1Para1"
+          components={{ em1: <em />, em2: <em />, strong1: <strong /> }}
+        />
       </p>
 
-      <h2 className="text-2xl font-semibold text-gray-900 mb-4">🎯 Why Constraint Satisfaction?</h2>
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        In Phase 3, the concept of modular constraints was introduced through
-        the <code>ILabyrinthConstraint</code> interface. This was already a
-        big improvement — adjacency checks, tile compatibility, and rotation
-        validity were no longer hardcoded into the generator.
+      <p className="mb-8">
+        {t('blog.posts.labyrinth5.page.sec1Para2')}
       </p>
 
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        But adding more constraints made the cracks show. Random tile
-        placement works fine for simple rules, but becomes brittle as soon as
-        additional structure is required. Before long, you end up with
-        placement failures that are impossible to debug or reproduce.
+      <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+        {t('blog.posts.labyrinth5.page.sec2Title')}
+      </h2>
+      <p className="mb-8">
+        <Trans
+          i18nKey="blog.posts.labyrinth5.page.sec2Para1"
+          components={{ code1: <code /> }}
+        />
+      </p>
+      <p className="mb-8">
+        {t('blog.posts.labyrinth5.page.sec2Para2')}
+      </p>
+      <p className="mb-8">
+        <Trans
+          i18nKey="blog.posts.labyrinth5.page.sec2Para3"
+          components={{ strong1: <strong /> }}
+        />
       </p>
 
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        The solution was clear: move toward a proper constraint satisfaction
-        model, where the generator evaluates <strong>feasible candidates</strong> rather than
-        guessing until something fits.
+      <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+        {t('blog.posts.labyrinth5.page.sec3Title')}
+      </h2>
+      <p className="mb-8">
+        <Trans
+          i18nKey="blog.posts.labyrinth5.page.sec3Para1"
+          components={{ code1: <code /> }}
+        />
+      </p>
+      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-xl mb-8 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed shadow-md">
+        {t('blog.posts.labyrinth5.page.sec3Code')}
+      </pre>
+      <p className="mb-8">
+        {t('blog.posts.labyrinth5.page.sec3Para2')}
       </p>
 
-      <h2 className="text-2xl font-semibold text-gray-900 mb-4">🧩 Introducing the Constraint Context</h2>
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        One of the first architectural improvements was the introduction of a
-        dedicated <code>ConstraintContext</code> — a lightweight struct that
-        carries all the information a constraint needs to evaluate a tile
-        placement.
+      <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+        {t('blog.posts.labyrinth5.page.sec4Title')}
+      </h2>
+      <p className="mb-8">
+        {t('blog.posts.labyrinth5.page.sec4Para1')}
+      </p>
+      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-xl mb-8 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed shadow-md">
+        {t('blog.posts.labyrinth5.page.sec4Code')}
+      </pre>
+      <p className="mb-8">
+        <Trans
+          i18nKey="blog.posts.labyrinth5.page.sec4Para2"
+          components={{ strong1: <strong /> }}
+        />
       </p>
 
-      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-xl mb-8 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed shadow-md">{`public readonly struct ConstraintContext
-{
-    public readonly TileConnection[,] grid;
-    public readonly int x, y;
-    public readonly TileType type;
-    public readonly int rotation;
-    public readonly TileConnection mask;
-
-    public ConstraintContext(TileConnection[,] grid, int x, int y, TileType type, int rotation, TileConnection mask)
-    {
-        this.grid = grid;
-        this.x = x;
-        this.y = y;
-        this.type = type;
-        this.rotation = rotation;
-        this.mask = mask;
-    }
-}`}</pre>
-
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        This change reduced method signatures dramatically and made constraint
-        logic more consistent. Each rule now receives a single context object
-        instead of multiple raw parameters, which makes adding new constraints
-        far easier.
+      <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+        {t('blog.posts.labyrinth5.page.sec5Title')}
+      </h2>
+      <p className="mb-8">
+        <Trans
+          i18nKey="blog.posts.labyrinth5.page.sec5Para1"
+          components={{ em1: <em /> }}
+        />
+      </p>
+      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-xl mb-8 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed shadow-md">
+        {t('blog.posts.labyrinth5.page.sec5Code')}
+      </pre>
+      <p className="mb-8">
+        <Trans
+          i18nKey="blog.posts.labyrinth5.page.sec5Para2"
+          components={{ em1: <em />, em2: <em /> }}
+        />
+      </p>
+      <p className="mb-8">
+        {t('blog.posts.labyrinth5.page.sec5Para3')}
       </p>
 
-      <h2 className="text-2xl font-semibold text-gray-900 mb-4">✔️ A Unified Validation Pipeline</h2>
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        Another major addition was the creation of a single pipeline
-        responsible for evaluating all active constraints. Instead of each
-        constraint being checked in ad-hoc places, the generator now flows
-        everything through a clear, composable validator.
+      <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+        {t('blog.posts.labyrinth5.page.sec6Title')}
+      </h2>
+      <p className="mb-8">
+        <Trans
+          i18nKey="blog.posts.labyrinth5.page.sec6Para1"
+          components={{ strong1: <strong />, em1: <em /> }}
+        />
       </p>
-
-      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-xl mb-8 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed shadow-md">{`public static bool ValidateAll(
-    ConstraintContext ctx,
-    IEnumerable<ILabyrinthConstraint> constraints,
-    out List<ILabyrinthConstraint> failed)
-{
-    failed = new List<ILabyrinthConstraint>();
-
-    foreach (var c in constraints)
-    {
-        if (!c.Validate(ctx))
-            failed.Add(c);
-    }
-
-    return failed.Count == 0;
-}`}</pre>
-
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        The generator can now not only determine whether a placement is valid,
-        but also <strong>which constraints failed</strong>. This is invaluable for debugging,
-        tweaking rules, or building editor tools later on.
-      </p>
-
-      <h2 className="text-2xl font-semibold text-gray-900 mb-4">🔍 Evaluating Candidate Tiles</h2>
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        With the validation pipeline in place, the next step was to evaluate
-        <em>all</em> possible combinations of tile types and rotations —
-        selecting from only the candidates that satisfy all constraints.
-      </p>
-
-      <pre className="bg-gray-900 text-green-300 text-sm p-4 rounded-xl mb-8 overflow-x-auto text-left font-mono whitespace-pre leading-relaxed shadow-md">{`var candidates = new List<(TileType, int, TileConnection)>();
-
-foreach (var type in tileTypes)
-{
-    for (int rot = 0; rot < 4; rot++)
-    {
-        var mask = type.baseConnections.Rotate(rot);
-        var ctx = new ConstraintContext(grid, x, y, type, rot, mask);
-
-        if (ValidateAll(ctx, constraints, out _))
-            candidates.Add((type, rot, mask));
-    }
-}`}</pre>
-
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        This effectively turns the generator into a simple constraint solver.
-        Instead of hoping a tile fits, the system now understands <em>which</em>
-        tiles fit and <em>why</em>.
-      </p>
-
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        And because all logic happens before any GameObjects are spawned, the
-        process remains lightweight and scalable.
-      </p>
-
-      <h2 className="text-2xl font-semibold text-gray-900 mb-4">🎚️ Setting the Stage for Scored Generation</h2>
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        With the feasibility system working, the next step will be to
-        introduce <strong>scoring</strong> — the ability to choose the
-        <em>best</em> tile rather than the first valid one. This paves the way
-        for:
-      </p>
-
-      <ul className="list-disc list-inside mb-8 text-lg text-gray-700 leading-relaxed space-y-2">
-        <li>difficulty biasing</li>
-        <li>symmetry weighting</li>
-        <li>thematic tile layouts</li>
-        <li>or even soft constraints with penalties</li>
+      <ul className="list-disc list-inside mb-8 space-y-2">
+        <li>{t('blog.posts.labyrinth5.page.sec6List1')}</li>
+        <li>{t('blog.posts.labyrinth5.page.sec6List2')}</li>
+        <li>{t('blog.posts.labyrinth5.page.sec6List3')}</li>
+        <li>{t('blog.posts.labyrinth5.page.sec6List4')}</li>
       </ul>
-
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        But even without scoring, the generator is now significantly more
-        flexible, stable, and predictable than earlier versions.
+      <p className="mb-8">
+        {t('blog.posts.labyrinth5.page.sec6Para2')}
       </p>
 
-      <h2 className="text-2xl font-semibold text-gray-900 mb-4">🧠 Design Reflections</h2>
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        Phase 4 represents a fundamental shift in how the labyrinth is built.
-        The early stages were about rapid prototyping, visual feedback, and
-        getting tiles on the board. This phase marks the transition from
-        procedural enthusiasm to <strong>intentional architecture</strong>.
+      <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+        {t('blog.posts.labyrinth5.page.sec7Title')}
+      </h2>
+      <p className="mb-8">
+        <Trans
+          i18nKey="blog.posts.labyrinth5.page.sec7Para1"
+          components={{ strong1: <strong /> }}
+        />
       </p>
-
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        Before: Generation was random, reactive, and hard to control.
-        <br />
-        Now: Generation is rule-based, modular, and extensible.
+      <p className="mb-8">
+        {t('blog.posts.labyrinth5.page.sec7Para2')}
       </p>
-
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        Before: Gameplay and generation logic were tightly intertwined.
-        <br />
-        Now: The generator is a self-contained reasoning engine capable of
-        supporting multiple gameplay contexts.
+      <p className="mb-8">
+        {t('blog.posts.labyrinth5.page.sec7Para3')}
       </p>
-
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        This phase also laid the groundwork for more advanced features:
-        dynamic difficulty, thematic tile clustering, or even procedural
-        campaign progression. By reframing everything around constraints and
-        rules, future expansion becomes a matter of <em>composition</em>, not
-        refactoring.
+      <p className="mb-8">
+        <Trans
+          i18nKey="blog.posts.labyrinth5.page.sec7Para4"
+          components={{ em1: <em /> }}
+        />
       </p>
-
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed font-semibold">The labyrinth finally has a brain — next, we’ll teach it style.</p>
+      <p className="mb-8">
+        {t('blog.posts.labyrinth5.page.sec7Para5')}
+      </p>
     </main>
   );
 }
