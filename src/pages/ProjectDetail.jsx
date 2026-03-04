@@ -1,13 +1,16 @@
 import { useParams } from 'react-router-dom';
 import projects from '../data/projects';
+import { useTranslation } from 'react-i18next';
+import TextLink from '../components/TextLink';
 
 
 export default function ProjectDetail() {
   const { projectId } = useParams();
+  const { t } = useTranslation();
   const project = projects[projectId];
 
   if (!project) {
-    return <div className="p-6 text-center text-gray-500">Project not found.</div>;
+    return <div className="p-6 text-center text-gray-500">{t('projects.notFound')}</div>;
   }
 
   const isAbsoluteUrl = /^(https?:)?\/\//.test(project.imageUrl);
@@ -38,27 +41,31 @@ export default function ProjectDetail() {
       )}
 
       {/* Title + Itch Link */}
-      <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-10 text-center">{project.title}</h1>
+      <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-10 text-center">
+        {t(`projects.${project.id}.title`, { defaultValue: project.title })}
+      </h1>
 
       {project.itchLink && (
         <div className="text-center mb-10">
-          <a href={project.itchLink} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-            View on Itch.io
-          </a>
+          <TextLink href={project.itchLink}>
+            {t('projects.viewOnItch')}
+          </TextLink>
         </div>
       )}
 
       {/* Description */}
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">{project.description}</p>
+      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+        {t(`projects.${project.id}.description`, { defaultValue: project.description })}
+      </p>
 
       {/* Contributions (if present) */}
       {project.contributions && project.contributions.length > 0 && (
         <>
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">My Contributions</h2>
+          <h2 className="text-2xl font-semibold text-gray-900 mb-4">{t('projects.contributions')}</h2>
           <ul className="list-disc list-inside mb-8 text-lg text-gray-700 leading-relaxed space-y-2">
             {project.contributions.map(([title, desc], index) => (
               <li key={index}>
-                <strong>{title}:</strong> {desc}
+                <strong>{t(`projects.${project.id}.contributions.${index}.title`, { defaultValue: title })}:</strong> {t(`projects.${project.id}.contributions.${index}.description`, { defaultValue: desc })}
               </li>
             ))}
           </ul>
@@ -68,17 +75,19 @@ export default function ProjectDetail() {
       {/* Team Info (if present) */}
       {project.team && (
         <>
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">Team</h2>
-          <p className="text-lg text-gray-700 mb-8 leading-relaxed">{project.team}</p>
+          <h2 className="text-2xl font-semibold text-gray-900 mb-4">{t('projects.teamHeader')}</h2>
+          <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+            {t(`projects.${project.id}.team`, { defaultValue: project.team })}
+          </p>
         </>
       )}
 
       {/* Roles (if present and no contributions) */}
       {project.roles && project.roles.length > 0 && (!project.contributions || project.contributions.length === 0) && (
         <>
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">My Roles</h2>
+          <h2 className="text-2xl font-semibold text-gray-900 mb-4">{t('projects.roles')}</h2>
           <ul className="list-disc list-inside mb-8 text-lg text-gray-700 leading-relaxed">
-            {project.roles.map((role, index) => <li key={index}>{role}</li>)}
+            {project.roles.map((role, index) => <li key={index}>{t(`projects.${project.id}.roles.${index}`, { defaultValue: role })}</li>)}
           </ul>
         </>
       )}
@@ -86,13 +95,15 @@ export default function ProjectDetail() {
       {/* Reflections */}
       {project.reflections && (
         <>
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">Reflections</h2>
-          <p className="text-lg text-gray-700 mb-8 leading-relaxed">{project.reflections}</p>
+          <h2 className="text-2xl font-semibold text-gray-900 mb-4">{t('projects.reflections')}</h2>
+          <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+            {t(`projects.${project.id}.reflections`, { defaultValue: project.reflections })}
+          </p>
         </>
       )}
 
       {/* Tech */}
-      <h2 className="text-2xl font-semibold text-gray-900 mb-4">Technologies</h2>
+      <h2 className="text-2xl font-semibold text-gray-900 mb-4">{t('projects.techHeader')}</h2>
       <ul className="list-disc list-inside mb-8 text-lg text-gray-700 leading-relaxed">
         {project.tech.map((t, index) => <li key={index}>{t}</li>)}
       </ul>

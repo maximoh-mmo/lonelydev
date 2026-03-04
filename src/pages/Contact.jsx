@@ -1,6 +1,9 @@
 import { Mail, FileText, Download } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function Contact() {
+  const { t } = useTranslation();
+
   const contactLinks = [
     {
       name: "Email",
@@ -72,8 +75,8 @@ export default function Contact() {
       isDownload: false,
     },
     {
-      name: "Resume / CV",
-      value: "Download PDF",
+      name: t("contact.resume"),
+      value: t("contact.download"),
       href: "/CV_Max_Heinze.pdf",
       icon: <FileText className="w-8 h-8" />,
       color: "bg-emerald-50 text-emerald-600 hover:bg-emerald-100",
@@ -84,11 +87,10 @@ export default function Contact() {
   return (
     <main className="max-w-5xl mx-auto px-6 py-20 text-center">
       <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-6">
-        Let's Connect
+        {t("contact.title")}
       </h1>
       <p className="text-xl text-gray-600 mb-16 max-w-2xl mx-auto leading-relaxed">
-        Looking for the next big problem to solve.
-        If you need a passionate engineer for your team or project, let’s connect.
+        {t("contact.subtitle")}
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">

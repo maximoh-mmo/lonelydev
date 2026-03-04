@@ -1,8 +1,10 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { posts } from '../../data/posts';
+import { useTranslation } from 'react-i18next';
 
 export default function DevBlogIndex() {
+  const { t } = useTranslation();
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedProject, setSelectedProject] = useState('All');
 
@@ -31,13 +33,13 @@ export default function DevBlogIndex() {
   return (
     <main className="max-w-4xl mx-auto px-6 py-16">
       <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-10 text-center">
-        Developer Blog
+        {t('blog.title')}
       </h1>
 
       {/* Filter Bar */}
       <div className="relative flex flex-col md:flex-row gap-4 mb-10 justify-center items-center bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
         <div className="flex items-center gap-2">
-          <label className="text-sm font-semibold text-gray-600">Project:</label>
+          <label className="text-sm font-semibold text-gray-600">{t('blog.project')}</label>
           <select
             value={selectedProject}
             onChange={(e) => setSelectedProject(e.target.value)}
@@ -45,14 +47,14 @@ export default function DevBlogIndex() {
           >
             {projects.map((proj) => (
               <option key={proj} value={proj}>
-                {proj}
+                {proj === 'All' ? t('blog.all') : t(`blog.projects.${proj}`, { defaultValue: proj })}
               </option>
             ))}
           </select>
         </div>
 
         <div className="flex items-center gap-2">
-          <label className="text-sm font-semibold text-gray-600">Category:</label>
+          <label className="text-sm font-semibold text-gray-600">{t('blog.category')}</label>
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
@@ -60,7 +62,7 @@ export default function DevBlogIndex() {
           >
             {categories.map((cat) => (
               <option key={cat} value={cat}>
-                {cat}
+                {cat === 'All' ? t('blog.all') : t(`blog.categories.${cat}`, { defaultValue: cat })}
               </option>
             ))}
           </select>
@@ -71,7 +73,7 @@ export default function DevBlogIndex() {
             onClick={clearFilters}
             className="text-sm text-red-500 hover:text-red-700 font-medium px-4 py-2 md:absolute md:right-4"
           >
-            Clear Filters
+            {t('blog.clearFilters')}
           </button>
         )}
       </div>
@@ -86,18 +88,20 @@ export default function DevBlogIndex() {
             >
               <div>
                 <h2 className="text-2xl font-semibold text-gray-900">
-                  {post.title}
+                  {t(`blog.posts.${post.id}.title`, { defaultValue: post.title })}
                 </h2>
               </div>
 
               <p className="text-gray-500 text-sm mb-3">
-                {new Date(post.date).toLocaleDateString('en-GB', {
+                {new Date(post.date).toLocaleDateString(t.language === 'de' ? 'de-DE' : 'en-GB', {
                   day: '2-digit',
                   month: 'short',
                   year: 'numeric',
                 })}
               </p>
-              <p className="text-gray-700 mb-4">{post.summary}</p>
+              <p className="text-gray-700 mb-4">
+                {t(`blog.posts.${post.id}.summary`, { defaultValue: post.summary })}
+              </p>
 
               <div className="flex flex-wrap gap-2 mb-4">
                 {post.tags && post.tags.map(tag => (
@@ -108,7 +112,7 @@ export default function DevBlogIndex() {
               </div>
 
               <span className="inline-block text-sm text-gray-500 font-medium">
-                {post.category}
+                {t(`blog.categories.${post.category}`, { defaultValue: post.category })}
               </span>
             </Link>
           ))

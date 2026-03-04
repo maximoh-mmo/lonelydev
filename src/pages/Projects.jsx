@@ -1,7 +1,10 @@
 import ProjectCard from '../components/ProjectCard';
 import projects from '../data/projects';
+import { useTranslation, Trans } from 'react-i18next';
+import TextLink from '../components/TextLink';
 
 export default function Projects() {
+  const { t } = useTranslation();
   const projectList = Object.values(projects);
 
   const featuredProjects = projectList.filter((project) => project.featured);
@@ -27,8 +30,8 @@ export default function Projects() {
             >
               <div className="w-full md:max-w-md">
                 <ProjectCard
-                  title={project.title}
-                  description={project.shortDescription}
+                  title={t(`projects.${project.id}.title`, { defaultValue: project.title })}
+                  description={t(`projects.${project.id}.shortDescription`, { defaultValue: project.shortDescription })}
                   imageUrl={project.imageUrl}
                   link={`/projects/${project.id}`}
                 />
@@ -45,22 +48,26 @@ export default function Projects() {
       {/* Header */}
       <header className="max-w-4xl mx-auto px-6 py-16 text-center">
         <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-10">
-          Projects
+          {t('projects.title')}
         </h1>
         <p className="text-lg text-gray-600 mx-auto">
-          Current and previous selected Game projects. Additional projects can be found on my <a
-            href="https://github.com/maximoh-mmo"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline"
-          >GitHub</a>.
+          <Trans
+            i18nKey="projects.subtitle"
+            components={{
+              github: (
+                <TextLink
+                  href="https://github.com/maximoh-mmo"
+                />
+              ),
+            }}
+          />
         </p>
       </header>
 
       {/* Featured Projects */}
       {featuredProjects.length > 0 && (
         <>
-          <h2 className="text-2xl font-semibold mb-6">Active Development:</h2>
+          <h2 className="text-2xl font-semibold mb-6">{t('projects.active')}</h2>
           {renderProjectGrid(featuredProjects)}
           <div className="my-12" />
         </>
@@ -69,7 +76,7 @@ export default function Projects() {
       {/* Previous Projects */}
       {previousProjects.length > 0 && (
         <>
-          <h2 className="text-2xl font-semibold mb-6">Previous Projects:</h2>
+          <h2 className="text-2xl font-semibold mb-6">{t('projects.previous')}</h2>
           {renderProjectGrid(previousProjects)}
         </>
       )}
