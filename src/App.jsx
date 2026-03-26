@@ -35,7 +35,7 @@ function App() {
               path={`/dev-blog/${post.id}`}
               element={
                 <>
-                  <SEO title={post.title} description={post.summary} url={`/dev-blog/${post.id}`} />
+                  <SEO title={post.seoTitle || post.title} description={post.summary} url={`/dev-blog/${post.id}`} />
                   <AsyncComponent loader={post.component} />
                 </>
               }

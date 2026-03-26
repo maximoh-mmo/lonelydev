@@ -2,6 +2,7 @@ export const posts = [
   {
     id: 'photoboss8',
     title: '📸 Finding the Needle in the Haystack: Similarity Search & Grouping',
+    seoTitle: 'Similarity Search & Grouping for Exact Image Deduplication',
     date: '2026-02-17',
     category: 'Software Engineering',
     summary:
@@ -13,6 +14,7 @@ export const posts = [
   {
     id: 'photoboss7',
     title: '📸 Short-Circuiting Work: Introducing a Persistent Hash Cache',
+    seoTitle: 'Persistent Hash Caching with SQLite for Pipeline Optimization',
     date: '2026-01-27',
     summary: 'Adding a versioned, persistent hash cache to avoid recomputing expensive perceptual hashes. This entry covers file identity, cache-first pipeline design, SQLite persistence, and how treating cached results as first-class pipeline outputs dramatically reduces unnecessary work.',
     category: 'Software Engineering',
@@ -23,6 +25,7 @@ export const posts = [
   {
     id: 'photoboss6',
     title: '📸 Designing a Persistent Hash Cache with SQLite',
+    seoTitle: 'Designing a SQLite Persistent Hash Cache in C++',
     date: '2026-01-21',
     summary: 'Building a first-class cache stage using SQLite: identifying files, storing multiple hash algorithms, and injecting results back into the pipeline to skip redundant work.',
     category: 'Software Engineering',
@@ -33,6 +36,7 @@ export const posts = [
   {
     id: 'photoboss5',
     title: '📸 The Realisation: Recomputing Everything Is Wasteful',
+    seoTitle: 'Optimizing Image Hashing Pipelines with Caching',
     date: '2026-01-07',
     summary: 'Identifying the inefficiency of recomputing hashes for unchanged files, and defining caching requirements for persistence, invalidation, and multiple hash algorithms.',
     category: 'Software Engineering',
@@ -43,6 +47,7 @@ export const posts = [
   {
     id: 'photoboss4',
     title: '📸 Hashing Images: More Than Just Checksums',
+    seoTitle: 'Multithreaded Perceptual and Cryptographic Image Hashing in C++',
     date: '2025-12-24',
     summary: 'Implementing both cryptographic and perceptual image hashing, separating IO, decoding, and computation into pipeline stages with worker pools for performance.',
     category: 'Software Engineering',
@@ -53,6 +58,7 @@ export const posts = [
   {
     id: 'photoboss3',
     title: '📸 Learning Qt by Building: Threads, Signals, and Ownership',
+    seoTitle: 'Qt Concurrency: Threads, Signals, and Object Ownership',
     date: '2025-12-10',
     summary: 'A deep dive into Qt threading, signals/slots, and object ownership while building a responsive photo processing pipeline — including early mistakes and lessons learned.',
     category: 'Software Engineering',
@@ -63,6 +69,7 @@ export const posts = [
   {
     id: 'photoboss2',
     title: '📸 From Idea to Architecture: Designing a Scalable Image Processing Pipeline',
+    seoTitle: 'Scalable Image Processing Pipeline Architecture in C++',
     date: '2025-11-26',
     summary: 'How I modeled a messy photo library as a parallel pipeline of scanning, decoding, hashing, and aggregation — enabling scalable and responsive image processing.',
     category: 'Software Engineering',
@@ -73,6 +80,7 @@ export const posts = [
   {
     id: 'photoboss1',
     title: '📸 The Problem Nobody Talks About: Photo Libraries at Scale',
+    seoTitle: 'Managing Multi-Year Photo Libraries at Scale',
     date: '2025-11-12',
     summary: 'Exploring the hidden chaos of multi-year photo libraries — exact duplicates, resized copies, messaging exports — and why typical deduplication tools fail.',
     category: 'Software Engineering',
@@ -83,6 +91,7 @@ export const posts = [
   {
     id: 'labyrinth5',
     title: '🧠 Building a Real Constraint Solver for the Labyrinth.',
+    seoTitle: 'Building a Constraint Solver for Procedural Generation in Unity',
     date: '2025-11-14',
     summary: 'Building a proper constraint-based reasoning system for the labyrinth generator — introducing a unified validation pipeline, tile feasibility evaluation, and the foundations of a real constraint solver.',
     category: 'Game Dev',
@@ -93,6 +102,7 @@ export const posts = [
   {
     id: 'labyrinth4',
     title: '🧠 From Random Chaos to Structured Generation',
+    seoTitle: 'Rule-Driven Procedural Labyrinth Generation in C#',
     date: '2025-10-29',
     summary: 'Refactoring the labyrinth generator into a modular, rule-driven system built on constraints.',
     category: 'Game Dev',
@@ -103,6 +113,7 @@ export const posts = [
   {
     id: 'labyrinth3',
     title: '🌀 Making the Labyrinth Shift!',
+    seoTitle: 'Animating Tile Movement and Grid Shifting in Unity',
     date: '2025-10-28',
     summary: 'Animating tile movement and grid shifting in Unity — bringing the Labyrinth to life with smooth transitions and interactive mechanics.',
     category: 'Game Dev',
@@ -113,6 +124,7 @@ export const posts = [
   {
     id: 'labyrinth2',
     title: '🌀 Designing a Dynamic Maze Tile System',
+    seoTitle: 'Designing a Dynamic Procedural Maze Tile System in Unity',
     date: '2025-10-27',
     summary: 'Creating the core tile types, rotations, and grid structure for a procedural Labyrinth in Unity.',
     category: 'Game Dev',
@@ -123,6 +135,7 @@ export const posts = [
   {
     id: 'labyrinth',
     title: '🌀 Building a Living Labyrinth',
+    seoTitle: 'Procedural Maze Generation in Unity',
     date: '2025-10-27',
     summary: 'Exploring procedural maze generation inspired by Verrückte Labyrinth and turning board game mechanics into a Unity project.',
     category: 'Game Dev',
