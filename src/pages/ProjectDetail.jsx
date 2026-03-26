@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import projects from '../data/projects';
 import { useTranslation } from 'react-i18next';
 import TextLink from '../components/TextLink';
+import SEO from '../components/SEO';
 
 
 export default function ProjectDetail() {
@@ -20,6 +21,12 @@ export default function ProjectDetail() {
 
   return (
     <main className="max-w-4xl mx-auto px-6 py-16 text-left">
+      <SEO 
+        title={t(`projects.${project.id}.title`, { defaultValue: project.title })} 
+        description={t(`projects.${project.id}.description`, { defaultValue: project.shortDescription || project.description })} 
+        image={fullImageUrl}
+        url={`/projects/${project.id}`} 
+      />
       {/* Video or Image */}
       {project.videoId ? (
         <div className="aspect-video mb-8">

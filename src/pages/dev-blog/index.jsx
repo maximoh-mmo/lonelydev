@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { posts } from '../../data/posts';
 import { useTranslation } from 'react-i18next';
+import SEO from '../../components/SEO';
 
 export default function DevBlogIndex() {
   const { t } = useTranslation();
@@ -32,6 +33,11 @@ export default function DevBlogIndex() {
 
   return (
     <main className="max-w-4xl mx-auto px-6 py-16">
+      <SEO 
+        title={t('blog.title', 'Dev Blog')} 
+        description="Development blog posts and project updates." 
+        url="/dev-blog" 
+      />
       <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-10 text-center">
         {t('blog.title')}
       </h1>

@@ -1,5 +1,6 @@
 import { Mail, FileText, Download } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import SEO from '../components/SEO';
 
 export default function Contact() {
   const { t } = useTranslation();
@@ -86,6 +87,11 @@ export default function Contact() {
 
   return (
     <main className="max-w-5xl mx-auto px-6 py-20 text-center">
+      <SEO 
+        title={t("contact.title", "Contact Me")} 
+        description={t("contact.subtitle", "Get in touch for opportunities.")} 
+        url="/contact" 
+      />
       <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-6">
         {t("contact.title")}
       </h1>

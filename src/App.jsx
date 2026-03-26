@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import SEO from './components/SEO';
 import Navbar from './components/Navbar'; // adjust if needed
 import Home from './pages/Home';
 import Projects from './pages/Projects';
@@ -33,7 +34,10 @@ function App() {
               key={post.id}
               path={`/dev-blog/${post.id}`}
               element={
-                <AsyncComponent loader={post.component} />
+                <>
+                  <SEO title={post.title} description={post.summary} url={`/dev-blog/${post.id}`} />
+                  <AsyncComponent loader={post.component} />
+                </>
               }
             />
           ))}

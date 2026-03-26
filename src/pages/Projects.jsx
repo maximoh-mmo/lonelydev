@@ -2,6 +2,7 @@ import ProjectCard from '../components/ProjectCard';
 import projects from '../data/projects';
 import { useTranslation, Trans } from 'react-i18next';
 import TextLink from '../components/TextLink';
+import SEO from '../components/SEO';
 
 export default function Projects() {
   const { t } = useTranslation();
@@ -45,6 +46,11 @@ export default function Projects() {
 
   return (
     <section className="text-center">
+      <SEO 
+        title={t('projects.title', 'Projects')} 
+        description={t('projects.subtitle', 'A collection of my recent work.')} 
+        url="/projects" 
+      />
       {/* Header */}
       <header className="max-w-4xl mx-auto px-6 py-16 text-center">
         <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-10">

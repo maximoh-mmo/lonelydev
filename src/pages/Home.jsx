@@ -1,11 +1,17 @@
 import { useTranslation, Trans } from 'react-i18next';
 import TextLink from '../components/TextLink';
+import SEO from '../components/SEO';
 
 export default function Home() {
   const { t } = useTranslation();
 
   return (
     <main className="max-w-4xl mx-auto px-6 py-16 text-center">
+      <SEO 
+        title="Home" 
+        description="Portfolio of Max Heinze, a Game Programmer specializing in C++, C#, Unity, and Unreal Engine." 
+        url="/" 
+      />
       <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-6">
         {t('home.title')}
       </h1>

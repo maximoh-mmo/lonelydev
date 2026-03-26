@@ -1,11 +1,17 @@
 import { useTranslation, Trans } from 'react-i18next';
 import TextLink from '../components/TextLink';
+import SEO from '../components/SEO';
 
 export default function About() {
   const { t } = useTranslation();
 
   return (
     <main className="max-w-4xl mx-auto px-6 py-16 text-left">
+      <SEO 
+        title={t('about.title', 'About Me')} 
+        description={t('about.subtitle', 'I am Max.')} 
+        url="/about" 
+      />
       <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-10 text-center">
         {t('about.title')}
       </h1>
