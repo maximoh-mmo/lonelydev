@@ -1,5 +1,17 @@
 export const posts = [
   {
+    id: 'photoboss9',
+    title: '📸 Engineering Diary: Building a High-Performance Image Pipeline in PhotoBoss',
+    seoTitle: 'High-Performance Image Decoding and UI Batching in Qt',
+    date: '2026-04-17',
+    category: 'Software Engineering',
+    summary:
+      'Refactoring the thumbnail system into a formal pipeline stage with Direct-to-Size decoding, smooth lerped progress reporting, and race-condition-safe UI batching.',
+    component: () => import('../pages/dev-blog/photolibrary9.jsx'),
+    project: 'PhotoBoss',
+    tags: ['C++', 'Qt', 'Performance', 'Architecture', 'UX'],
+  },
+  {
     id: 'photoboss8',
     title: '📸 Finding the Needle in the Haystack: Similarity Search & Grouping',
     seoTitle: 'Similarity Search & Grouping for Exact Image Deduplication',
