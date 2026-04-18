@@ -26,6 +26,9 @@ function copyIndexTo404() {
 export default defineConfig({
   base: '/', // or your repo name if hosting at github.com/user/repo
   plugins: [react(), copyIndexTo404()],
+  define: {
+    __BUILD_DATE__: JSON.stringify(new Date().toISOString().split('T')[0]),
+  },
   server: {
     historyApiFallback: true
   },

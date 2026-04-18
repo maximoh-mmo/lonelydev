@@ -92,10 +92,24 @@ export default function DevBlogIndex() {
               to={`/dev-blog/${post.id}`}
               className="block p-6 rounded-2xl border border-gray-200 hover:shadow-lg transform hover:-translate-y-1 transition duration-300 bg-white"
             >
-              <div>
+              <div className="flex justify-between items-start gap-4">
                 <h2 className="text-2xl font-semibold text-gray-900">
                   {t(`blog.posts.${post.id}.title`, { defaultValue: post.title })}
                 </h2>
+                {import.meta.env.DEV && (
+                  <div className="flex gap-2 shrink-0">
+                    {post.status === 'draft' && (
+                      <span className="bg-amber-100 text-amber-700 px-2 py-0.5 rounded text-[10px] font-bold uppercase border border-amber-200">
+                        Draft
+                      </span>
+                    )}
+                    {new Date(post.date) > new Date() && (
+                      <span className="bg-purple-100 text-purple-700 px-2 py-0.5 rounded text-[10px] font-bold uppercase border border-purple-200">
+                        Scheduled
+                      </span>
+                    )}
+                  </div>
+                )}
               </div>
 
               <p className="text-gray-500 text-sm mb-3">

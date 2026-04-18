@@ -1,4 +1,4 @@
-export const posts = [
+const allPosts = [
   {
     id: 'photoboss9',
     title: '📸 Engineering Diary: Building a High-Performance Image Pipeline in PhotoBoss',
@@ -155,4 +155,43 @@ export const posts = [
     project: 'Labyrinth',
     tags: ['Unity', 'Game Design', 'Procedural Generation'],
   },
+  {
+    id: 'scheduled-post-test',
+    title: '🚀 Future Feature: Something Amazing',
+    date: '2026-12-25', // Far in the future
+    category: 'Software Engineering',
+    summary: 'This post is from the future and should only be visible in development mode.',
+    component: () => import('../pages/dev-blog/photolibrary1.jsx'), // Reusing an existing one for test
+    project: 'PhotoBoss',
+    tags: ['Future', 'Test'],
+  },
+  {
+    id: 'draft-post-test',
+    title: '📝 Work in Progress',
+    date: '2026-04-18',
+    status: 'draft',
+    category: 'Software Engineering',
+    summary: 'This is a draft and should only be visible in development mode.',
+    component: () => import('../pages/dev-blog/photolibrary1.jsx'),
+    project: 'PhotoBoss',
+    tags: ['Draft', 'Test'],
+  },
 ];
+
+// Determine the reference date for filtering
+// Use build-time injected __BUILD_DATE__ if available, otherwise fallback to today (for safety)
+const referenceDate = typeof __BUILD_DATE__ !== 'undefined' 
+  ? __BUILD_DATE__ 
+  : new Date().toISOString().split('T')[0];
+
+export const posts = allPosts.filter(post => {
+  // Always show all posts in development mode
+  if (import.meta.env.DEV) return true;
+  
+  // Hide drafts in production
+  if (post.status === 'draft') return false;
+  
+  // Hide future posts in production
+  return post.date <= referenceDate;
+});
+

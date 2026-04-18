@@ -1,0 +1,15 @@
+name: Weekly Friday Build
+
+on:
+  schedule:
+    # Runs at 09:00 UTC every Friday
+    - cron: '0 9 * * 5'
+  workflow_dispatch: # Allows you to trigger this manually from the GitHub Actions tab
+
+jobs:
+  trigger-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Cloudflare Pages Deploy Hook
+        run: |
+          curl -X POST ${{ secrets.CLOUDFLARE_DEPLOY_HOOK }}
