@@ -24,7 +24,7 @@ function copyIndexTo404() {
 }
 
 export default defineConfig({
-  base: '/', // or your repo name if hosting at github.com/user/repo
+  base: '/',
   plugins: [react(), copyIndexTo404()],
   define: {
     __BUILD_DATE__: JSON.stringify(new Date().toISOString().split('T')[0]),
@@ -33,8 +33,6 @@ export default defineConfig({
     historyApiFallback: true
   },
   build: {
-    rollupOptions: {
-      // optional additional config
-    }
+    rollupOptions: {}
   }
 });

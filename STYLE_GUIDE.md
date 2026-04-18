@@ -71,6 +71,28 @@ Subtle, centered text below the image.
 </figcaption>
 ```
 
+## Code & Monospace
+
+### Inline Code
+Single backticks in markdown (e.g. `ILabyrinthConstraint`) render as inline code with a classic console look:
+```jsx
+<span className="text-green-400 font-mono text-base bg-gray-900 px-1.5 py-0.5 rounded">
+  CodeName
+</span>
+```
+
+### Code Blocks
+Multi-line code (triple backticks) renders with a dark background and green text:
+```jsx
+<div className="my-8 relative group">
+  <pre className="bg-gray-900 text-green-400 rounded-xl p-6 font-mono text-sm overflow-x-auto border border-green-900/30 shadow-lg">
+    <code>
+      // code here
+    </code>
+  </pre>
+</div>
+```
+
 ## Blog Post Structure
 Standard structure for a blog post or project detail:
 

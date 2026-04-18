@@ -1,6 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import SEO from './components/SEO';
-import Navbar from './components/Navbar'; // adjust if needed
+import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Projects from './pages/Projects';
 import About from './pages/About';
@@ -10,7 +9,7 @@ import Kumiko from './pages/Kumiko';
 import Keyboard from './pages/Keyboard';
 import Climbing from './pages/Climbing';
 import DevBlogIndex from './pages/dev-blog/index';
-import { posts } from './data/posts';
+import BlogPost from './pages/dev-blog/BlogPost';
 
 function App() {
   return (
@@ -28,33 +27,11 @@ function App() {
           <Route path="/keyboard" element={<Keyboard />} />
           <Route path="/climbing" element={<Climbing />} />
           <Route path="/dev-blog" element={<DevBlogIndex />} />
-          {/* Dynamically generate routes for each post */}
-          {posts.map((post) => (
-            <Route
-              key={post.id}
-              path={`/dev-blog/${post.id}`}
-              element={
-                <>
-                  <SEO title={post.seoTitle || post.title} description={post.summary} url={`/dev-blog/${post.id}`} />
-                  <AsyncComponent loader={post.component} />
-                </>
-              }
-            />
-          ))}
+          <Route path="/dev-blog/:id" element={<BlogPost />} />
         </Routes>
       </main>
     </div>
   );
 }
-// Helper for lazy-loaded components
-import { lazy, Suspense } from 'react';
 
-function AsyncComponent({ loader }) {
-  const Component = lazy(loader);
-  return (
-    <Suspense fallback={<div className="p-8 text-center text-gray-500">Loading...</div>}>
-      <Component />
-    </Suspense>
-  );
-}
 export default App;
