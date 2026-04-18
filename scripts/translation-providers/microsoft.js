@@ -1,6 +1,6 @@
 const API_KEY = process.env.MICROSOFT_TRANSLATOR_KEY;
 const ENDPOINT = 'https://api.cognitive.microsofttranslator.com';
-const REGION = 'global';
+const REGION = 'germanywestcentral';
 
 export async function translate(text, { to = 'de' } = {}) {
   if (!API_KEY) {

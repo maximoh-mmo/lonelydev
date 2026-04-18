@@ -6,9 +6,7 @@ let translator = null;
 
 function getTranslator() {
   if (!translator && API_KEY) {
-    translator = new deepl.DeepL(API_KEY, { 
-      baseUrl: deepl.DeepL.FreeApiUrl 
-    });
+    translator = new deepl.DeepLClient(API_KEY);
   }
   return translator;
 }
@@ -27,7 +25,7 @@ export async function translate(text, { to = 'de' } = {}) {
 
   try {
     const result = await t.translateText(text, null, targetLang);
-    return result[0].text;
+    return result.text;
   } catch (err) {
     if (err.message?.includes('429') || err.message?.includes('rate')) {
       const error = new Error('Rate limited');
