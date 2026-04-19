@@ -156,10 +156,13 @@ const allPosts = [
 
 // Filter posts - all posts have markdown content
 export const posts = allPosts.filter(post => {
-  // Hide drafts
+  // Always show in development
+  if (import.meta.env.DEV) return true;
+
+  // Hide drafts in production
   if (post.status === 'draft') return false;
 
-  // Hide future posts
+  // Hide future posts in production
   const referenceDate = new Date().toISOString().split('T')[0];
   if (post.date > referenceDate) return false;
 

@@ -1,9 +1,6 @@
 name: Build and Deploy
 
 on:
-  push:
-    branches:
-      - main
   schedule:
     # Runs at 09:00 UTC every Friday
     - cron: '0 9 * * 5'
