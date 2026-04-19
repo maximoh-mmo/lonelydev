@@ -1,5 +1,16 @@
 const allPosts = [
   {
+    id: 'photoboss10',
+    title: '📸 Engineering Diary: Slaying the Shutdown Ghost & The Race Condition Race',
+    seoTitle: 'Race Condition Hardening in Qt Pipeline Shutdown',
+    date: '2026-04-22',
+    category: 'Software Engineering',
+    summary:
+      'Proactively identifying and hardening race conditions in the pipeline shutdown logic by moving producer registration from onStart() to constructors for guaranteed initialization order.',
+    project: 'PhotoBoss',
+    tags: ['C++', 'Qt', 'Concurrency', 'Race Conditions', 'Production Quality'],
+  },
+  {
     id: 'photoboss9',
     title: '📸 Engineering Diary: Building a High-Performance Image Pipeline in PhotoBoss',
     seoTitle: 'High-Performance Image Decoding and UI Batching in Qt',
