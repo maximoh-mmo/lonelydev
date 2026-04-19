@@ -1,5 +1,16 @@
 const allPosts = [
   {
+    id: 'photoboss11',
+    title: '📸 Engineering Diary: The Off Switch — Stop Button Fail & Pruning Gone Wrong',
+    seoTitle: 'UX Stop Button Implementation and SQLite Pruning Bug Fix',
+    date: '2026-04-24',
+    category: 'Software Engineering',
+    summary:
+      'Adding a Stop button to give users control over the scan pipeline, discovering a dormant prune feature that was deleting the entire cache instead of cleaning stale entries, and the bug fix that corrected the scan ID parameter — plus removing dead code from unused lifecycle methods.',
+    project: 'PhotoBoss',
+    tags: ['C++', 'Qt', 'UX', 'Bug Fix', 'SQLite', 'Caching'],
+  },
+  {
     id: 'photoboss10',
     title: '📸 Engineering Diary: Slaying the Shutdown Ghost & The Race Condition Race',
     seoTitle: 'Race Condition Hardening in Qt Pipeline Shutdown',
