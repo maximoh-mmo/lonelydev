@@ -154,25 +154,14 @@ const allPosts = [
   }
 ];
 
-// Check for markdown files to determine which posts are available
-const markdownModules = import.meta.glob('../../content/blog/*.md', { query: '?raw' });
-
-// Filter posts to only include those that have markdown content
+// Filter posts - all posts have markdown content
 export const posts = allPosts.filter(post => {
-  // Always show all posts in development mode
-  if (import.meta.env.DEV) return true;
-
-  // Hide drafts in production
+  // Hide drafts
   if (post.status === 'draft') return false;
 
-  // Hide future posts in production
-  const referenceDate = typeof __BUILD_DATE__ !== 'undefined'
-    ? __BUILD_DATE__
-    : new Date().toISOString().split('T')[0];
+  // Hide future posts
+  const referenceDate = new Date().toISOString().split('T')[0];
   if (post.date > referenceDate) return false;
 
-  // Only show posts that have markdown content
-  const enPath = `../../content/blog/${post.id}.en.md`;
-  const dePath = `../../content/blog/${post.id}.de.md`;
-  return markdownModules[enPath] || markdownModules[dePath];
+  return true;
 });
