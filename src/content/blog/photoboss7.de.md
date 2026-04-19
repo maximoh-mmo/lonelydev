@@ -1,15 +1,16 @@
 ---
 id: photoboss7
-title: "\U0001F4F8 Kurzschlussarbeit: Einführung eines persistenten Hash-Caches"
-seoTitle: Persistentes Hash-Caching mit SQLite zur Pipeline-Optimierung
+title: "\U0001F4F8 Arbeitsabläufe verkürzen: Einführung eines persistenten Hash-Caches"
+seoTitle: Persistentes Hash-Caching mit SQLite zur Optimierung der Pipeline
 date: '2026-01-27'
 category: Software Engineering
 summary: >-
-  Hinzufügung eines versionierten, persistenten Hash-Caches, um eine
-  Neuberechnung teurer Wahrnehmungshashes zu vermeiden. Dieser Eintrag behandelt
-  Dateiidentität, Cache-First-Pipeline-Design, SQLite-Persistenz und wie die
-  Behandlung von zwischengespeicherten Ergebnissen als erstklassige
-  Pipeline-Ausgaben unnötige Arbeit dramatisch reduziert.
+  Einführung eines versionierten, persistenten Hash-Caches, um die erneute
+  Berechnung rechenintensiver Perzeptual-Hashes zu vermeiden. Dieser Beitrag
+  behandelt die Dateidentität, das „Cache-First“-Pipeline-Design, die Persistenz
+  in SQLite sowie die Frage, wie die Behandlung von zwischengespeicherten
+  Ergebnissen als vollwertige Pipeline-Ausgaben unnötigen Aufwand drastisch
+  reduziert.
 project: PhotoBoss
 tags:
   - C++
@@ -21,11 +22,11 @@ status: published
 isAutoTranslated: true
 ---
 
-In meinem letzten Beitrag habe ich das Schema für meinen Cache entworfen. Jetzt war es Zeit, es zu verkabeln.
+In meinem letzten Beitrag habe ich das Schema für meinen Cache entworfen. Nun war es an der Zeit, ihn zu implementieren.
 
 ## Die Umsetzung
 
-Das Problem der "Identität" war die erste Hürde. Ich brauchte eine Möglichkeit, eine Akte zu fingerabdrücken, ohne sie zu lesen. Ich entschied mich für eine zusammengesetzte Tonart:
+Das „Identitätsproblem“ war die erste Hürde. Ich musste einen Weg finden, eine Datei zu identifizieren, ohne sie zu lesen. Ich entschied mich für einen zusammengesetzten Schlüssel:
 
 ```cpp
 // Any change to these fields invalidates cached hashes
@@ -36,9 +37,9 @@ struct FileIdentity {
 };
 ```
 
-Ist es theoretisch möglich, eine Datei zu verändern, während Größe und Zeitstempel exakt gleich bleiben? Ja. Ist es wahrscheinlich, dass es bei meinen Familienurlaubsfotos passiert? Nein.
+Ist es theoretisch möglich, eine Datei zu ändern, ohne dass sich ihre Größe und ihr Zeitstempel verändern? Ja. Ist es wahrscheinlich, dass das bei meinen Familienurlaubsfotos passiert? Nein.
 
-Für die Datenbank selbst brauchte ich ein Schema, das mehrere Hash-Algorithmen pro Datei verarbeiten kann. Ich habe einen normalisierten Ansatz verwendet:
+Für die Datenbank selbst benötigte ich ein Schema, das mehrere Hash-Algorithmen pro Datei verarbeiten konnte. Ich habe einen normalisierten Ansatz gewählt:
 
 ```sql
 -- Files table (The Identity)
@@ -59,15 +60,15 @@ CREATE TABLE hashes (
 );
 ```
 
-Hier hat sich die Pipeline-Architektur, für die ich in Teil 2 gekämpft habe, wirklich ausgezahlt. Wenn ich eine Spaghetti-Code-Schleife geschrieben hätte, wäre das Hinzufügen von Caching ein Albtraum von 'if'-Anweisungen gewesen.
+Hier hat sich die Pipeline-Architektur, für die ich mich in Teil 2 eingesetzt habe, wirklich ausgezahlt. Hätte ich eine Schleife mit Spaghetti-Code geschrieben, wäre das Hinzufügen von Caching ein Albtraum aus `if`-Anweisungen geworden.
 
-Stattdessen habe ich einfach einen neuen Knoten im Diagramm eingefügt:
+Stattdessen habe ich einfach einen neuen Knoten in den Graphen eingefügt:
 
-'Scanner --> CacheLookup'
-'CacheLookup -->|Hit| ResultAggregation'
-'CacheLookup -->|Miss| DiskLoader'
+`Scanner --> CacheLookup`
+`CacheLookup -->|Treffer| Ergebnisaggregation`
+`CacheLookup -->|Fehltreffer| DiskLoader`
 
-Der 'CacheLookup'-Worker nimmt einen Dateipfad, fragt SQLite ab und trifft eine Entscheidung. Wenn der Hash existiert, erzeugt er ein "Job erledigt"-Signal und sendet es direkt zur Ziellinie. Der Diskloader weiß nicht einmal, dass die Datei existiert.
+Der `CacheLookup`-Worker nimmt einen Dateipfad entgegen, fragt SQLite ab und trifft eine Entscheidung. Wenn der Hash vorhanden ist, erzeugt er ein „Job Done“-Signal und leitet es direkt an die Ziellinie weiter. Der Disk Loader erfährt nicht einmal, dass die Datei überhaupt existiert hat.
 
 ---
 
@@ -75,18 +76,18 @@ Der 'CacheLookup'-Worker nimmt einen Dateipfad, fragt SQLite ab und trifft eine 
 
 Ich habe das SQLite-Backend implementiert, das WAL (Write-Ahead Logging) für die Parallelverarbeitung eingerichtet und das Ganze in Betrieb genommen.
 
-**Lauf 1:** 45 Minuten. (Erwartet. Es musste alles von Grund auf hashen).
+**Lauf 1:** 45 Minuten. (Wie erwartet. Es musste alles von Grund auf neu berechnen).
 
-Dann kam der Moment der Wahrheit. Ich habe die App geschlossen. Wieder geöffnet. Und richtete es auf dieselben 50.000 Fotos.
+Dann kam der Moment der Wahrheit. Ich schloss die App. Öffnete sie erneut. Und wählte dieselben 50.000 Fotos aus.
 
 **Lauf 2:** 4 Sekunden.
 
-Ich musste tatsächlich laut lachen. Der Engpass hatte sich komplett von "JPEGs parsen" auf "Wie schnell kann SQLite Zeilen zurückgeben?" verschoben. (Antwort: sehr schnell).
+Ich musste tatsächlich laut lachen. Der Engpass hatte sich komplett von „JPEGs parsen“ zu „Wie schnell kann SQLite Zeilen zurückgeben?“ verlagert (Antwort: sehr schnell).
 
 ## Laufzeitkonfiguration
 
-Da ich die Hash-Methoden in der Datenbank versioniert hatte, konnte ich jetzt etwas Cooles machen: Ich fügte einen "Einstellungen"-Dialog hinzu, in dem ich einzelne Algorithmen ein- und ausschalten konnte.
+Da ich die Hash-Methoden in der Datenbank mit Versionsnummern versehen hatte, konnte ich nun etwas Tolles machen: Ich habe einen „Einstellungen“-Dialog hinzugefügt, in dem ich einzelne Algorithmen ein- und ausschalten kann.
 
-Willst du MD5 nur für die Geschwindigkeit verwenden? Deaktivieren Sie "Perceptual Hash". Die Pipeline passt sich sofort an. Wieder aktivieren? Das System überprüft den Cache, sieht die fehlenden Werte für *diesen speziellen Algorithmus* und plant Jobs, die nur die fehlenden Daten berechnen.
+Möchten Sie aus Gründen der Geschwindigkeit nur MD5 verwenden? Deaktivieren Sie „Perceptual Hash“. Die Pipeline passt sich sofort an. Möchten Sie die Funktion wieder aktivieren? Das System überprüft den Cache, erkennt die fehlenden Werte für *diesen bestimmten Algorithmus* und plant Jobs, um nur die fehlenden Daten zu berechnen.
 
 Es fühlte sich an, als hätte ich das Biest endlich gezähmt. Die Infrastruktur war solide. Jetzt konnte ich mich endlich auf das eigentliche Ziel konzentrieren: die Duplikate zu finden.

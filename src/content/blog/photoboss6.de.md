@@ -1,13 +1,13 @@
 ---
 id: photoboss6
-title: "\U0001F4F8 Entwurf eines persistenten Hash-Caches mit SQLite"
-seoTitle: Design eines SQLite-persistenten Hash-Caches in C++
+title: "\U0001F449 Entwurf eines persistenten Hash-Caches mit SQLite"
+seoTitle: Entwicklung eines persistenten SQLite-Hash-Caches in C++
 date: '2026-01-21'
 category: Software Engineering
 summary: >-
-  Erstellung einer erstklassigen Cache-Stufe mit SQLite: Dateie identifizieren,
-  mehrere Hash-Algorithmen speichern und Ergebnisse wieder in die Pipeline
-  einfügen, um redundante Arbeit zu überspringen.
+  Aufbau einer erstklassigen Cache-Stufe mit SQLite: Identifizieren von Dateien,
+  Speichern mehrerer Hash-Algorithmen und Rückführen der Ergebnisse in die
+  Pipeline, um überflüssige Arbeitsschritte zu vermeiden.
 project: PhotoBoss
 tags:
   - C++
@@ -18,40 +18,40 @@ status: published
 isAutoTranslated: true
 ---
 
-Die Maschine wurde schneller, aber sie hatte immer noch ein Gedächtnis wie ein Goldfisch. Jedes Mal, wenn ich die App neu gestartet habe, musste sie alles über meine Fotobibliothek neu lernen. Es war Zeit, PhotoBoss ein dauerhaftes Gehirn zu geben.
+Der Rechner wurde zwar immer schneller, hatte aber immer noch das Gedächtnis eines Goldfisches. Jedes Mal, wenn ich die App neu startete, musste sie alles über meine Fotobibliothek neu lernen. Es war an der Zeit, PhotoBoss ein dauerhaftes Gedächtnis zu verschaffen.
 
 ## Identität ohne Lesen
 
-Die zentrale Herausforderung eines Caches ist Vertrauen. Wenn ich die Datenbank frage *"Kennst du den Hash für Photo.jpg?" *, und es steht *"Ja", * Ich muss mir zu 100 % sicher sein, dass sich 'Photo.jpg' seit der Berechnung dieses Hashs nicht geändert hat.
+Die zentrale Herausforderung bei einem Cache ist das Vertrauen. Wenn ich die Datenbank frage: *„Kennst du den Hash für Photo.jpg?“*, und sie antwortet: *„Ja“*, muss ich mir zu 100 % sicher sein, dass sich `Photo.jpg` seit der Berechnung dieses Hashs nicht verändert hat.
 
-Aber ich kann die Datei nicht lesen, um das zu überprüfen, weil ich genau das Lesen der Datei vermeiden möchte.
+Aber ich kann die Datei nicht lesen, um das zu überprüfen, denn genau das möchte ich ja vermeiden.
 
-Die Lösung ist eine Proxy-Identität. Ich nehme an, eine Datei bleibt unverändert, wenn drei Werte konstant bleiben:
+Die Lösung ist eine Proxy-Identität. Ich gehe davon aus, dass eine Datei unverändert ist, wenn drei Werte konstant bleiben:
 
-1. **Absoluter Pfad** (Ort)
-2. **Größe in Bytes** (Magnitude)
-3. **Letzte Modifizierte Zeit** (Geschichte)
+1.  **Absoluter Pfad** (Speicherort)
+2.  **Größe in Byte** (Umfang)
+3.  **Zeitpunkt der letzten Änderung** (Verlauf)
 
-Ist es theoretisch möglich, eine Datei zu verändern, während Größe und Zeitstempel exakt gleich bleiben? Ja. Ist es wahrscheinlich, dass es bei meinen Familienurlaubsfotos passiert? Nein.
+Ist es theoretisch möglich, eine Datei zu ändern, ohne dass sich ihre Größe und ihr Zeitstempel verändern? Ja. Ist es wahrscheinlich, dass das bei meinen Familienurlaubsfotos passiert? Nein.
 
 ---
 
 ## Das Schema
 
-Die Gestaltung der Datenbank fühlte sich an, als würde man ein Puzzle zusammensetzen. Ich wollte keinen einzigen flachen Tisch. Ich wollte ein System, das mehrere Hash-Algorithmen (MD5, pHash, BlockMean) für dieselbe Datei verarbeiten kann.
+Das Entwerfen der Datenbank kam mir vor wie das Zusammensetzen eines Puzzles. Ich wollte keine einzige flache Tabelle. Ich wollte ein System, das mehrere Hash-Algorithmen (MD5, pHash, BlockMean) für dieselbe Datei verarbeiten kann.
 
-Ich entschied mich für eine normalisierte 3-Tabellen-Struktur:
+Ich habe mich für eine normalisierte Struktur mit drei Tabellen entschieden:
 
-- **Dateitabelle:** Speichert Pfad, Größe und MTime. Das ist der "Schlüssel".
-- **Methodentabelle:** Speichert den Namen des Algorithmus (z. B. "pHash") und seine *Version*.
-- **Hashes Table:** Der Klebstoff. Es verknüpft eine Datei mit einer Methode und speichert die Blob-Daten.
+-   **Dateitabelle:** Speichert den Pfad, die Größe und den Zugriffszeitstempel (MTime). Dies ist der „Schlüssel“.
+-   **Methodentabelle:** Speichert den Namen des Algorithmus (z. B. „pHash“) und dessen *Version*.
+-   **Hash-Tabelle:** Das Bindeglied. Sie verknüpft eine Datei mit einer Methode und speichert die Blob-Daten.
 
-Diese Trennung ist kraftvoll. Wenn ich meinen pHash-Berechnungscode aktualisiere, verschiebe ich einfach die Versionsnummer in der Methods-Tabelle. Die App erkennt die Versionsabweichung und berechnet automatisch die neuen Hashes neu, während die MD5-Hashes unverändert bleiben.
+Diese Trennung ist sehr effektiv. Wenn ich meinen Code zur Berechnung der pHash-Werte aktualisiere, erhöhe ich einfach die Versionsnummer in der Methodentabelle. Die App erkennt die Versionsinkongruenz und berechnet automatisch die neuen Hash-Werte neu, während die MD5-Hash-Werte unverändert bleiben.
 
 ---
 
 ## Der Cache als Bestandteil der Pipeline
 
-Das Beste an diesem Design? Der Cache ist kein Side-Car-Prozess. Es ist nur eine weitere Phase in der Pipeline.
+Das Beste an diesem Design? Der Cache ist kein separater Nebenprozess. Er ist einfach nur eine weitere Stufe in der Pipeline.
 
-Die **CacheLookup**-Phase liegt direkt nach dem Scanner. Es überprüft die Datenbank. Wenn es einen Treffer gibt, sendet er das Ergebnis direkt an die Benutzeroberfläche, wodurch die starken "Lade-" und "Hashing"-Phasen komplett umgangen werden. Es fühlt sich wie Betrug an.
+Die **CacheLookup**-Phase folgt direkt auf den Scanner. Sie überprüft die Datenbank. Wenn sie einen Treffer findet, sendet sie das Ergebnis direkt an die Benutzeroberfläche und umgeht dabei die ressourcenintensiven Phasen „Laden“ und „Hashing“ vollständig. Das kommt einem fast wie Schummeln vor.

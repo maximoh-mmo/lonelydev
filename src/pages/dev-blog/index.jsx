@@ -11,20 +11,59 @@ function parseFrontmatter(content) {
 
   const frontmatter = {};
   const dataLines = match[1].split('\n');
+  let currentKey = null;
+  let currentArray = null;
+  let multilineValue = [];
+
   dataLines.forEach(line => {
-    const colonIndex = line.indexOf(':');
-    if (colonIndex === -1) return;
+    const trimmed = line;
 
-    const key = line.slice(0, colonIndex).trim();
-    let value = line.slice(colonIndex + 1).trim();
-
-    if (value.startsWith('[') && value.endsWith(']')) {
-      value = value.slice(1, -1).split(',').map(v => v.trim().replace(/^"|"$/g, ''));
-    } else if (value.startsWith('"') && value.endsWith('"')) {
-      value = value.slice(1, -1);
+    if (trimmed.startsWith('- ')) {
+      if (currentArray) {
+        currentArray.push(trimmed.slice(2).trim().replace(/^"|"$/g, ''));
+      }
+      return;
     }
-    frontmatter[key] = value;
+
+    if (currentArray && currentKey) {
+      frontmatter[currentKey] = currentArray;
+      currentArray = null;
+    }
+
+    if (trimmed.match(/^[a-zA-Z_]+:/)) {
+      if (currentKey) {
+        frontmatter[currentKey] = multilineValue.join(' ').trim();
+        multilineValue = [];
+      }
+
+      const colonIndex = trimmed.indexOf(':');
+      currentKey = trimmed.slice(0, colonIndex).trim();
+      let value = trimmed.slice(colonIndex + 1).trim();
+
+      if (!value) return;
+
+      if (value === '>' || value === '>-') {
+        multilineValue = [];
+        return;
+      }
+
+      if (value === '[') {
+        currentArray = [];
+        return;
+      }
+
+      frontmatter[currentKey] = value.replace(/^["']|["']$/g, '').replace(/^"|"$/g, '');
+      currentKey = null;
+    } else if (multilineValue.length > 0 && (trimmed.startsWith(' ') || trimmed === '')) {
+      multilineValue.push(trimmed);
+    }
   });
+
+  if (currentArray && currentKey) {
+    frontmatter[currentKey] = currentArray;
+  } else if (multilineValue.length > 0 && currentKey) {
+    frontmatter[currentKey] = multilineValue.join(' ').trim();
+  }
 
   return { data: frontmatter, content: match[2] };
 }

@@ -1,13 +1,13 @@
 ---
 id: photoboss5
-title: "\U0001F4F8 Die Erkenntnis: Alles neu zu berechnen ist verschwenderisch"
-seoTitle: Optimieren von Bild-Hashing-Pipelines mit Caching
+title: "\U0001F4F8 Die Erkenntnis: Alles neu zu berechnen ist Verschwendung"
+seoTitle: Optimierung von Bild-Hashing-Pipelines durch Zwischenspeicherung
 date: '2026-01-07'
 category: Software Engineering
 summary: >-
-  Identifizieren der Ineffizienz der Neuberechnung von Hashes für unveränderte
-  Dateien und Definieren von Caching-Anforderungen für Persistenz, Invalidierung
-  und mehrere Hash-Algorithmen.
+  Ermittlung der Ineffizienz bei der Neuberechnung von Hashwerten für
+  unveränderte Dateien sowie Festlegung der Caching-Anforderungen hinsichtlich
+  Persistenz, Ungültigkeitserklärung und verschiedener Hash-Algorithmen.
 project: PhotoBoss
 tags:
   - System Analysis
@@ -17,37 +17,37 @@ status: published
 isAutoTranslated: true
 ---
 
-My parallel pipeline was a thing of beauty. I could drag a folder of 10,000 images onto the window, and watch 32 CPU threads devour it. The fans would spin up, the progress bar would fly across the screen, and 45 seconds later, I had my results.
+Meine parallele Pipeline war ein wahres Meisterwerk. Ich konnte einen Ordner mit 10.000 Bildern in das Fenster ziehen und zusehen, wie 32 CPU-Threads ihn verschlangen. Die Lüfter drehten auf, der Fortschrittsbalken flog über den Bildschirm, und 45 Sekunden später hatte ich meine Ergebnisse.
 
-Then I closed the app. And opened it again. And dragged the same folder in.
+Dann habe ich die App geschlossen. Und sie wieder geöffnet. Und denselben Ordner hineingezogen.
 
-And waited another 45 seconds.
+Und wartete weitere 45 Sekunden.
 
-## The "Lightbulb" Moment
+## Der „Aha“-Moment
 
-It seems obvious in hindsight, but in the heat of "getting it working," I had ignored a fundamental truth: **My photos don't change.**
+Im Nachhinein erscheint es offensichtlich, aber in der Hektik, „es zum Laufen zu bringen“, hatte ich eine grundlegende Tatsache außer Acht gelassen: **Meine Fotos ändern sich nicht.**
 
-A picture taken in 2012 and stored on my NAS hasn't been modified in a decade. Why was I spending expensive CPU cycles decoding and hashing it every single time I wanted to organise my library?
+Ein Foto, das 2012 aufgenommen und auf meinem NAS gespeichert wurde, wurde seit zehn Jahren nicht mehr verändert. Warum habe ich jedes Mal, wenn ich meine Bibliothek ordnen wollte, wertvolle Rechenleistung für das Dekodieren und Hashen dieses Fotos verschwendet?
 
-I realised that for this tool to be actually *usable*—to be something I could open, tweak a filter, and close without feeling dread—it needed **Memory**.
-
----
-
-## Defining the Cache
-
-I grabbed a notebook (paper is still the best IDE) and sketched out what a caching system would actually look like. It wasn't just "save the results." It had strict requirements:
-
-1.  **Persistence:** It has to survive application restarts. (Goodbye, `std::map`).
-2.  **Invalidation:** If I *do* edit a photo, the cache must know instantly. Stale data is worse than no data.
-3.  **Versioning:** If I improve my hashing algorithm next week, I need a way to tell the database "throw away the old hashes, they are garbage now."
-4.  **Zero Config:** I didn't want to install a PostgreSQL server just to run my desktop app.
+Mir wurde klar, dass dieses Tool, um wirklich *nutzbar* zu sein – also etwas, das ich öffnen, an dessen Filtern ich herumspielen und wieder schließen konnte, ohne dabei Unbehagen zu verspüren –, **Speicher** benötigte.
 
 ---
 
-## The Candidate: SQLite
+## Definition des Caches
 
-I briefly considered using a massive JSON file or a custom binary format. Then I remembered I wanted to keep my sanity.
+Ich schnappte mir ein Notizbuch (Papier ist immer noch die beste Entwicklungsumgebung) und skizzierte, wie ein Caching-System konkret aussehen könnte. Es ging nicht einfach nur darum, „die Ergebnisse zu speichern“. Es gab strenge Anforderungen:
 
-SQLite was the only logical choice. It’s serverless, it’s single-file, and it has transactional integrity. If my app crashes halfway through writing a cache entry, the database won't get corrupted. Plus, Qt has excellent support for it via `QSqlDatabase`.
+1.  **Persistenz:** Es muss einen Neustart der Anwendung überstehen. (Auf Wiedersehen, `std::map`).
+2.  **Invalidierung:** Wenn ich ein Foto bearbeite, muss der Cache dies sofort erkennen. Veraltete Daten sind schlimmer als gar keine Daten.
+3.  **Versionierung:** Wenn ich nächste Woche meinen Hash-Algorithmus verbessere, brauche ich eine Möglichkeit, der Datenbank mitzuteilen: „Wirf die alten Hashes weg, sie sind jetzt Müll.“
+4.  **Zero Config:** Ich wollte keinen PostgreSQL-Server installieren, nur um meine Desktop-App auszuführen.
 
-The decision was made. Now I just had to design a schema that could identify a file uniquely without actually reading it.
+---
+
+## Der Kandidat: SQLite
+
+Ich habe kurz darüber nachgedacht, eine riesige JSON-Datei oder ein benutzerdefiniertes Binärformat zu verwenden. Dann fiel mir ein, dass ich mir meine geistige Gesundheit bewahren wollte.
+
+SQLite war die einzig logische Wahl. Es ist serverlos, besteht aus einer einzigen Datei und bietet Transaktionsintegrität. Sollte meine App während des Schreibvorgangs eines Cache-Eintrags abstürzen, wird die Datenbank nicht beschädigt. Außerdem bietet Qt über `QSqlDatabase` eine hervorragende Unterstützung dafür.
+
+Die Entscheidung war gefallen. Nun musste ich nur noch ein Schema entwerfen, mit dem sich eine Datei eindeutig identifizieren ließ, ohne sie tatsächlich zu lesen.

@@ -1,13 +1,15 @@
 ---
 id: photoboss4
-title: "\U0001F4F8 Hashing von Bildern: Mehr als nur Prüfsummen"
-seoTitle: Multithread-perzeptuelles und kryptografisches Bild-Hashing in C++
+title: "\U0001F4F8 Bild-Hashing: Mehr als nur Prüfsummen"
+seoTitle: >-
+  Multithread-basiertes wahrnehmungsorientiertes und kryptografisches
+  Bild-Hashing in C++
 date: '2025-12-24'
 category: Software Engineering
 summary: >-
-  Implementierung von kryptografischem und wahrnehmungsbezogenem Bild-Hashing,
-  Aufteilung von E/A, Dekodierung und Berechnung in Pipeline-Stufen mit
-  Worker-Pools für mehr Leistung.
+  Implementierung sowohl kryptografischer als auch wahrnehmungsbasierter
+  Bild-Hashing-Verfahren, wobei E/A, Dekodierung und Berechnung zur
+  Leistungsoptimierung in Pipeline-Stufen mit Worker-Pools aufgeteilt werden.
 project: PhotoBoss
 tags:
   - C++
@@ -17,34 +19,36 @@ tags:
 status: published
 isAutoTranslated: true
 ---
-Wenn Sie einem Programmierer „Dateivergleich“ sagen, greift er instinktiv nach MD5 oder SHA-256. Es ist ein Reflex.
 
-Das habe ich also getan. Ich habe eine blitzschnelle Pipeline erstellt, die SHA-256-Hashes für jede Datei in meiner Bibliothek berechnet. Ich war stolz darauf. Es hat 100 GB Fotos in wenigen Minuten durchgekaut.
+Wenn man einem Programmierer von „Dateivergleich“ erzählt, denkt er instinktiv an MD5 oder SHA-256. Das ist ein Reflex.
 
-Es war auch nutzlos.
+Also habe ich genau das getan. Ich habe eine blitzschnelle Pipeline entwickelt, die für jede Datei in meiner Bibliothek SHA-256-Hashes berechnet. Ich war stolz darauf. Sie hat 100 GB an Fotos in wenigen Minuten verarbeitet.
+
+Es war auch sinnlos.
 
 ## Die MD5-Falle
 
-Ein einzelner Bit-Flip verändert einen SHA-256-Hash vollständig. Das Öffnen einer JPEG-Datei und das erneute Speichern (auch bei 100 % Qualität) ändert den Hash. Wenn Sie die Größe eines Bildes um 1 Pixel ändern, ändert sich der Hash. Meine Bibliothek war voll von „Duplikaten“, die zwar bytespezifisch, aber optisch identisch waren.
+Schon ein einziger Bitwechsel verändert einen SHA-256-Hash vollständig. Das Öffnen einer JPEG-Datei und das erneute Speichern (selbst bei 100 % Qualität) verändert den Hash. Eine Größenänderung des Bildes um nur 1 Pixel verändert den Hash. Meine Bibliothek war voll von „Duplikaten“, die sich zwar auf Byte-Ebene unterschieden, optisch jedoch identisch waren.
 
 ---
 
-## Geben Sie Perceptual Hashing ein
+## Einführung in Perceptual Hashing
 
-Ich brauchte einen Hash, der sich wie ein menschliches Auge verhält. Wenn ich auf ein Bild einer Katze blinzele und dann auf eine kleinere Version desselben Bildes blinzele, sehen sie gleich aus.
+Ich brauchte einen Hash, der sich wie ein menschliches Auge verhält. Wenn ich ein Bild einer Katze aus den Augenwinkeln betrachte und dann eine kleinere Version desselben Bildes aus den Augenwinkeln betrachte, sehen beide gleich aus.
 
-Dies führte mich in die Welt von **pHash** (Perceptual Hash) und **aHash** (Average Hash).
+Das führte mich in die Welt von **pHash** (Perceptual Hash) und **aHash** (Average Hash).
 
-- **aHash** zerlegt das Bild in ein 8x8-Raster aus Graustufenpixeln und vergleicht jedes Pixel mit der durchschnittlichen Helligkeit. Es ist unglaublich schnell und eignet sich hervorragend zum Auffinden verkleinerter Kopien. - **pHash** verwendet eine diskrete Kosinustransformation (DCT) – die gleiche Mathematik wie bei der JPEG-Komprimierung – um die Niederfrequenzstruktur des Bildes zu erfassen. Es konzentriert sich eher auf die „Form“ des Bildes als auf die Pixel.
+-   **aHash** unterteilt das Bild in ein 8×8-Raster aus Graustufenpixeln und vergleicht jedes Pixel mit der durchschnittlichen Helligkeit. Das Verfahren ist unglaublich schnell und eignet sich hervorragend zum Auffinden von Kopien mit geänderter Bildgröße.
+-   **pHash** nutzt eine diskrete Kosinustransformation (DCT) – dieselbe mathematische Methode, die auch hinter der JPEG-Komprimierung steckt –, um die Niederfrequenzstruktur des Bildes zu erfassen. Es konzentriert sich eher auf die „Form“ des Bildes als auf die einzelnen Pixel.
 
 ---
 
 ## Die Kosten des Sehens
 
-Der Haken? Die Berechnung eines pHash ist teuer. Sie müssen das vollständige Bild dekodieren, in Graustufen konvertieren und eine Matrixberechnung durchführen.
+Der Haken daran? Die Berechnung eines pHash ist rechenintensiv. Man muss das gesamte Bild dekodieren, in Graustufen umwandeln und Matrixberechnungen durchführen.
 
-Meine Pipeline verlangsamte sich auf ein Kriechtempo. Der Scanner lieferte sofort Dateipfade, aber die „Hasher“-Stufe verlangsamte die CPU-Auslastung.
+Meine Pipeline lief nur noch im Schneckentempo. Der Scanner lieferte die Dateipfade zwar sofort, aber die „Hasher“-Phase kam aufgrund der hohen CPU-Auslastung ins Stocken.
 
-Dies zwang mich dazu, meinen Arbeitskräftepool zu überdenken. Ich könnte nicht nur einen „Hasher“-Thread haben. Ich brauchte einen Schwarm davon. Ich habe die Pipeline aktualisiert, um den Worker-Pool basierend auf der CPU-Kernanzahl des Benutzers dynamisch zu skalieren (minus eins, damit die Benutzeroberfläche reagiert).
+Das zwang mich dazu, meinen Worker-Pool zu überdenken. Ich konnte nicht einfach nur einen einzigen „Hasher“-Thread verwenden. Ich brauchte eine ganze Schar davon. Ich habe die Pipeline so angepasst, dass der Worker-Pool dynamisch an die Anzahl der CPU-Kerne des Benutzers angepasst wird (abzüglich eines Kerns, damit die Benutzeroberfläche reaktionsschnell bleibt).
 
-Jetzt ist der Blick auf den Task-Manager zufriedenstellend: 100 % Auslastung aller Kerne, Speicherdurchlauf mit maximaler Geschwindigkeit.
+Es ist ein befriedigendes Gefühl, jetzt einen Blick auf den Task-Manager zu werfen: 100 % Auslastung auf allen Kernen, der Arbeitsspeicher wird mit Höchstgeschwindigkeit durchforstet.

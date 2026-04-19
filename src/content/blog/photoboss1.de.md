@@ -1,13 +1,13 @@
 ---
 id: photoboss1
-title: "\U0001F4F8 Das Problem, über das niemand spricht: Fotobibliotheken im großen Maßstab"
-seoTitle: Verwalten Sie mehrjährige Fotobibliotheken im großen Stil
+title: "\U0001F4F8 Das Problem, über das niemand spricht: Fotobibliotheken in großem Maßstab"
+seoTitle: 'Verwaltung umfangreicher, über mehrere Jahre hinweg angewachsener Fotobestände'
 date: '2025-11-12'
 category: Software Engineering
 summary: >-
-  Erkunden Sie das verborgene Chaos mehrjähriger Fotobibliotheken – exakte
-  Duplikate, verkleinerte Kopien, Messaging-Exporte – und warum typische
-  Deduplizierungstools scheitern.
+  Ein Blick auf das verborgene Chaos in langjährigen Fotobibliotheken – exakte
+  Duplikate, Kopien mit geänderter Größe, aus Messengern exportierte Dateien –
+  und warum herkömmliche Tools zur Datendeduplizierung versagen.
 project: PhotoBoss
 tags:
   - Problem Solving
@@ -15,34 +15,37 @@ tags:
 status: published
 isAutoTranslated: true
 ---
-Es begann ganz harmlos. Ein paar Ordner mit Fotos einer 2010er Kompaktkamera, auf einen Laptop gezogen. Dann kamen die Smartphones. Dann die Backups der Smartphones. Dann die Backups der Laptops, auf denen sich die Backups der Smartphones befanden.
 
-14 Jahre später ächzt mein Heimserver unter der Last einer digitalen Geschichte, die nicht mehr zu verwalten ist. Wir sprechen von Terabytes an Erinnerungen, aber sie sind unter einem Sediment aus Redundanz begraben.
+Es fing ganz harmlos an. Ein paar Ordner mit Fotos von einer Kompaktkamera aus dem Jahr 2010, die auf einen Laptop gezogen wurden. Dann kamen die Smartphones. Dann die Backups der Smartphones. Dann die Backups der Laptops, auf denen die Backups der Smartphones gespeichert waren.
 
-Ich habe kürzlich einen Ordner mit dem Namen „/backup_2018_final_sorted“ geöffnet und festgestellt, dass er einen anderen Ordner namens „/old_laptop_backup“ enthielt, der eine fast identische Kopie des ersten Ordners enthielt, jedoch mit leicht unterschiedlichen Dateinamen.
+14 Jahre später ächzt mein Heimserver unter der Last einer digitalen Vergangenheit, die mittlerweile unmöglich zu bewältigen ist. Wir sprechen hier von Terabytes an Erinnerungen, die jedoch unter einer Schicht aus Redundanzen begraben sind.
 
-Es war nicht mehr nur ein Speicherproblem. Es war ein archäologisches Problem.
+Ich habe kürzlich einen Ordner namens `/backup_2018_final_sorted` geöffnet und festgestellt, dass er einen weiteren Ordner namens `/old_laptop_backup` enthielt, der eine fast identische Kopie des ersten Ordners enthielt, allerdings mit leicht abweichenden Dateinamen.
 
-## Warum „Einfach Duplikate löschen“ nicht funktioniert hat
+Es war nicht mehr nur ein Platzproblem. Es war ein archäologisches Problem.
 
-Mein erster Gedanke war, wie bei jedem Ingenieur: *„Ich schreibe einfach ein Drehbuch.“*
+## Warum es nicht gereicht hat, einfach nur die Duplikate zu löschen
 
-Ich habe mir ein Standard-Deduplizierungstool geschnappt, es 12 Stunden lang ausgeführt und ... es hat vielleicht 10 % des Datenmülls gefunden. Warum? Weil **binäre Gleichheit** in der realen Welt ein fragiles Konzept ist.
+Mein erster Gedanke war, wie bei jedem Ingenieur: *„Ich schreibe einfach ein Skript.“*
 
-- **Die verkleinerte Kopie:** Ein aus Lightroom für Instagram exportiertes Bild ist „anders“ als auf dem Computer, aber für mich identisch. - **Die Metadatenverschiebung:** Bei einer von Android auf Windows kopierten Datei werden die EXIF-Daten häufig verfälscht, wodurch sich der Hash ändert. - **Die Messenger-Komprimierung:** Das über WhatsApp gesendete Foto? Es ist jetzt eine völlig neue Datei, die ihrer Seele (und Pixel) beraubt ist.
+Ich habe mir ein handelsübliches Tool zur Datendeduplizierung besorgt, es 12 Stunden lang laufen lassen, und … es hat vielleicht 10 % des Datenmülls gefunden. Warum? Weil **binäre Gleichheit** in der Praxis ein fragiles Konzept ist.
 
-Mir wurde klar, dass Standardtools Dateien als *Daten* anzeigen, aber ich brauchte ein Tool, das sie als *Bilder* anzeigt. Ich musste nicht wissen, ob „img_123.jpg“ gleich „img_123_copy.jpg“ ist. Ich musste wissen, ob sie *gleich aussahen*.
+-   **Die in der Größe angepasste Kopie:** Ein aus Lightroom für Instagram exportiertes Bild sieht auf dem Computer „anders“ aus, ist für mich aber identisch.
+-   **Die Verschiebung der Metadaten:** Bei einer von Android auf Windows kopierten Datei geraten die EXIF-Daten oft durcheinander, wodurch sich ihr Hash-Wert ändert.
+-   **Die Messenger-Komprimierung:** Das Foto, das über WhatsApp verschickt wurde? Es ist jetzt eine völlig neue Datei, ihrer Seele (und ihrer Pixel) beraubt.
+
+Mir wurde klar, dass herkömmliche Tools Dateien als *Daten* betrachten, ich aber ein Tool brauchte, das sie als *Bilder* betrachtet. Ich musste nicht wissen, ob `img_123.jpg` mit `img_123_copy.jpg` identisch war. Ich musste wissen, ob sie *gleich aussahen*.
 
 ---
 
-## Ein Projekt ist geboren
+## Ein Projekt entsteht
 
-Aus dieser Frustration entstand **PhotoBoss** (ein Arbeitstitel, der hängen blieb). Ich beschloss, dies nicht als schnelles Drehbuch, sondern als ernsthafte technische Herausforderung zu betrachten. Ich wollte ein System aufbauen, das Hunderttausende Bilder aufnehmen, sie wahrnehmungsmäßig erfassen und mir dabei helfen kann, das Chaos zu verstehen.
+Aus dieser Frustration entstand **PhotoBoss** (ein Arbeitstitel, der schließlich hängen blieb). Ich beschloss, das Projekt nicht als schnelles Skript, sondern als ernsthafte technische Herausforderung anzugehen. Ich wollte ein System entwickeln, das Hunderttausende von Bildern verarbeiten, sie anhand ihrer visuellen Merkmale identifizieren und mir helfen konnte, Ordnung in das Chaos zu bringen.
 
-Es war auch der perfekte Vorwand, endlich meine modernen C++-Kenntnisse zu verbessern und tief in das Qt-Framework einzutauchen – nicht nur das Lesen der Dokumente, sondern auch den Kampf um Thread-Affinität, Besitz und benutzerdefinierte Modelle.
+Es war auch der perfekte Anlass, endlich meine Kenntnisse in modernem C++ aufzufrischen und mich intensiv mit dem Qt-Framework auseinanderzusetzen – nicht nur, indem ich die Dokumentation las, sondern indem ich mich mit Themen wie Thread-Affinität, Ownership und benutzerdefinierten Modellen auseinandersetzte.
 
 ## Der Weg in die Zukunft
 
-In den nächsten Beiträgen werde ich die Architektur dieser Sache dokumentieren. Es war eine Reise voller „naiver“ Implementierungen, die meinen PC zum Absturz brachten, der Entdeckung wahrnehmungsbezogener Hashing-Algorithmen und schließlich der Erkenntnis, dass ich eine persistente Datenbank brauchte, um den Verstand zu behalten.
+In den nächsten paar Beiträgen werde ich die Architektur dieses Projekts dokumentieren. Es war eine Reise voller „naiver“ Implementierungen, die meinen PC zum Absturz brachten, der Entdeckung von Perceptual-Hashing-Algorithmen und der schlussendlichen Erkenntnis, dass ich eine persistente Datenbank brauchte, um nicht den Verstand zu verlieren.
 
-Dies ist kein Tutorial zum Thema „Wie schreibe ich einen Deduplizierer“. Es ist ein Entwicklerprotokoll darüber, wie ich eine Lösung für ein Problem, das ich für mich selbst erstellt habe, überentwickelt habe.
+Dies ist kein Tutorial zum Thema „Wie man einen Deduplizierer schreibt“. Es ist ein Entwickler-Tagebuch darüber, „wie ich eine Lösung für ein Problem, das ich mir selbst geschaffen hatte, viel zu kompliziert gestaltet habe“.
