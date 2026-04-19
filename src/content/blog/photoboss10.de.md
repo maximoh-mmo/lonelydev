@@ -19,8 +19,6 @@ status: published
 isAutoTranslated: true
 ---
 
-# Entwickler-Tagebuch: Den „Shutdown-Geist“ besiegen & Das Rennen um die Race Condition
-
 In meinem letzten Beitrag habe ich beschrieben, wie ich in PhotoBoss eine leistungsstarke Bild-Pipeline aufgebaut habe. Sie war schneller, flüssiger und speicherfreundlicher. Doch selbst wenn ein System stabil erscheint, besteht immer die Gefahr, dass die hohe Geschwindigkeit subtile Synchronisationslücken überdeckt – jene Art von „Geistern“, die einem erst dann zu schaffen machen, wenn die richtigen Hardware- oder Auslastungsbedingungen zusammenkommen.
 
 Bei einer proaktiven Überprüfung der Pipeline-Logik habe ich heute eine potenzielle Race Condition entdeckt. Auch wenn sie sich in der Praxis noch nicht bemerkbar gemacht hat, macht es den Unterschied zwischen „Prototyp“- und „Produktions“-Code aus, diese Schwachstellen zu beheben, bevor sie zu Fehlern werden.

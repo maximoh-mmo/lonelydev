@@ -11,8 +11,6 @@ status: "published"
 isAutoTranslated: false
 ---
 
-# Engineering Diary: Slaying the Shutdown Ghost & The Race Condition Race
-
 In my last update, I shared how I built a high-performance image pipeline in PhotoBoss. It was faster, smoother, and lighter on memory. But even when a system feels stable, there's always a danger that high speed is masking subtle synchronization gaps—the kind of "ghosts" that only haunt you when the right hardware or load conditions align.
 
 Today, while performing a proactive audit of the pipeline logic, I identified a potential race condition. Although it hadn't manifested in practice yet, closing these holes before they become bugs is the difference between a "prototype" and "production" code.

@@ -11,8 +11,6 @@ status: "published"
 isAutoTranslated: false
 ---
 
-# Engineering Diary: The Off Switch — Stop Button Fail & Pruning Gone Wrong
-
 ## Part 1: Giving the User the Brakes
 
 A scan that can't be stopped is a scan you can't trust.

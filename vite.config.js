@@ -33,7 +33,15 @@ function copyCloudflareFiles() {
 }
 
 function getPlugins() {
-  return [react(), copyCloudflareFiles()];
+  const plugins = [react(), copyCloudflareFiles()];
+  
+  // Only add admin API plugin in development mode
+  if (process.env.NODE_ENV === 'development') {
+    const adminApiPlugin = require('./admin/vite-plugin-admin-api').default;
+    plugins.push(adminApiPlugin());
+  }
+  
+  return plugins;
 }
 
 export default defineConfig({

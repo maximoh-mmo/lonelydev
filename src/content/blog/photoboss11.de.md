@@ -21,8 +21,6 @@ status: published
 isAutoTranslated: true
 ---
 
-# Technik-Tagebuch: Der Ausschalter – Fehlfunktion des Stoppknopfs & missglücktes Ausdünnen
-
 ## Teil 1: Dem Benutzer die Kontrolle geben
 
 Ein Scan, der nicht gestoppt werden kann, ist ein Scan, dem man nicht trauen kann.
