@@ -1,6 +1,6 @@
 ---
 id: photoboss3
-title: "\U0001F4F8 Qt durch praktische Übungen lernen: Threads, Signale und Eigentumsrechte"
+title: "📸 Qt durch praktische Übungen lernen: Threads, Signale und Eigentumsrechte"
 seoTitle: 'Qt-Parallelität: Threads, Signale und Objektbesitz'
 date: '2025-12-10'
 category: Software Engineering

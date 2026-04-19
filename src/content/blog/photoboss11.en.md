@@ -1,3 +1,16 @@
+---
+id: photoboss11
+title: "📸 Engineering Diary: The Off Switch — Stop Button & Pruning Fixes"
+seoTitle: "PhotoBoss Stop Button Implementation and Cache Pruning Bug Fix"
+date: "2026-04-24"
+category: "Software Engineering"
+summary: "Implementing a robust stop button with state-aware UI for the PhotoBoss pipeline, and fixing a cache pruning bug that was deleting all cached hash data."
+project: "PhotoBoss"
+tags: ["C++", "Qt", "UX", "Bug Fix"]
+status: "published"
+isAutoTranslated: false
+---
+
 # Engineering Diary: The Off Switch — Stop Button Fail & Pruning Gone Wrong
 
 ## Part 1: Giving the User the Brakes

@@ -1,6 +1,6 @@
 ---
 id: labyrinth4
-title: "\U0001F9E0 Vom zufälligen Chaos zur strukturierten Generierung"
+title: "🧠 Vom zufälligen Chaos zur strukturierten Generierung"
 seoTitle: Refactoring eines Unity-Labyrinth-Generators mit Constraint-Architektur
 date: '2025-10-29'
 category: Game Dev

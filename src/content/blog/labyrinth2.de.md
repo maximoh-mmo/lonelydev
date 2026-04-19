@@ -1,6 +1,6 @@
 ---
 id: labyrinth2
-title: "\U0001F300 Entwerfen eines dynamischen Labyrinth-Kachelsystems"
+title: "🌀 Entwerfen eines dynamischen Labyrinth-Kachelsystems"
 seoTitle: Entwerfen eines dynamischen Labyrinthkachelsystems in Unity mit C#
 date: '2025-10-27'
 category: Game Dev

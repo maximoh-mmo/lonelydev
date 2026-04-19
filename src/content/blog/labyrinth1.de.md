@@ -1,6 +1,6 @@
 ---
 id: labyrinth1
-title: "\U0001F300 Ein lebendiges Labyrinth bauen"
+title: "🌀 Ein lebendiges Labyrinth bauen"
 seoTitle: 'Aufbau eines lebendigen Labyrinths: Prozedurale Labyrinthe in Einheit'
 date: '2025-10-27'
 category: Game Dev

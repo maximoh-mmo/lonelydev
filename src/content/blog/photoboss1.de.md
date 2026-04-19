@@ -1,6 +1,6 @@
 ---
 id: photoboss1
-title: "\U0001F4F8 Das Problem, über das niemand spricht: Fotobibliotheken in großem Maßstab"
+title: "📸 Das Problem, über das niemand spricht: Fotobibliotheken in großem Maßstab"
 seoTitle: 'Verwaltung umfangreicher, über mehrere Jahre hinweg angewachsener Fotobestände'
 date: '2025-11-12'
 category: Software Engineering

@@ -1,6 +1,6 @@
 ---
 id: labyrinth3
-title: "\U0001F300 Das Labyrinth verändern!"
+title: "🌀 Das Labyrinth verändern!"
 seoTitle: Animieren der Kachelgitterverschiebung in Unity
 date: '2025-10-28'
 category: Game Dev

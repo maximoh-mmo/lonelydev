@@ -1,6 +1,6 @@
 ---
 id: photoboss7
-title: "\U0001F4F8 Arbeitsabläufe verkürzen: Einführung eines persistenten Hash-Caches"
+title: "📸 Arbeitsabläufe verkürzen: Einführung eines persistenten Hash-Caches"
 seoTitle: Persistentes Hash-Caching mit SQLite zur Optimierung der Pipeline
 date: '2026-01-27'
 category: Software Engineering

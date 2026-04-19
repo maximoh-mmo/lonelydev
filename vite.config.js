@@ -32,9 +32,21 @@ function copyCloudflareFiles() {
   };
 }
 
+async function getPlugins() {
+  const plugins = [react(), copyCloudflareFiles()];
+  
+  const adminPluginPath = resolve(__dirname, 'admin/vite-plugin-admin-api.js');
+  if (fs.existsSync(adminPluginPath)) {
+    const adminModule = await import('./admin/vite-plugin-admin-api.js');
+    plugins.push(adminModule.default());
+  }
+  
+  return plugins;
+}
+
 export default defineConfig({
   base: '/',
-  plugins: [react(), copyCloudflareFiles()],
+  plugins: await getPlugins(),
   define: {
     __BUILD_DATE__: JSON.stringify(new Date().toISOString().split('T')[0]),
   },

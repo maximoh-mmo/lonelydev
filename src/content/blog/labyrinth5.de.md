@@ -1,6 +1,6 @@
 ---
 id: labyrinth5
-title: "\U0001F9E0 Erstellen eines echten Constraint-Lösers für das Labyrinth"
+title: "🧠 Erstellen eines echten Constraint-Lösers für das Labyrinth"
 seoTitle: Aufbau eines Constraint-Lösers für die prozedurale Generierung in Unity
 date: '2025-11-14'
 category: Game Dev

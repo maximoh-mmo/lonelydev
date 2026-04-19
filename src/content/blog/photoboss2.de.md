@@ -1,6 +1,6 @@
 ---
 id: photoboss2
-title: "\U0001F4F8 Von der Idee zur Architektur: Entwurf einer skalierbaren Bildverarbeitungs-Pipeline"
+title: "📸 Von der Idee zur Architektur: Entwurf einer skalierbaren Bildverarbeitungs-Pipeline"
 seoTitle: Skalierbare Architektur für eine Bildverarbeitungs-Pipeline in C++
 date: '2025-11-26'
 category: Software Engineering

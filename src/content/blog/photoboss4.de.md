@@ -1,6 +1,6 @@
 ---
 id: photoboss4
-title: "\U0001F4F8 Bild-Hashing: Mehr als nur Prüfsummen"
+title: "📸 Bild-Hashing: Mehr als nur Prüfsummen"
 seoTitle: >-
   Multithread-basiertes wahrnehmungsorientiertes und kryptografisches
   Bild-Hashing in C++

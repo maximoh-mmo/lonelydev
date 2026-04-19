@@ -1,3 +1,16 @@
+---
+id: photoboss10
+title: "📸 Engineering Diary: Slaying the Shutdown Ghost & Race Conditions"
+seoTitle: "Hardening PhotoBoss Pipeline: Race Conditions and Producer Registration"
+date: "2026-04-22"
+category: "Software Engineering"
+summary: "Proactively identifying and fixing race conditions in the PhotoBoss pipeline by moving producer registration from onStart to constructors, ensuring robust synchronization for high-concurrency image processing."
+project: "PhotoBoss"
+tags: ["C++", "Qt", "Concurrency", "Pipeline"]
+status: "published"
+isAutoTranslated: false
+---
+
 # Engineering Diary: Slaying the Shutdown Ghost & The Race Condition Race
 
 In my last update, I shared how I built a high-performance image pipeline in PhotoBoss. It was faster, smoother, and lighter on memory. But even when a system feels stable, there's always a danger that high speed is masking subtle synchronization gaps—the kind of "ghosts" that only haunt you when the right hardware or load conditions align.

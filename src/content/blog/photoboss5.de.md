@@ -1,6 +1,6 @@
 ---
 id: photoboss5
-title: "\U0001F4F8 Die Erkenntnis: Alles neu zu berechnen ist Verschwendung"
+title: "📸 Die Erkenntnis: Alles neu zu berechnen ist Verschwendung"
 seoTitle: Optimierung von Bild-Hashing-Pipelines durch Zwischenspeicherung
 date: '2026-01-07'
 category: Software Engineering

@@ -1,6 +1,6 @@
 ---
 id: photoboss6
-title: "\U0001F449 Entwurf eines persistenten Hash-Caches mit SQLite"
+title: "📸 Entwurf eines persistenten Hash-Caches mit SQLite"
 seoTitle: Entwicklung eines persistenten SQLite-Hash-Caches in C++
 date: '2026-01-21'
 category: Software Engineering
