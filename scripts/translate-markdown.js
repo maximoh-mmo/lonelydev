@@ -27,19 +27,40 @@ export async function translateFile(filePath, options = {}) {
   // --- 1. Prepare Frontmatter ---
   const translatedData = { ...data };
   console.log('Translating frontmatter...');
+
+  // Protect emojis before translation (they should not be translated)
+  const emojiPattern = /[\u{1F300}-\u{1F9FF}]|[\u{1F600}-\u{1F64F}]|[\u{1F680}-\u{1F6FF}]|[\u{1F700}-\u{1F77F}]|[\u{1F780}-\u{1F7FF}]|[\u{1F800}-\u{1F8FF}]|[\u{1F900}-\u{1F9FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]/gu;
+  const emojiPlaceholders = [];
+  let frontmatterText = JSON.stringify(data);
   
-  if (data.title) {
-    const title = await translate(data.title, { to: lang });
+  frontmatterText = frontmatterText.replace(emojiPattern, (match) => {
+    const placeholder = `__EMOJI_${emojiPlaceholders.length}__`;
+    emojiPlaceholders.push(match);
+    return placeholder;
+  });
+  
+  const protectedData = JSON.parse(frontmatterText);
+  
+  if (protectedData.title) {
+    const title = await translate(protectedData.title, { to: lang });
     translatedData.title = title;
   }
-  if (data.summary) {
-    const summary = await translate(data.summary, { to: lang });
+  if (protectedData.summary) {
+    const summary = await translate(protectedData.summary, { to: lang });
     translatedData.summary = summary;
   }
-  if (data.seoTitle) {
-    const seoTitle = await translate(data.seoTitle, { to: lang });
+  if (protectedData.seoTitle) {
+    const seoTitle = await translate(protectedData.seoTitle, { to: lang });
     translatedData.seoTitle = seoTitle;
   }
+
+  // Restore emojis after translation
+  emojiPlaceholders.forEach((emoji, index) => {
+    const placeholder = `__EMOJI_${index}__`;
+    translatedData.title = translatedData.title?.replace(placeholder, emoji);
+    translatedData.summary = translatedData.summary?.replace(placeholder, emoji);
+    translatedData.seoTitle = translatedData.seoTitle?.replace(placeholder, emoji);
+  });
   
   translatedData.isAutoTranslated = true;
 

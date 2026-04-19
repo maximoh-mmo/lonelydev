@@ -102,13 +102,21 @@ export default function DevBlogIndex({ posts }) {
     loadTranslations();
   }, [i18n.language, posts]);
 
-  // Extract unique options
-  const categories = ['All', ...new Set(posts.map((p) => p.category))];
-  const projects = ['All', ...new Set(posts.map((p) => p.project).filter(Boolean))];
+  // Merge translations with posts for filtering and display
+  const postsWithTranslations = useMemo(() => {
+    return posts.map(post => ({
+      ...post,
+      ...translations[post.id]
+    }));
+  }, [posts, translations]);
+
+  // Extract unique options from merged data
+  const categories = ['All', ...new Set(postsWithTranslations.map((p) => p.category).filter(Boolean))];
+  const projects = ['All', ...new Set(postsWithTranslations.map((p) => p.project).filter(Boolean))];
 
   // Filter Logic
   const filteredPosts = useMemo(() => {
-    return posts
+    return postsWithTranslations
       .filter((post) => {
         const categoryMatch =
           selectedCategory === 'All' || post.category === selectedCategory;
@@ -117,7 +125,7 @@ export default function DevBlogIndex({ posts }) {
         return categoryMatch && projectMatch;
       })
       .sort((a, b) => new Date(b.date) - new Date(a.date));
-  }, [selectedCategory, selectedProject]);
+  }, [selectedCategory, selectedProject, postsWithTranslations]);
 
   const clearFilters = () => {
     setSelectedCategory('All');
@@ -187,7 +195,7 @@ export default function DevBlogIndex({ posts }) {
             >
               <div className="flex justify-between items-start gap-4">
                 <h2 className="text-2xl font-semibold text-gray-900">
-                  {translations[post.id]?.title || post.title}
+                  {post.title}
                 </h2>
                 {import.meta.env.DEV && (
                   <div className="flex gap-2 shrink-0">
@@ -213,7 +221,7 @@ export default function DevBlogIndex({ posts }) {
                 })}
               </p>
               <p className="text-gray-700 mb-4">
-                {translations[post.id]?.summary || post.summary}
+                {post.summary}
               </p>
 
               <div className="flex flex-wrap gap-2 mb-4">
@@ -225,7 +233,7 @@ export default function DevBlogIndex({ posts }) {
               </div>
 
               <span className="inline-block text-sm text-gray-500 font-medium">
-                {t(`blog.categories.${post.category}`, { defaultValue: post.category })}
+                {t(`blog.categories.${post.category}`, { defaultValue: post.category || post.project })}
               </span>
             </Link>
           ))

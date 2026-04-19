@@ -15,6 +15,12 @@ const Climbing = lazy(() => import('./pages/Climbing'));
 const DevBlogIndex = lazy(() => import('./pages/dev-blog/index'));
 const BlogPost = lazy(() => import('./pages/dev-blog/BlogPost'));
 
+// Only load admin in development mode
+let AdminPage;
+if (process.env.NODE_ENV === 'development') {
+  AdminPage = lazy(() => import('../admin/pages/Admin'));
+}
+
 function LazyLoader() {
   return (
     <div className="flex items-center justify-center min-h-[50vh]">
@@ -42,6 +48,9 @@ function App() {
               <Route path="/climbing" element={<Climbing />} />
               <Route path="/dev-blog" element={<DevBlogIndex posts={posts} />} />
               <Route path="/dev-blog/:id" element={<BlogPost posts={posts} />} />
+              {process.env.NODE_ENV === 'development' && (
+                <Route path="/admin" element={<AdminPage />} />
+              )}
             </Routes>
           </Suspense>
         </ErrorBoundary>
