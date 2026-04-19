@@ -1,12 +1,67 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import SEO from '../../components/SEO';
 
+const markdownModules = import.meta.glob('../../content/blog/*.md', { query: '?raw' });
+
+function parseFrontmatter(content) {
+  const match = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+  if (!match) return { data: {}, content: '' };
+
+  const frontmatter = {};
+  const dataLines = match[1].split('\n');
+  dataLines.forEach(line => {
+    const colonIndex = line.indexOf(':');
+    if (colonIndex === -1) return;
+
+    const key = line.slice(0, colonIndex).trim();
+    let value = line.slice(colonIndex + 1).trim();
+
+    if (value.startsWith('[') && value.endsWith(']')) {
+      value = value.slice(1, -1).split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+    } else if (value.startsWith('"') && value.endsWith('"')) {
+      value = value.slice(1, -1);
+    }
+    frontmatter[key] = value;
+  });
+
+  return { data: frontmatter, content: match[2] };
+}
+
 export default function DevBlogIndex({ posts }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedProject, setSelectedProject] = useState('All');
+  const [translations, setTranslations] = useState({});
+
+  useEffect(() => {
+    async function loadTranslations() {
+      const lang = i18n.language === 'de' ? 'de' : 'en';
+      const allKeys = Object.keys(markdownModules);
+
+      const loaded = {};
+      for (const post of posts) {
+        const targetKey = allKeys.find(k => k.includes(`/${post.id}.${lang}.`));
+        const fallbackKey = allKeys.find(k => k.includes(`/${post.id}.en.`));
+        const fileKey = targetKey || fallbackKey;
+
+        if (fileKey) {
+          try {
+            const rawContent = await markdownModules[fileKey]();
+            const contentStr = rawContent.default || rawContent;
+            const { data } = parseFrontmatter(contentStr);
+            loaded[post.id] = data;
+          } catch (err) {
+            console.error('Error loading translation for', post.id, err);
+          }
+        }
+      }
+      setTranslations(loaded);
+    }
+
+    loadTranslations();
+  }, [i18n.language, posts]);
 
   // Extract unique options
   const categories = ['All', ...new Set(posts.map((p) => p.category))];
@@ -93,7 +148,7 @@ export default function DevBlogIndex({ posts }) {
             >
               <div className="flex justify-between items-start gap-4">
                 <h2 className="text-2xl font-semibold text-gray-900">
-                  {t(`blog.posts.${post.id}.title`, { defaultValue: post.title })}
+                  {translations[post.id]?.title || post.title}
                 </h2>
                 {import.meta.env.DEV && (
                   <div className="flex gap-2 shrink-0">
@@ -119,7 +174,7 @@ export default function DevBlogIndex({ posts }) {
                 })}
               </p>
               <p className="text-gray-700 mb-4">
-                {t(`blog.posts.${post.id}.summary`, { defaultValue: post.summary })}
+                {translations[post.id]?.summary || post.summary}
               </p>
 
               <div className="flex flex-wrap gap-2 mb-4">
