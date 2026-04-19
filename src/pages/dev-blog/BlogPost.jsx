@@ -46,6 +46,8 @@ export default function BlogPost() {
   const [isFallback, setIsFallback] = useState(false);
 
   useEffect(() => {
+    let cancelled = false;
+
     async function loadPost() {
       setLoading(true);
       setError(false);
@@ -55,12 +57,10 @@ export default function BlogPost() {
         const allKeys = Object.keys(markdownModules);
         const enKey = allKeys.find(k => k.includes('/' + id + '.en.'));
         const deKey = allKeys.find(k => k.includes('/' + id + '.de.'));
-        // Determine if we're falling back to a different language
         const targetLangFile = preferredLang === 'de' ? deKey : enKey;
         const fallbackLangFile = preferredLang === 'de' ? enKey : deKey;
         const matchingKey = targetLangFile || fallbackLangFile;
         
-        // Track if we're showing a fallback language
         if (preferredLang === 'de' && !deKey && enKey) {
           setIsFallback(true);
         }
@@ -70,19 +70,31 @@ export default function BlogPost() {
         }
 
         const rawContent = await markdownModules[matchingKey]();
+        if (cancelled) return;
+        
         const contentStr = rawContent.default || rawContent;
         const { data, content } = parseMarkdown(contentStr);
         
-        setPost({ ...data, content, id });
+        if (!cancelled) {
+          setPost({ ...data, content, id });
+        }
       } catch (err) {
-        console.error('Error loading blog post:', err);
-        setError(true);
+        if (!cancelled) {
+          console.error('Error loading blog post:', err);
+          setError(true);
+        }
       } finally {
-        setLoading(false);
+        if (!cancelled) {
+          setLoading(false);
+        }
       }
     }
 
     loadPost();
+
+    return () => {
+      cancelled = true;
+    };
   }, [id, i18n.language]);
 
   if (loading) {

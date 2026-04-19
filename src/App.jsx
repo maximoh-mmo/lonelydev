@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import Navbar from './components/Navbar';
+import { ErrorBoundary } from './components/ErrorBoundary';
 
 const Home = lazy(() => import('./pages/Home'));
 const Projects = lazy(() => import('./pages/Projects'));
@@ -26,21 +27,23 @@ function App() {
     <div className="bg-gray-100 min-h-screen">
       <Navbar />
       <main className="max-w-4xl mx-auto p-6 text-center mt-20">
-        <Suspense fallback={<LazyLoader />}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/lonelydev/" element={<Home />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/projects/:projectId" element={<ProjectDetail />} />
-            <Route path="/kumiko" element={<Kumiko />} />
-            <Route path="/keyboard" element={<Keyboard />} />
-            <Route path="/climbing" element={<Climbing />} />
-            <Route path="/dev-blog" element={<DevBlogIndex />} />
-            <Route path="/dev-blog/:id" element={<BlogPost />} />
-          </Routes>
-        </Suspense>
+        <ErrorBoundary>
+          <Suspense fallback={<LazyLoader />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/lonelydev/" element={<Home />} />
+              <Route path="/projects" element={<Projects />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/projects/:projectId" element={<ProjectDetail />} />
+              <Route path="/kumiko" element={<Kumiko />} />
+              <Route path="/keyboard" element={<Keyboard />} />
+              <Route path="/climbing" element={<Climbing />} />
+              <Route path="/dev-blog" element={<DevBlogIndex />} />
+              <Route path="/dev-blog/:id" element={<BlogPost />} />
+            </Routes>
+          </Suspense>
+        </ErrorBoundary>
       </main>
     </div>
   );
