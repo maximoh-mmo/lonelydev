@@ -13,21 +13,33 @@ export default function SEO({ title, description, image, url }) {
   const defaultUrl = "https://maxheinze.com";
   const metaUrl = url ? `${defaultUrl}${url}` : defaultUrl;
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Max Heinze",
+    "url": defaultUrl,
+    "jobTitle": "Game Programmer",
+    "description": metaDescription,
+    "sameAs": [
+      "https://github.com/maxheinze",
+      "https://linkedin.com/in/maxheinze"
+    ]
+  };
+
   return (
     <Helmet>
-      {/* Standard metadata tags */}
       <title>{fullTitle}</title>
       <meta name="title" content={fullTitle} />
       <meta name="description" content={metaDescription} />
 
-      {/* Open Graph / Facebook */}
       <meta property="og:type" content="website" />
       <meta property="og:url" content={metaUrl} />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={metaDescription} />
       <meta property="og:image" content={metaImage} />
+      <meta property="og:locale" content="en_US" />
+      <meta property="og:locale:alternate" content="de_DE" />
 
-      {/* Twitter */}
       <meta property="twitter:card" content="summary_large_image" />
       <meta property="twitter:url" content={metaUrl} />
       <meta property="twitter:title" content={fullTitle} />
@@ -35,6 +47,10 @@ export default function SEO({ title, description, image, url }) {
       <meta property="twitter:image" content={metaImage} />
       
       <link rel="canonical" href={metaUrl} />
+      
+      <script type="application/ld+json">
+        {JSON.stringify(structuredData)}
+      </script>
     </Helmet>
   );
 }

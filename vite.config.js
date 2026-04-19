@@ -33,6 +33,13 @@ export default defineConfig({
     historyApiFallback: true
   },
   build: {
-    rollupOptions: {}
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor': ['react', 'react-dom', 'react-router-dom', 'i18next'],
+          'markdown': ['react-markdown', 'remark-gfm', 'rehype-raw'],
+        }
+      }
+    }
   }
 });
