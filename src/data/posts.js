@@ -19,7 +19,13 @@ const allPosts = [
 ];
 
 export const posts = allPosts.filter(post => {
+  // In development, show all posts, drafts and scheduled (future dates) as well
+  if (process.env.NODE_ENV === 'development') {
+    return true;
+  }
+
   if (post.status === 'draft') return false;
+
   const referenceDate = new Date().toISOString().split('T')[0];
   if (post.date > referenceDate) return false;
   return true;
