@@ -151,26 +151,7 @@ const allPosts = [
     category: 'Game Dev',
     project: 'Labyrinth',
     tags: ['Unity', 'Game Design', 'Procedural Generation'],
-  },
-  {
-    id: 'scheduled-post-test',
-    title: '🚀 Future Feature: Something Amazing',
-    date: '2026-12-25',
-    category: 'Software Engineering',
-    summary: 'This post is from the future and should only be visible in development mode.',
-    project: 'PhotoBoss',
-    tags: ['Future', 'Test'],
-  },
-  {
-    id: 'draft-post-test',
-    title: '📝 Work in Progress',
-    date: '2026-04-18',
-    status: 'draft',
-    category: 'Software Engineering',
-    summary: 'This is a draft and should only be visible in development mode.',
-    project: 'PhotoBoss',
-    tags: ['Draft', 'Test'],
-  },
+  }
 ];
 
 // Check for markdown files to determine which posts are available
@@ -180,16 +161,16 @@ const markdownModules = import.meta.glob('../../content/blog/*.md', { query: '?r
 export const posts = allPosts.filter(post => {
   // Always show all posts in development mode
   if (import.meta.env.DEV) return true;
-  
+
   // Hide drafts in production
   if (post.status === 'draft') return false;
-  
+
   // Hide future posts in production
-  const referenceDate = typeof __BUILD_DATE__ !== 'undefined' 
-    ? __BUILD_DATE__ 
+  const referenceDate = typeof __BUILD_DATE__ !== 'undefined'
+    ? __BUILD_DATE__
     : new Date().toISOString().split('T')[0];
   if (post.date > referenceDate) return false;
-  
+
   // Only show posts that have markdown content
   const enPath = `../../content/blog/${post.id}.en.md`;
   const dePath = `../../content/blog/${post.id}.de.md`;
