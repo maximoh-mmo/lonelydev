@@ -1,10 +1,9 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { posts } from '../../data/posts';
 import { useTranslation } from 'react-i18next';
 import SEO from '../../components/SEO';
 
-export default function DevBlogIndex() {
+export default function DevBlogIndex({ posts }) {
   const { t } = useTranslation();
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedProject, setSelectedProject] = useState('All');

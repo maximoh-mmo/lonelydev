@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import Navbar from './components/Navbar';
 import { ErrorBoundary } from './components/ErrorBoundary';
+import { posts } from './data/posts';
 
 const Home = lazy(() => import('./pages/Home'));
 const Projects = lazy(() => import('./pages/Projects'));
@@ -39,8 +40,8 @@ function App() {
               <Route path="/kumiko" element={<Kumiko />} />
               <Route path="/keyboard" element={<Keyboard />} />
               <Route path="/climbing" element={<Climbing />} />
-              <Route path="/dev-blog" element={<DevBlogIndex />} />
-              <Route path="/dev-blog/:id" element={<BlogPost />} />
+              <Route path="/dev-blog" element={<DevBlogIndex posts={posts} />} />
+              <Route path="/dev-blog/:id" element={<BlogPost posts={posts} />} />
             </Routes>
           </Suspense>
         </ErrorBoundary>
