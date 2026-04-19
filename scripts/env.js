@@ -1,2 +1,5 @@
 import { config } from 'dotenv';
-config();
+
+if (!process.env.GITHUB_ACTIONS && !process.env.CI) {
+  config();
+}

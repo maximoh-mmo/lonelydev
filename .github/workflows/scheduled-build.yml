@@ -24,6 +24,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Debug env secrets
+        run: |
+          echo "DEEPL_API_KEY present: ${{ !! secrets.DEEPL_API_KEY }}"
+          echo "DEEPL_API_KEY first chars: ${DEEPL_API_KEY:0:4}"
+
       - name: Run translation and build
         run: npm run build
         env:
