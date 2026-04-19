@@ -67,9 +67,17 @@ export async function translateFile(filePath, options = {}) {
   // --- 2. Prepare Body (Handling Protected Patterns) ---
   console.log('Processing body and protecting patterns...');
   
+  // Protect emojis in body (they should not be translated)
+  const bodyEmojiPlaceholders = [];
+  let bodyWithPlaceholders = body.replace(emojiPattern, (match) => {
+    const placeholder = `__BODY_EMOJI_${bodyEmojiPlaceholders.length}__`;
+    bodyEmojiPlaceholders.push(match);
+    return placeholder;
+  });
+
   // Protect icon shortcodes {:icon:Name}
   const iconShortcodes = [];
-  let bodyWithPlaceholders = body.replace(/\{:icon:([A-Za-z]+)\}/g, (match, iconName) => {
+  bodyWithPlaceholders = bodyWithPlaceholders.replace(/\{:icon:([A-Za-z]+)\}/g, (match, iconName) => {
     const placeholder = `__ICON_${iconName}__`;
     iconShortcodes.push({ placeholder, iconName });
     return placeholder;
@@ -106,6 +114,12 @@ export async function translateFile(filePath, options = {}) {
   codeBlocks.forEach((block, index) => {
     const placeholder = `__CODE_BLOCK_${index}__`;
     translatedBody = translatedBody.split(placeholder).join(block);
+  });
+
+  // Restore emojis in body
+  bodyEmojiPlaceholders.forEach((emoji, index) => {
+    const placeholder = `__BODY_EMOJI_${index}__`;
+    translatedBody = translatedBody.split(placeholder).join(emoji);
   });
 
   // Icons don't need restoration - the shortcode stays as-is for MarkdownRenderer to handle
