@@ -13,52 +13,80 @@ function parseFrontmatter(content) {
   const dataLines = match[1].split('\n');
   let currentKey = null;
   let currentArray = null;
+  let multilineMode = null;
   let multilineValue = [];
 
   dataLines.forEach(line => {
     const trimmed = line;
 
+    // Handle YAML multiline continuation (summary: >-, summary: >, etc.)
+    if (multilineMode) {
+      if (trimmed === '' || trimmed.startsWith(' ') || trimmed.startsWith('\t')) {
+        multilineValue.push(trimmed);
+        return;
+      } else {
+        // End of multiline, store it
+        if (currentKey) {
+          frontmatter[currentKey] = multilineValue.join(' ').trim();
+        }
+        currentKey = null;
+        multilineMode = null;
+        multilineValue = [];
+        // Continue parsing this line as a new key
+      }
+    }
+
+    // Handle array items (- item)
     if (trimmed.startsWith('- ')) {
       if (currentArray) {
         currentArray.push(trimmed.slice(2).trim().replace(/^"|"$/g, ''));
+      } else if (currentKey && !multilineMode) {
+        // Not in a current array, could be the first item of a new array
+        currentArray = [trimmed.slice(2).trim().replace(/^"|"$/g, '')];
+        frontmatter[currentKey] = currentArray;
+        currentArray = null;
+        currentKey = null;
       }
       return;
     }
 
+    // Close any pending array
     if (currentArray && currentKey) {
       frontmatter[currentKey] = currentArray;
       currentArray = null;
     }
 
+    // Parse key: value
     if (trimmed.match(/^[a-zA-Z_]+:/)) {
-      if (currentKey) {
-        frontmatter[currentKey] = multilineValue.join(' ').trim();
-        multilineValue = [];
-      }
-
       const colonIndex = trimmed.indexOf(':');
       currentKey = trimmed.slice(0, colonIndex).trim();
       let value = trimmed.slice(colonIndex + 1).trim();
 
       if (!value) return;
 
-      if (value === '>' || value === '>-') {
+      // Check for multiline indicator
+      if (value === '>' || value === '>-' || value === '|+') {
+        multilineMode = value;
         multilineValue = [];
         return;
       }
 
-      if (value === '[') {
-        currentArray = [];
+      // Check for array start [item1, item2]
+      if (value.startsWith('[') && value.endsWith(']')) {
+        currentArray = value.slice(1, -1).split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+        frontmatter[currentKey] = currentArray;
+        currentArray = null;
+        currentKey = null;
         return;
       }
 
+      // Simple quoted or unquoted value
       frontmatter[currentKey] = value.replace(/^["']|["']$/g, '').replace(/^"|"$/g, '');
       currentKey = null;
-    } else if (multilineValue.length > 0 && (trimmed.startsWith(' ') || trimmed === '')) {
-      multilineValue.push(trimmed);
     }
   });
 
+  // Handle any remaining data
   if (currentArray && currentKey) {
     frontmatter[currentKey] = currentArray;
   } else if (multilineValue.length > 0 && currentKey) {

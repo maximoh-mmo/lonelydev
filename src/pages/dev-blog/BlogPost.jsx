@@ -13,26 +13,75 @@ const markdownModules = import.meta.glob('../../content/blog/*.md', { query: '?r
 function parseMarkdown(content) {
   const match = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
   if (!match) return { data: {}, content };
-  
+
   const frontmatter = {};
   const dataLines = match[1].split('\n');
+  let currentKey = null;
+  let currentArray = null;
+  let multilineMode = null;
+  let multilineValue = [];
+
   dataLines.forEach(line => {
-    const colonIndex = line.indexOf(':');
-    if (colonIndex === -1) return;
-    
-    const key = line.slice(0, colonIndex).trim();
-    let value = line.slice(colonIndex + 1).trim();
-    
-    // Handle arrays: ["item1", "item2"]
-    if (value.startsWith('[') && value.endsWith(']')) {
-      value = value.slice(1, -1).split(',').map(v => v.trim().replace(/^"|"$/g, ''));
-    } else if (value.startsWith('"') && value.endsWith('"')) {
-      // Remove quotes
-      value = value.slice(1, -1);
+    const trimmed = line;
+
+    // Handle YAML multiline continuation
+    if (multilineMode) {
+      if (trimmed === '' || trimmed.startsWith(' ') || trimmed.startsWith('\t')) {
+        multilineValue.push(trimmed);
+        return;
+      } else {
+        if (currentKey) {
+          frontmatter[currentKey] = multilineValue.join(' ').trim();
+        }
+        currentKey = null;
+        multilineMode = null;
+        multilineValue = [];
+      }
     }
-    frontmatter[key] = value;
+
+    // Handle array items
+    if (trimmed.startsWith('- ')) {
+      if (currentArray) {
+        currentArray.push(trimmed.slice(2).trim().replace(/^"|"$/g, ''));
+      }
+      return;
+    }
+
+    // Close array
+    if (currentArray && currentKey) {
+      frontmatter[currentKey] = currentArray;
+      currentArray = null;
+    }
+
+    const colonIndex = trimmed.indexOf(':');
+    if (colonIndex === -1) return;
+
+    let key = trimmed.slice(0, colonIndex).trim();
+    let value = trimmed.slice(colonIndex + 1).trim();
+
+    // Handle multiline YAML (>, >-, |+)
+    if (value === '>' || value === '>-' || value === '|+') {
+      multilineMode = value;
+      currentKey = key;
+      multilineValue = [];
+      return;
+    }
+
+    // Handle arrays [item1, item2]
+    if (value.startsWith('[') && value.endsWith(']')) {
+      currentArray = value.slice(1, -1).split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+      frontmatter[key] = currentArray;
+      currentArray = null;
+      currentKey = null;
+    } else if (value.startsWith('"') && value.endsWith('"')) {
+      frontmatter[key] = value.slice(1, -1);
+      currentKey = null;
+    } else {
+      frontmatter[key] = value;
+      currentKey = null;
+    }
   });
-  
+
   return { data: frontmatter, content: match[2] };
 }
 
