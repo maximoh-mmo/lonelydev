@@ -7,25 +7,34 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-function copyIndexTo404() {
+function copyCloudflareFiles() {
   return {
-    name: 'copy-index-to-404',
+    name: 'copy-cloudflare-files',
     closeBundle() {
       const indexPath = resolve(__dirname, 'dist/index.html');
       const notFoundPath = resolve(__dirname, 'dist/404.html');
+      
       if (fs.existsSync(indexPath)) {
         fs.copyFileSync(indexPath, notFoundPath);
         console.log('✔ Copied index.html to 404.html');
-      } else {
-        console.warn('⚠ index.html not found, 404.html not created.');
       }
+
+      const files = ['_redirects', '_headers'];
+      files.forEach(file => {
+        const src = resolve(__dirname, 'public', file);
+        const dest = resolve(__dirname, 'dist', file);
+        if (fs.existsSync(src)) {
+          fs.copyFileSync(src, dest);
+          console.log(`✔ Copied ${file} to dist`);
+        }
+      });
     }
   };
 }
 
 export default defineConfig({
   base: '/',
-  plugins: [react(), copyIndexTo404()],
+  plugins: [react(), copyCloudflareFiles()],
   define: {
     __BUILD_DATE__: JSON.stringify(new Date().toISOString().split('T')[0]),
   },
