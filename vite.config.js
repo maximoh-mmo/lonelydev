@@ -37,8 +37,11 @@ function getPlugins() {
   
   // Only add admin API plugin in development mode
   if (process.env.NODE_ENV === 'development') {
-    const adminApiPlugin = require('./admin/vite-plugin-admin-api').default;
-    plugins.push(adminApiPlugin());
+    const adminPluginPath = resolve(__dirname, 'admin/vite-plugin-admin-api.js');
+    if (fs.existsSync(adminPluginPath)) {
+      const adminApiPlugin = require(adminPluginPath).default;
+      plugins.push(adminApiPlugin());
+    }
   }
   
   return plugins;
