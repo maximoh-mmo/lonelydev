@@ -27,7 +27,12 @@ export async function translate(text, { to = 'de' } = {}) {
     const result = await t.translateText(text, null, targetLang);
     return result.text;
   } catch (err) {
-    if (err.message?.includes('429') || err.message?.includes('rate')) {
+    const isRateLimit = 
+      err.message?.includes('429') || 
+      err.message?.includes('rate') ||
+      err.message?.includes('Too many requests') ||
+      err.message?.includes('high load');
+    if (isRateLimit) {
       const error = new Error('Rate limited');
       error.isRateLimited = true;
       throw error;

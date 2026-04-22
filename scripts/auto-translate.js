@@ -89,12 +89,18 @@ async function autoTranslate() {
     
     const sourcePath = path.join(BLOG_DIR, file);
     console.log(`🔄 Translating: ${baseName} → ${targetLang}`);
+    let failedBlocksCount = 0;
     
     try {
       const result = await translateWithRetry(sourcePath, baseName, targetLang);
       if (result.success) {
         translated++;
-        console.log(`   ✅ Saved: ${result.message}\n`);
+        failedBlocksCount = result.failedBlocks?.length || 0;
+        if (failedBlocksCount > 0) {
+          console.log(`   ✅ Saved: ${result.message} (${failedBlocksCount} block(s) failed translation)`);
+        } else {
+          console.log(`   ✅ Saved: ${result.message}\n`);
+        }
       } else {
         skipped++;
         console.log(`   ⏭️  ${result.message}\n`);

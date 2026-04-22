@@ -25,19 +25,19 @@ Ich wollte, dass sich die Benutzeroberfläche *lebendig* anfühlt und den Status
 
 Die drei Bundesstaaten sind:
 
-| State | Button Text | Button Enabled |
+| Status | Schaltflächentext | Schaltfläche aktiv |
 |---|---|---|
-| Idle | `Start Scan` | ✅ |
-| Running | `Stop Scan` | ✅ |
-| Draining | `Stopping...` | ❌ |
+| Im Leerlauf | `Scan starten` | ✅ |
+| Läuft | `Scan stoppen` | ✅ |
+| Lädt | `Wird gestoppt...` | ❌ |
 
 Der Status „Wird angehalten...“ ist beabsichtigt. Wenn der Benutzer auf „Scan stoppen“ klickt, friert die Pipeline nicht einfach ein – sie fordert jede Warteschlange auf, den Vorgang ordnungsgemäß abzuschließen. Dadurch wird verhindert, dass unvollständige Schreibvorgänge in den Cache gelangen oder halbverarbeitete Hash-Ergebnisse in die Ergebnismenge aufgenommen werden. Der Benutzer sieht „Wird angehalten...“, sodass er weiß, dass etwas geschieht, kann jedoch keinen zweiten Stoppbefehl auslösen, solange der erste noch ausgeführt wird.
 
-### How It Works
+### So funktioniert es
 
 Der `PipelineController` verfügte bereits über eine übersichtliche `PipelineState`-Enumeration (`Stopped`, `Running`, `Stopping`) mit einem `pipelineStateChanged`-Signal, das bei jedem Übergang ausgelöst wurde. Es fehlte lediglich ein Listener in der Benutzeroberfläche.
 
-Das `MainWindow` ist nun mit dem Ereignis `pipelineStateChanged` verknüpft und steuert den Text der Schaltfläche sowie deren Aktivierungsstatus; außerdem setzt es den Fortschrittsbalken zurück, sobald der Status der Pipeline wieder auf `Stopped` wechselt:
+Das „MainWindow“ stellt jetzt eine Verbindung zu „pipelineStateChanged“ her und steuert den Schaltflächentext, den aktivierten Status und setzt sogar den Fortschrittsbalken zurück, wenn die Pipeline wieder auf „Gestoppt“ wechselt:
 
 ```cpp
 case PipelineController::PipelineState::Stopped:
@@ -48,9 +48,9 @@ case PipelineController::PipelineState::Stopped:
     break;
 ```
 
-Die Schaltfläche „Durchsuchen“ ist während eines Scanvorgangs ebenfalls deaktiviert, sodass der Benutzer das Verzeichnis während des Vorgangs nicht wechseln kann – eine subtile, aber wichtige Sicherheitsmaßnahme gegen undefinierte Zustände.
+Der Durchsuchen-Button ist während eines Scans ebenfalls deaktiviert, wodurch verhindert wird, dass der Benutzer während des Flugs das Verzeichnis wechselt – ein subtiler, aber wichtiger Schutz gegen einen undefinierten Zustand.
 
-### Warum dies für die Benutzererfahrung wichtig ist
+### Warum das für UX wichtig ist
 
 Ein Elektrowerkzeug ohne Ausschalter stellt ein Sicherheitsrisiko dar. PhotoBoss durchsucht Ihre persönliche Fotobibliothek; den Nutzern jederzeit eine klare, gut sichtbare „Stopp“-Möglichkeit zu bieten, ist ein unverzichtbarer Bestandteil der Nutzungsvereinbarung. Dies signalisiert, dass die Anwendung *unter Kontrolle* ist und nicht außer Kontrolle gerät.
 
@@ -60,11 +60,11 @@ Kleines Detail, große Wirkung.
 
 ## Teil 2: Der „Pruning Bug“, der Ihre Daten verschlungen hat
 
-When files disappear from your scanned folders, they should also disappear from your cache. That's the entire point of the prune step — cleaning up stale entries so they don't clutter your results or misreport duplicate status.
+Wenn Dateien aus Ihren gescannten Ordnern verschwinden, sollten sie auch aus Ihrem Cache verschwinden. Genau darum geht es beim Bereinigungsschritt – veraltete Einträge zu entfernen, damit sie Ihre Ergebnisse nicht überladen oder fälschlicherweise als Duplikate melden.
 
 Nachdem ich die Stopp-Schaltfläche hinzugefügt hatte, wandte ich mich der Cache-Pflege zu. Der SQLite-Cache wuchs mit jedem Scan, wurde aber nie bereinigt.
 
-### The Existing Machinery
+### Der bestehende Maschinenpark
 
 Die Klasse `SqliteHashCache` verfügte bereits über eine Methode `prune(const QString& root)`, die:
 - Datenbankeinträge für Dateien löscht, die im aktuellen Scan NICHT gefunden wurden
@@ -75,7 +75,7 @@ Die Methode war toter Code – sie wurde nirgendwo in der Pipeline aufgerufen.
 
 ### Die Lösung: Nach Abschluss des Scans aufrufen
 
-The prune needed to run after a scan completes. The best place is `PipelineController::onThumbnailWorkerFinished()`, when all thumbnail workers are done and the pipeline is about to transition to `Stopped`:
+Die Bereinigung muss nach Abschluss eines Scans ausgeführt werden. Der beste Zeitpunkt dafür ist `PipelineController::onThumbnailWorkerFinished()`, wenn alle Thumbnail-Worker fertig sind und die Pipeline kurz davor steht, in den Status `Stopped` zu wechseln:
 
 ```cpp
 void PipelineController::onThumbnailWorkerFinished()
@@ -95,45 +95,45 @@ void PipelineController::onThumbnailWorkerFinished()
 }
 ```
 
-### The Symptom
+### Das Symptom
 
-After scanning a folder, all the cached hash data would vanish. Your images were being processed correctly, but on the next scan — even without deleting any files — PhotoBoss would recompute every single hash from scratch. The cache wasn't persisting. It was a write-only store.
+Nach dem Scannen eines Ordners verschwinden alle zwischengespeicherten Hash-Daten. Ihre Bilder wurden korrekt verarbeitet, aber beim nächsten Scan – selbst ohne Dateien zu löschen – berechnete PhotoBoss jeden einzelnen Hash von Grund auf neu. Der Cache bestand nicht mehr. Es war ein reiner Schreibladen.
 
-### Die Ermittlungen
+### Die Untersuchung
 
-Die „prune“-Methode in `SqliteHashCache` sah auf den ersten Blick korrekt aus. Sie enthielt den richtigen SQL-Code, die richtige WHERE-Klausel und die richtige Behandlung von Fremdschlüsseln. Das Problem lag darin, wie sie aufgerufen wurde:
+Die Prune-Methode in 'SqliteHashCache' sah auf der Oberfläche korrekt aus. Es hatte das richtige SQL, die richtige WHERE-Klausel, die richtige Fremdschlüsselbehandlung. Das Problem lag darin, wie es genannt wurde:
 
 ```cpp
 SqliteHashCache cache(0);
 cache.prune(m_current_request_.directory);
 ```
 
-Ich habe `0` als Scan-ID übergeben. Ich erkläre dir, warum das den Cache zerstört hat.
+Ich habe '0' als Scan-ID durchgegeben. Lassen Sie mich erklären, warum das den Cache zerstört hat.
 
-Every file in the database has a `last_seen_scan_id` column — the ID of the scan that last processed it. When pruning runs, it deletes entries where `last_seen_scan_id` doesn't match the *current* scan. Files seen in this scan get updated; files not seen (because they were deleted from disk) get removed.
+Jede Datei in der Datenbank hat eine Spalte 'last_seen_scan_id' – die ID des Scans, der sie zuletzt verarbeitet hat. Beim Pruning werden Einträge gelöscht, bei denen 'last_seen_scan_id' nicht mit dem *aktuellen* Scan übereinstimmt. Dateien, die in diesem Scan zu sehen sind, werden aktualisiert; Dateien, die nicht gesehen werden (weil sie von der Festplatte gelöscht wurden), werden entfernt.
 
-But with `scanId = 0`, the query became:
+Aber mit 'scanId = 0' wurde die Abfrage:
 
 ```sql
 DELETE FROM files WHERE path = ? AND last_seen_scan_id != 0
 ```
 
-Since every file in the cache has `last_seen_scan_id` set to an actual scan number (not 0), this condition matched **every single row**. The prune wasn't finding stale entries — it was annihilating the entire directory.
+Da für jede Datei im Cache „last_seen_scan_id“ auf eine tatsächliche Scannummer (nicht 0) gesetzt ist, stimmte diese Bedingung mit **jeder einzelnen Zeile** überein. Die Bereinigung fand keine veralteten Einträge – sie vernichtete das gesamte Verzeichnis.
 
-### The Fix
+### Die Lösung
 
-Übergeben Sie die tatsächliche Scan-ID aus dem Anforderungskontext:
+Gib die tatsächliche Scan-ID aus dem Anforderungskontext über:
 
 ```cpp
 SqliteHashCache cache(m_scan_id_);
 cache.prune(m_current_request_.directory);
 ```
 
-Now the prune behaves correctly: it only deletes files that weren't seen in this scan — i.e., files that were actually removed from the folder.
+Jetzt verhält sich die Pflaume korrekt: Sie löscht nur Dateien, die in diesem Scan nicht gesehen wurden – also Dateien, die tatsächlich aus dem Ordner entfernt wurden.
 
-### Bonus Cleanup: Removing Dead Code
+### Bonus-Aufräumen: Entfernen von Dead Code
 
-Beim Überarbeiten des Prune fiel mir außerdem auf, dass die Pipeline eine merkwürdige `onStart()`-Lifecycle-Methode enthielt, die niemand nutzte. Jede einzelne Stufe implementierte sie als leeren Stub:
+Während ich die Pflaucke reparierte, fiel mir auch auf, dass die Pipeline eine merkwürdige 'onStart()'-Lebenszyklusmethode hatte, die niemand benutzte. Jede einzelne Stufe implementierte es als leeren Stub:
 
 ```cpp
 void DiskReader::onStart() { }
@@ -141,15 +141,15 @@ void HashWorker::onStart() { }
 // ... every other stage
 ```
 
-The base class `StageBase::Run()` used to call it, but I'd already refactored that path in an earlier change. The method was just sitting there, virtual and inherited, doing nothing.
+Die Basisklasse `StageBase::Run()` rief sie früher auf, aber ich hatte diesen Pfad bereits in einer früheren Änderung umgestaltet. Die Methode war einfach nur da, virtuell und vererbt, ohne irgendetwas zu tun.
 
-So I removed it. The stage lifecycle is now just:
+Also habe ich es entfernt. Der Phasenlebenszyklus ist jetzt nur noch:
 
-- `run()` — the work (implemented by each stage)
-- `onStop()` — graceful shutdown
+- 'run()' — das Werk (in jeder Stufe umgesetzt)
+- 'onStop()' — elegantes Abschalten
 
-I also deleted `CachePrune.h` — a header file I'd created for a separate prune stage that never got used. The prune is handled directly in `PipelineController` now.
+Außerdem habe ich 'CachePrune.h' gelöscht – eine Header-Datei, die ich für eine separate Prune-Phase erstellt hatte und die nie verwendet wurde. Die Begrenzung wird jetzt direkt in 'PipelineController' behandelt.
 
-### The Lesson
+### Die Lektion
 
-This bug existed silently. The immediate function (scanning and hashing) completed successfully. The damage only showed up later, when users expected to reuse their previously computed hashes. "Seems to work" isn't the same as "correctly implemented."
+Dieser Bug existierte still. Die unmittelbare Funktion (Scannen und Hashing) wurde erfolgreich abgeschlossen. Der Schaden trat erst später auf, als Nutzer erwarteten, ihre zuvor berechneten Hashes wiederzuverwenden. "Scheint zu funktionieren" ist nicht dasselbe wie "korrekt umgesetzt".

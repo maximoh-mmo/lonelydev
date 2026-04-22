@@ -5,7 +5,12 @@ export async function translate(text, { to = 'de' } = {}) {
     const result = await googleTranslate(text, { to });
     return Array.isArray(result) ? result[0] : result;
   } catch (err) {
-    if (err.message?.includes('429') || err.message?.includes('rate')) {
+    const isRateLimit = 
+      err.message?.includes('429') || 
+      err.message?.includes('rate') ||
+      err.message?.includes('Too many requests') ||
+      err.message?.includes('high load');
+    if (isRateLimit) {
       const error = new Error('Rate limited');
       error.isRateLimited = true;
       throw error;

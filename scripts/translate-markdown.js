@@ -4,6 +4,12 @@ import path from 'path';
 import matter from 'gray-matter';
 import { translate } from './translation-providers/index.js';
 
+const BLOCK_TRANSLATION_DELAY_MS = 3000;
+const BLOCK_MAX_RETRIES = 3;
+const BLOCK_RETRY_DELAY_MS = 8000;
+
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
 function normalizeYamlFormat(content) {
   const lines = content.split('\n');
   const result = [];
@@ -271,19 +277,45 @@ const protectedData = JSON.parse(frontmatterText);
   // --- 3. Translate Body Block-by-Block ---
   console.log('Translating body content block-by-block...');
   const blocks = bodyWithPlaceholders.split('\n\n');
+  const failedBlocks = [];
+  
   const translatedBlocks = await Promise.all(
-    blocks.map(async (block) => {
+    blocks.map(async (block, index) => {
       if (!block.trim()) return block;
       if (block.includes('__ICON_') || block.includes('__CODE_BLOCK_')) return block;
-      try {
-        const result = await translate(block, { to: lang });
-        return result;
-      } catch {
-        console.warn('Block translation failed, keeping original:', block.substring(0, 30));
-        return block;
+      
+      for (let attempt = 1; attempt <= BLOCK_MAX_RETRIES + 1; attempt++) {
+        try {
+          const result = await translate(block, { to: lang });
+          if (attempt > 1) {
+            console.log(`   ✓ Block ${index} succeeded on attempt ${attempt}`);
+          }
+          await delay(BLOCK_TRANSLATION_DELAY_MS);
+          return result;
+        } catch (err) {
+          const isRateLimit = err.isRateLimited || err.message?.includes('429') || err.message?.includes('rate');
+          const errorType = isRateLimit ? 'rate limited' : 'error';
+          
+          if (attempt <= BLOCK_MAX_RETRIES) {
+            const retryDelay = isRateLimit ? BLOCK_RETRY_DELAY_MS * 2 : BLOCK_RETRY_DELAY_MS;
+            console.log(`   ⚠ Block ${index} ${errorType}, retrying in ${retryDelay/1000}s (attempt ${attempt + 1}/${BLOCK_MAX_RETRIES + 1})...`);
+            await delay(retryDelay);
+          } else {
+            const blockPreview = block.substring(0, 50).replace(/\n/g, ' ');
+            console.warn(`   ❌ Block ${index} translation failed after ${BLOCK_MAX_RETRIES + 1} attempts: ${err.message} | Block: "${blockPreview}..."`);
+            failedBlocks.push({ index, preview: blockPreview, error: err.message });
+            return block;
+          }
+        }
       }
     })
   );
+  
+  if (failedBlocks.length > 0) {
+    console.log(`\n   📊 ${failedBlocks.length} block(s) failed to translate (kept original):`);
+    failedBlocks.forEach(fb => console.log(`      - Block ${fb.index}: ${fb.preview.substring(0, 40)}`));
+  }
+  
   let translatedBody = String(translatedBlocks.join('\n\n'));
 
   // --- 4. Re-inject Protected Content ---
@@ -328,7 +360,7 @@ const protectedData = JSON.parse(frontmatterText);
   fs.writeFileSync(outputFilePath, fixedContent);
   
   console.log(`Success! Translated post saved to: ${outputFilePath}`);
-  return { success: true, message: outputFilePath };
+  return { success: true, message: outputFilePath, failedBlocks: failedBlocks };
 }
 
 // CLI handler
