@@ -41,6 +41,19 @@ function normalizeYamlFormat(content) {
     const key = line.slice(0, colonIdx).trim();
     let value = line.slice(colonIdx + 1).trim();
     
+    // Check for block array (multiline with dashes) - must check BEFORE pushing current line
+    if (value === '' && i + 1 < lines.length && lines[i + 1].trim().startsWith('-')) {
+      const arrayItems = [];
+      i++;
+      while (i < lines.length && lines[i].trim().startsWith('-')) {
+        const item = lines[i].trim().slice(2).trim().replace(/^["']|["']$/g, '');
+        arrayItems.push(item);
+        i++;
+      }
+      result.push(`${key}: [${arrayItems.map(item => `"${item}"`).join(', ')}]`);
+      continue;
+    }
+    
     // Check for multiline YAML (>, >-, |+)
     if (value === '>' || value === '>-' || value === '|+') {
       const multilineValues = [];
@@ -59,19 +72,6 @@ function normalizeYamlFormat(content) {
       continue;
     }
     
-    // Check for block array (multiline with dashes)
-    if (value === '' && i + 1 < lines.length && lines[i + 1].trim().startsWith('-')) {
-      const arrayItems = [];
-      i++;
-      while (i < lines.length && lines[i].trim().startsWith('-')) {
-        const item = lines[i].trim().slice(2).trim().replace(/^["']|["']$/g, '');
-        arrayItems.push(item);
-        i++;
-      }
-      result.push(`${key}: [${arrayItems.map(item => `"${item}"`).join(', ')}]`);
-      continue;
-    }
-    
     // Handle inline arrays [item1, item2]
     if (value.startsWith('[') && value.endsWith(']')) {
       const items = value.slice(1, -1).split(',').map(v => {
@@ -83,8 +83,12 @@ function normalizeYamlFormat(content) {
       continue;
     }
     
-    // Regular string value - ensure double quotes
-    if (value.startsWith('"') && value.endsWith('"')) {
+    // Regular string value - ensure double quotes, preserve booleans
+    if (value === 'true') {
+      result.push(`${key}: true`);
+    } else if (value === 'false') {
+      result.push(`${key}: false`);
+    } else if (value.startsWith('"') && value.endsWith('"')) {
       result.push(`${key}: ${value}`);
     } else if (value.startsWith("'") && value.endsWith("'")) {
       result.push(`${key}: "${value.slice(1, -1)}"`);
@@ -97,9 +101,8 @@ function normalizeYamlFormat(content) {
     i++;
   }
   
-  // Append remaining content after frontmatter
-  const remainingLines = lines.slice(result.length + 1); // +1 for closing ---
-  return result.join('\n') + '\n---\n' + remainingLines.join('\n');
+  const remainingLines = lines.slice(i + 1);
+  return result.join('\n') + '\n' + remainingLines.join('\n');
 }
 
 function normalizeYamlFrontmatter(content) {
@@ -206,8 +209,8 @@ export async function translateFile(filePath, options = {}) {
     return placeholder;
   });
   
-  const protectedData = JSON.parse(frontmatterText);
-  
+const protectedData = JSON.parse(frontmatterText);
+   
   if (protectedData.title) {
     const title = await translate(protectedData.title, { to: lang });
     translatedData.title = title;
@@ -219,6 +222,10 @@ export async function translateFile(filePath, options = {}) {
   if (protectedData.seoTitle) {
     const seoTitle = await translate(protectedData.seoTitle, { to: lang });
     translatedData.seoTitle = seoTitle;
+  }
+  if (protectedData.category) {
+    const category = await translate(protectedData.category, { to: lang });
+    translatedData.category = category;
   }
 
   // Restore emojis after translation (handle both literal and Unicode escape forms)
@@ -277,7 +284,7 @@ export async function translateFile(filePath, options = {}) {
       }
     })
   );
-  let translatedBody = translatedBlocks.join('\n\n');
+  let translatedBody = String(translatedBlocks.join('\n\n'));
 
   // --- 4. Re-inject Protected Content ---
   console.log('Restoring protected content...');
@@ -292,7 +299,7 @@ export async function translateFile(filePath, options = {}) {
     const emojiEscape = emoji.replace(/[\u{1F000}-\u{1F9FF}]/gu, (m) => {
       return '\\U' + m.codePointAt(0).toString(16).toUpperCase().padStart(8, '0');
     });
-    translatedBody = translatedBody.split(placeholder).split(emojiEscape).join(emoji).split(placeholder).join(emoji);
+    translatedBody = String(translatedBody).split(placeholder).join(emoji).split(emojiEscape).join(emoji);
   });
 
   // Icons don't need restoration - the shortcode stays as-is for MarkdownRenderer to handle
