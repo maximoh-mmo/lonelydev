@@ -10,7 +10,6 @@ tags: ["Unity", "C#", "Animation", "Coroutines"]
 status: "published"
 isAutoTranslated: true
 ---
----
 
 Letztes Mal haben wir die Grundlagen für unsere digitale Version von *The Crazy Labyrinth* gelegt – wir haben das Konzept eines Rasters, von Spielfeldern und eines zusätzlichen Spielfelds entwickelt, das in das Labyrinth geschoben werden kann, um dessen Anordnung zu verändern.
 

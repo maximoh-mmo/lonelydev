@@ -10,7 +10,6 @@ tags: ["C++", "Multithreading", "Hashing", "Cryptography"]
 status: "published"
 isAutoTranslated: true
 ---
----
 
 Wenn man einem Programmierer von „Dateivergleich“ erzählt, denkt er instinktiv an MD5 oder SHA-256. Das ist ein Reflex.
 

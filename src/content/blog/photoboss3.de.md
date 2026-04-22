@@ -10,7 +10,6 @@ tags: ["C++", "Qt", "Concurrency", "Signals & Slots"]
 status: "published"
 isAutoTranslated: true
 ---
----
 
 Ich habe mich bei diesem Projekt für Qt entschieden, weil ich es gründlich lernen wollte. Ich habe mich zwar schon früher damit beschäftigt, aber „sich mit Qt beschäftigen“ bedeutet in der Regel, „Code von StackOverflow zu kopieren und einzufügen, bis das Fenster erscheint“.
 

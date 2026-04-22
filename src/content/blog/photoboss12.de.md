@@ -10,7 +10,6 @@ tags: ["UI Implementation", "File Management", "Safety Features", "Duplicate Det
 status: "draft"
 isAutoTranslated: true
 ---
----
 
 ## Das Problem
 

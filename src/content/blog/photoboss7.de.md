@@ -10,7 +10,6 @@ tags: ["C++", "SQLite", "Optimization", "Caching", "Systems Design"]
 status: "published"
 isAutoTranslated: true
 ---
----
 
 In meinem letzten Beitrag habe ich das Schema für meinen Cache entworfen. Nun war es an der Zeit, ihn zu implementieren.
 

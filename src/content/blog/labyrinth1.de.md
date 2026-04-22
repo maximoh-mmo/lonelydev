@@ -10,7 +10,6 @@ tags: ["Unity", "C#", "Procedural Generation", "Game Design"]
 status: "published"
 isAutoTranslated: true
 ---
----
 
 Gestern Abend habe ich mit meiner Tochter *Verrückte Labyrinth* (auch bekannt als *The aMAZEing Labyrinth*) gespielt. Während wir die Spielsteine über das Brett schoben und zusahen, wie neue Wege entstanden, ging mir ein Gedanke nicht aus dem Kopf: Diese Spielmechanik wäre perfekt, um prozedurale Generierung und kachelbasierte Systeme in Unity zu erforschen.
 

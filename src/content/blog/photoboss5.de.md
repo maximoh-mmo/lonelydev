@@ -10,7 +10,6 @@ tags: ["System Analysis", "Performance", "Caching"]
 status: "published"
 isAutoTranslated: true
 ---
----
 
 Meine parallele Pipeline war ein wahres Meisterwerk. Ich konnte einen Ordner mit 10.000 Bildern in das Fenster ziehen und zusehen, wie 32 CPU-Threads ihn verschlangen. Die Lüfter drehten auf, der Fortschrittsbalken flog über den Bildschirm, und 45 Sekunden später hatte ich meine Ergebnisse.
 

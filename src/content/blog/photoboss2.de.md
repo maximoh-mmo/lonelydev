@@ -10,7 +10,6 @@ tags: ["System Architecture", "Pipeline Pattern", "Scalability"]
 status: "published"
 isAutoTranslated: true
 ---
----
 
 In meinem Kopf war die Logik ganz einfach. Alle Ordner durchgehen, jedes Bild laden, einen Hashwert berechnen und auf Duplikate prüfen. Ganz einfach, oder?
 

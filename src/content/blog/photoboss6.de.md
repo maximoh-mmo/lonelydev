@@ -10,7 +10,6 @@ tags: ["C++", "SQLite", "Database Design", "Schema Versioning"]
 status: "published"
 isAutoTranslated: true
 ---
----
 
 Der Rechner wurde zwar immer schneller, hatte aber immer noch das Gedächtnis eines Goldfisches. Jedes Mal, wenn ich die App neu startete, musste sie alles über meine Fotobibliothek neu lernen. Es war an der Zeit, PhotoBoss ein dauerhaftes Gedächtnis zu verschaffen.
 

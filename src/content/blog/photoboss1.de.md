@@ -10,7 +10,6 @@ tags: ["Problem Solving", "Requirements Analysis"]
 status: "published"
 isAutoTranslated: true
 ---
----
 
 Es fing ganz harmlos an. Ein paar Ordner mit Fotos von einer Kompaktkamera aus dem Jahr 2010, die auf einen Laptop gezogen wurden. Dann kamen die Smartphones. Dann die Backups der Smartphones. Dann die Backups der Laptops, auf denen die Backups der Smartphones gespeichert waren.
 

@@ -10,7 +10,6 @@ tags: ["Unity", "C#", "Procedural Generation", "Data Structures"]
 status: "published"
 isAutoTranslated: true
 ---
----
 
 Im letzten Beitrag habe ich die Idee vorgestellt, *Verrückte Labyrinth* in Unity nachzubilden – ein lebendiges, sich ständig veränderndes Labyrinth, mit dem wir die prozedurale Generierung erkunden können.
 
