@@ -4,6 +4,74 @@ import path from 'path';
 import matter from 'gray-matter';
 import { translate } from './translation-providers/index.js';
 
+function normalizeYamlFrontmatter(content) {
+  const lines = content.split('\n');
+  let inFrontmatter = false;
+  let frontmatterLines = [];
+  let bodyLines = [];
+  let inMultiline = false;
+  let multilineKey = null;
+  let multilineValues = [];
+  let firstDashDone = false;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    
+    if (line === '---') {
+      if (!firstDashDone) {
+        firstDashDone = true;
+        inFrontmatter = true;
+        frontmatterLines.push(line);
+        continue;
+      } else {
+        if (inMultiline) {
+          frontmatterLines.push(multilineKey + ': "' + multilineValues.join(' ') + '"');
+          inMultiline = false;
+        }
+        frontmatterLines.push(line);
+        bodyLines = lines.slice(i + 1);
+        break;
+      }
+    }
+
+    if (!inFrontmatter) continue;
+
+    if (inMultiline) {
+      if (line.match(/^  /) || line.match(/^\t/)) {
+        multilineValues.push(line.trim());
+        continue;
+      } else {
+        frontmatterLines.push(multilineKey + ': "' + multilineValues.join(' ') + '"');
+        inMultiline = false;
+      }
+    }
+
+    const colonIdx = line.indexOf(':');
+    if (colonIdx === -1) {
+      frontmatterLines.push(line);
+      continue;
+    }
+
+    const key = line.slice(0, colonIdx).trim();
+    let value = line.slice(colonIdx + 1).trim();
+
+    if (value === '>-' || value === '>' || value === '|+') {
+      inMultiline = true;
+      multilineKey = key;
+      multilineValues = [];
+      continue;
+    }
+
+    if (value.startsWith("'") && value.endsWith("'")) {
+      value = '"' + value.slice(1, -1) + '"';
+    }
+
+    frontmatterLines.push(`${key}: ${value}`);
+  }
+
+  return frontmatterLines.join('\n') + '\n---\n' + bodyLines.join('\n');
+}
+
 /**
  * Translate a markdown file from one language to another
  * @param {string} filePath - Path to the source .en.md file

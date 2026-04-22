@@ -20,18 +20,25 @@ function parseMarkdown(content) {
   let currentArray = null;
   let multilineMode = null;
   let multilineValue = [];
+  let previousKey = null;
 
   dataLines.forEach(line => {
     const trimmed = line;
 
-    // Handle YAML multiline continuation
+    // Skip empty lines that are just part of multiline
+    if (multilineMode && trimmed === '') {
+      multilineValue.push(' ');
+      return;
+    }
+
+    // Handle YAML multiline continuation (>-, |+, etc)
     if (multilineMode) {
-      if (trimmed === '' || trimmed.startsWith(' ') || trimmed.startsWith('\t')) {
+      if (trimmed.startsWith(' ') || trimmed.startsWith('\t')) {
         multilineValue.push(trimmed);
         return;
       } else {
         if (currentKey) {
-          frontmatter[currentKey] = multilineValue.join(' ').trim();
+          frontmatter[currentKey] = multilineValue.join(' ').trim().replace(/^["']|["']$/g, '');
         }
         currentKey = null;
         multilineMode = null;
@@ -39,15 +46,22 @@ function parseMarkdown(content) {
       }
     }
 
-    // Handle array items
+    // Handle array items (multiline YAML arrays like: tags: - item1 - item2)
     if (trimmed.startsWith('- ')) {
+      if (!currentArray && previousKey) {
+        currentArray = [];
+        frontmatter[previousKey] = currentArray;
+      }
       if (currentArray) {
         currentArray.push(trimmed.slice(2).trim().replace(/^"|"$/g, ''));
       }
       return;
     }
 
-    // Close array
+    // Track previous key for array detection
+    previousKey = currentKey;
+
+    // Close array if we have one and hit a non-indented line
     if (currentArray && currentKey) {
       frontmatter[currentKey] = currentArray;
       currentArray = null;
@@ -58,6 +72,13 @@ function parseMarkdown(content) {
 
     let key = trimmed.slice(0, colonIndex).trim();
     let value = trimmed.slice(colonIndex + 1).trim();
+
+    // Skip empty values
+    if (!value) {
+      currentKey = key;
+      currentArray = null;
+      return;
+    }
 
     // Handle multiline YAML (>, >-, |+)
     if (value === '>' || value === '>-' || value === '|+') {
@@ -76,8 +97,18 @@ function parseMarkdown(content) {
     } else if (value.startsWith('"') && value.endsWith('"')) {
       frontmatter[key] = value.slice(1, -1);
       currentKey = null;
+    } else if (value.startsWith("'") && value.endsWith("'")) {
+      frontmatter[key] = value.slice(1, -1);
+      currentKey = null;
     } else {
-      frontmatter[key] = value;
+      // Treat bare values starting with - as array markers
+      if (value.startsWith('-')) {
+        currentArray = value.slice(1).split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+        frontmatter[key] = currentArray;
+        currentArray = null;
+      } else {
+        frontmatter[key] = value.replace(/^["']|["']$/g, '');
+      }
       currentKey = null;
     }
   });
