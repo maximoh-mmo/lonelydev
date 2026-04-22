@@ -1,6 +1,6 @@
 ---
 id: photoboss10
-title: "\U0001F4F8 Entwickler-Tagebuch: Den „Shutdown-Geist“ besiegen & Race Conditions"
+title: "📸 Entwickler-Tagebuch: Den „Shutdown-Geist“ besiegen & Race Conditions"
 seoTitle: "Sicherung der PhotoBoss-Pipeline: Race-Conditions und Produzentenregistrierung"
 date: '2026-04-22'
 category: Software Engineering
@@ -16,7 +16,7 @@ tags:
   - Concurrency
   - Pipeline
 status: published
-isAutoTranslated: true
+isAutoTranslated: false
 ---
 
 In meinem letzten Beitrag habe ich beschrieben, wie ich in PhotoBoss eine leistungsstarke Bild-Pipeline aufgebaut habe. Sie war schneller, flüssiger und speicherfreundlicher. Doch selbst wenn ein System stabil erscheint, besteht immer die Gefahr, dass die hohe Geschwindigkeit subtile Synchronisationslücken überdeckt – jene Art von „Geistern“, die einem erst dann zu schaffen machen, wenn die richtigen Hardware- oder Auslastungsbedingungen zusammenkommen.
