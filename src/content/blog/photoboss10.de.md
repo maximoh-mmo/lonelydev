@@ -1,7 +1,7 @@
 ---
 id: photoboss10
 title: "\U0001F4F8 Entwickler-Tagebuch: Den „Shutdown-Geist“ besiegen & Race Conditions"
-seoTitle: 'Sicherung der PhotoBoss-Pipeline: Race-Conditions und Produzentenregistrierung'
+seoTitle: "Sicherung der PhotoBoss-Pipeline: Race-Conditions und Produzentenregistrierung"
 date: '2026-04-22'
 category: Software Engineering
 summary: >-
