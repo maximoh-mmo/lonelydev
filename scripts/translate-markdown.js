@@ -29,7 +29,8 @@ export async function translateFile(filePath, options = {}) {
   console.log('Translating frontmatter...');
 
   // Protect emojis before translation (they should not be translated)
-  const emojiPattern = /[\u{1F300}-\u{1F9FF}]|[\u{1F600}-\u{1F64F}]|[\u{1F680}-\u{1F6FF}]|[\u{1F700}-\u{1F77F}]|[\u{1F780}-\u{1F7FF}]|[\u{1F800}-\u{1F8FF}]|[\u{1F900}-\u{1F9FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]/gu;
+  // Includes variation selectors (U+FE0E, U+FE0F) and keycap digit (U+20E3)
+  const emojiPattern = /[\u{1F300}-\u{1F9FF}\u{FE0E}\u{FE0F}\u{20E3}]|[\u{1F600}-\u{1F64F}]|[\u{1F680}-\u{1F6FF}]|[\u{1F700}-\u{1F77F}]|[\u{1F780}-\u{1F7FF}]|[\u{1F800}-\u{1F8FF}]|[\u{1F900}-\u{1F9FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]/gu;
   const emojiPlaceholders = [];
   let frontmatterText = JSON.stringify(data);
   
@@ -54,12 +55,15 @@ export async function translateFile(filePath, options = {}) {
     translatedData.seoTitle = seoTitle;
   }
 
-  // Restore emojis after translation
+  // Restore emojis after translation (handle both literal and Unicode escape forms)
   emojiPlaceholders.forEach((emoji, index) => {
     const placeholder = `__EMOJI_${index}__`;
-    translatedData.title = translatedData.title?.replace(placeholder, emoji);
-    translatedData.summary = translatedData.summary?.replace(placeholder, emoji);
-    translatedData.seoTitle = translatedData.seoTitle?.replace(placeholder, emoji);
+    const emojiEscape = emoji.replace(/[\u{1F000}-\u{1F9FF}]/gu, (m) => {
+      return '\\U' + m.codePointAt(0).toString(16).toUpperCase().padStart(8, '0');
+    });
+    translatedData.title = translatedData.title?.replace(new RegExp(emojiEscape, 'g'), emoji).replace(placeholder, emoji);
+    translatedData.summary = translatedData.summary?.replace(new RegExp(emojiEscape, 'g'), emoji).replace(placeholder, emoji);
+    translatedData.seoTitle = translatedData.seoTitle?.replace(new RegExp(emojiEscape, 'g'), emoji).replace(placeholder, emoji);
   });
   
   translatedData.isAutoTranslated = true;
@@ -116,10 +120,13 @@ export async function translateFile(filePath, options = {}) {
     translatedBody = translatedBody.split(placeholder).join(block);
   });
 
-  // Restore emojis in body
+  // Restore emojis in body (handle both literal and Unicode escape forms)
   bodyEmojiPlaceholders.forEach((emoji, index) => {
     const placeholder = `__BODY_EMOJI_${index}__`;
-    translatedBody = translatedBody.split(placeholder).join(emoji);
+    const emojiEscape = emoji.replace(/[\u{1F000}-\u{1F9FF}]/gu, (m) => {
+      return '\\U' + m.codePointAt(0).toString(16).toUpperCase().padStart(8, '0');
+    });
+    translatedBody = translatedBody.split(placeholder).split(emojiEscape).join(emoji).split(placeholder).join(emoji);
   });
 
   // Icons don't need restoration - the shortcode stays as-is for MarkdownRenderer to handle
@@ -132,7 +139,17 @@ export async function translateFile(filePath, options = {}) {
   }
 
   const outputContent = matter.stringify(translatedBody, translatedData);
-  fs.writeFileSync(outputFilePath, outputContent);
+  
+  // Convert Unicode escapes back to actual emojis (gray-matter converts them to escapes)
+  // Only apply fix if there are Unicode escapes to avoid reformatting YAML unnecessarily
+  let fixedContent = outputContent;
+  if (/\\U[0-9A-Fa-f]{8}/.test(outputContent)) {
+    fixedContent = outputContent.replace(/\\U([0-9A-Fa-f]{8})/g, (match, hex) => {
+      return String.fromCodePoint(parseInt(hex, 16));
+    });
+  }
+  
+  fs.writeFileSync(outputFilePath, fixedContent);
   
   console.log(`Success! Translated post saved to: ${outputFilePath}`);
   return { success: true, message: outputFilePath };

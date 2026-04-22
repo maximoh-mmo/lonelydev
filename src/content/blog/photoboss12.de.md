@@ -1,6 +1,6 @@
 ---
 id: photoboss12
-title: "\U0001F5D1️ Entwickler-Tagebuch: Entwicklung einer Benutzeroberfläche zum sicheren Löschen doppelter Fotos"
+title: "🗑️ Entwickler-Tagebuch: Entwicklung einer benutzerfreundlichen Löschfunktion für doppelte Fotos"
 seoTitle: >-
   Entwicklertagebuch: Entwicklung einer Benutzeroberfläche zum sicheren Löschen
   doppelter Fotos
@@ -22,10 +22,6 @@ tags:
 status: draft
 isAutoTranslated: true
 ---
-
-# Entwickler-Tagebuch: Hinzufügen der Löschfunktion zur Benutzeroberfläche – Implementierung abgeschlossen
-
-**Veröffentlicht am 19.04.2026**
 
 ## Das Problem
 
