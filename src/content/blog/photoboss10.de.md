@@ -3,19 +3,14 @@ id: photoboss10
 title: "📸 Entwickler-Tagebuch: Den „Shutdown-Geist“ besiegen & Race Conditions"
 seoTitle: 'Sicherung der PhotoBoss-Pipeline: Race-Conditions und Produzentenregistrierung'
 date: '2026-04-22'
-category: Software Engineering
-summary: >-
-  Proaktive Erkennung und Behebung von Race-Conditions in der PhotoBoss-Pipeline
+category: "Software Engineering"
+summary: "Proaktive Erkennung und Behebung von Race-Conditions in der PhotoBoss-Pipeline
   durch die Verlagerung der Produzentenregistrierung von `onStart` in die
   Konstruktoren, wodurch eine robuste Synchronisation für die Bildverarbeitung
-  bei hoher Parallelität gewährleistet wird.
+  bei hoher Parallelität gewährleistet wird."
 project: PhotoBoss
-tags:
-  - C++
-  - Qt
-  - Concurrency
-  - Pipeline
-status: published
+tags: ["C++", "Qt", "Concurrency", "Pipeline"]
+status: "published"
 isAutoTranslated: true
 ---
 
