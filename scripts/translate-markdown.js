@@ -4,6 +4,104 @@ import path from 'path';
 import matter from 'gray-matter';
 import { translate } from './translation-providers/index.js';
 
+function normalizeYamlFormat(content) {
+  const lines = content.split('\n');
+  const result = [];
+  let inFrontmatter = false;
+  let i = 0;
+  
+  while (i < lines.length) {
+    const line = lines[i];
+    
+    if (line === '---') {
+      if (!inFrontmatter) {
+        inFrontmatter = true;
+        result.push(line);
+        i++;
+        continue;
+      } else {
+        result.push(line);
+        break;
+      }
+    }
+    
+    if (!inFrontmatter) {
+      result.push(line);
+      i++;
+      continue;
+    }
+    
+    const colonIdx = line.indexOf(':');
+    if (colonIdx === -1) {
+      result.push(line);
+      i++;
+      continue;
+    }
+    
+    const key = line.slice(0, colonIdx).trim();
+    let value = line.slice(colonIdx + 1).trim();
+    
+    // Check for multiline YAML (>, >-, |+)
+    if (value === '>' || value === '>-' || value === '|+') {
+      const multilineValues = [];
+      i++;
+      while (i < lines.length) {
+        const nextLine = lines[i];
+        if (nextLine.startsWith('  ') || nextLine.startsWith('\t') || nextLine === '') {
+          multilineValues.push(nextLine.trim());
+          i++;
+        } else {
+          break;
+        }
+      }
+      const combinedValue = multilineValues.join(' ').replace(/^["']|["']$/g, '');
+      result.push(`${key}: "${combinedValue}"`);
+      continue;
+    }
+    
+    // Check for block array (multiline with dashes)
+    if (value === '' && i + 1 < lines.length && lines[i + 1].trim().startsWith('-')) {
+      const arrayItems = [];
+      i++;
+      while (i < lines.length && lines[i].trim().startsWith('-')) {
+        const item = lines[i].trim().slice(2).trim().replace(/^["']|["']$/g, '');
+        arrayItems.push(item);
+        i++;
+      }
+      result.push(`${key}: [${arrayItems.map(item => `"${item}"`).join(', ')}]`);
+      continue;
+    }
+    
+    // Handle inline arrays [item1, item2]
+    if (value.startsWith('[') && value.endsWith(']')) {
+      const items = value.slice(1, -1).split(',').map(v => {
+        const trimmed = v.trim().replace(/^["']|["']$/g, '');
+        return `"${trimmed}"`;
+      });
+      result.push(`${key}: [${items.join(', ')}]`);
+      i++;
+      continue;
+    }
+    
+    // Regular string value - ensure double quotes
+    if (value.startsWith('"') && value.endsWith('"')) {
+      result.push(`${key}: ${value}`);
+    } else if (value.startsWith("'") && value.endsWith("'")) {
+      result.push(`${key}: "${value.slice(1, -1)}"`);
+    } else if (value === '') {
+      result.push(`${key}: ""`);
+    } else {
+      result.push(`${key}: "${value}"`);
+    }
+    
+    i++;
+  }
+  
+  // Append remaining content after frontmatter
+  const remainingLines = lines.slice(result.length + 1); // +1 for closing ---
+  return result.join('\n') + '\n---\n' + remainingLines.join('\n');
+}
+
 function normalizeYamlFrontmatter(content) {
   const lines = content.split('\n');
   let inFrontmatter = false;
@@ -212,10 +310,13 @@ export async function translateFile(filePath, options = {}) {
   // Only apply fix if there are Unicode escapes to avoid reformatting YAML unnecessarily
   let fixedContent = outputContent;
   if (/\\U[0-9A-Fa-f]{8}/.test(outputContent)) {
-    fixedContent = outputContent.replace(/\\U([0-9A-Fa-f]{8})/g, (match, hex) => {
+    fixedContent = fixedContent.replace(/\\U([0-9A-Fa-f]{8})/g, (match, hex) => {
       return String.fromCodePoint(parseInt(hex, 16));
     });
   }
+  
+  // Normalize YAML to consistent format: double-quoted strings and inline arrays
+  fixedContent = normalizeYamlFormat(fixedContent);
   
   fs.writeFileSync(outputFilePath, fixedContent);
   
