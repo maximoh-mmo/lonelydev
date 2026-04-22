@@ -5,9 +5,12 @@ import SEO from '../../components/SEO';
 
 const markdownModules = import.meta.glob('../../content/blog/*.md', { query: '?raw' });
 
-function parseFrontmatter(content) {
-  const match = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
-  if (!match) return { data: {}, content: '' };
+function parseFrontmatter(content, id = '') {
+  const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
+  if (!match) {
+    console.debug('[parseFrontmatter] No frontmatter match for', id, 'content:', content.slice(0, 100));
+    return { data: {}, content: '' };
+  }
 
   const frontmatter = {};
   const dataLines = match[1].split('\n');
@@ -93,6 +96,7 @@ function parseFrontmatter(content) {
     frontmatter[currentKey] = multilineValue.join(' ').trim();
   }
 
+  console.debug('[parseFrontmatter] Parsed for', id, ':', frontmatter);
   return { data: frontmatter, content: match[2] };
 }
 
@@ -117,7 +121,7 @@ export default function DevBlogIndex({ posts }) {
           try {
             const rawContent = await markdownModules[fileKey]();
             const contentStr = rawContent.default || rawContent;
-            const { data } = parseFrontmatter(contentStr);
+            const { data } = parseFrontmatter(contentStr, post.id);
             loaded[post.id] = data;
           } catch (err) {
             console.error('Error loading translation for', post.id, err);

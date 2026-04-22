@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve, dirname } from 'path';
 import fs from 'fs';
-import { fileURLToPath } from 'url';
+import { fileURLToPath, pathToFileURL } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -32,14 +32,14 @@ function copyCloudflareFiles() {
   };
 }
 
-function getPlugins() {
+async function getPlugins() {
   const plugins = [react(), copyCloudflareFiles()];
   
-  // Only add admin API plugin in development mode
   if (process.env.NODE_ENV === 'development') {
     const adminPluginPath = resolve(__dirname, 'admin/vite-plugin-admin-api.js');
     if (fs.existsSync(adminPluginPath)) {
-      const adminApiPlugin = require(adminPluginPath).default;
+      const adminApiModule = await import(pathToFileURL(adminPluginPath));
+      const adminApiPlugin = adminApiModule.default;
       plugins.push(adminApiPlugin());
     }
   }
@@ -47,9 +47,9 @@ function getPlugins() {
   return plugins;
 }
 
-export default defineConfig({
+export default async () => defineConfig({
   base: '/',
-  plugins: getPlugins(),
+  plugins: await getPlugins(),
   define: {
     __BUILD_DATE__: JSON.stringify(new Date().toISOString().split('T')[0]),
   },

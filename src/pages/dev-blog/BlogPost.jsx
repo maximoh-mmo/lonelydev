@@ -10,9 +10,12 @@ import { ChevronLeft, Calendar, Tag, Folder } from 'lucide-react';
 const markdownModules = import.meta.glob('../../content/blog/*.md', { query: '?raw' });
 
 // Simple frontmatter parser (avoids gray-matter Buffer issue in browser)
-function parseMarkdown(content) {
-  const match = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
-  if (!match) return { data: {}, content };
+function parseMarkdown(content, id = '') {
+  const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
+  if (!match) {
+    console.debug('[parseMarkdown] No match for', id, 'content slice:', content.slice(0, 80));
+    return { data: {}, content };
+  }
 
   const frontmatter = {};
   const dataLines = match[1].split('\n');
@@ -113,6 +116,7 @@ function parseMarkdown(content) {
     }
   });
 
+  console.debug('[parseMarkdown] Parsed', id, ':', frontmatter);
   return { data: frontmatter, content: match[2] };
 }
 
@@ -153,7 +157,7 @@ export default function BlogPost() {
         if (cancelled) return;
         
         const contentStr = rawContent.default || rawContent;
-        const { data, content } = parseMarkdown(contentStr);
+        const { data, content } = parseMarkdown(contentStr, id);
         
         if (!cancelled) {
           setPost({ ...data, content, id });
