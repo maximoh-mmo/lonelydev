@@ -11,7 +11,6 @@ status: "scheduled"
 isAutoTranslated: false
 ---
 
-# Pipeline Refactor and Parallel‑Performance Foundations
 
 *“Three days, a few thousand lines of code, and a UI that finally feels responsive—that’s the story of PhotoBoss’s latest sprint.”*
 

@@ -11,8 +11,6 @@ status: "scheduled"
 isAutoTranslated: false
 ---
 
-# Improving the Delete Confirmation Dialog in Photoboss
-
 ## Introduction
 
 When developing applications that perform potentially destructive operations like file deletion, the confirmation dialog is a critical user experience touchpoint. In Photoboss, our duplicate image finder, the DeleteConfirmDialog was functional but had several areas for improvement: hardcoded values scattered throughout the code, lack of image caching causing reloads, and inconsistent styling. This post documents how I enhanced this dialog to be more maintainable, performant, and polished.

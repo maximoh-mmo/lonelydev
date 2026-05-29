@@ -11,8 +11,6 @@ status: "scheduled"
 isAutoTranslated: false
 ---
 
-# Improving User Experience: Status Updates and Progress Indicators in Photoboss
-
 ## Introduction
 
 When building applications that perform long-running background operations, users need clear, actionable feedback on what's happening. In Photoboss - our duplicate image finder - the UX had several issues: status messages were unclear, there was no multi-stage progress visibility, and critically, the Delete button enabled prematurely before all groups were displayed in the preview pane.

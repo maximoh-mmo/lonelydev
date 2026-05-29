@@ -11,8 +11,6 @@ status: "scheduled"
 isAutoTranslated: false
 ---
 
-# Pipeline Crisis Resolution: From Infinite Loops to Structured Delta Updates
-
 *Four critical bugs in three days—each one teaching me something fundamental about concurrency, state management, and the importance of clean boundaries between pipeline stages.*
 
 ---

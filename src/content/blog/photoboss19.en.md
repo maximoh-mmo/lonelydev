@@ -11,7 +11,6 @@ status: "scheduled"
 isAutoTranslated: false
 ---
 
-# Refactoring Progress Indicators: From Multiple Signals to a Unified Phase System
 
 ## Introduction
 

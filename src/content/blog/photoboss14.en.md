@@ -11,8 +11,6 @@ status: "scheduled"
 isAutoTranslated: false
 ---
 
-# Storage-Aware File Scanning with Improved Progress Tracking
-
 ## Introduction
 
 When scanning directories containing thousands of photos in Photoboss, users faced two frustrating issues: the progress bar was useless because the total file count was unknown until scanning completed, and the scanner treated SSD and HDD storage identically—ignoring fundamental I/O performance differences that directly impacted scan speed.

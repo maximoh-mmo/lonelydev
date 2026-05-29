@@ -11,8 +11,6 @@ status: "scheduled"
 isAutoTranslated: false
 ---
 
-# The Great Cleanup: A Four-Phase Journey to Cleaner Code
-
 I've been in this codebase almost every day for months. I know it pretty well - can navigate straight to the relevant file when debugging, remember where I left off on half-finished features, that kind of thing. So when it came time to start preparing Photoboss for public release, I wasn't coming in completely blind. I knew pretty much exactly what was there.
 
 That said, even familiar code accumulates gunk when you've been heads-down shipping features. Little experiments that didn't pan out, TODO comments from early implementation, constants that got copied inline rather than centralized, naming that drifted as my style evolved. Nothing terrible - not security issues or algorithmic mess - just the normal accumulation of a project that's been actively developed. I figured while I was doing the polish anyway, I might as well clean up some of the loose ends.
