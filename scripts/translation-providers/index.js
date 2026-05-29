@@ -19,11 +19,8 @@ export async function translate(text, options = {}) {
     } catch (err) {
       const isRetryable = err.isRateLimited || err.message?.includes('429') || err.message?.includes('rate');
       errors.push({ provider: provider.providerName, error: err.message, retryable: isRetryable });
-
-      if (isRetryable) {
-        continue;
-      }
-      throw err;
+      console.warn(`   ⚠️ Provider "${provider.providerName}" failed: ${err.message}. Trying next provider...`);
+      continue;
     }
   }
 
