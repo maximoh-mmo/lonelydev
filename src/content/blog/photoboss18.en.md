@@ -13,9 +13,9 @@ isAutoTranslated: false
 
 ## Introduction
 
-When building applications that perform long-running background operations, users need clear, actionable feedback on what's happening. In Photoboss - our duplicate image finder - the UX had several issues: status messages were unclear, there was no multi-stage progress visibility, and critically, the Delete button enabled prematurely before all groups were displayed in the preview pane.
+I've been using Photoboss daily while sorting through my own photo archives, and one thing kept nagging at me: I had no idea what the app was actually doing during a scan. Was it still finding files? Already hashing them? Halfway through grouping? The status bar would say "Scanning... Discovered 1,234 files," which told me a number but not where we were in the pipeline. And worse — the Delete button would light up mid-scan, letting me start deleting before all the duplicate groups had even appeared. That's a recipe for regret.
 
-This post documents the comprehensive UX improvements that address these issues.
+So I sat down to fix the UX properly: better status visibility, clearer pipeline stages, and—most importantly—making sure the Delete button only enables when the scan is truly done.
 
 ## The Problem
 
@@ -41,13 +41,13 @@ I implemented four major improvements:
 
 ### Phase Indicator Strip
 
-Following the user's specification, I created a three-phase indicator system that runs horizontally in the footer area:
+I created a three-phase indicator system that runs horizontally in the footer area:
 
 ```
-┌──────────────────────────────────────────────────────────────────┐
-│ Finding Files   │   Analyzing    │   Grouping          [✓ Done] │
-│  ○  1,234       │   ○  567      │   ○  12                    │
-└──────────────────────────────────────────────────────────────────┘
+┌───────────────────────────────────────────────────────────┐
+│ Finding Files      │   Analyzing        │   Grouping      │
+│  ○  1,234          │   ○  567           │   ○  12         │
+└───────────────────────────────────────────────────────────┘
 ```
 
 Each phase has three states:
@@ -87,13 +87,13 @@ This approach is:
 
 Changed to short messages with counts in the phase strip:
 
-| Phase | Status Message |
-|-------|---------------|
-| Start | "Scan started..." |
-| Finding Complete | "File Discovery Complete. Processing Files..." |
-| Analyzing Complete | "Files Processed. Grouping Duplicates..." |
-| Complete | "n Duplicates found -- Scan Complete" |
-| No duplicates | "No duplicates found -- Scan Complete" |
+| Phase                | Status Message                                  |
+|----------------------|-------------------------------------------------|
+| Start                | "Scan started..."                               |
+| Finding Complete     | "File Discovery Complete. Processing Files..."  |
+| Analyzing Complete   | "Files Processed. Grouping Duplicates..."       |
+| Complete             | "n Duplicates found -- Scan Complete"           |
+| No duplicates        | "No duplicates found -- Scan Complete"          |
 
 ### Progress Bar Fix
 
@@ -148,7 +148,19 @@ Since stages run in parallel, the code tracks each phase independently. The phas
 
 ### Challenge 3: UI Integration
 
-The phase strip needed to fit in the existing footer layout without disrupting the progress bar or buttons. I added it as a new verticallaout item within the existing footer GroupBox.
+The phase strip needed to fit in the existing footer layout without disrupting the progress bar or buttons. I added it as a new vertical layout item within the existing footer GroupBox.
+
+## Reflection and Lessons Learned
+
+This round of improvements reinforced a few principles I keep coming back to:
+
+**Signal design is UI architecture.** Adding three dedicated phase signals instead of parsing status strings wasn't just cleaner — it fundamentally changed what the UI could display. The lesson is that the pipeline's output interface (its signals) should be designed for the UI's needs, not retrofitted from internal log messages.
+
+**The Delete button is a safety-critical control.** The original code enabled it eagerly because "groups exist = ready to delete." But that ignored the user's mental model: they need to see all the options before making a choice. This is a case where correctness (wait until everything is displayed) beats responsiveness (enable as soon as possible).
+
+**Progress visibility is a UX force multiplier.** The phase strip cost relatively little code to implement, but it dramatically changes how the app feels during a long scan. A few indicators and color states turned a black-box operation into something the user can follow and trust.
+
+If I were doing this again, I'd start with the signal design rather than retrofitting it. The phase-specific signals should have been part of PipelineController from day one — it would have saved me the regex-parsing detour entirely.
 
 ## Results
 
@@ -163,13 +175,11 @@ Users now see:
 
 ## Looking Forward
 
-Possible future improvements:
+The phase indicator system works well, but there's room to take it further:
 
-- Estimated time remaining per phase
-- Per-phase progress bars (not just counts)
-- Ability to pause/resume scans
-- Progress percentage for the grouping phase
+- **Estimated time remaining per phase** — using rolling throughput averages to give the user a sense of how much longer each stage will take
+- **Per-phase progress bars** — right now we show counts, but a visual fill bar would be more glanceable
+- **Pause/resume scans** — the infrastructure is nearly there; it just needs a clean UI affordance
+- **Progress percentage for the grouping phase** — the grouping stage is currently opaque; adding a completion ratio would round out the picture
 
-## Conclusion
-
-The improvements balance giving users full visibility into the pipeline while not overwhelming them with technical details. The concurrent nature of the pipeline is now communicated through clear phase indicators, and users can trust that the Delete button only becomes active when scanning is fully complete.
+The next post in this series will tackle consolidating the phase signals: the three separate `phase*Update` signals work, but they'd be cleaner as a single signal with an enum discriminator — reducing boilerplate and making the architecture more maintainable.
