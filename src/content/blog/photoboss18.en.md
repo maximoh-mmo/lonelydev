@@ -2,7 +2,7 @@
 id: photoboss18
 title: "📊 UX Improvements: Status Updates and Progress Indicators in Photoboss"
 seoTitle: "Improving User Experience: Status Updates and Progress Indicators in Photoboss"
-date: "2026-05-22"
+date: "2026-06-12"
 category: "Software Engineering"
 summary: "This post documents comprehensive UX improvements for Photoboss, a duplicate image finder. The author addresses several pain points including vague status messages, missing progress visibility, premature delete button activation, and progress bar issues by implementing a phase indicator strip, phase-specific signals, simplified status messages, and fixing the delete button timing to only enable when scanning fully completes."
 project: "photoboss"
