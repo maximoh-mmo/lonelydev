@@ -7,11 +7,10 @@ category: "Software Engineering"
 summary: "A developer cleaned up technical debt in their C++/Qt photo deduplication app by standardizing naming conventions, fixing Qt includes, and removing dead code. The 8-hour cleanup effort touched 64 files and removed 393 lines of code."
 project: "photoboss"
 tags: ["C++","Qt","Code Refactoring"]
-status: "scheduled"
+uuustatus: "scheduled"
 isAutoTranslated: false
 ---
 
-# 🧹 The Great Cleanup: 64 Files, 393 Deletions, Zero Regrets
 
 ## Introduction
 
