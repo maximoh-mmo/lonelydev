@@ -11,8 +11,6 @@ status: "scheduled"
 isAutoTranslated: false
 ---
 
-# 🖼️ From Double Reads to Zero Reads: Thumbnail Cache, Rotation, and Eliminating an Entire Stage
-
 ## Introduction
 
 In the last post, I brought a 33k-photo scan from >20 minutes and >64 GB OOM down to something reasonable. The bottleneck moved from memory exhaustion to the disk — which is exactly where you want it. The pipeline was balanced, the UI was responsive, and the grouping stage was essentially free.

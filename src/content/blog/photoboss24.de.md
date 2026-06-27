@@ -11,8 +11,6 @@ status: "scheduled"
 isAutoTranslated: true
 ---
 
-# 🎛️ Profile scannen: Den Benutzern die Kontrolle über die Ressourcennutzung in der Pipeline geben
-
 ## Einleitung
 
 In den letzten Beiträgen habe ich die Pipeline von PhotoBoss so lange optimiert, bis der Engpass eindeutig bei der Hardware lag – Festplatten-E/A, CPU-Kerne und Speicherbandbreite. Die Pipeline hat sich automatisch selbst ausbalanciert, und auf meinem Entwicklungsrechner (16 logische Kerne, 32 GB RAM, SSD) flog sie förmlich durch die Scans.

@@ -1,14 +1,14 @@
 ---
-id: photoboss20
-title: "🧹 The Great Cleanup: 64 Files, 393 Deletions, Zero Regrets"
-seoTitle: "The Great Cleanup: 64 Files, 393 Deletions, Zero Regrets"
+id: "photoboss20"
+title: "🧹 Die große Aufräumaktion: 64 Dateien, 393 Löschungen, null Reue"
+seoTitle: "Die große Aufräumaktion: 64 Dateien, 393 Löschungen, null Reue"
 date: "2026-06-26"
-category: "Software Engineering"
-summary: "A developer cleaned up technical debt in their C++/Qt photo deduplication app by standardizing naming conventions, fixing Qt includes, and removing dead code. The 8-hour cleanup effort touched 64 files and removed 393 lines of code."
+category: "Softwareentwicklung"
+summary: "Ein Entwickler hat in seiner C++/Qt-Anwendung zur Duplikatserkennung bei Fotos technische Schulden abgebaut, indem er die Namenskonventionen vereinheitlichte, Qt-Includes korrigierte und nicht mehr benötigten Code entfernte. Die achtstündige Bereinigungsmaßnahme betraf 64 Dateien und führte zur Entfernung von 393 Codezeilen."
 project: "photoboss"
-tags: ["C++","Qt","Code Refactoring"]
+tags: ["C++", "Qt", "Code Refactoring"]
 uuustatus: "scheduled"
-isAutoTranslated: false
+isAutoTranslated: true
 ---
 
 ## Introduction

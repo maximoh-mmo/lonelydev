@@ -11,8 +11,6 @@ status: "scheduled"
 isAutoTranslated: true
 ---
 
-# 🖼️ Von doppelten Lesevorgängen auf null Lesevorgänge: Thumbnail-Cache, Rotation und das Weglassen einer ganzen Stufe
-
 ## Einführung
 
 Im letzten Beitrag habe ich einen Scan mit 33.000 Fotos, der ursprünglich über 20 Minuten dauerte und mehr als 64 GB Speicherplatz beanspruchte, auf ein vernünftiges Maß reduziert. Der Engpass verlagerte sich vom Speicherengpass auf die Festplatte – genau dort, wo man ihn haben will. Die Pipeline lief stabil, die Benutzeroberfläche reagierte zügig, und die Gruppierungsphase verlief praktisch ohne Verzögerungen.

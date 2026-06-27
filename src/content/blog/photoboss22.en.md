@@ -11,8 +11,6 @@ status: "scheduled"
 isAutoTranslated: false
 ---
 
-# ⚡ When a 33k Photo Scan Takes 20 Minutes: A Performance Deep Dive
-
 ## Introduction
 
 In the last post I covered the architecture cleanup — extracting services, adopting a composition root, getting SOLID violations under control. With the structure in good shape, it was time to tackle the biggest open problem: **PhotoBoss was unusably slow on large datasets.**

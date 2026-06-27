@@ -11,8 +11,6 @@ status: "scheduled"
 isAutoTranslated: false
 ---
 
-# 🏗️ From Monolith to Composition Root: SOLID Refactoring in a Qt Desktop App
-
 ## Introduction
 
 I've been building **PhotoBoss**, a C++/Qt desktop application that scans directories for duplicate photos and helps you clean them up. Like many projects that start as a prototype, the code worked — but it wasn't exactly beautiful. Over time, `MainWindow.cpp` had grown into a monolithic ~700-line class that managed the pipeline, owned the entire UI tree, queued thumbnail updates, handled deletion logic, and generally knew way too much about everything.

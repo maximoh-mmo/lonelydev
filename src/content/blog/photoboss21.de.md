@@ -11,8 +11,6 @@ status: "scheduled"
 isAutoTranslated: true
 ---
 
-# 🏗️ Vom Monolithen zum Composition Root: SOLID-Refactoring in einer Qt-Desktop-Anwendung
-
 ## Einleitung
 
 Ich habe **PhotoBoss** entwickelt, eine C++/Qt-Desktop-Anwendung, die Verzeichnisse nach doppelten Fotos durchsucht und dabei hilft, diese zu bereinigen. Wie bei vielen Projekten, die als Prototyp beginnen, funktionierte der Code zwar – aber er war nicht gerade schön. Im Laufe der Zeit war sich `MainWindow.cpp` zu einer monolithischen Klasse mit etwa 700 Zeilen entwickelt, die die Pipeline verwaltete, den gesamten UI-Baum kontrollierte, Aktualisierungen der Miniaturansichten in die Warteschlange stellte, die Löschlogik abwickelte und im Allgemeinen viel zu viel über alles wusste.

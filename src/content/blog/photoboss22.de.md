@@ -11,8 +11,6 @@ status: "scheduled"
 isAutoTranslated: true
 ---
 
-# ⚡ Wenn das Scannen eines 33-kB-Fotos 20 Minuten dauert: Ein detaillierter Einblick in die Leistung
-
 ## Einleitung
 
 Im letzten Beitrag habe ich mich mit der Bereinigung der Architektur befasst – der Ausgliederung von Diensten, der Einführung einer Kompositionswurzel und der Beseitigung von SOLID-Verstößen. Nachdem die Struktur nun in Ordnung war, war es an der Zeit, das größte noch offene Problem anzugehen: **PhotoBoss war bei großen Datensätzen unbrauchbar langsam.**

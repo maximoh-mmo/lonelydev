@@ -11,8 +11,6 @@ status: "scheduled"
 isAutoTranslated: false
 ---
 
-# 🎛️ Scan Profiles: Giving Users Control Over Pipeline Resource Usage
-
 ## Introduction
 
 In the last few posts, I've been optimizing PhotoBoss's pipeline until the bottleneck was squarely on the hardware — disk I/O, CPU cores, and memory bandwidth. The pipeline automatically balanced itself, and on my development machine (16 logical cores, 32 GB RAM, SSD) it flew through scans.
