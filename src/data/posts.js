@@ -1,4 +1,5 @@
 const allPosts = [
+  { id: 'photoboss26', date: '2026-08-07', status: 'scheduled' },
   { id: 'photoboss25', date: '2026-07-31', status: 'scheduled' },
   { id: 'photoboss24', date: '2026-07-24', status: 'scheduled' },
   { id: 'photoboss23', date: '2026-07-17', status: 'scheduled' },
