@@ -30,7 +30,7 @@ This post is the postmortem — the two root causes, the fixes, and a handful of
 
 The pipeline is a chain of stages connected by bounded queues, each on its own thread:
 
-```
+```mermaid
 Enumerate → CacheLookup → DiskReader → HashWorker → CacheStore
                                                      ↓
                                            ResultProcessor (grouping)
