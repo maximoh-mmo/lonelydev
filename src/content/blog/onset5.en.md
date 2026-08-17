@@ -11,12 +11,6 @@ status: "scheduled"
 isAutoTranslated: false
 ---
 
-# 🎬 Post 5 — From Stubs to StateTrees: Onset's NPC Brain and the Pooled AIController Leak
-
-*17 commits · May 30 – Jun 3, 2026 · covering A3.1–A3.3 AI systems and the A4.1 GAS foundation*
-
----
-
 ## Introduction
 
 Post 4 gave the NPCs bodies, spawners, pools, and group identity. What it didn't give them was a brain. An enemy could stand, get hit, and get reused — but it couldn't notice the player, decide to chase, or attack. This arc makes that brain real.

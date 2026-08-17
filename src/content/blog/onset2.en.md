@@ -11,7 +11,7 @@ status: "scheduled"
 isAutoTranslated: false
 ---
 
-# 🎬 Post 2 — Blank Slate to Input-Agnostic Player Core: Stripping the Template and Building Onset's Movement
+
 
 *6 commits · May 24–27, 2026 · covering project re-init, Enhanced Input, and the A1.1–A1.4 player systems*
 

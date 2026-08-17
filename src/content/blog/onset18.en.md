@@ -11,12 +11,6 @@ status: "scheduled"
 isAutoTranslated: false
 ---
 
-# 🎬 Post 18 — HUD v2: Ground Reticles, Target Skins, and the Content Pipeline
-
-*2 commits · Aug 7–8, 2026 · covering HUD v2: Targeting, Damage Numbers, Cooldowns, Ground Reticle Decal, Content Pipeline*
-
----
-
 ## Introduction
 
 Post 17 built a HUD and called it a foundation. It was — but foundations are for building on, and the v2 commit (plus a polish pass the next day) tore up some of the v1 assumptions. The screen-space reticle I'd sketched for the target frame? Gone, replaced by a ground decal that actually sits under the target's feet. The target lifebar that was supposed to float over the world? Anchored static in the HUD instead, with skins for Normal/Elite/Boss targets. The ability slots got real icons driven by the ability Blueprints, and the whole content tree got reorganized out of a flat `Content/` root into `Content/Maps` and `Content/Game/Combat`.

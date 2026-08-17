@@ -11,12 +11,6 @@ status: "scheduled"
 isAutoTranslated: false
 ---
 
-# 🎬 Post 16 — The Abilities Arrive: AoE, Cone, Shadowstep, and the Montage Attack
-
-*2 commits · Aug 5, 2026 · covering Phase 1 Combat Abilities, Stagger Execution, Class Row Name Fix*
-
----
-
 ## Introduction
 
 Post 15 called the series "complete." I knew better. The deferred work from A4.6 — the abilities I'd put off while the full combat design was still forming — was sitting in the planning docs with a giant ⏳ next to it. AoE. Cone. Shadowstep. A montage-driven basic attack. These aren't polish items; they're the difference between "you can swing a sword" and "you have a kit."

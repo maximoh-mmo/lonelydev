@@ -11,12 +11,6 @@ status: "scheduled"
 isAutoTranslated: false
 ---
 
-# 🎬 Post 14 — The Cloud Spine: Auth Extraction, Lambda Accounts, and the Two-Server Token Flow
-
-*14 commits · Jul 27–28, 2026 · covering Sprint A5c Auth Extraction & Login Server*
-
----
-
 ## Introduction
 
 Post 11 proved the game can run multiplayer with Steam tickets. Post 12 proved it can persist accounts. Post 13 proved it can render menus in packaged builds. But there's a gap: the auth logic is still baked into the game server, and the game server is still the only server. What if we separate auth from gameplay entirely?

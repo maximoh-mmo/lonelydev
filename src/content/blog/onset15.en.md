@@ -11,12 +11,6 @@ status: "scheduled"
 isAutoTranslated: false
 ---
 
-# 🎬 Post 15 — The Final Form: Character Classes, Loading Screens, and the Polish That Turns a Demo into a Game
-
-*9 commits · Aug 2–4, 2026 · covering Character Classes, Loading Screens, API Access Control Hardening*
-
----
-
 ## Introduction
 
 The game has a working multiplayer loop, persistent accounts, cloud auth, a CommonUI screen stack, and a PostgreSQL-backed account API. But it still has one character — the default Hero — and no loading screen. A game without character variety is a tech demo; a game without loading screens is a preview build.

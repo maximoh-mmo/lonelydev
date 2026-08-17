@@ -10,11 +10,6 @@ tags: ["Unreal Engine", "Persistence", "SQLite", "PostgreSQL", "Bug Postmortem",
 status: "scheduled"
 isAutoTranslated: false
 ---
-# 🎬 Post 19 — The Bug That Ate the Character Names: A Postmortem
-
-*1 commit · Aug 9, 2026 · covering INSERT OR REPLACE Semantics, Partial Saves, SaveCharacterPreservingIdentity*
-
----
 
 ## Introduction
 

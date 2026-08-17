@@ -11,12 +11,6 @@ status: "scheduled"
 isAutoTranslated: false
 ---
 
-# 🎬 Post 8 — Fixing the Chase: GAS Speed Sync, Pool Reset, and Anti-Bunching Offsets
-
-*7 commits · Jun 10–11, 2026 · covering the E22 correctness pass and the pre-autoplay refactor*
-
----
-
 ## Introduction
 
 Post 7 shipped the movement attribute set and declared victory. The next two days are what victory looks like in practice: **everything that shipped quietly broken gets fixed.** The GAS speed-sync callback never fired for infinite effects. Pooled enemies respawned with `Health = 0` from their death state. And — the one you can *see* — enemies chasing the player converged into a single clump that looked like they were all trying to occupy the same pixel.

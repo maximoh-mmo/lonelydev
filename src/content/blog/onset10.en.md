@@ -11,12 +11,6 @@ status: "scheduled"
 isAutoTranslated: false
 ---
 
-# 🎬 Post 10 — From Aggro to Threat: Building a Server-Side Threat Table and Simplifying the StateTree
-
-*23 commits · Jun 22–27, 2026 · covering the Threat System arc, the Aggro→Threat rename, and a full codebase audit*
-
----
-
 ## Introduction
 
 By the end of Post 9, the player could watch AI fight AI indefinitely. But the combat decision-making was still rough — enemies would chase the nearest target in a straight line, clump together, and occasionally get stuck. The A3.6 wave (planned in Post 1's pre-production review) was supposed to fix all of that with a proper threat system, angular combat spread, and AI LOD.

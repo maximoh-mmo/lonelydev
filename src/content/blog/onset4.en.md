@@ -11,12 +11,6 @@ status: "scheduled"
 isAutoTranslated: false
 ---
 
-# 🎬 Post 4 — NPC Infrastructure in a Day: Spawner → Pool → Groups → Profiles
-
-*16 commits · May 29, 2026 · covering sprint A2 — NPC character, object pooling, group system, and the fallback cube mesh saga*
-
----
-
 ## Introduction
 
 Post 3 ended with exactly one enemy in the world, placed by hand in the editor. That's a fine state for testing targeting, but it's not a game. The next sprint — sixteen commits, all in a single marathon day — builds the entire NPC pipeline that the rest of the project will stand on: an enemy pawn, a spawner, an object pool, a group system, and the data-driven profiles that let those pooled enemies look and behave differently.

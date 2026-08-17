@@ -11,12 +11,6 @@ status: "scheduled"
 isAutoTranslated: false
 ---
 
-# 🎬 Post 17 — The HUD Rises: Health, Abilities, and Pooled Damage Numbers
-
-*1 commit · Aug 5, 2026 · covering In-Game HUD: Health Bar, Ability Bar, Target Frame, Pooled Damage Numbers*
-
----
-
 ## Introduction
 
 For the entire project, the in-game feedback loop had been held together by debug text and log lines. Damage numbers? None. Health bars? Only in the world space of the NPC AI. Cooldowns? You guessed the timing by feel. Post 16 shipped a real ability kit, and a kit with no readout is a piano with no sheet music — the player is expected to play without seeing the notes.

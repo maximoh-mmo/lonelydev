@@ -11,12 +11,6 @@ status: "scheduled"
 isAutoTranslated: false
 ---
 
-# 🎬 Post 11 — Server's Word Is Law: HasAuthority Guards, Replication, and the Steam-Authenticated Dedicated Server
-
-*16 commits · Jun 27–29, 2026 · covering Sprint A5: Multiplayer & Steam*
-
----
-
 ## Introduction
 
 The single-player demo works. The AI fights. The menus navigate. But the moment two players connect, everything that was built on the assumption of a single authoritative server gets exposed. Who owns the damage? Who decides who dies? Do NPCs replicate? Does the client see what the server sees?

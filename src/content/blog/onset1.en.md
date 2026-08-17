@@ -11,12 +11,6 @@ status: "scheduled"
 isAutoTranslated: false
 ---
 
-# 🎬 Post 1 — Before a Single Line of Gameplay: Scaffolding a Production Repository
-
-*25 commits · May 22, 2026 · covering repo setup, documentation system, series planning, and pre-production review*
-
----
-
 ## Introduction
 
 Every project I've started in the past has followed the same doomed pattern: create a fresh Unreal project, start moving a character around, and then slowly realize I've built something that can't be shipped, taught, or even understood three months later. The systems grow organically, the naming is inconsistent, and the "how do I explain this to someone" question gets deferred forever.

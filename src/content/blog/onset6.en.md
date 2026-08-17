@@ -11,12 +11,6 @@ status: "scheduled"
 isAutoTranslated: false
 ---
 
-# 🎬 Post 6 — Death Is a Fork, Not a State: Hit Reactions, Corpse Actors, and the Pool Migration
-
-*9 commits · Jun 4–7, 2026 · covering A4.3 hit reactions, A4.4 NPC attack integration, A4.5a death, and A4.5b corpse system*
-
----
-
 ## Introduction
 
 At the end of Post 5, the basic attack *dealt damage* — a number went down. But nothing in the world responded: no flinch, no feedback, no consequence when health hit zero. Combat is 90% feedback, and this arc builds all of it: event-driven hit reactions, NPC attacks that respect GAS cooldowns, and a complete death lifecycle where an enemy turns into a corpse, returns to the pool, and respawns on its own timer.

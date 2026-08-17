@@ -11,12 +11,6 @@ status: "scheduled"
 isAutoTranslated: false
 ---
 
-# 🎬 Post 3 — You Can Fight Now: Ability Input, Target Data, and the PvP Toggle
-
-*3 commits · May 28, 2026 · covering A1.4 ability input pipeline, A1.5 targeting library, A1.6 PvP toggle — sprint A1 reaches 100%*
-
----
-
 ## Introduction
 
 At the end of Post 2, Onset had everything a player needs to *exist* in the world: camera, movement, targeting — even a hand-placed test enemy. But the ability buttons were decorative. The `IA_Ability1-4` actions existed as assets with no bindings, no handlers, and no way to turn "I clicked an enemy" into "my character hit that enemy."

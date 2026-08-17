@@ -11,12 +11,6 @@ status: "scheduled"
 isAutoTranslated: false
 ---
 
-# 🎬 Post 9 — Teaching the Player to Play Itself: Autoplay, the Idle-Timer Handoff, and a bIsAlive Lifecycle
-
-*4 commits · June 18, 2026 · covering A3.5 — Player AI autoplay in a single 8-minute session*
-
----
-
 ## Introduction
 
 For weeks the NPCs have had a brain. The player character — the whole reason the demo exists — has had nothing but input handlers. This arc fixes that asymmetry in the most literal way possible: **the player pawn gets possessed by an AI controller and plays itself.**

@@ -11,12 +11,6 @@ status: "scheduled"
 isAutoTranslated: false
 ---
 
-# 🎬 Post 12 — Remember You: SQLite Persistence, SteamID Resolution, and the ServerTravel Gauntlet
-
-*25 commits · Jun 29–30, 2026 · covering Sprint A5b Persistence & Account System*
-
----
-
 ## Introduction
 
 Sprint A5 proved the game can run multiplayer. But when the player disconnects, everything is lost — no save, no character select, no account. Sprint A5b builds the persistence layer that makes death meaningful and progression real.

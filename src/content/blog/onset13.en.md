@@ -11,12 +11,6 @@ status: "scheduled"
 isAutoTranslated: false
 ---
 
-# 🎬 Post 13 — Menus That Actually Stack: CommonUI, Screen Stacks, and the UMG-to-CommonUI Migration
-
-*4 commits · Jul 8, 2026 · covering CommonUI UI Migration*
-
----
-
 ## Introduction
 
 Sprint A5b built the persistence layer. The game can save, load, and travel between worlds. But the menus — the lobby, the character select, the pause screen — are canvas-drawn HUDs that don't render in packaged `-game` builds. They work in the editor, they work in PIE, and they vanish silently in shipping.

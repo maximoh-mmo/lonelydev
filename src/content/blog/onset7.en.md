@@ -11,12 +11,6 @@ status: "scheduled"
 isAutoTranslated: false
 ---
 
-# 🎬 Post 7 — Enemies That Hear, Hunt, and Hustle: Group Assist, the Combat Loop, and GAS Movement
-
-*12 commits · Jun 7–9, 2026 · covering A3.4 group assist, the StateTree combat loop, the profile split, and the movement attribute set*
-
----
-
 ## Introduction
 
 Post 6 made hits feel real — stagger, corpses, respawn — but the enemies' *decision-making* was still a stub. The attack task was a one-line cooldown poll. A pack of enemies would happily ignore its dying neighbor. And the `UAIProfile` data asset had quietly become a god object holding mesh, animation, behavior, and perception all at once.
