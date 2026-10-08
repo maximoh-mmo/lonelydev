@@ -81,7 +81,7 @@ a, button, select { outline-offset: 4px; }
 :root[data-theme='light'] .site-nav {
   border-bottom-color: rgba(22, 24, 27, .14);
   color: #17191d;
-  background: rgba(246, 243, 237, .94);
+  background: #ebe7de;
   box-shadow: 0 10px 32px rgba(43, 38, 30, .08);
 }
 :root[data-theme='light'] .site-nav__links a,
@@ -128,7 +128,7 @@ a, button, select { outline-offset: 4px; }
   .site-nav__settings { justify-content: space-between; padding: 1rem 0 0; border-top: 1px solid rgba(255, 255, 255, .14); border-left: 0; }
   :root[data-theme='light'] .site-nav__panel {
     border-bottom-color: rgba(22, 24, 27, .14);
-    background: rgba(246, 243, 237, .99);
+    background: #ebe7de;
   }
   :root[data-theme='light'] .site-nav__settings { border-top-color: rgba(22, 24, 27, .14); }
 }
