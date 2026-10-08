@@ -51,16 +51,16 @@ export default function Home() {
           <p className="chapter-index">{t('home.redesign.onsetIndex')}</p>
           <h2 id="onset-title">Onset</h2>
           <p>{t('home.redesign.onsetDescription')}</p>
-          <TagList items={['Unreal Engine', 'Gameplay Systems', t('home.redesign.inDevelopment')]} />
+          <TagList items={['Unreal Engine 5.8', t('home.redesign.onsetGenre'), t('home.redesign.inDevelopment')]} />
           <Link className="text-action" to={`${prefix}/dev-blog`}>{t('home.redesign.readNotes')} <ArrowUpRight aria-hidden="true" /></Link>
         </div>
         <div className="system-map" role="img" aria-label={t('home.redesign.onsetDiagramAlt')}>
           <span className="system-map__grid" aria-hidden="true" />
-          <span className="system-node system-node--capture">{t('home.redesign.captureState')}</span>
+          <span className="system-node system-node--capture">{t('home.redesign.onsetCombat')}</span>
           <span className="system-wire system-wire--one" aria-hidden="true" />
-          <span className="system-node system-node--zone">{t('home.redesign.repZone')}</span>
+          <span className="system-node system-node--zone">{t('home.redesign.onsetAI')}</span>
           <span className="system-wire system-wire--two" aria-hidden="true" />
-          <span className="system-node system-node--spawn">{t('home.redesign.spawnChoice')}</span>
+          <span className="system-node system-node--spawn">{t('home.redesign.onsetServer')}</span>
           <p className="system-map__note">{t('home.redesign.onsetNote')}</p>
         </div>
       </section>
