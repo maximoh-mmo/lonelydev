@@ -1,0 +1,65 @@
+:root[data-theme='light'] .portfolio-home {
+  --home-ink: #17191d;
+  --home-muted: #5b6267;
+  --home-cyan: #006f73;
+  --home-magenta: #8c2ea6;
+  color: var(--home-ink);
+  background: #f4f1ea;
+}
+
+:root[data-theme='light'] .cinematic-hero {
+  --home-ink: #f3f0e9;
+  --home-muted: #d1cec7;
+  --home-cyan: #66f1f2;
+  color: #f3f0e9;
+}
+
+:root[data-theme='light'] .project-chapter {
+  border-top-color: rgba(23, 25, 29, .16);
+}
+
+:root[data-theme='light'] .onset-chapter {
+  background: linear-gradient(135deg, #faf8f2, #ece8df 72%);
+}
+
+:root[data-theme='light'] .project-tags li {
+  border-color: rgba(23, 25, 29, .22);
+  color: #34383c;
+  background: rgba(255, 255, 255, .46);
+}
+
+:root[data-theme='light'] .system-map {
+  background:
+    radial-gradient(circle at 50% 46%, rgba(0, 132, 136, .15), transparent 35%),
+    radial-gradient(circle at 82% 76%, rgba(140, 46, 166, .12), transparent 30%),
+    #e7e4dc;
+}
+
+:root[data-theme='light'] .system-map__grid {
+  opacity: .32;
+  background-image:
+    linear-gradient(rgba(0, 111, 115, .2) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 111, 115, .2) 1px, transparent 1px);
+}
+
+:root[data-theme='light'] .system-node {
+  border-color: rgba(0, 111, 115, .52);
+  color: #075c5f;
+  background: rgba(255, 253, 248, .94);
+  box-shadow: 0 16px 38px rgba(65, 58, 46, .16);
+}
+
+:root[data-theme='light'] .system-map__note { color: #4d5357; }
+
+:root[data-theme='light'] .photoboss-chapter { background: #f7f4ed; }
+
+:root[data-theme='light'] .photoboss-media {
+  --home-cyan: #66f1f2;
+  color: #f3f0e9;
+  box-shadow: 0 24px 70px rgba(48, 42, 33, .16);
+}
+
+:root[data-theme='light'] .photoboss-title,
+:root[data-theme='light'] .photoboss-note { color: #f3f0e9; }
+
+:root[data-theme='light'] .home-footer { background: #ebe7de; }

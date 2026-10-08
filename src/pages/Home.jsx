@@ -4,6 +4,7 @@ import { ArrowDown, ArrowUpRight, Play } from 'lucide-react';
 import SEO from '../components/SEO';
 import TranslationDisclaimer from '../components/TranslationDisclaimer';
 import './Home.css';
+import './Home.light.css';
 
 const TagList = ({ items }) => (
   <ul className="project-tags" aria-label="Technologies">

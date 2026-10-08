@@ -78,6 +78,36 @@ a, button, select { outline-offset: 4px; }
 :root[data-theme='dark'] body,
 :root[data-theme='dark'] .site-shell { background: #07090b; }
 
+:root[data-theme='light'] .site-nav {
+  border-bottom-color: rgba(22, 24, 27, .14);
+  color: #17191d;
+  background: rgba(246, 243, 237, .94);
+  box-shadow: 0 10px 32px rgba(43, 38, 30, .08);
+}
+:root[data-theme='light'] .site-nav__links a,
+:root[data-theme='light'] .site-nav__email { color: #50555a; }
+:root[data-theme='light'] .site-nav__links a:hover,
+:root[data-theme='light'] .site-nav__email:hover { color: #111315; }
+:root[data-theme='light'] .site-nav__settings { border-color: rgba(22, 24, 27, .16); }
+:root[data-theme='light'] .language-switch button { color: #71767a; }
+:root[data-theme='light'] .language-switch button.is-active { color: #006f73; }
+:root[data-theme='light'] .language-switch span { color: #a1a19d; }
+:root[data-theme='light'] .theme-select { color: #62676b; }
+:root[data-theme='light'] .theme-select select {
+  border-color: rgba(22, 24, 27, .22);
+  color: #202326;
+  background: #fffdf8;
+}
+:root[data-theme='light'] .site-nav__menu { color: #17191d; }
+:root[data-theme='light'] .cv-viewer { background: rgba(235, 232, 224, .97); }
+:root[data-theme='light'] .cv-viewer__toolbar { color: #17191d; }
+:root[data-theme='light'] .cv-viewer__button {
+  border-color: rgba(22, 24, 27, .24);
+  color: #17191d;
+  background: rgba(255, 255, 255, .58);
+}
+:root[data-theme='light'] .cv-viewer__button:hover { border-color: #00777a; }
+
 @media (max-width: 850px) {
   .site-nav__menu { display: block; }
   .site-nav__panel {
@@ -96,6 +126,11 @@ a, button, select { outline-offset: 4px; }
   .site-nav__links a { display: block; padding: .8rem 0; font-size: .9rem; }
   .site-nav__email { padding: .65rem 0; font-size: .82rem; }
   .site-nav__settings { justify-content: space-between; padding: 1rem 0 0; border-top: 1px solid rgba(255, 255, 255, .14); border-left: 0; }
+  :root[data-theme='light'] .site-nav__panel {
+    border-bottom-color: rgba(22, 24, 27, .14);
+    background: rgba(246, 243, 237, .99);
+  }
+  :root[data-theme='light'] .site-nav__settings { border-top-color: rgba(22, 24, 27, .14); }
 }
 
 @media (max-width: 520px) {
