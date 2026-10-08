@@ -1,6 +1,8 @@
-import { Routes, Route } from 'react-router-dom';
-import { lazy, Suspense } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { lazy, Suspense, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import Navbar from './components/Navbar';
+import CVViewer from './components/CVViewer';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { posts } from './data/posts';
 
@@ -15,46 +17,52 @@ const Climbing = lazy(() => import('./pages/Climbing'));
 const DevBlogIndex = lazy(() => import('./pages/dev-blog/index'));
 const BlogPost = lazy(() => import('./pages/dev-blog/BlogPost'));
 
-// Only load admin in development mode
-let AdminPage;
-if (process.env.NODE_ENV === 'development') {
-  AdminPage = lazy(() => import('../admin/pages/Admin'));
+function RouteLanguageSync() {
+  const location = useLocation();
+  const { i18n } = useTranslation();
+
+  useEffect(() => {
+    const routeLanguage = location.pathname === '/de' || location.pathname.startsWith('/de/') ? 'de' : 'en';
+    if (!i18n.language.startsWith(routeLanguage)) i18n.changeLanguage(routeLanguage);
+  }, [i18n, location.pathname]);
+
+  return null;
 }
 
 function LazyLoader() {
-  return (
-    <div className="flex items-center justify-center min-h-[50vh]">
-      <div className="animate-pulse text-gray-400">Loading...</div>
-    </div>
-  );
+  return <div className="route-loader" aria-live="polite">Loading…</div>;
 }
+
+const routeDefinitions = (prefix = '') => (
+  <>
+    <Route path={`${prefix}/`} element={<Home />} />
+    <Route path={`${prefix}/projects`} element={<Projects />} />
+    <Route path={`${prefix}/about`} element={<About />} />
+    <Route path={`${prefix}/contact`} element={<Contact />} />
+    <Route path={`${prefix}/cv`} element={<><Home /><CVViewer /></>} />
+    <Route path={`${prefix}/projects/:projectId`} element={<ProjectDetail />} />
+    <Route path={`${prefix}/kumiko`} element={<Kumiko />} />
+    <Route path={`${prefix}/keyboard`} element={<Keyboard />} />
+    <Route path={`${prefix}/climbing`} element={<Climbing />} />
+    <Route path={`${prefix}/dev-blog`} element={<DevBlogIndex posts={posts} />} />
+    <Route path={`${prefix}/dev-blog/:id`} element={<BlogPost posts={posts} />} />
+  </>
+);
 
 function App() {
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className="site-shell">
+      <RouteLanguageSync />
       <Navbar />
-      <main className="max-w-4xl mx-auto p-6 text-center mt-20">
-        <ErrorBoundary>
-          <Suspense fallback={<LazyLoader />}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/lonelydev/" element={<Home />} />
-              <Route path="/projects" element={<Projects />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/projects/:projectId" element={<ProjectDetail />} />
-              <Route path="/kumiko" element={<Kumiko />} />
-              <Route path="/keyboard" element={<Keyboard />} />
-              <Route path="/climbing" element={<Climbing />} />
-              <Route path="/dev-blog" element={<DevBlogIndex posts={posts} />} />
-              <Route path="/dev-blog/:id" element={<BlogPost posts={posts} />} />
-              {process.env.NODE_ENV === 'development' && (
-                <Route path="/admin" element={<AdminPage />} />
-              )}
-            </Routes>
-          </Suspense>
-        </ErrorBoundary>
-      </main>
+      <ErrorBoundary>
+        <Suspense fallback={<LazyLoader />}>
+          <Routes>
+            {routeDefinitions('')}
+            {routeDefinitions('/de')}
+            <Route path="/lonelydev/" element={<Home />} />
+          </Routes>
+        </Suspense>
+      </ErrorBoundary>
     </div>
   );
 }

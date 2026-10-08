@@ -1,95 +1,81 @@
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import { Menu, X, Globe } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { AtSign, Menu, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+
+const themeOptions = ['system', 'light', 'dark'];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme-preference') || 'system');
   const { t, i18n } = useTranslation();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isGerman = i18n.language.startsWith('de');
+  const prefix = isGerman ? '/de' : '';
 
-  const changeLanguage = (lng) => {
-    i18n.changeLanguage(lng);
+  useEffect(() => {
+    const media = window.matchMedia('(prefers-color-scheme: dark)');
+    const applyTheme = () => {
+      const resolved = theme === 'system' ? (media.matches ? 'dark' : 'light') : theme;
+      document.documentElement.dataset.theme = resolved;
+      document.documentElement.dataset.themePreference = theme;
+    };
+    applyTheme();
+    media.addEventListener('change', applyTheme);
+    localStorage.setItem('theme-preference', theme);
+    return () => media.removeEventListener('change', applyTheme);
+  }, [theme]);
+
+  useEffect(() => setIsOpen(false), [location.pathname]);
+
+  const changeLanguage = (language) => {
+    const unprefixedPath = location.pathname.replace(/^\/de(?=\/|$)/, '') || '/';
+    const targetPath = language === 'de'
+      ? `/de${unprefixedPath === '/' ? '' : unprefixedPath}`
+      : unprefixedPath;
+    i18n.changeLanguage(language);
+    navigate(`${targetPath}${location.search}${location.hash}`);
   };
 
   const navLinks = [
-    { name: t('nav.home'), path: '/' },
-    { name: t('nav.devBlog'), path: '/dev-blog' },
-    { name: t('nav.projects'), path: '/projects' },
-    { name: t('nav.about'), path: '/about' },
-    { name: t('nav.contact'), path: '/contact' },
+    { name: t('nav.work'), path: `${prefix}/` },
+    { name: t('nav.about'), path: `${prefix}/about` },
+    { name: t('nav.devBlog'), path: `${prefix}/dev-blog` },
+    { name: t('nav.cv'), path: `${prefix}/cv` },
   ];
 
-  const LanguageSwitcher = () => (
-    <div className="flex items-center gap-2 ml-4 border-l pl-4 border-gray-200">
-      <button
-        onClick={() => changeLanguage('en')}
-        className={`text-sm font-medium ${i18n.language === 'en' ? 'text-blue-600' : 'text-gray-500 hover:text-blue-500'}`}
-      >
-        EN
-      </button>
-      <span className="text-gray-300">|</span>
-      <button
-        onClick={() => changeLanguage('de')}
-        className={`text-sm font-medium ${i18n.language === 'de' ? 'text-blue-600' : 'text-gray-500 hover:text-blue-500'}`}
-      >
-        DE
-      </button>
-    </div>
-  );
-
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        <Link to="/" className="text-xl font-bold text-gray-800">Max Heinze</Link>
-        
-        <div className="hidden md:flex items-center">
-          <ul className="flex gap-6 text-gray-700 font-medium">
-            {navLinks.map((link) => (
-              <li key={link.path}>
-                <Link to={link.path} className="hover:text-blue-600 transition">
-                  {link.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <LanguageSwitcher />
-        </div>
+    <nav className="site-nav" aria-label={t('nav.primary')}>
+      <Link to={`${prefix}/`} className="site-nav__brand">MAX HEINZE</Link>
 
-        <div className="flex items-center md:hidden">
-          <div className="mr-4">
-             <button
-              onClick={() => changeLanguage(i18n.language === 'en' ? 'de' : 'en')}
-              className="p-2 text-gray-600 hover:text-blue-600 transition flex items-center gap-1"
-            >
-              <Globe className="w-5 h-5" />
-              <span className="text-xs font-bold uppercase">{i18n.language.split('-')[0]}</span>
-            </button>
+      <div className={`site-nav__panel ${isOpen ? 'is-open' : ''}`}>
+        <ul className="site-nav__links">
+          {navLinks.map((link) => (
+            <li key={link.path}><Link to={link.path}>{link.name}</Link></li>
+          ))}
+        </ul>
+        <a className="site-nav__email" href="mailto:maxheinze@gmail.com" aria-label={t('nav.email')}>
+          <AtSign aria-hidden="true" /><span>{t('nav.email')}</span>
+        </a>
+        <div className="site-nav__settings">
+          <div className="language-switch" aria-label={t('nav.language')}>
+            <button type="button" className={!isGerman ? 'is-active' : ''} onClick={() => changeLanguage('en')}>EN</button>
+            <span aria-hidden="true">/</span>
+            <button type="button" className={isGerman ? 'is-active' : ''} onClick={() => changeLanguage('de')}>DE</button>
           </div>
-          <button
-            className="text-gray-700 focus:outline-none"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          <label className="theme-select">
+            <span>{t('nav.theme')}</span>
+            <select value={theme} onChange={(event) => setTheme(event.target.value)}>
+              {themeOptions.map((option) => <option value={option} key={option}>{t(`nav.theme_${option}`)}</option>)}
+            </select>
+          </label>
         </div>
       </div>
 
-      {isOpen && (
-        <ul className="md:hidden bg-white px-4 pb-4 space-y-2 shadow-md">
-          {navLinks.map((link) => (
-            <li key={link.path}>
-              <Link
-                to={link.path}
-                className="block py-2 text-gray-700 hover:text-blue-600"
-                onClick={() => setIsOpen(false)}
-              >
-                {link.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
+      <button className="site-nav__menu" type="button" onClick={() => setIsOpen((open) => !open)} aria-expanded={isOpen} aria-label={t('nav.menu')}>
+        {isOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
+      </button>
     </nav>
   );
 }

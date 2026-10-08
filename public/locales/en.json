@@ -4,7 +4,17 @@
     "devBlog": "Dev-Blog",
     "projects": "Projects",
     "about": "About",
-    "contact": "Contact"
+    "contact": "Contact",
+    "work": "Work",
+    "cv": "CV",
+    "email": "Email",
+    "primary": "Primary navigation",
+    "language": "Language",
+    "theme": "Theme",
+    "theme_system": "System",
+    "theme_light": "Light",
+    "theme_dark": "Dark",
+    "menu": "Toggle menu"
   },
   "home": {
     "title": "Game Programmer. Maker. Problem Solver.",
@@ -14,7 +24,37 @@
     "explore": "🕹️ <projects>Explore</projects> semester games that simulate real studio workflows.",
     "peek": "🔧 <keyboard>Peek behind the curtain</keyboard> into hardware builds and custom electronics.",
     "discover": "🧗 <climbing>Discover</climbing> how climbing, coding, and crafting converge.",
-    "footer": "<contact>Let’s make something remarkable.</contact>"
+    "footer": "<contact>Let’s make something remarkable.</contact>",
+    "redesign": {
+      "seoTitle": "Game Programmer",
+      "seoDescription": "Portfolio of Max Heinze, a C++ and Unreal Engine game programmer focused on gameplay, multiplayer systems, and technical tools.",
+      "kicker": "Game Programmer · C++ · Unreal Engine",
+      "headlineLead": "Systems that hold",
+      "headlineEcho": "under pressure.",
+      "intro": "I build gameplay, multiplayer, and tools where clear structure matters as much as what the player sees.",
+      "caseStudy": "Explore the case study",
+      "playBuild": "Open the playable build",
+      "kyotoNoteSpawn": "Forward-base control updates spawn eligibility",
+      "kyotoNoteFlag": "The server owns every flag-state transition",
+      "featured": "Featured project · 01",
+      "explore": "Explore systems",
+      "onsetIndex": "Project 02 · Architecture in progress",
+      "onsetDescription": "A technical case study centred on CTF flow, reputation zones, and Lyra-style spawning—shown through decisions, constraints, and working system relationships.",
+      "inDevelopment": "In development",
+      "readNotes": "Read the development notes",
+      "onsetDiagramAlt": "Onset system diagram showing capture state, reputation zone, and player spawn choice",
+      "captureState": "Capture state",
+      "repZone": "Rep zone",
+      "spawnChoice": "Spawn choice",
+      "onsetNote": "Player choice remains visible while the server controls whether a spawn is valid.",
+      "photoIndex": "Project 03 · C++ software tool",
+      "photoHeadline": "Evidence beyond games.",
+      "photoDescription": "PhotoBoss applies the same systems thinking to a local-first duplicate-image workflow: parallel hashing, persistent cache, and explicit review before deletion.",
+      "photoAlt": "PhotoBoss interface showing duplicate image groups and a large preview",
+      "photoNote": "Unchanged path + size + timestamp short-circuits almost all repeat file I/O.",
+      "readBuildLog": "Read the build log",
+      "footerLead": "Available for game programming and technical software roles."
+    }
   },
   "about": {
     "title": "About Me",
@@ -31,6 +71,11 @@
     "subtitle": "Looking for the next big problem to solve. If you need a passionate engineer for your team or project, let’s connect.",
     "resume": "Resume / CV",
     "download": "Download PDF"
+  },
+  "cv": {
+    "viewerTitle": "Max Heinze · Game Programmer CV",
+    "download": "Download",
+    "close": "Close"
   },
   "projects": {
     "title": "Projects",

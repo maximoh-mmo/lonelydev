@@ -4,7 +4,17 @@
     "devBlog": "Dev-Blog",
     "projects": "Projekte",
     "about": "Über mich",
-    "contact": "Kontakt"
+    "contact": "Kontakt",
+    "work": "Projekte",
+    "cv": "Lebenslauf",
+    "email": "E-Mail",
+    "primary": "Hauptnavigation",
+    "language": "Sprache",
+    "theme": "Darstellung",
+    "theme_system": "System",
+    "theme_light": "Hell",
+    "theme_dark": "Dunkel",
+    "menu": "Menü öffnen oder schließen"
   },
   "home": {
     "title": "Game Programmer. Maker. Problem Solver.",
@@ -14,7 +24,37 @@
     "explore": "🕹️ <projects>Erkunde</projects> Semester-Spiele, die reale Studio-Workflows simulieren.",
     "peek": "🔧 <keyboard>Blicke hinter die Kulissen</keyboard> von Hardware-Builds und maßgeschneiderter Elektronik.",
     "discover": "🧗 <climbing>Entdecke</climbing>, wie Klettern, Programmieren und Handwerk zusammenfließen.",
-    "footer": "<contact>Lass uns etwas Außergewöhnliches schaffen.</contact>"
+    "footer": "<contact>Lass uns etwas Außergewöhnliches schaffen.</contact>",
+    "redesign": {
+      "seoTitle": "Game Programmer",
+      "seoDescription": "Portfolio von Max Heinze, einem C++- und Unreal-Engine-Game-Programmer mit Schwerpunkt auf Gameplay, Multiplayer-Systemen und technischen Tools.",
+      "kicker": "Game Programmer · C++ · Unreal Engine",
+      "headlineLead": "Systeme, die",
+      "headlineEcho": "unter Druck bestehen.",
+      "intro": "Ich entwickle Gameplay, Multiplayer-Systeme und Tools, bei denen eine klare Struktur ebenso wichtig ist wie das, was Spieler sehen.",
+      "caseStudy": "Case Study ansehen",
+      "playBuild": "Spielbare Version öffnen",
+      "kyotoNoteSpawn": "Die Kontrolle der FOB aktualisiert die Spawn-Berechtigung",
+      "kyotoNoteFlag": "Der Server steuert jeden Zustandswechsel der Flagge",
+      "featured": "Ausgewähltes Projekt · 01",
+      "explore": "Systeme entdecken",
+      "onsetIndex": "Projekt 02 · Architektur in Entwicklung",
+      "onsetDescription": "Eine technische Case Study zu CTF-Ablauf, Reputation-Zonen und Lyra-basiertem Spawning – erklärt durch Entscheidungen, Einschränkungen und funktionierende Systembeziehungen.",
+      "inDevelopment": "In Entwicklung",
+      "readNotes": "Entwicklungsnotizen lesen",
+      "onsetDiagramAlt": "Onset-Systemdiagramm mit Eroberungszustand, Reputation-Zone und Spawn-Auswahl",
+      "captureState": "Eroberungszustand",
+      "repZone": "Rep-Zone",
+      "spawnChoice": "Spawn-Auswahl",
+      "onsetNote": "Die Auswahl bleibt beim Spieler; der Server entscheidet, ob ein Spawn gültig ist.",
+      "photoIndex": "Projekt 03 · C++-Software-Tool",
+      "photoHeadline": "Technische Substanz über Spiele hinaus.",
+      "photoDescription": "PhotoBoss überträgt dasselbe Systemdenken auf einen lokalen Workflow für doppelte Bilder: paralleles Hashing, persistenter Cache und ausdrückliche Prüfung vor dem Löschen.",
+      "photoAlt": "PhotoBoss-Oberfläche mit Gruppen doppelter Bilder und großer Vorschau",
+      "photoNote": "Unveränderter Pfad + Größe + Zeitstempel vermeiden nahezu alle wiederholten Datei-I/O-Operationen.",
+      "readBuildLog": "Build-Log lesen",
+      "footerLead": "Verfügbar für Game-Programming- und technische Software-Rollen."
+    }
   },
   "about": {
     "title": "Über mich",
@@ -31,6 +71,11 @@
     "subtitle": "Auf der Suche nach dem nächsten großen Problem, das es zu lösen gilt. Wenn du einen leidenschaftlichen Entwickler für dein Team oder Projekt suchst, melde dich gerne.",
     "resume": "Lebenslauf / CV",
     "download": "PDF herunterladen"
+  },
+  "cv": {
+    "viewerTitle": "Max Heinze · Game Programmer · Lebenslauf (Englisch)",
+    "download": "Herunterladen",
+    "close": "Schließen"
   },
   "projects": {
     "title": "Projekte",
