@@ -35,7 +35,8 @@
     "backHome": "Zurück zu den Projekten",
     "originalEnglish": "Diese Seite ist derzeit auf Englisch verfügbar.",
     "contactIntro": "Möglichkeiten in der Spieleprogrammierung und technischen Softwareentwicklung.",
-    "contactElsewhere": "Weitere Profile"
+    "contactElsewhere": "Weitere Profile",
+    "nextStep": "Nächster Schritt"
   },
   "nav": {
     "home": "Startseite",
@@ -73,7 +74,7 @@
       "introLead": "Ich entwickle ",
       "introFocus": "Gameplay, Multiplayer-Systeme und Tools",
       "introTail": ", bei denen eine klare Struktur ebenso wichtig ist wie das, was Spieler sehen.",
-      "caseStudy": "Case Study ansehen",
+      "caseStudy": "CTF-Case-Study ansehen",
       "playBuild": "Spielbare Version öffnen",
       "kyotoNoteSpawn": "Die Kontrolle der FOB aktualisiert die Spawn-Berechtigung",
       "kyotoNoteFlag": "Der Server steuert jeden Zustandswechsel der Flagge",
@@ -152,15 +153,49 @@
     "techHeader": "Technologien",
     "kyoto-conflict": {
       "title": "Kyoto Conflict",
-      "shortDescription": "Ein rasanter Online-FPS in einem futuristischen japanischen Vorort, der fortschrittliche Bewegungsmechaniken mit taktischem Capture-and-Defend-Gameplay kombiniert. Erstellt in Unreal Engine 5.5.",
+      "shortDescription": "Ein Online-FPS eines 13-köpfigen Teams, in dem ich Capture the Flag und die replizierte Zonenlogik für das Spawning verantwortet habe.",
       "description": "Tauchen Sie ein in das pulsierende Herz eines futuristischen japanischen Vororts, in dem neonbeleuchtete Straßen und fortschrittliche Technologie nahtlos mit alten Traditionen verschmelzen. Kyoto Conflict ist ein reiner Online-First-Person-Shooter, der die Spieler in einen brutalen Kampf um die Vorherrschaft über ein begehrtes Artefakt stürzt – einen Helm von immenser Macht, der das Blatt der Schlacht wenden kann. Die Spieler müssen entweder feindliche Festungen in gewagten Überfällen stürmen oder ihren heiligen Tempel gegen unerbittliche Angriffe verteidigen. Das Spiel bietet dynamische Bewegungen mit Bunny-Hopping-Mechaniken, einen einzigartigen Capture/Defend-Spielmodus, der Capture the Flag mit Attacker/Defender-Gameplay kombiniert, und strategische FOB-Capture-Points.",
-      "team": "Entwickelt von einem Studententeam der Games Academy über 8 Wochen in 2024/25, basierend auf der Vision von Marcel Pospiech. Als einer von drei Programmierern unter Marc Hoffmann (Lead Programmer) zusammen mit Nils Hähndel arbeitete ich mit 3 Produzenten, 6 Künstlern, 1 Game Designer und zahlreichen externen Spezialisten zusammen, um dieses rasante Multiplayer-FPS-Erlebnis zu schaffen.",
-      "contributions": [
-        { "title": "Fortgeschrittenes Bewegungssystem", "description": "Implementierung flüssiger First-Person-Bewegungsmechaniken..." },
-        { "title": "Multiplayer-Respawn-Systeme", "description": "Entwicklung robuster Respawn-Mechaniken..." },
-        { "title": "User Interface Design", "description": "Erstellung umfassender UI-Systeme..." }
-      ],
-      "reflections": "Koyoto Conflict war eine herausfordernde und lohnende Lernerfahrung, die sowohl meine technischen Fähigkeiten als auch meine kooperativen Fähigkeiten auf die Probe stellte. Ich konzentrierte mich auf die Gameplay-Entwicklung, die Implementierung der Core-Game-Loop, Multiplayer-Replikation, Spielerinteraktionen und übernahm später die volle Verantwortung für die Audio-Integration. Durch die Zusammenarbeit mit internen und externen Teammitgliedern stellte ich sicher, dass die wichtigsten Gameplay-Systeme über das Netzwerk synchronisiert wurden und dass Interaktionen, Pickups und Spawn-Punkte zuverlässig funktionierten. Eine große Herausforderung war es, die Projektanforderungen mit meinen persönlichen Lernzielen in Einklang zu bringen. Ich passte mich dem Blueprint-only-Ansatz eines externen Programmierers an, um die Kompatibilität zu gewährleisten, was manchmal mit meinem Ziel kollidierte, in C++ zu arbeiten, um strukturierte und erweiterbare Coding-Praktiken zu verbessern. Zusätzlich führten spätere Verantwortlichkeiten für die Audio-Integration aufgrund unbekannter Plugins in einem Multiplayer-Kontext zu unvorhergesehenen technischen Komplikationen. Das Projekt verdeutlichte auch die Auswirkungen einer schwachen Pre-Production und betonte die Wichtigkeit einer frühen Abstimmung, eines klaren Design-Plans und des Aufbaus einer zentralen Wissensbasis. Rückblickend habe ich den Wert von starker Planung, Anpassungsfähigkeit und Zusammenarbeit gelernt. Die Unterstützung von Kollegen, Mentoring, wo immer möglich, und die effektive Priorisierung angesichts wechselnder Verantwortlichkeiten stärkten das Team und verbesserten das gesamte Projektergebnis. Trotz der Herausforderungen bin ich stolz auf die von mir implementierten Systeme, die geförderte Teamarbeit und die gelernten Lektionen, die meinen Ansatz für zukünftige Projekte leiten werden."
+      "team": "Entwickelt von einem 13-köpfigen Studententeam der Games Academy in wochenweisen Blöcken über einen achtwöchigen Semesterzeitraum 2024/25, basierend auf der Vision von Marcel Pospiech. Als einer von drei Programmierern unter Marc Hoffmann (Lead Programmer) zusammen mit Nils Hähndel arbeitete ich mit 3 Produzenten, 6 Künstlern, 1 Game Designer und externen Spezialisten zusammen.",
+      "playNote": "Reiner Multiplayer-Build: Sinnvolles Spielen erfordert weitere Spieler.",
+      "caseStudy": {
+        "roleLabel": "Meine Rolle",
+        "roleLead": "In einem Team-Shooter müssen sich alle Spieler einig sein, wer die Flagge hält, wo sie spawnen dürfen und ob eine Eroberung zählt. Ich habe die Systeme verantwortet, die diese Fragen beantworten.",
+        "ownership": [
+          "Capture the Flag vollständig: Aufnehmen, Tragen, Fallenlassen, Zurückbringen, Validierung der Eroberung, Punktewertung und Reset.",
+          "Replizierte Zonen, die steuern, welche Spawnpunkte verfügbar sind.",
+          "Replikation von Flaggen- und Zonenzustand zwischen Host und allen Clients."
+        ],
+        "context": "13-köpfiges Team · wochenweise Blöcke über ein achtwöchiges Semester · serverautoritativer Listen-Server",
+        "flowLabel": "Ablauf von Capture the Flag",
+        "flowIntro": "Jede Zustandsänderung wird auf dem Server entschieden und repliziert, sodass alle Spieler denselben Flaggenzustand und denselben Punktestand sehen.",
+        "flowMainLabel": "Weg zur Eroberung",
+        "flowMain": [
+          { "name": "In der Basis", "detail": "Die Flagge startet an ihrer Ausgangsposition." },
+          { "name": "Aufnehmen", "detail": "Der Server akzeptiert die Aufnahme und registriert den Träger." },
+          { "name": "Getragen", "detail": "Träger- und Flaggenzustand werden an alle Spieler repliziert." },
+          { "name": "Eroberung", "detail": "Der Server validiert die Eroberung, bevor sie zählt." },
+          { "name": "Wertung und Reset", "detail": "Der Punktestand wird aktualisiert und die Flagge zurückgesetzt." }
+        ],
+        "flowBranchLabel": "Wenn der Träger sie fallen lässt",
+        "flowBranch": [
+          { "name": "Fallen gelassen", "detail": "Die Flagge verlässt ihren Träger." },
+          { "name": "Zurückgebracht", "detail": "Die Flagge kehrt an ihre Ausgangsposition zurück." }
+        ],
+        "authorityLabel": "Autorität und Replikation",
+        "authorityIntro": "Kyoto Conflict läuft auf einem Listen-Server: Der Rechner eines Spielers hostet das autoritative Spiel, während dieser Spieler selbst mitspielt. Ein dedizierter Server wird nicht verwendet.",
+        "authority": [
+          { "role": "Spieler", "detail": "Handeln über ihren eigenen Charakter. Sie entscheiden nicht über Spielziele." },
+          { "role": "Listen-Server-Host", "detail": "Besitzt Flaggen-, Punkte- und Zonenzustand. Validiert Aufnahmen und Eroberungen." },
+          { "role": "Alle Clients", "detail": "Empfangen den replizierten Flaggen-, Punkte- und Zonenzustand und stellen ihn dar." }
+        ],
+        "decisionsLabel": "Entscheidungen und Abwägungen",
+        "decisions": [
+          { "title": "Ergebnisse entscheidet der Server", "body": "Aufnehmen, Eroberung, Wertung und Reset werden vom Host aufgelöst und dann repliziert. Ein Client kann sich keine Eroberung selbst zusprechen." },
+          { "title": "Auf dem etablierten Spawn-Modell aufbauen", "body": "Der Spawning-Ansatz orientiert sich an Lyra und dem etablierten Modell von Unreal. Meine Arbeit war die replizierte Zonenlogik, die steuert, welche Spawnpunkte verfügbar sind." },
+          { "title": "Den Blueprint-Workflow des Teams übernehmen", "body": "Ein externer Programmierer arbeitete ausschließlich mit Blueprints. Ich blieb bei diesem Ansatz, damit unsere Systeme kompatibel blieben – auf Kosten der C++-Struktur, die ich üben wollte." }
+        ]
+      },
+      "reflections": "Kyoto Conflict war eine herausfordernde und lohnende Lernerfahrung, die sowohl meine technischen Fähigkeiten als auch meine kooperativen Fähigkeiten auf die Probe stellte. Ich konzentrierte mich auf die Gameplay-Entwicklung, die Implementierung der Core-Game-Loop, Multiplayer-Replikation, Spielerinteraktionen und übernahm später die volle Verantwortung für die Audio-Integration. Durch die Zusammenarbeit mit internen und externen Teammitgliedern stellte ich sicher, dass die wichtigsten Gameplay-Systeme über das Netzwerk synchronisiert wurden und dass Interaktionen, Pickups und Spawn-Punkte zuverlässig funktionierten. Eine große Herausforderung war es, die Projektanforderungen mit meinen persönlichen Lernzielen in Einklang zu bringen. Ich passte mich dem Blueprint-only-Ansatz eines externen Programmierers an, um die Kompatibilität zu gewährleisten, was manchmal mit meinem Ziel kollidierte, in C++ zu arbeiten, um strukturierte und erweiterbare Coding-Praktiken zu verbessern. Zusätzlich führten spätere Verantwortlichkeiten für die Audio-Integration aufgrund unbekannter Plugins in einem Multiplayer-Kontext zu unvorhergesehenen technischen Komplikationen. Das Projekt verdeutlichte auch die Auswirkungen einer schwachen Pre-Production und betonte die Wichtigkeit einer frühen Abstimmung, eines klaren Design-Plans und des Aufbaus einer zentralen Wissensbasis. Rückblickend habe ich den Wert von starker Planung, Anpassungsfähigkeit und Zusammenarbeit gelernt. Die Unterstützung von Kollegen, Mentoring, wo immer möglich, und die effektive Priorisierung angesichts wechselnder Verantwortlichkeiten stärkten das Team und verbesserten das gesamte Projektergebnis. Trotz der Herausforderungen bin ich stolz auf die von mir implementierten Systeme, die geförderte Teamarbeit und die gelernten Lektionen, die meinen Ansatz für zukünftige Projekte leiten werden."
     },
     "steambrawl": {
       "title": "SteamBrawl",

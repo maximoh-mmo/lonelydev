@@ -35,7 +35,8 @@
     "backHome": "Back to work",
     "originalEnglish": "This page is currently available in English.",
     "contactIntro": "Game programming and technical software opportunities.",
-    "contactElsewhere": "Find me elsewhere"
+    "contactElsewhere": "Find me elsewhere",
+    "nextStep": "Next step"
   },
   "nav": {
     "home": "Home",
@@ -73,7 +74,7 @@
       "introLead": "I build ",
       "introFocus": "gameplay, multiplayer, and tools",
       "introTail": " where clear structure matters as much as what the player sees.",
-      "caseStudy": "Explore the case study",
+      "caseStudy": "View the CTF case study",
       "playBuild": "Open the playable build",
       "kyotoNoteSpawn": "Forward-base control updates spawn eligibility",
       "kyotoNoteFlag": "The server owns every flag-state transition",
@@ -152,15 +153,49 @@
     "techHeader": "Technologies",
     "kyoto-conflict": {
       "title": "Kyoto Conflict",
-      "shortDescription": "A fast-paced online FPS set in a futuristic Japanese suburb, blending advanced movement mechanics with tactical capture-and-defend gameplay. Built in Unreal Engine 5.5.",
+      "shortDescription": "A 13-person online FPS where I owned Capture the Flag and the replicated zone logic that controls spawning.",
       "description": "Step into the pulsating heart of a futuristic Japanese suburb where neon-lit streets and advanced technology blend seamlessly with ancient traditions. Kyoto Conflict is an online-only first-person shooter that thrusts players into a brutal fight for dominance over a coveted artifact—a helmet of immense power capable of turning the tide of battle. Players must either storm enemy strongholds in daring raids or defend their sacred temple against relentless assault. The game features dynamic movement with bunny hopping mechanics, a unique capture/defend game mode combining Capture the Flag with attacker/defender gameplay, and strategic FOB capture points.",
-      "team": "Developed by a Games Academy student team over 8 weeks in 2024/25, following the vision of Marcel Pospiech. As one of three programmers working under Marc Hoffmann (Lead Programmer) alongside Nils Hähndel, I collaborated with 3 producers, 6 artists, 1 game designer, and numerous external specialists to create this fast-paced multiplayer FPS experience.",
-      "contributions": [
-        { "title": "Advanced Movement System", "description": "Implemented fluid first-person movement mechanics..." },
-        { "title": "Multiplayer Respawn Systems", "description": "Developed robust respawn mechanics..." },
-        { "title": "User Interface Design", "description": "Created comprehensive UI systems..." }
-      ],
-      "reflections": "Koyoto Conflict was a challenging and rewarding learning experience that tested both my technical skills and collaborative abilities. I focused on gameplay development, implementing the core game loop, multiplayer replication, player interactions, and later taking full responsibility for audio integration. Working with both internal and external team members, I ensured key gameplay systems were synchronized across the network and that interactions, pickups, and spawn points functioned reliably. One major challenge was balancing project needs with personal learning goals. I adapted to an external programmer’s Blueprint-only approach to maintain compatibility, which sometimes conflicted with my goal of working in C++ to improve structured and extendable coding practices. Additionally, late-stage responsibilities for audio integration introduced unforeseen technical complications due to unfamiliar plugins in a multiplayer context. The project also highlighted the impact of weak pre-production, emphasizing the importance of early alignment, a clear design plan, and establishing a centralized knowledge base. Reflecting on the project, I learned the value of strong planning, adaptability, and collaboration. Supporting colleagues, mentoring when possible, and prioritizing effectively in the face of shifting responsibilities strengthened the team and enhanced the overall project outcome. Despite the challenges, I am proud of the systems I implemented, the teamwork fostered, and the lessons learned, which will guide my approach to future projects."
+      "team": "Developed by a 13-person Games Academy student team in week-long blocks across an eight-week semester period in 2024/25, following the vision of Marcel Pospiech. As one of three programmers working under Marc Hoffmann (Lead Programmer) alongside Nils Hähndel, I collaborated with 3 producers, 6 artists, 1 game designer, and external specialists.",
+      "playNote": "Multiplayer-only build: meaningful play needs other players.",
+      "caseStudy": {
+        "roleLabel": "My role",
+        "roleLead": "In a team shooter, every player has to agree on who holds the flag, where they can spawn, and whether a capture counted. I owned the systems that answer those questions.",
+        "ownership": [
+          "Capture the Flag, end to end: pickup, carrying, dropping, returning, capture validation, scoring, and reset.",
+          "Replicated zones that control which spawn locations are eligible.",
+          "Replication of flag and zone state between the host and every client."
+        ],
+        "context": "13-person team · week-long blocks across an eight-week semester · server-authoritative listen server",
+        "flowLabel": "Capture the Flag flow",
+        "flowIntro": "Each state change is decided on the server and replicated, so every player sees the same flag state and the same score.",
+        "flowMainLabel": "Capture path",
+        "flowMain": [
+          { "name": "At base", "detail": "The flag starts at its home position." },
+          { "name": "Pickup", "detail": "The server accepts the pickup and records the carrier." },
+          { "name": "Carried", "detail": "Carrier and flag state replicate to every player." },
+          { "name": "Capture", "detail": "The server validates the capture before it counts." },
+          { "name": "Score and reset", "detail": "The score updates and the flag resets." }
+        ],
+        "flowBranchLabel": "If the carrier drops it",
+        "flowBranch": [
+          { "name": "Dropped", "detail": "The flag leaves its carrier." },
+          { "name": "Returned", "detail": "The flag goes back to its home position." }
+        ],
+        "authorityLabel": "Authority and replication",
+        "authorityIntro": "Kyoto Conflict runs on a listen server: one player’s machine hosts the authoritative game while that player also plays. It does not use a dedicated server.",
+        "authority": [
+          { "role": "Players", "detail": "Act through their own character. They do not decide objective outcomes." },
+          { "role": "Listen-server host", "detail": "Owns flag, score, and zone state. Validates pickups and captures." },
+          { "role": "Every client", "detail": "Receives the replicated flag, score, and zone state and presents it." }
+        ],
+        "decisionsLabel": "Decisions and tradeoffs",
+        "decisions": [
+          { "title": "Outcomes are server decisions", "body": "Pickup, capture, scoring, and reset are resolved by the host and then replicated. A client cannot award itself a capture." },
+          { "title": "Build on the established spawn model", "body": "The spawning approach is influenced by Lyra and Unreal’s established model. My work was the replicated zone logic that controls which spawn locations are eligible." },
+          { "title": "Match the team’s Blueprint workflow", "body": "An external programmer worked Blueprint-only. I kept to that approach so our systems stayed compatible, at the cost of the C++ structure I wanted to practise." }
+        ]
+      },
+      "reflections": "Kyoto Conflict was a challenging and rewarding learning experience that tested both my technical skills and collaborative abilities. I focused on gameplay development, implementing the core game loop, multiplayer replication, player interactions, and later taking full responsibility for audio integration. Working with both internal and external team members, I ensured key gameplay systems were synchronized across the network and that interactions, pickups, and spawn points functioned reliably. One major challenge was balancing project needs with personal learning goals. I adapted to an external programmer’s Blueprint-only approach to maintain compatibility, which sometimes conflicted with my goal of working in C++ to improve structured and extendable coding practices. Additionally, late-stage responsibilities for audio integration introduced unforeseen technical complications due to unfamiliar plugins in a multiplayer context. The project also highlighted the impact of weak pre-production, emphasizing the importance of early alignment, a clear design plan, and establishing a centralized knowledge base. Reflecting on the project, I learned the value of strong planning, adaptability, and collaboration. Supporting colleagues, mentoring when possible, and prioritizing effectively in the face of shifting responsibilities strengthened the team and enhanced the overall project outcome. Despite the challenges, I am proud of the systems I implemented, the teamwork fostered, and the lessons learned, which will guide my approach to future projects."
     },
     "steambrawl": {
       "title": "SteamBrawl",

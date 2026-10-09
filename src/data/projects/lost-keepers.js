@@ -1,7 +1,7 @@
 export default {
     id: 'lost-keepers',
     title: 'Lost Keepers',
-    imageUrl: '/images/lost-keepers.png',
+    imageUrl: '/images/lost-keepers-1280.jpg',
     description: `Lost Keepers is a stylized 3D platform adventure inspired by Zelda, focusing on exploration, environmental puzzles, and player-driven discovery. Players follow the protagonist, Lyra, as she navigates a dungeon castle environment, using “Ghost” artifacts—magical companions like Kealen, a shield—to interact with the world and solve intricate puzzles. Each artifact provides unique abilities that are essential for progression, encouraging creative problem-solving and strategic use of tools. Currently in development using Unreal Engine 5.6, the project is a collaborative effort among friends, acquaintances, and fellow students, combining narrative, puzzle design, and stylized visuals into an engaging adventure.`,
     shortDescription: "A stylized 3D platform adventure inspired by Zelda, focused on environmental puzzles and exploration. Currently in development in Unreal Engine 5.6.", 
     team: `Lost Keepers is primarily developed by a small core team of 4–5 collaborators, all contributing part-time alongside other roles and responsibilities. Each team member focuses on specific areas such as narrative, art, level design, or puzzle creation, while I serve as the sole programmer responsible for all gameplay systems. Despite our part-time schedules, the team maintains strong collaboration and iterative development to steadily progress the project.`,

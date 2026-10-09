@@ -52,12 +52,12 @@ export default function Home() {
       <SEO
         title={t('home.redesign.seoTitle')}
         description={t('home.redesign.seoDescription')}
-        image="https://maxheinze.com/images/kyoto-conflict.png"
+        image="https://maxheinze.com/images/kyoto-conflict-1280.jpg"
         url={prefix || '/'}
       />
 
       <section className="cinematic-hero" aria-labelledby="home-title">
-        <img className="cinematic-hero__image" src="/images/kyoto-conflict.png" alt="" fetchPriority="high" />
+        <img className="cinematic-hero__image" src="/images/kyoto-conflict-2400.jpg" srcSet="/images/kyoto-conflict-1280.jpg 1280w, /images/kyoto-conflict-2400.jpg 2400w" sizes="100vw" width="2400" height="1350" alt="" fetchPriority="high" />
         <div className="cinematic-hero__grain" aria-hidden="true" />
         <div className="cinematic-hero__copy">
           <p className="section-kicker">{t('home.redesign.kicker')}</p>
