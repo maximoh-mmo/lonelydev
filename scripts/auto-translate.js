@@ -2,8 +2,6 @@ import './env.js';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { translateFile } from './translate-markdown.js';
-import { getProviderStatus } from './translation-providers/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,9 +16,17 @@ const RETRY_DELAY_MS = 10000; // 10 second delay on rate limit
 
 // Check for flags
 const skipTranslate = process.argv.includes('--skip-translate');
+const force = process.argv.includes('--force');
+if (skipTranslate) {
+  console.log('Translation disabled: no providers loaded and no content written.');
+  process.exit(0);
+}
+const { translateFile } = await import('./translate-markdown.js');
+const { getProviderStatus } = await import('./translation-providers/index.js');
 const targetLang = process.argv.includes('--lang') 
   ? process.argv[process.argv.indexOf('--lang') + 1] 
   : DEFAULT_LANG;
+if (targetLang !== 'de') throw new Error('Only English-source to German translation is supported.');
 
 // Delay helper
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
@@ -30,7 +36,7 @@ async function translateWithRetry(sourcePath, baseName, lang) {
   
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
-      const result = await translateFile(sourcePath, { lang: lang, force: false });
+      const result = await translateFile(sourcePath, { lang: lang, force });
       return result;
     } catch (err) {
       const isRateLimit = err.message?.includes('429') || err.message?.includes('rate');
@@ -75,7 +81,7 @@ async function autoTranslate() {
     const baseName = file.replace('.en.md', '');
     const targetFile = path.join(BLOG_DIR, `${baseName}.${targetLang}.md`);
     
-    if (fs.existsSync(targetFile)) {
+    if (fs.existsSync(targetFile) && !force) {
       console.log(`⏭️  Skipping: ${baseName} (${targetLang} already exists)`);
       skipped++;
       continue;
@@ -124,7 +130,7 @@ async function autoTranslate() {
   console.log(`   Total:      ${files.length}\n`);
   
   if (errors > 0) {
-    console.log('⚠️  Some translations failed. They will be retried on next build.');
+    console.log('⚠️  Some translations failed. Run npm run translate to retry.');
   }
   
   console.log('✅ Auto-translation complete!\n');

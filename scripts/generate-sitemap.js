@@ -1,6 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { visiblePosts } from '../src/data/post-visibility.js';
+import { allPosts } from '../src/data/posts.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -31,20 +33,12 @@ try {
   }
 
   // 2. Get Dev-blog Post Routes
-  const postsFilePath = path.join(__dirname, '../src/data/posts.js');
-  const postRoutes = [];
-  if (fs.existsSync(postsFilePath)) {
-    const postsFileContent = fs.readFileSync(postsFilePath, 'utf-8');
-    // Regex to extract id: 'some-id'
-    const idRegex = /id:\s*['"]([^'"]+)['"]/g;
-    let match;
-    while ((match = idRegex.exec(postsFileContent)) !== null) {
-      postRoutes.push(`/dev-blog/${match[1]}`);
-    }
-  }
+  const postRoutes = visiblePosts(allPosts, new Date().toISOString().slice(0, 10))
+    .map(post => `/dev-blog/${post.id}`);
 
   // Combine all routes
-  const allRoutes = [...staticRoutes, ...projectRoutes, ...postRoutes];
+  const routes = [...staticRoutes, ...projectRoutes, ...postRoutes];
+  const allRoutes = [...routes, ...routes.map(route => '/de' + (route === '/' ? '' : route))];
 
   // Generate XML
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

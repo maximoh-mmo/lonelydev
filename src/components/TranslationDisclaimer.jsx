@@ -4,7 +4,7 @@ import { Info, AlertCircle } from 'lucide-react';
 const TranslationDisclaimer = ({ type = 'auto' }) => {
   const { i18n } = useTranslation();
   
-  if (i18n.language === 'en') return null;
+  if (!i18n.resolvedLanguage?.startsWith('de')) return null;
 
   const content = {
     auto: {

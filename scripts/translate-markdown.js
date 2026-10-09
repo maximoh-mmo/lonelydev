@@ -190,7 +190,14 @@ function normalizeYamlFrontmatter(content) {
 export async function translateFile(filePath, options = {}) {
   const { force = false, lang = 'de' } = options;
   
+  if (!filePath.endsWith('.en.md') || lang !== 'de') {
+    throw new Error('Expected an English .en.md source and German target.');
+  }
   const absolutePath = path.resolve(filePath);
+  const outputFilePath = absolutePath.replace(/\.en\.md$/, '.de.md');
+  if (fs.existsSync(outputFilePath) && !force) {
+    return { success: false, message: 'File already exists, skipping' };
+  }
   if (!fs.existsSync(absolutePath)) {
     return { success: false, message: `File not found: ${absolutePath}` };
   }
@@ -229,10 +236,7 @@ const protectedData = JSON.parse(frontmatterText);
     const seoTitle = await translate(protectedData.seoTitle, { to: lang });
     translatedData.seoTitle = seoTitle;
   }
-  if (protectedData.category) {
-    const category = await translate(protectedData.category, { to: lang });
-    translatedData.category = category;
-  }
+  // Category and project are stable source identities, localized by the website.
 
   // Restore emojis after translation (handle both literal and Unicode escape forms)
   emojiPlaceholders.forEach((emoji, index) => {
@@ -337,7 +341,6 @@ const protectedData = JSON.parse(frontmatterText);
   // Icons don't need restoration - the shortcode stays as-is for MarkdownRenderer to handle
 
   // --- 5. Save Output ---
-  const outputFilePath = absolutePath.replace('.en.md', `.${lang}.md`);
   if (fs.existsSync(outputFilePath) && !force) {
     console.log(`Skipping: ${outputFilePath} already exists (use --force to overwrite)`);
     return { success: false, message: 'File already exists, skipping' };

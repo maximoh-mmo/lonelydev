@@ -1,146 +1,17 @@
-import { useState, useMemo, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useMemo } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { localizedPost } from '../../data/blog';
 import { useTranslation } from 'react-i18next';
 import SEO from '../../components/SEO';
 
-const markdownModules = import.meta.glob('../../content/blog/*.md', { query: '?raw' });
-
-function parseFrontmatter(content, id = '') {
-  const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
-  if (!match) {
-    console.debug('[parseFrontmatter] No frontmatter match for', id, 'content:', content.slice(0, 100));
-    return { data: {}, content: '' };
-  }
-
-  const frontmatter = {};
-  const dataLines = match[1].split('\n');
-  let currentKey = null;
-  let currentArray = null;
-  let multilineMode = null;
-  let multilineValue = [];
-
-  dataLines.forEach(line => {
-    const trimmed = line;
-
-    // Handle YAML multiline continuation (summary: >-, summary: >, etc.)
-    if (multilineMode) {
-      if (trimmed === '' || trimmed.startsWith(' ') || trimmed.startsWith('\t')) {
-        multilineValue.push(trimmed);
-        return;
-      } else {
-        // End of multiline, store it
-        if (currentKey) {
-          frontmatter[currentKey] = multilineValue.join(' ').trim();
-        }
-        currentKey = null;
-        multilineMode = null;
-        multilineValue = [];
-        // Continue parsing this line as a new key
-      }
-    }
-
-    // Handle array items (- item)
-    if (trimmed.startsWith('- ')) {
-      if (currentArray) {
-        currentArray.push(trimmed.slice(2).trim().replace(/^"|"$/g, ''));
-      } else if (currentKey && !multilineMode) {
-        // Not in a current array, could be the first item of a new array
-        currentArray = [trimmed.slice(2).trim().replace(/^"|"$/g, '')];
-        frontmatter[currentKey] = currentArray;
-        currentArray = null;
-        currentKey = null;
-      }
-      return;
-    }
-
-    // Close any pending array
-    if (currentArray && currentKey) {
-      frontmatter[currentKey] = currentArray;
-      currentArray = null;
-    }
-
-    // Parse key: value
-    if (trimmed.match(/^[a-zA-Z_]+:/)) {
-      const colonIndex = trimmed.indexOf(':');
-      currentKey = trimmed.slice(0, colonIndex).trim();
-      let value = trimmed.slice(colonIndex + 1).trim();
-
-      if (!value) return;
-
-      // Check for multiline indicator
-      if (value === '>' || value === '>-' || value === '|+') {
-        multilineMode = value;
-        multilineValue = [];
-        return;
-      }
-
-      // Check for array start [item1, item2]
-      if (value.startsWith('[') && value.endsWith(']')) {
-        currentArray = value.slice(1, -1).split(',').map(v => v.trim().replace(/^"|"$/g, ''));
-        frontmatter[currentKey] = currentArray;
-        currentArray = null;
-        currentKey = null;
-        return;
-      }
-
-      // Simple quoted or unquoted value
-      frontmatter[currentKey] = value.replace(/^["']|["']$/g, '').replace(/^"|"$/g, '');
-      currentKey = null;
-    }
-  });
-
-  // Handle any remaining data
-  if (currentArray && currentKey) {
-    frontmatter[currentKey] = currentArray;
-  } else if (multilineValue.length > 0 && currentKey) {
-    frontmatter[currentKey] = multilineValue.join(' ').trim();
-  }
-
-  console.debug('[parseFrontmatter] Parsed for', id, ':', frontmatter);
-  return { data: frontmatter, content: match[2] };
-}
-
 export default function DevBlogIndex({ posts }) {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
+  const { pathname } = useLocation();
+  const language = pathname === '/de' || pathname.startsWith('/de/') ? 'de' : 'en';
+  const prefix = language === 'de' ? '/de' : '';
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedProject, setSelectedProject] = useState('All');
-  const [translations, setTranslations] = useState({});
-
-  useEffect(() => {
-    async function loadTranslations() {
-      const lang = i18n.language === 'de' ? 'de' : 'en';
-      const allKeys = Object.keys(markdownModules);
-
-      const loaded = {};
-      for (const post of posts) {
-        const targetKey = allKeys.find(k => k.includes(`/${post.id}.${lang}.`));
-        const fallbackKey = allKeys.find(k => k.includes(`/${post.id}.en.`));
-        const fileKey = targetKey || fallbackKey;
-
-        if (fileKey) {
-          try {
-            const rawContent = await markdownModules[fileKey]();
-            const contentStr = rawContent.default || rawContent;
-            const { data } = parseFrontmatter(contentStr, post.id);
-            loaded[post.id] = data;
-          } catch (err) {
-            console.error('Error loading translation for', post.id, err);
-          }
-        }
-      }
-      setTranslations(loaded);
-    }
-
-    loadTranslations();
-  }, [i18n.language, posts]);
-
-  // Merge translations with posts for filtering and display
-  const postsWithTranslations = useMemo(() => {
-    return posts.map(post => ({
-      ...post,
-      ...translations[post.id]
-    }));
-  }, [posts, translations]);
+  const postsWithTranslations = useMemo(() => posts.map(post => localizedPost(post, language)), [posts, language]);
 
   // Extract unique options from merged data
   const categories = ['All', ...new Set(postsWithTranslations.map((p) => p.category).filter(Boolean))];
@@ -169,7 +40,7 @@ export default function DevBlogIndex({ posts }) {
       <SEO 
         title={t('blog.title', 'Dev Blog')} 
         description="Development blog posts and project updates." 
-        url="/dev-blog" 
+        url={`${prefix}/dev-blog`}
       />
       <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-10 text-center">
         {t('blog.title')}
@@ -178,8 +49,9 @@ export default function DevBlogIndex({ posts }) {
       {/* Filter Bar */}
       <div className="relative flex flex-col md:flex-row gap-4 mb-10 justify-center items-center bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
         <div className="flex items-center gap-2">
-          <label className="text-sm font-semibold text-gray-600">{t('blog.project')}</label>
+          <label htmlFor="blog-project" className="text-sm font-semibold text-gray-600">{t('blog.project')}</label>
           <select
+            id="blog-project"
             value={selectedProject}
             onChange={(e) => setSelectedProject(e.target.value)}
             className="p-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none"
@@ -193,8 +65,9 @@ export default function DevBlogIndex({ posts }) {
         </div>
 
         <div className="flex items-center gap-2">
-          <label className="text-sm font-semibold text-gray-600">{t('blog.category')}</label>
+          <label htmlFor="blog-category" className="text-sm font-semibold text-gray-600">{t('blog.category')}</label>
           <select
+            id="blog-category"
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
             className="p-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none"
@@ -222,7 +95,7 @@ export default function DevBlogIndex({ posts }) {
           filteredPosts.map((post) => (
             <Link
               key={post.id}
-              to={`/dev-blog/${post.id}`}
+              to={`${prefix}/dev-blog/${post.id}`}
               className="block p-6 rounded-2xl border border-gray-200 hover:shadow-lg transform hover:-translate-y-1 transition duration-300 bg-white"
             >
               <div className="flex justify-between items-start gap-4">
@@ -246,7 +119,7 @@ export default function DevBlogIndex({ posts }) {
               </div>
 
               <p className="text-gray-500 text-sm mb-3">
-                {new Date(post.date).toLocaleDateString(t.language === 'de' ? 'de-DE' : 'en-GB', {
+                {new Date(post.date).toLocaleDateString(language === 'de' ? 'de-DE' : 'en-GB', {
                   day: '2-digit',
                   month: 'short',
                   year: 'numeric',

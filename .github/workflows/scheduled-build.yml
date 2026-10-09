@@ -27,7 +27,7 @@ jobs:
           echo "DEEPL_API_KEY first chars: ${DEEPL_API_KEY:0:4}"
 
       - name: Run translation and build
-        run: npm run build
+        run: npm run translate && npm run build
         env:
           DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
           MICROSOFT_TRANSLATOR_KEY: ${{ secrets.MICROSOFT_TRANSLATOR_KEY }}

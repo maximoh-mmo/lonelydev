@@ -1,4 +1,6 @@
-const allPosts = [
+import { visiblePosts } from './post-visibility.js';
+
+export const allPosts = [
   { id: 'onset19', date: '2026-10-19', status: 'scheduled' },
   { id: 'onset18', date: '2026-10-16', status: 'scheduled' },
   { id: 'onset17', date: '2026-10-12', status: 'scheduled' },
@@ -51,15 +53,4 @@ const allPosts = [
   { id: 'labyrinth1', date: '2025-10-27', status: 'published' },
 ];
 
-export const posts = allPosts.filter(post => {
-  // In development, show all posts, drafts and scheduled (future dates) as well
-  if (process.env.NODE_ENV === 'development') {
-    return true;
-  }
-
-  if (post.status === 'draft') return false;
-
-  const referenceDate = new Date().toISOString().split('T')[0];
-  if (post.date > referenceDate) return false;
-  return true;
-});
+export const posts = visiblePosts(allPosts, typeof __BUILD_DATE__ === 'undefined' ? new Date().toISOString().slice(0, 10) : __BUILD_DATE__, import.meta.env?.DEV);

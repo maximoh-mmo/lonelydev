@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ArrowDown, ArrowUpRight, Play } from 'lucide-react';
 import SEO from '../components/SEO';
-import TranslationDisclaimer from '../components/TranslationDisclaimer';
 import './Home.css';
 import './Home.light.css';
 
@@ -86,7 +85,6 @@ export default function Home() {
       <footer className="home-footer">
         <p>{t('home.redesign.footerLead')}</p>
         <a href="mailto:maxheinze@gmail.com">maxheinze@gmail.com</a>
-        <TranslationDisclaimer />
       </footer>
     </main>
   );

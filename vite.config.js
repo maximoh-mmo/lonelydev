@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { blogMetadataPlugin } from './scripts/blog-metadata.js';
 import { resolve, dirname } from 'path';
 import fs from 'fs';
 import { fileURLToPath, pathToFileURL } from 'url';
@@ -33,7 +34,7 @@ function copyCloudflareFiles() {
 }
 
 async function getPlugins() {
-  const plugins = [react(), copyCloudflareFiles()];
+  const plugins = [react(), blogMetadataPlugin(resolve(__dirname, 'src/content/blog')), copyCloudflareFiles()];
   
   if (process.env.NODE_ENV === 'development') {
     const adminPluginPath = resolve(__dirname, 'admin/vite-plugin-admin-api.js');

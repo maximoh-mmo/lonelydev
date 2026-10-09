@@ -5,9 +5,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node scripts/auto-translate.js && node scripts/generate-sitemap.js && vite",
-    "build": "node scripts/auto-translate.js && node scripts/generate-sitemap.js && vite build",
-    "build:skip-translate": "node scripts/auto-translate.js --skip-translate && node scripts/generate-sitemap.js && vite build",
+    "dev": "node scripts/generate-sitemap.js && vite",
+    "build": "node scripts/generate-sitemap.js && vite build",
+    "build:skip-translate": "npm run build",
     "translate": "node scripts/auto-translate.js",
     "translate:force": "node scripts/auto-translate.js --force",
     "lint": "eslint .",
