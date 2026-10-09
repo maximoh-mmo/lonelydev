@@ -1,70 +1,146 @@
-.headline-echo {
-  position: relative;
-  width: max-content;
-  max-width: 100%;
+/* Stronger scrim behind the headline column so the outlined words separate
+   from the key art's logo. The right half of the image stays untouched. */
+.cinematic-hero::before {
+  background:
+    linear-gradient(90deg, rgba(3, 5, 7, .96), rgba(3, 5, 7, .86) 36%, rgba(3, 5, 7, .5) 58%, rgba(3, 5, 7, .06) 80%),
+    linear-gradient(0deg, #07090b, transparent 42%);
 }
 
+@media (max-width: 620px) {
+  .cinematic-hero::before {
+    background: linear-gradient(0deg, #07090b 3%, rgba(3, 5, 7, .7) 58%, rgba(3, 5, 7, .3));
+  }
+}
+
+/* Hero — one sequence that follows the attention order:
+   role (static) → claim underline → focus phrase → primary action → proof → image annotations. */
+
+.headline-echo {
+  position: relative;
+}
+
+.cinematic-hero h1 .headline-echo__text {
+  display: inline;
+  /* Dark halo keeps the outlined words legible over the key art. */
+  text-shadow: 0 0 .32em rgba(3, 5, 7, .85), 0 0 .08em rgba(3, 5, 7, .9);
+}
+
+/* Accent under the last line of the phrase. Width comes from Home.jsx; the
+   fallback is the whole block, matching the previous behaviour. */
 .headline-echo::after {
   content: '';
   position: absolute;
-  right: .02em;
   bottom: -.08em;
-  left: .02em;
+  left: var(--echo-left, .02em);
+  width: var(--echo-width, calc(100% - .04em));
   height: 2px;
   background: var(--home-cyan);
   opacity: .9;
-  transform: scaleX(0);
   transform-origin: left;
 }
 
 .motion-ready .headline-echo::after {
-  animation: home-line-in .75s cubic-bezier(.22, 1, .36, 1) .18s forwards;
+  animation: home-line-in .8s cubic-bezier(.65, 0, .35, 1) .15s both;
 }
 
 .cinematic-hero__intro mark {
   padding: 0 .04em;
   color: inherit;
-  background: linear-gradient(rgba(102, 241, 242, .18), rgba(102, 241, 242, .18)) no-repeat left 92% / 0 42%;
+  background: linear-gradient(rgba(102, 241, 242, .18), rgba(102, 241, 242, .18)) no-repeat left 92% / 100% 42%;
 }
 
 .motion-ready .cinematic-hero__intro mark {
-  animation: home-mark-in .65s cubic-bezier(.22, 1, .36, 1) .48s forwards;
+  background-size: 0 42%;
+  animation: home-mark-in .65s cubic-bezier(.22, 1, .36, 1) .55s forwards;
 }
 
 .hero-proof {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
-  max-width: 680px;
+  max-width: 700px;
   margin: 1.6rem 0 0;
   padding: 0;
 }
 
 .hero-proof > div {
-  padding: .7rem 0 .7rem .9rem;
-  border-left: 1px solid rgba(102, 241, 242, .55);
+  position: relative;
+  padding: .7rem 0 .7rem 1rem;
+}
+
+.hero-proof > div::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 2px;
+  background: var(--home-cyan);
+  opacity: .7;
+  transform-origin: top;
 }
 
 .hero-proof dt {
   color: #f3f0e9;
-  font-size: .76rem;
+  font-size: .84rem;
   font-weight: 700;
-  letter-spacing: .025em;
+  letter-spacing: .015em;
 }
 
 .hero-proof dd {
   margin: .32rem 0 0;
-  color: #aaa9a4;
-  font-size: .7rem;
+  color: #c2c0ba;
+  font-size: .78rem;
   line-height: 1.5;
 }
 
-.motion-ready .hero-proof > div {
-  animation: home-proof-in .5s cubic-bezier(.22, 1, .36, 1) .68s both;
+.motion-ready .hero-proof > div::before {
+  animation: home-rule-in .45s cubic-bezier(.22, 1, .36, 1) 1.05s both;
 }
 
-.motion-ready .hero-proof > div + div {
-  animation-delay: .78s;
+.motion-ready .hero-proof dt,
+.motion-ready .hero-proof dd {
+  animation: home-proof-in .5s cubic-bezier(.22, 1, .36, 1) 1.2s both;
+}
+
+.motion-ready .hero-proof dd { animation-delay: 1.28s; }
+.motion-ready .hero-proof > div + div::before { animation-delay: 1.17s; }
+.motion-ready .hero-proof > div + div dt { animation-delay: 1.32s; }
+.motion-ready .hero-proof > div + div dd { animation-delay: 1.4s; }
+
+/* Image annotations: the leader line extends, then the label settles. They are
+   notes on the gameplay systems, so they arrive last. */
+.system-note span {
+  position: relative;
+  transform-origin: left;
+}
+
+.system-note span::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  right: -3px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--home-cyan);
+  box-shadow: 0 0 10px var(--home-cyan);
+}
+
+.motion-ready .system-note {
+  animation: home-note-in .55s cubic-bezier(.22, 1, .36, 1) 1.75s both;
+}
+
+.motion-ready .system-note span {
+  animation: home-rule-x .5s cubic-bezier(.22, 1, .36, 1) 1.6s both;
+}
+
+.motion-ready .system-note--flag { animation-delay: 1.95s; }
+.motion-ready .system-note--flag span { animation-delay: 1.8s; }
+
+/* Scroll cue: two gentle nudges once the hero has settled, then still. */
+.motion-ready .hero-scroll svg {
+  animation: home-cue 1.1s ease-in-out 2.6s 2;
 }
 
 .text-action {
@@ -92,17 +168,32 @@
   transform: scaleX(1);
 }
 
+/* The primary action keeps a full underline; it draws once, then the arrow
+   nudges toward the case study a single time. */
+.text-action--primary::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.motion-ready .text-action--primary::after {
+  animation: home-cta-line .6s cubic-bezier(.22, 1, .36, 1) .85s both;
+}
+
+.motion-ready .text-action--primary svg {
+  animation: home-cta-nudge .7s cubic-bezier(.22, 1, .36, 1) 1.3s both;
+}
+
 .text-action:focus-visible {
   outline: 2px solid var(--home-cyan);
   outline-offset: 5px;
 }
 
-.motion-ready [data-reveal] {
+.portfolio-home.motion-ready [data-reveal] {
   opacity: 0;
   transform: translateY(12px);
 }
 
-.motion-ready [data-reveal].is-visible {
+.portfolio-home.motion-ready [data-reveal].is-visible {
   opacity: 1;
   transform: translateY(0);
   transition: opacity .55s ease, transform .55s cubic-bezier(.22, 1, .36, 1);
@@ -188,8 +279,111 @@ html.home-scroll-snap .portfolio-home > section {
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--home-cyan), transparent);
   opacity: .55;
-  transform: scaleX(0);
   transform-origin: center;
+}
+
+.motion-ready .system-map:not(.is-visible) .architecture-columns::before,
+.motion-ready .system-map:not(.is-visible) .architecture-columns::after {
+  transform: scaleX(0);
+}
+
+.architecture-columns::before { top: 33.5%; }
+.architecture-columns::after { bottom: 33.5%; }
+.system-map.is-visible .architecture-columns::before { animation: home-wire-in .65s ease-out .25s forwards; }
+.system-map.is-visible .architecture-columns::after { animation: home-wire-in .65s ease-out .55s forwards; }
+
+.architecture-lane {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-width: 0;
+  text-align: center;
+}
+
+.architecture-lane p {
+  min-height: 2em;
+  margin: 0 0 .7rem;
+  color: var(--home-cyan);
+  font: 650 .61rem/1.35 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.architecture-lane .system-node {
+  position: relative;
+  inset: auto;
+  display: block;
+  padding: .65rem .4rem;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .22);
+}
+
+.architecture-lane .system-wire {
+  position: relative;
+  inset: auto;
+  align-self: center;
+  width: 1px;
+  height: 18px;
+  background: var(--home-cyan);
+  opacity: .42;
+  transform: scaleY(1);
+  transform-origin: top;
+}
+
+.architecture-server {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border: 1px solid rgba(102, 241, 242, .42);
+  background: rgba(7, 13, 16, .88);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.architecture-boundary {
+  padding: .75rem 1rem;
+}
+
+.architecture-boundary span {
+  color: var(--home-muted);
+  font-size: .58rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.architecture-boundary strong {
+  color: #caffff;
+  font-size: .72rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.architecture-columns {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  padding: 1.4rem 0;
+}
+
+.architecture-columns::before,
+.architecture-columns::after {
+  content: '';
+  position: absolute;
+  right: 16.66%;
+  left: 16.66%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--home-cyan), transparent);
+  opacity: .55;
+  transform-origin: center;
+}
+
+.motion-ready .system-map:not(.is-visible) .architecture-columns::before,
+.motion-ready .system-map:not(.is-visible) .architecture-columns::after {
+  transform: scaleX(0);
 }
 
 .architecture-columns::before { top: 33.5%; }
@@ -271,13 +465,89 @@ html.home-scroll-snap .portfolio-home > section {
   margin: 1.2rem 0 0;
 }
 
-@keyframes home-line-in { to { transform: scaleX(1); } }
+/* Onset diagram: authority boundary first, lanes build top-down, then the
+   dedicated server locks in underneath — the reading is "everything resolves
+   at the server". One pass, then static. */
+.motion-ready .system-map:not(.is-visible) .architecture-boundary,
+.motion-ready .system-map:not(.is-visible) .architecture-lane p,
+.motion-ready .system-map:not(.is-visible) .architecture-lane .system-node,
+.motion-ready .system-map:not(.is-visible) .architecture-server,
+.motion-ready .system-map:not(.is-visible) .system-map__note {
+  opacity: 0;
+}
+
+.motion-ready .system-map:not(.is-visible) .architecture-lane .system-wire {
+  transform: scale(0);
+}
+
+.system-map.is-visible .architecture-boundary { animation: home-node-in .4s ease-out .1s both; }
+.system-map.is-visible .architecture-lane p { animation: home-fade-in .35s ease-out .25s both; }
+
+.system-map.is-visible .architecture-lane .system-node {
+  animation: home-node-in .4s ease-out .35s both;
+}
+
+.system-map.is-visible .architecture-lane .system-node:nth-of-type(2) { animation-delay: .55s; }
+.system-map.is-visible .architecture-lane .system-node:nth-of-type(3) { animation-delay: .75s; }
+
+.system-map.is-visible .architecture-lane .system-wire {
+  animation: home-wire-draw .22s ease-out .5s both;
+}
+
+.system-map.is-visible .architecture-lane .system-wire:nth-of-type(2) { animation-delay: .7s; }
+
+.system-map.is-visible .architecture-columns::before { animation: home-wire-in .5s ease-out .65s both; }
+.system-map.is-visible .architecture-columns::after { animation: home-wire-in .5s ease-out .85s both; }
+
+.system-map.is-visible .architecture-server {
+  animation: home-node-in .4s ease-out 1s both, home-lock 1.1s ease-out 1.25s both;
+}
+
+.system-map.is-visible .system-map__note { animation: home-fade-in .5s ease-out 1.5s both; }
+
+/* Pointer users can isolate a lane to read it as one path. */
+@media (hover: hover) {
+  .architecture-lane .system-node { transition: border-color .2s ease, background-color .2s ease; }
+  .architecture-lane:hover .system-node {
+    border-color: var(--home-cyan);
+    background-color: rgba(102, 241, 242, .1);
+  }
+}
+
+/* PhotoBoss: the evidence note arrives after the screenshot settles. */
+.motion-ready .photoboss-media:not(.is-visible) .photoboss-note { opacity: 0; }
+.motion-ready .photoboss-media.is-visible .photoboss-note {
+  animation: home-note-in .55s cubic-bezier(.22, 1, .36, 1) .6s both;
+}
+
+@keyframes home-line-in { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes home-rule-in { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes home-rule-x { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes home-fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes home-note-in {
+  from { opacity: 0; transform: translateX(-6px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes home-cta-line { from { transform: scaleX(.22); opacity: .58; } to { transform: scaleX(1); opacity: 1; } }
+@keyframes home-cta-nudge {
+  0%, 100% { transform: translate(0, 0); }
+  45% { transform: translate(4px, -4px); }
+}
+@keyframes home-cue {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+@keyframes home-wire-draw { from { transform: scale(0); } to { transform: scale(1); } }
+@keyframes home-lock {
+  0% { border-color: var(--home-cyan); box-shadow: 0 0 0 1px var(--home-cyan), 0 0 28px rgba(102, 241, 242, .28); }
+  100% { box-shadow: 0 0 0 0 transparent, 0 0 0 transparent; }
+}
 @keyframes home-mark-in { to { background-size: 100% 42%; } }
 @keyframes home-proof-in {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
-@keyframes home-wire-in { to { transform: scaleX(1); } }
+@keyframes home-wire-in { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 @keyframes home-node-in {
   from { opacity: 0; transform: translateY(5px); }
   to { opacity: 1; transform: translateY(0); }
@@ -288,7 +558,7 @@ html.home-scroll-snap .portfolio-home > section {
 }
 
 @media (max-width: 620px) {
-  .headline-echo { width: auto; }
+  .architecture-lane .system-wire { transform-origin: left; }
   .hero-proof { grid-template-columns: 1fr; gap: .15rem; margin-top: 1rem; }
   .hero-proof > div { padding: .45rem 0 .45rem .75rem; }
   .hero-proof dd { display: none; }
@@ -312,14 +582,11 @@ html.home-scroll-snap .portfolio-home > section {
 
 @media (prefers-reduced-motion: reduce) {
   html.home-scroll-snap { scroll-snap-type: none; }
-  .headline-echo::after { transform: scaleX(1); }
-  .cinematic-hero__intro mark { background-size: 100% 42%; }
-  .motion-ready [data-reveal],
-  .motion-ready [data-reveal].is-visible { opacity: 1; transform: none; transition: none; }
-  .motion-ready .hero-proof > div,
-  .system-map.is-visible .architecture-lane .system-node,
-  .system-map.is-visible .architecture-columns::before,
-  .system-map.is-visible .architecture-columns::after { animation: none; opacity: 1; transform: none; }
+  .portfolio-home.motion-ready [data-reveal],
+  .portfolio-home.motion-ready [data-reveal].is-visible { opacity: 1; transform: none; transition: none; }
+  .portfolio-home *,
+  .portfolio-home *::before,
+  .portfolio-home *::after { animation: none !important; }
   .motion-ready .photoboss-media[data-reveal] img { transform: none; transition: none; }
   .text-action::after,
   .text-action svg { transition: none; }

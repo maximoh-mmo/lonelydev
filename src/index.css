@@ -221,7 +221,7 @@ button, a, select, input, textarea, [tabindex] { outline-offset: 5px; }
 .project-row .action-link { margin-top: 1rem; }
 .project-row:hover h2 { color: var(--accent); }
 .project-media { margin: 0 0 3rem; overflow: hidden; background: var(--surface); }
-.project-media iframe { width: 100%; aspect-ratio: 16 / 9; border: 0; }
+.project-media iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; background: #000; }
 .project-media img { width: 100%; height: auto; }
 .project-tech { margin-top: 1.5rem; }
 .contribution-list { margin: 0; color: var(--muted); line-height: 1.8; }

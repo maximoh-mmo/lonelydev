@@ -19,6 +19,27 @@ export default function Home() {
   const { prefix } = useRouteLanguage();
   const pageRef = useRef(null);
 
+  // Size the "under pressure." accent to the last rendered line of the phrase,
+  // so it never overshoots when the headline wraps (any language, any width).
+  useEffect(() => {
+    const echo = pageRef.current?.querySelector('.headline-echo');
+    const text = echo?.querySelector('.headline-echo__text');
+    if (!echo || !text) return undefined;
+    const measure = () => {
+      const rects = text.getClientRects();
+      const last = rects[rects.length - 1];
+      if (!last) return;
+      const box = echo.getBoundingClientRect();
+      echo.style.setProperty('--echo-left', `${last.left - box.left}px`);
+      echo.style.setProperty('--echo-width', `${last.width}px`);
+    };
+    measure();
+    document.fonts?.ready.then(measure);
+    const observer = 'ResizeObserver' in window ? new ResizeObserver(measure) : null;
+    observer?.observe(echo);
+    return () => observer?.disconnect();
+  }, [t]);
+
   useEffect(() => {
     const page = pageRef.current;
     const targets = Array.from(page?.querySelectorAll('[data-reveal]') || []);
@@ -61,10 +82,10 @@ export default function Home() {
         <div className="cinematic-hero__grain" aria-hidden="true" />
         <div className="cinematic-hero__copy">
           <p className="section-kicker">{t('home.redesign.kicker')}</p>
-          <h1 id="home-title">{t('home.redesign.headlineLead')}<span className="headline-echo">{t('home.redesign.headlineEcho')}</span></h1>
+          <h1 id="home-title">{t('home.redesign.headlineLead')}<span className="headline-echo"><span className="headline-echo__text">{t('home.redesign.headlineEcho')}</span></span></h1>
           <p className="cinematic-hero__intro">{t('home.redesign.introLead')}<mark>{t('home.redesign.introFocus')}</mark>{t('home.redesign.introTail')}</p>
           <div className="hero-actions">
-            <Link className="text-action" to={`${prefix}/projects/kyoto-conflict`}>
+            <Link className="text-action text-action--primary" to={`${prefix}/projects/kyoto-conflict`}>
               {t('home.redesign.caseStudy')} <ArrowUpRight aria-hidden="true" />
             </Link>
             <a className="text-action text-action--quiet" href="https://games-academy.itch.io/kyoto-conflict" target="_blank" rel="noreferrer">

@@ -1,0 +1,98 @@
+/* Case-study motion. Each figure explains itself once as it enters view, then
+   stays static. Hidden pre-states only apply under .motion-ready (set by
+   useReveal when JS runs and reduced motion is not requested). */
+
+/* Ownership: the accent rule draws down each claim in turn. */
+.case-ownership li {
+  border-left: 0;
+  padding-left: calc(1rem + 2px);
+  background: linear-gradient(var(--accent), var(--accent)) no-repeat left top / 2px 100%;
+}
+
+.motion-ready .case-ownership:not(.is-visible) li {
+  opacity: 0;
+  background-size: 2px 0;
+}
+
+.case-ownership.is-visible li {
+  animation:
+    case-settle .5s cubic-bezier(.22, 1, .36, 1) calc(var(--i, 0) * .12s) both,
+    case-rule .45s cubic-bezier(.65, 0, .35, 1) calc(var(--i, 0) * .12s + .05s) both;
+}
+
+/* Capture the Flag flow: steps arrive in order and each one briefly carries
+   the accent, so the eye follows the state path left to right, then the
+   drop/return branch. */
+.motion-ready .case-flow:not(.is-visible) .case-flow__path li,
+.motion-ready .case-flow:not(.is-visible) .case-flow__path li + li::before {
+  opacity: 0;
+}
+
+.case-flow.is-visible .case-flow__path li {
+  animation: case-step .9s ease-out calc(var(--i, 0) * .14s + .1s) both;
+}
+
+.case-flow.is-visible .case-flow__path li + li::before {
+  animation: case-fade .3s ease-out calc(var(--i, 0) * .14s + .02s) both;
+}
+
+/* Authority: players → host → clients. The host is the authority, so it
+   settles last with a short emphasis on its existing accent border. */
+.motion-ready .case-authority:not(.is-visible) li,
+.motion-ready .case-authority:not(.is-visible) li + li::before {
+  opacity: 0;
+}
+
+.case-authority.is-visible li {
+  animation: case-settle .5s cubic-bezier(.22, 1, .36, 1) calc(var(--i, 0) * .2s + .1s) both;
+}
+
+.case-authority.is-visible li + li::before {
+  animation: case-fade .3s ease-out calc(var(--i, 0) * .2s) both;
+}
+
+.case-authority.is-visible li:nth-child(2) {
+  animation:
+    case-settle .5s cubic-bezier(.22, 1, .36, 1) .3s both,
+    case-authority-lock 1.2s ease-out .75s both;
+}
+
+/* Decisions: a quiet settle, no emphasis — the text is the evidence. */
+.motion-ready .case-decisions:not(.is-visible) > div { opacity: 0; }
+
+.case-decisions.is-visible > div {
+  animation: case-settle .5s cubic-bezier(.22, 1, .36, 1) calc(var(--i, 0) * .1s) both;
+}
+
+@keyframes case-settle {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes case-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes case-rule {
+  from { background-size: 2px 0; }
+  to { background-size: 2px 100%; }
+}
+
+@keyframes case-step {
+  0% { opacity: 0; transform: translateY(6px); border-color: var(--line-strong); }
+  35% { opacity: 1; transform: translateY(0); border-color: var(--accent); }
+  100% { opacity: 1; transform: translateY(0); border-color: var(--line-strong); }
+}
+
+@keyframes case-authority-lock {
+  0% { box-shadow: 0 0 0 1px var(--accent), 0 0 26px color-mix(in srgb, var(--accent) 28%, transparent); }
+  100% { box-shadow: 0 0 0 0 transparent, 0 0 0 transparent; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .case-study *,
+  .case-study *::before,
+  .case-study *::after { animation: none !important; }
+  .case-ownership li { background-size: 2px 100%; opacity: 1; }
+}

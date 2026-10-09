@@ -1,23 +1,29 @@
+import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import useReveal from '../hooks/useReveal';
+import './CaseStudy.motion.css';
 
-const FlowList = ({ steps, className = '' }) => (
+const FlowList = ({ steps, className = '', offset = 0 }) => (
   <ol className={'case-flow__path ' + className}>
-    {steps.map(step => <li key={step.name}><strong>{step.name}</strong><span>{step.detail}</span></li>)}
+    {steps.map((step, index) => <li key={step.name} style={{ '--i': index + offset }}><strong>{step.name}</strong><span>{step.detail}</span></li>)}
   </ol>
 );
 
 export default function CaseStudy({ projectId }) {
   const { t } = useTranslation();
+  const rootRef = useRef(null);
   const study = t('projects.' + projectId + '.caseStudy', { returnObjects: true, defaultValue: null });
+  const hasStudy = Boolean(study && typeof study === 'object');
+  useReveal(rootRef, [projectId, hasStudy]);
   if (!study || typeof study !== 'object') return null;
 
   return (
-    <div className="case-study">
+    <div className="case-study" ref={rootRef}>
       <section className="editorial-section case-role" aria-labelledby="case-role-title">
         <div className="section-label"><span>01</span><h2 id="case-role-title">{study.roleLabel}</h2></div>
         <div>
           <p className="case-role__lead">{study.roleLead}</p>
-          <ul className="case-ownership">{study.ownership.map(item => <li key={item}>{item}</li>)}</ul>
+          <ul className="case-ownership" data-reveal>{study.ownership.map((item, index) => <li key={item} style={{ '--i': index }}>{item}</li>)}</ul>
           <p className="case-context">{study.context}</p>
         </div>
       </section>
@@ -26,11 +32,11 @@ export default function CaseStudy({ projectId }) {
         <div className="section-label"><span>02</span><h2 id="case-flow-title">{study.flowLabel}</h2></div>
         <figure className="case-figure">
           <figcaption>{study.flowIntro}</figcaption>
-          <div className="case-flow">
+          <div className="case-flow" data-reveal>
             <p className="case-flow__label">{study.flowMainLabel}</p>
             <FlowList steps={study.flowMain} />
             <p className="case-flow__label">{study.flowBranchLabel}</p>
-            <FlowList steps={study.flowBranch} className="case-flow__path--branch" />
+            <FlowList steps={study.flowBranch} className="case-flow__path--branch" offset={study.flowMain.length + 1} />
           </div>
         </figure>
       </section>
@@ -39,16 +45,16 @@ export default function CaseStudy({ projectId }) {
         <div className="section-label"><span>03</span><h2 id="case-authority-title">{study.authorityLabel}</h2></div>
         <figure className="case-figure">
           <figcaption>{study.authorityIntro}</figcaption>
-          <ol className="case-authority">
-            {study.authority.map(node => <li key={node.role}><strong>{node.role}</strong><span>{node.detail}</span></li>)}
+          <ol className="case-authority" data-reveal>
+            {study.authority.map((node, index) => <li key={node.role} style={{ '--i': index }}><strong>{node.role}</strong><span>{node.detail}</span></li>)}
           </ol>
         </figure>
       </section>
 
       <section className="editorial-section" aria-labelledby="case-decisions-title">
         <div className="section-label"><span>04</span><h2 id="case-decisions-title">{study.decisionsLabel}</h2></div>
-        <dl className="contribution-list">
-          {study.decisions.map(decision => <div key={decision.title}><dt>{decision.title}</dt><dd>{decision.body}</dd></div>)}
+        <dl className="contribution-list case-decisions" data-reveal>
+          {study.decisions.map((decision, index) => <div key={decision.title} style={{ '--i': index }}><dt>{decision.title}</dt><dd>{decision.body}</dd></div>)}
         </dl>
       </section>
     </div>
