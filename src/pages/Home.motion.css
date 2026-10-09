@@ -108,6 +108,21 @@
   transition: opacity .55s ease, transform .55s cubic-bezier(.22, 1, .36, 1);
 }
 
+html.home-scroll-snap {
+  scroll-snap-type: y mandatory;
+}
+
+html.home-scroll-snap .portfolio-home > section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+@media (min-width: 861px) {
+  html.home-scroll-snap .project-chapter {
+    min-height: calc(100svh - 64px);
+  }
+}
+
 .motion-ready .photoboss-media[data-reveal] img {
   transform: scale(1.025);
   transition: transform .9s cubic-bezier(.22, 1, .36, 1);
@@ -296,6 +311,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html.home-scroll-snap { scroll-snap-type: none; }
   .headline-echo::after { transform: scaleX(1); }
   .cinematic-hero__intro mark { background-size: 100% 42%; }
   .motion-ready [data-reveal],

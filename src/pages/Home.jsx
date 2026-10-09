@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Trans, useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { ArrowDown, ArrowUpRight, Play } from 'lucide-react';
 import SEO from '../components/SEO';
 import useRouteLanguage from '../hooks/useRouteLanguage';
@@ -23,11 +23,12 @@ export default function Home() {
     const page = pageRef.current;
     const targets = Array.from(page?.querySelectorAll('[data-reveal]') || []);
     if (!page || !targets.length) return undefined;
+    document.documentElement.classList.add('home-scroll-snap');
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduceMotion || !('IntersectionObserver' in window)) {
       targets.forEach(target => target.classList.add('is-visible'));
-      return undefined;
+      return () => document.documentElement.classList.remove('home-scroll-snap');
     }
 
     page.classList.add('motion-ready');
@@ -40,11 +41,14 @@ export default function Home() {
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.16 });
 
     targets.forEach(target => observer.observe(target));
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      document.documentElement.classList.remove('home-scroll-snap');
+    };
   }, []);
 
   return (
-    <main ref={pageRef} className="portfolio-home motion-ready">
+    <main ref={pageRef} className="portfolio-home">
       <SEO
         title={t('home.redesign.seoTitle')}
         description={t('home.redesign.seoDescription')}
@@ -58,7 +62,7 @@ export default function Home() {
         <div className="cinematic-hero__copy">
           <p className="section-kicker">{t('home.redesign.kicker')}</p>
           <h1 id="home-title">{t('home.redesign.headlineLead')}<span className="headline-echo">{t('home.redesign.headlineEcho')}</span></h1>
-          <p className="cinematic-hero__intro"><Trans i18nKey="home.redesign.intro" components={{ emphasis: <mark /> }} /></p>
+          <p className="cinematic-hero__intro">{t('home.redesign.introLead')}<mark>{t('home.redesign.introFocus')}</mark>{t('home.redesign.introTail')}</p>
           <div className="hero-actions">
             <Link className="text-action" to={`${prefix}/projects/kyoto-conflict`}>
               {t('home.redesign.caseStudy')} <ArrowUpRight aria-hidden="true" />
