@@ -3,6 +3,8 @@ import { lazy, Suspense, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Navbar from './components/Navbar';
 import CVViewer from './components/CVViewer';
+import SiteFooter from './components/SiteFooter';
+import NotFound from './pages/NotFound';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { posts } from './data/posts';
 
@@ -23,6 +25,7 @@ function RouteLanguageSync() {
 
   useEffect(() => {
     const routeLanguage = location.pathname === '/de' || location.pathname.startsWith('/de/') ? 'de' : 'en';
+    document.documentElement.lang = routeLanguage;
     if (!i18n.language.startsWith(routeLanguage)) i18n.changeLanguage(routeLanguage);
   }, [i18n, location.pathname]);
 
@@ -30,7 +33,8 @@ function RouteLanguageSync() {
 }
 
 function LazyLoader() {
-  return <div className="route-loader" aria-live="polite">Loading…</div>;
+  const { t } = useTranslation();
+  return <div className="route-loader" aria-live="polite">{t('ui.loading')}</div>;
 }
 
 const routeDefinitions = (prefix = '') => (
@@ -50,19 +54,25 @@ const routeDefinitions = (prefix = '') => (
 );
 
 function App() {
+  const { t } = useTranslation();
   return (
     <div className="site-shell">
       <RouteLanguageSync />
+      <a className="skip-link" href="#main-content">{t('ui.skipContent')}</a>
       <Navbar />
+      <div id="main-content" tabIndex={-1}>
       <ErrorBoundary>
         <Suspense fallback={<LazyLoader />}>
           <Routes>
             {routeDefinitions('')}
             {routeDefinitions('/de')}
             <Route path="/lonelydev/" element={<Home />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
       </ErrorBoundary>
+      </div>
+      <SiteFooter />
     </div>
   );
 }

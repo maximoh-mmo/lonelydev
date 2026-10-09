@@ -1,142 +1,36 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import projects from '../data/projects';
 import { useTranslation } from 'react-i18next';
-import TextLink from '../components/TextLink';
 import SEO from '../components/SEO';
-
+import useRouteLanguage from '../hooks/useRouteLanguage';
 
 export default function ProjectDetail() {
   const { projectId } = useParams();
   const { t } = useTranslation();
+  const { prefix } = useRouteLanguage();
   const project = projects[projectId];
-
-  if (!project) {
-    return <div className="p-6 text-center text-gray-500">{t('projects.notFound')}</div>;
-  }
-
-  const isAbsoluteUrl = /^(https?:)?\/\//.test(project.imageUrl);
-  const fullImageUrl = isAbsoluteUrl
-    ? project.imageUrl
-    : `${import.meta.env.BASE_URL}${project.imageUrl.replace(/^\/+/, '')}`;
-
+  if (!project) return <main className="page"><header className="page-header"><h1>{t('projects.notFound')}</h1><Link className="action-link" to={prefix + '/projects'}>{t('ui.backToProjects')}</Link></header></main>;
+  const text = (field, fallback) => t('projects.' + project.id + '.' + field, { defaultValue: fallback });
   return (
-    <main className="max-w-4xl mx-auto px-6 py-16 text-left">
-      <SEO 
-        title={t(`projects.${project.id}.title`, { defaultValue: project.title })} 
-        description={t(`projects.${project.id}.description`, { defaultValue: project.shortDescription || project.description })} 
-        image={fullImageUrl}
-        url={`/projects/${project.id}`} 
-      />
-      {/* Video or Image */}
-      {project.videoId ? (
-        <div className="aspect-video mb-8">
-          <iframe
-            className="w-full h-full rounded-xl shadow-md"
-            src={`https://www.youtube.com/embed/${project.videoId}`}
-            title={`${project.title} video`}
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
+    <main className="page project-detail">
+      <SEO title={text('title', project.title)} description={text('shortDescription', project.shortDescription || project.description)} image={project.imageUrl.startsWith('http') ? project.imageUrl : 'https://maxheinze.com' + project.imageUrl} url={prefix + '/projects/' + project.id} />
+      <Link className="action-link article-back" to={prefix + '/projects'}>{t('ui.backToProjects')}</Link>
+      <header className="page-header"><p className="eyebrow">{t('ui.selectedWork')}</p><h1>{text('title', project.title)}</h1><p className="page-lead">{text('shortDescription', project.shortDescription)}</p>
+        <ul className="tags project-tech">{project.tech.map(value => <li key={value}>{value}</li>)}</ul>
+        <div className="action-group">
+          {project.itchLink && <a className="action-button" href={project.itchLink} target="_blank" rel="noopener noreferrer">{t('ui.viewItch')}<span className="sr-only"> {t('ui.newTab')}</span></a>}
+          {project.githubLink && <a className="action-link" href={project.githubLink} target="_blank" rel="noopener noreferrer">{t('ui.viewGitHub')}<span className="sr-only"> {t('ui.newTab')}</span></a>}
         </div>
-      ) : (
-        <img
-          src={fullImageUrl}
-          alt={project.title}
-          className="rounded-xl shadow-md w-full h-auto mb-8 transform transition-transform duration-300 hover:scale-105"
-        />
-      )}
-
-      {/* Title + Itch Link */}
-      <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-10 text-center">
-        {t(`projects.${project.id}.title`, { defaultValue: project.title })}
-      </h1>
-
-      {project.itchLink && (
-        <div className="text-center mb-10">
-          <TextLink href={project.itchLink}>
-            {t('projects.viewOnItch')}
-          </TextLink>
-        </div>
-      )}
-
-      {/* Description */}
-      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-        {t(`projects.${project.id}.description`, { defaultValue: project.description })}
-      </p>
-
-      {/* Contributions (if present) */}
-      {project.contributions && project.contributions.length > 0 && (
-        <>
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">{t('projects.contributions')}</h2>
-          <ul className="list-disc list-inside mb-8 text-lg text-gray-700 leading-relaxed space-y-2">
-            {project.contributions.map(([title, desc], index) => (
-              <li key={index}>
-                <strong>{t(`projects.${project.id}.contributions.${index}.title`, { defaultValue: title })}:</strong> {t(`projects.${project.id}.contributions.${index}.description`, { defaultValue: desc })}
-              </li>
-            ))}
-          </ul>
-        </>
-      )}
-
-      {/* Team Info (if present) */}
-      {project.team && (
-        <>
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">{t('projects.teamHeader')}</h2>
-          <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-            {t(`projects.${project.id}.team`, { defaultValue: project.team })}
-          </p>
-        </>
-      )}
-
-      {/* Roles (if present and no contributions) */}
-      {project.roles && project.roles.length > 0 && (!project.contributions || project.contributions.length === 0) && (
-        <>
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">{t('projects.roles')}</h2>
-          <ul className="list-disc list-inside mb-8 text-lg text-gray-700 leading-relaxed">
-            {project.roles.map((role, index) => <li key={index}>{t(`projects.${project.id}.roles.${index}`, { defaultValue: role })}</li>)}
-          </ul>
-        </>
-      )}
-
-      {/* Reflections */}
-      {project.reflections && (
-        <>
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">{t('projects.reflections')}</h2>
-          <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-            {t(`projects.${project.id}.reflections`, { defaultValue: project.reflections })}
-          </p>
-        </>
-      )}
-
-      {/* Tech */}
-      <h2 className="text-2xl font-semibold text-gray-900 mb-4">{t('projects.techHeader')}</h2>
-      <ul className="list-disc list-inside mb-8 text-lg text-gray-700 leading-relaxed">
-        {project.tech.map((t, index) => <li key={index}>{t}</li>)}
-      </ul>
-
-      {/* External Links */}
-      <div className="flex justify-center gap-6 mb-12 flex-wrap">
-        {project.githubLink && (
-          <a href={project.githubLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block mt-4 px-6 py-2 bg-gray-800 text-white rounded hover:bg-gray-700 transition"
-          >
-            View on GitHub
-          </a>
-        )}
-        {project.itchLink && (
-          <a
-            href={project.itchLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block mt-4 px-6 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition"
-          >
-            View on Itch.io
-          </a>
-        )}
+      </header>
+      <div className="project-media">{project.videoId
+        ? <iframe src={'https://www.youtube.com/embed/' + project.videoId} title={project.title + ' video'} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+        : <img src={project.imageUrl} alt={project.title} />}
       </div>
+      {project.contributions?.length > 0 && <section className="editorial-section"><div className="section-label"><h2>{t('projects.contributions')}</h2></div><dl className="contribution-list">{project.contributions.map(([title, description], index) => <div key={index}><dt>{text('contributions.' + index + '.title', title)}</dt><dd>{text('contributions.' + index + '.description', description)}</dd></div>)}</dl></section>}
+      <section className="editorial-section"><div className="section-label"><h2>{t('ui.projectOverview')}</h2></div><div className="prose"><p>{text('description', project.description)}</p></div></section>
+      {project.team && <section className="editorial-section"><div className="section-label"><h2>{t('projects.teamHeader')}</h2></div><div className="prose"><p>{text('team', project.team)}</p></div></section>}
+      {project.roles?.length > 0 && !project.contributions?.length && <section className="editorial-section"><div className="section-label"><h2>{t('projects.roles')}</h2></div><ul className="prose">{project.roles.map((role, index) => <li key={index}>{text('roles.' + index, role)}</li>)}</ul></section>}
+      {project.reflections && <section className="editorial-section"><div className="section-label"><h2>{t('projects.reflections')}</h2></div><div className="prose"><p>{text('reflections', project.reflections)}</p></div></section>}
     </main>
   );
 }

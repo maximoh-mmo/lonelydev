@@ -1,9 +1,12 @@
 import { Mail, FileText, Download } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import SEO from '../components/SEO';
+import CareerActions from '../components/CareerActions';
+import useRouteLanguage from '../hooks/useRouteLanguage';
 
 export default function Contact() {
   const { t } = useTranslation();
+  const { prefix } = useRouteLanguage();
 
   const contactLinks = [
     {
@@ -86,43 +89,12 @@ export default function Contact() {
   ];
 
   return (
-    <main className="max-w-5xl mx-auto px-6 py-20 text-center">
-      <SEO 
-        title={t("contact.title", "Contact Me")} 
-        description={t("contact.subtitle", "Get in touch for opportunities.")} 
-        url="/contact" 
-      />
-      <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-6">
-        {t("contact.title")}
-      </h1>
-      <p className="text-xl text-gray-600 mb-16 max-w-2xl mx-auto leading-relaxed">
-        {t("contact.subtitle")}
-      </p>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
-        {contactLinks.map((link) => (
-          <a
-            key={link.name}
-            href={link.href}
-            target={link.isDownload ? undefined : "_blank"}
-            rel={link.isDownload ? undefined : "noopener noreferrer"}
-            download={link.isDownload}
-            className={`flex flex-col items-center justify-center p-8 rounded-2xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl border border-transparent hover:border-gray-200 ${link.color}`}
-          >
-            <div className="mb-4 p-3 bg-white rounded-full shadow-sm">
-              {link.icon}
-            </div>
-            <h2 className="text-xl font-bold mb-1">{link.name}</h2>
-            <p className="text-sm font-medium opacity-80">{link.value}</p>
-            {link.isDownload && (
-              <div className="mt-4 flex items-center text-xs font-bold uppercase tracking-wide opacity-70">
-                <Download className="w-3 h-3 mr-1" />
-                PDF
-              </div>
-            )}
-          </a>
-        ))}
-      </div>
+    <main className="page contact-page">
+      <SEO title={t('contact.title')} description={t('contact.subtitle')} url={prefix + '/contact'} />
+      <header className="page-header"><p className="eyebrow">{t('ui.contactIntro')}</p><h1>{t('contact.title')}</h1><p className="page-lead">{t('contact.subtitle')}</p><CareerActions /></header>
+      <ul className="contact-list">{contactLinks.map(link => <li key={link.name}><a href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined} download={link.isDownload || undefined}>
+        <span className="contact-icon" aria-hidden="true">{link.icon}</span><div><h2>{link.name}</h2><p>{link.value}</p></div>{link.isDownload && <Download aria-hidden="true" />}
+      </a></li>)}</ul>
     </main>
   );
 }

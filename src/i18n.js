@@ -9,10 +9,13 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    debug: true,
+    debug: false,
+    lng: /^\/de(?:\/|$)/.test(window.location.pathname) ? 'de' : 'en',
+    supportedLngs: ['en', 'de'],
+    load: 'languageOnly',
     fallbackLng: 'en',
     interpolation: {
-      escapeValue: false, 
+      escapeValue: false,
     },
     backend: {
       loadPath: '/locales/{{lng}}.json',

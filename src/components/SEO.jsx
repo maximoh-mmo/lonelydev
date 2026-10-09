@@ -1,15 +1,17 @@
 import { Helmet } from 'react-helmet-async';
+import useRouteLanguage from '../hooks/useRouteLanguage';
 
 export default function SEO({ title, description, image, url }) {
+  const { language } = useRouteLanguage();
   const siteTitle = 'Max Heinze - Game Programmer';
   const fullTitle = title ? `${title} | ${siteTitle}` : siteTitle;
-  
+
   const defaultDescription = "Portfolio of Max Heinze, a specialized Game Programmer. Explore his projects, development blog, and experiences in software engineering and game development.";
   const metaDescription = description || defaultDescription;
-  
+
   const defaultImage = "https://maxheinze.com/social-preview.png";
   const metaImage = image || defaultImage;
-  
+
   const defaultUrl = "https://maxheinze.com";
   const metaUrl = url ? `${defaultUrl}${url}` : defaultUrl;
 
@@ -21,7 +23,7 @@ export default function SEO({ title, description, image, url }) {
     "jobTitle": "Game Programmer",
     "description": metaDescription,
     "sameAs": [
-      "https://github.com/maxheinze",
+      "https://github.com/maximoh-mmo",
       "https://linkedin.com/in/maxheinze"
     ]
   };
@@ -37,17 +39,17 @@ export default function SEO({ title, description, image, url }) {
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={metaDescription} />
       <meta property="og:image" content={metaImage} />
-      <meta property="og:locale" content="en_US" />
-      <meta property="og:locale:alternate" content="de_DE" />
+      <meta property="og:locale" content={language === 'de' ? 'de_DE' : 'en_US'} />
+      <meta property="og:locale:alternate" content={language === 'de' ? 'en_US' : 'de_DE'} />
 
       <meta property="twitter:card" content="summary_large_image" />
       <meta property="twitter:url" content={metaUrl} />
       <meta property="twitter:title" content={fullTitle} />
       <meta property="twitter:description" content={metaDescription} />
       <meta property="twitter:image" content={metaImage} />
-      
+
       <link rel="canonical" href={metaUrl} />
-      
+
       <script type="application/ld+json">
         {JSON.stringify(structuredData)}
       </script>

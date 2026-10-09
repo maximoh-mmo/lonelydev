@@ -1,3 +1,4 @@
+import EnglishContentNotice from '../components/EnglishContentNotice';
 import { useState } from 'react';
 
 export default function Climbing() {
@@ -23,7 +24,8 @@ export default function Climbing() {
   };
 
   return (
-    <main className="max-w-5xl mx-auto px-6 py-16 text-gray-800">
+    <main className="page legacy-page" lang="en">
+      <EnglishContentNotice />
       {/* Hero Section */}
       <div className="aspect-[3/1] overflow-hidden rounded-2xl shadow-lg mb-12">
         {imageErrors.banner ? (
@@ -157,7 +159,7 @@ export default function Climbing() {
                 key={image.id}
                 src={image.src}
                 alt={image.alt}
-                className="rounded-lg shadow-md object-cover w-full h-64 transform hover:scale-[1.02] transition duration-300"
+                className="rounded-lg shadow-md object-cover w-full h-64 transform transition duration-300"
                 onError={() => handleImageError(image.id)}
               />
             )

@@ -1,6 +1,8 @@
+import EnglishContentNotice from '../components/EnglishContentNotice';
 export default function Kumiko() {
   return (
-    <main className="max-w-4xl mx-auto px-6 py-16 text-center">
+    <main className="page legacy-page" lang="en">
+      <EnglishContentNotice />
       <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-10">
         Precision in Pattern: Exploring Kumiko Joinery
       </h1>
@@ -44,7 +46,7 @@ export default function Kumiko() {
         <img
           src="/images/first-attempt.jpg"
           alt="First attempt — square-grid Asanoha pattern cut from basswood scrap."
-          className="rounded-xl shadow-md mx-auto transform transition-transform duration-300 hover:scale-105"
+          className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
         />
         <figcaption className="text-sm text-gray-500 mt-2">
           First attempt — square-grid Asanoha pattern cut from basswood scrap.
@@ -72,7 +74,7 @@ export default function Kumiko() {
         <img
           src="/images/small-panel-wip.jpg"
           alt="Small panel work in progress — switching to limewood and testing precision fit."
-          className="rounded-xl shadow-md mx-auto transform transition-transform duration-300 hover:scale-105"
+          className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
         />
         <figcaption className="text-sm text-gray-500 mt-2">
           Small panel work in progress — switching to limewood and testing precision fit.
@@ -100,7 +102,7 @@ export default function Kumiko() {
         <img
           src="/images/small-panel.jpg"
           alt="Small panel nearing completion — precise hand-fit lattice."
-          className="rounded-xl shadow-md mx-auto transform transition-transform duration-300 hover:scale-105"
+          className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
         />
         <figcaption className="text-sm text-gray-500 mt-2">
           Small panel nearing completion — precise hand-fit lattice, trimmed to size.
@@ -126,7 +128,7 @@ export default function Kumiko() {
         <img
           src="/images/small-frame.jpg"
           alt="Custom frame assembly — miter joints and color contrast."
-          className="rounded-xl shadow-md mx-auto transform transition-transform duration-300 hover:scale-105"
+          className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
         />
         <figcaption className="text-sm text-gray-500 mt-2">
           Finished Frame, ready for Kumiko panel.
@@ -137,7 +139,7 @@ export default function Kumiko() {
         <img
           src="/images/small-panel-framed.jpg"
           alt="Final framed Kumiko panel — precise geometry and warm tone balance."
-          className="rounded-xl shadow-md mx-auto transform transition-transform duration-300 hover:scale-105"
+          className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
         />
         <figcaption className="text-sm text-gray-500 mt-2">
           Final framed Kumiko panel — precise geometry and warm tone balance.
@@ -159,7 +161,7 @@ export default function Kumiko() {
         <img
           src="/images/wall-panel-wip.jpg"
           alt="Larger wall panel — work in progress, sub-grids preparation for assembly."
-          className="rounded-xl shadow-md mx-auto transform transition-transform duration-300 hover:scale-105"
+          className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
         />
         <figcaption className="text-sm text-gray-500 mt-2">
           Larger wall panel — work in progress, sub-grids preparation for assembly.
@@ -170,7 +172,7 @@ export default function Kumiko() {
         <img
           src="/images/wall-panel-detail.jpg"
           alt="Larger wall panel — detail showing contrasting wood selections."
-          className="rounded-xl shadow-md mx-auto transform transition-transform duration-300 hover:scale-105"
+          className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
         />
         <figcaption className="text-sm text-gray-500 mt-2">
           Larger wall panel — detail view.
@@ -181,7 +183,7 @@ export default function Kumiko() {
         <img
           src="/images/wall-panel.jpg"
           alt="Larger wall panel — finished, unframed, untrimmed wall panel."
-          className="rounded-xl shadow-md mx-auto transform transition-transform duration-300 hover:scale-105"
+          className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
         />
         <figcaption className="text-sm text-gray-500 mt-2">
           Larger wall panel — finished panel, awaiting trimming and framing.
@@ -207,22 +209,22 @@ export default function Kumiko() {
         <img
           src="/images/box-sides.jpg"
           alt="Box body — work in progress, box body."
-          className="rounded-xl shadow-md mx-auto transform transition-transform duration-300 hover:scale-105"
+          className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
         />
         <img
           src="/images/box-lid-wip.jpg"
           alt="Box lid — adding contrasting elements."
-          className="rounded-xl shadow-md mx-auto transform transition-transform duration-300 hover:scale-105"
+          className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
         />
         <img
           src="/images/box-kumiko-wip.jpg"
           alt="Box body — work in progress, kumiko pattern."
-          className="rounded-xl shadow-md mx-auto transform transition-transform duration-300 hover:scale-105"
+          className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
         />
         <img
           src="/images/box-finished.jpg"
           alt="Box finished — kumiko pattern on lid, box body."
-          className="rounded-xl shadow-md mx-auto transform transition-transform duration-300 hover:scale-105"
+          className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
         />
       </div>
 
@@ -230,7 +232,7 @@ export default function Kumiko() {
         <img
           src="/images/box-wip.jpg"
           alt="Workbench view — box assembly surrounded by hand tools and templates."
-          className="rounded-xl shadow-md mx-auto transform transition-transform duration-300 hover:scale-105"
+          className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
         />
         <figcaption className="text-sm text-gray-500 mt-2">
           Workbench view — box assembly surrounded by hand tools and templates.

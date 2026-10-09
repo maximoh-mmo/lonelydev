@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ArrowDown, ArrowUpRight, Play } from 'lucide-react';
 import SEO from '../components/SEO';
+import useRouteLanguage from '../hooks/useRouteLanguage';
 import './Home.css';
 import './Home.light.css';
 
@@ -12,8 +13,8 @@ const TagList = ({ items }) => (
 );
 
 export default function Home() {
-  const { t, i18n } = useTranslation();
-  const prefix = i18n.language.startsWith('de') ? '/de' : '';
+  const { t } = useTranslation();
+  const { prefix } = useRouteLanguage();
 
   return (
     <main className="portfolio-home">
@@ -52,7 +53,7 @@ export default function Home() {
           <h2 id="onset-title">Onset</h2>
           <p>{t('home.redesign.onsetDescription')}</p>
           <TagList items={['Unreal Engine 5.8', t('home.redesign.onsetGenre'), t('home.redesign.inDevelopment')]} />
-          <Link className="text-action" to={`${prefix}/dev-blog`}>{t('home.redesign.readNotes')} <ArrowUpRight aria-hidden="true" /></Link>
+          <Link className="text-action" to={prefix + '/dev-blog?project=Onset'}>{t('home.redesign.readNotes')} <ArrowUpRight aria-hidden="true" /></Link>
         </div>
         <div className="system-map" role="img" aria-label={t('home.redesign.onsetDiagramAlt')}>
           <span className="system-map__grid" aria-hidden="true" />
@@ -78,14 +79,10 @@ export default function Home() {
         </div>
         <div className="chapter-footer">
           <TagList items={['C++', 'Qt', 'SQLite', 'Windows 11']} />
-          <Link className="text-action" to={`${prefix}/dev-blog`}>{t('home.redesign.readBuildLog')} <ArrowUpRight aria-hidden="true" /></Link>
+          <Link className="text-action" to={prefix + '/dev-blog?project=PhotoBoss'}>{t('home.redesign.readBuildLog')} <ArrowUpRight aria-hidden="true" /></Link>
         </div>
       </section>
 
-      <footer className="home-footer">
-        <p>{t('home.redesign.footerLead')}</p>
-        <a href="mailto:maxheinze@gmail.com">maxheinze@gmail.com</a>
-      </footer>
     </main>
   );
 }

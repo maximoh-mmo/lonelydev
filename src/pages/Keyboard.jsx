@@ -1,6 +1,8 @@
+import EnglishContentNotice from '../components/EnglishContentNotice';
 export default function Keyboard() {
   return (
-    <main className="max-w-4xl mx-auto px-6 py-16 text-left">
+    <main className="page legacy-page" lang="en">
+      <EnglishContentNotice />
       <header className="text-center mb-12">
         <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-10">
           Making the Charybdis Wireless — and Then Taking It Further
@@ -36,9 +38,9 @@ export default function Keyboard() {
         </ul>
         <figure className="my-6">
           <img
-            src="images/keyboard-schematic.png"
+            src="/images/keyboard-schematic.png"
             alt="EasyEDA PCB view of the Charybdis redesign"
-            className="rounded-xl shadow-md mx-auto transform transition-transform duration-300 hover:scale-105"
+            className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
           />
           <figcaption className="text-sm text-gray-500 mt-2 text-center">
             PCB layout in EasyEDA showing the SuperMini nRF52840 pinout schematic and connections.
@@ -46,9 +48,9 @@ export default function Keyboard() {
         </figure>
         <figure className="my-6">
           <img
-            src="images/trackball-schematic.png"
+            src="/images/trackball-schematic.png"
             alt="EasyEDA PCB view of the Trackball redesign"
-            className="rounded-xl shadow-md mx-auto transform transition-transform duration-300 hover:scale-105"
+            className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
           />
           <figcaption className="text-sm text-gray-500 mt-2 text-center">
             PCB layout in EasyEDA showing the trackball schematic.
@@ -68,9 +70,9 @@ export default function Keyboard() {
         </ul>
         <figure className="my-6">
           <img
-            src="images/keyboard-rgb.jpg"
+            src="/images/keyboard-rgb.jpg"
             alt="Per-key RGB lighting on the custom wireless Charybdis"
-            className="rounded-xl shadow-md mx-auto transform transition-transform duration-300 hover:scale-105"
+            className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
           />
           <figcaption className="text-sm text-gray-500 mt-2 text-center">
             Per-key RGB lighting powered by SK6812 Mini-E LEDs, driven at 3.3V logic.
@@ -91,9 +93,9 @@ export default function Keyboard() {
         </ul>
         <figure className="my-6">
           <img
-            src="images/zmk.png"
+            src="/images/zmk.png"
             alt="ZMK firmware configuration screenshot"
-            className="rounded-xl shadow-md mx-auto transform transition-transform duration-300 hover:scale-105"
+            className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
           />
           <figcaption className="text-sm text-gray-500 mt-2 text-center">
             Custom ZMK configuration and keymap setup for the nRF52840 board.
@@ -126,9 +128,9 @@ export default function Keyboard() {
         </ul>
         <figure className="my-6">
           <img
-            src="images/trackball-pcb-layout.png"
+            src="/images/trackball-pcb-layout.png"
             alt="Custom trackball PCB and sensor module"
-            className="rounded-xl shadow-md mx-auto transform transition-transform duration-300 hover:scale-105"
+            className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
           />
           <figcaption className="text-sm text-gray-500 mt-2 text-center">
             Trackball PCB iteration featuring the 3.3V-compatible sensor and SPI interface.
@@ -182,9 +184,9 @@ export default function Keyboard() {
         <div className="space-y-8">
           <figure>
             <img
-              src="images/keyboard.jpg"
+              src="/images/keyboard.jpg"
               alt="Finished wireless RGB Charybdis keyboard"
-              className="rounded-xl shadow-md mx-auto transform transition-transform duration-300 hover:scale-105"
+              className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
             />
             <figcaption className="text-sm text-gray-500 mt-2 text-center">
               The finished wireless, per-key RGB Charybdis — functional, bright, and entirely untethered.
@@ -192,9 +194,9 @@ export default function Keyboard() {
           </figure>
           <figure>
             <img
-              src="images/keyboard-main-pcb.png"
+              src="/images/keyboard-main-pcb.png"
               alt="Firmware debugging output"
-              className="rounded-xl shadow-md mx-auto transform transition-transform duration-300 hover:scale-105"
+              className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
             />
             <figcaption className="text-sm text-gray-500 mt-2 text-center">
               Keyboard PCB Design.
@@ -202,9 +204,9 @@ export default function Keyboard() {
           </figure>
           <figure>
             <img
-              src="images/keyboard-wiring.jpg"
+              src="/images/keyboard-wiring.jpg"
               alt="Firmware debugging output"
-              className="rounded-xl shadow-md mx-auto transform transition-transform duration-300 hover:scale-105"
+              className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
             />
             <figcaption className="text-sm text-gray-500 mt-2 text-center">
               Wired up PCB with RGB and key switch connections
@@ -212,9 +214,9 @@ export default function Keyboard() {
           </figure>
           <figure>
             <img
-              src="images/trackball-prototype.jpg"
+              src="/images/trackball-prototype.jpg"
               alt="Firmware debugging output"
-              className="rounded-xl shadow-md mx-auto transform transition-transform duration-300 hover:scale-105"
+              className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
             />
             <figcaption className="text-sm text-gray-500 mt-2 text-center">
               Trackball WIP Prototype
