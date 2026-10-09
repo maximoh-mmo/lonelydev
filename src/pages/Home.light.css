@@ -49,6 +49,15 @@
   box-shadow: 0 16px 38px rgba(65, 58, 46, .16);
 }
 
+:root[data-theme='light'] .architecture-boundary,
+:root[data-theme='light'] .architecture-server {
+  border-color: rgba(0, 111, 115, .45);
+  color: #075c5f;
+  background: rgba(255, 253, 248, .92);
+}
+
+:root[data-theme='light'] .architecture-boundary strong { color: #075c5f; }
+
 :root[data-theme='light'] .system-map__note { color: #4d5357; }
 
 :root[data-theme='light'] .photoboss-chapter { background: #f7f4ed; }
