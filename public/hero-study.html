@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
 <style>
 /* Layout: the site's cinematic hero, with the right half "x-rayed" into the
-   systems underneath — Blueprint graph of the CTF flow, then real Onset C++.
+   systems underneath — Blueprint graph of the CTF flow, then the matching Kyoto C++.
    Deliberately single-theme dark, matching the live hero. */
 :root {
   color-scheme: dark;
@@ -48,12 +48,12 @@ body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f
 .study-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem 1.5rem; padding: .7rem clamp(1rem, 3vw, 3rem); border-bottom: 1px solid var(--line); font-size: .78rem; color: var(--muted); }
 .study-bar strong { color: var(--ink); font-size: .74rem; letter-spacing: .12em; text-transform: uppercase; }
 .study-bar__controls { display: flex; flex-wrap: wrap; gap: .5rem; }
-.study-bar button { min-height: 40px; padding: .45rem .85rem; border: 1px solid var(--line); border-radius: 4px; background: transparent; color: var(--ink); font: 500 .76rem/1 var(--font-sans); cursor: pointer; }
+.study-bar button { min-height: 44px; padding: .45rem .85rem; border: 1px solid var(--line); border-radius: 4px; background: transparent; color: var(--ink); font: 500 .76rem/1 var(--font-sans); cursor: pointer; }
 .study-bar button:hover { border-color: var(--accent); }
 .study-bar button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
 
 /* Hero */
-.hero { position: relative; min-height: min(840px, calc(100svh - 58px)); overflow: hidden; isolation: isolate; }
+.hero { position: relative; min-height: max(900px, calc(100svh - 58px)); overflow: hidden; isolation: isolate; }
 .hero__image { position: absolute; inset: 0; z-index: -3; width: 100%; height: 100%; object-fit: cover; filter: saturate(.82) contrast(1.12) brightness(.88); }
 .hero::before { content: ''; position: absolute; inset: 0; z-index: -2; background: linear-gradient(90deg, rgba(3,5,7,.96), rgba(3,5,7,.86) 34%, rgba(3,5,7,.4) 56%, rgba(3,5,7,.1)), linear-gradient(0deg, var(--bg), transparent 40%); }
 
@@ -121,15 +121,15 @@ body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f
 .code figcaption b { color: var(--ink); font-weight: 600; }
 .code__scroll { overflow-x: auto; }
 .code pre { margin: 0; padding: .6rem 0; font: .68rem/1.55 var(--font-mono); tab-size: 4; }
-.code .ln { display: block; padding: 0 .9rem 0 0; white-space: pre; }
-.code .ln::before { content: attr(data-n); display: inline-block; width: 3.2rem; padding-right: .9rem; color: var(--code-com); text-align: right; }
-.code .ln--hit { background: linear-gradient(90deg, rgba(102,241,242,.16), rgba(102,241,242,.04)); box-shadow: inset 2px 0 var(--accent); animation: hit 1.4s ease-out 4.1s both; }
+.code .ln { display: block; padding: 0 .9rem; white-space: pre; }
+.code .ln--hit { background: linear-gradient(90deg, rgba(102,241,242,.16), rgba(102,241,242,.04)); box-shadow: inset 2px 0 var(--accent); animation: hit 1.4s ease-out var(--hit-delay, 4.1s) both; }
+.s { color: #a8d6a0; }
 .k { color: var(--code-key); } .t { color: var(--code-type); } .f { color: var(--code-fn); }
 .code__note { margin: 0; padding: .55rem .9rem .7rem; border-top: 1px solid var(--node-edge); color: #c2c0ba; font-size: .74rem; line-height: 1.5; }
 
 /* Player view / system view toggle */
 .view-toggle { position: absolute; right: clamp(16px, 3vw, 48px); bottom: 24px; z-index: 5; display: inline-flex; padding: 3px; border: 1px solid var(--line); border-radius: 999px; background: rgba(7,9,11,.82); animation: fade .5s ease-out 4.4s both; }
-.view-toggle button { min-height: 36px; padding: .4rem .9rem; border: 0; border-radius: 999px; background: transparent; color: var(--muted); font: 600 .68rem/1 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; cursor: pointer; }
+.view-toggle button { min-height: 44px; padding: .4rem .9rem; border: 0; border-radius: 999px; background: transparent; color: var(--muted); font: 600 .68rem/1 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; cursor: pointer; }
 .view-toggle button[aria-pressed="true"] { background: rgba(102,241,242,.16); color: var(--accent); }
 .hero.is-player .xray { animation: none; clip-path: inset(0 0 0 100%); transition: clip-path .7s cubic-bezier(.65,0,.35,1); }
 .hero:not(.is-player) .xray.was-toggled { transition: clip-path .7s cubic-bezier(.65,0,.35,1); }
@@ -156,7 +156,7 @@ body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f
 @media (max-width: 860px) {
   .hero { min-height: 0; display: flex; flex-direction: column; }
   .hero::before { background: linear-gradient(0deg, var(--bg) 40%, rgba(3,5,7,.55) 70%, rgba(3,5,7,.25)); }
-  .xray { position: relative; width: 100%; padding: 1.25rem 1rem 1.5rem; animation-delay: .8s; }
+  .xray { position: relative; width: 100%; padding: 1.25rem 1rem 5rem; animation-delay: .8s; }
   .scan { display: none; }
   .hero__copy { position: relative; left: auto; bottom: auto; width: auto; padding: 1.5rem 1.25rem 5rem; }
   .code { align-self: stretch; animation-delay: 3.2s; }
@@ -198,7 +198,7 @@ body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f
       <a class="action action--quiet" href="https://games-academy.itch.io/kyoto-conflict">Open the playable build ▷</a>
     </div>
     <dl class="proof">
-      <div><dt>End-to-end CTF ownership</dt><dd>Pickup through capture, scoring, reset, and replication.</dd></div>
+      <div><dt>End-to-end CTF ownership</dt><dd>Pickup, carrier state, drops, extraction, and round completion.</dd></div>
       <div><dt>Replicated spawn-zone logic</dt><dd>Zone state controls eligible spawn locations.</dd></div>
     </dl>
   </div>
@@ -209,106 +209,67 @@ body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f
     <p class="xray__label"><span class="chip">Blueprint</span>Kyoto Conflict · Capture the Flag</p>
 
     <div class="graph-wrap" tabindex="0" aria-label="Blueprint graph, scrollable on small screens">
-    <svg class="graph" viewBox="0 0 760 360" role="img" aria-labelledby="graph-title graph-desc">
-      <title id="graph-title">Conceptual Blueprint graph of the Capture the Flag flow</title>
-      <desc id="graph-desc">When a player touches the flag, a Switch Has Authority node lets only the server validate the pickup and set the replicated carrier; remote machines make no change and display replicated state. When the carrier enters the capture zone, the server validates the capture, adds the score and resets the flag.</desc>
-
+    <svg class="graph" viewBox="0 0 760 350" role="img" aria-labelledby="graph-title graph-desc">
+      <title id="graph-title">PickupFlag Blueprint: visual and audio feedback</title>
+      <desc id="graph-desc">Recreated from the project's Blueprint graph. OnPickedUpEvent hides CollisionComp and its children, then posts the pickup audio event. OnRespawnEvent shows them, then posts the drop audio event. OnFlagReturnedHome posts the secure audio event. A shared Get CollisionComp node supplies the targets of both Set Visibility calls.</desc>
       <g class="comment">
-        <rect class="frame" x="4" y="4" width="752" height="352" rx="6"/>
+        <rect class="frame" x="4" y="4" width="752" height="342" rx="6"/>
         <rect class="bar" x="4" y="4" width="752" height="26" rx="6"/>
-        <text x="18" y="21">CTF objective flow · server-authoritative · conceptual view of my implementation</text>
+        <text x="18" y="21">PickupFlag · recreated from the project's Blueprint graph</text>
       </g>
-
-      <!-- wires first so nodes sit on top -->
-      <path class="wire wire--exec" pathLength="1" style="--d:2.2s" d="M162 100 C185 100 185 100 208 100"/>
-      <path class="wire wire--exec" pathLength="1" style="--d:2.48s" d="M342 100 C365 100 365 100 388 100"/>
-      <path class="wire wire--remote" pathLength="1" style="--d:2.48s" d="M342 122 C372 122 352 172 382 172"/>
-      <path class="wire wire--exec" pathLength="1" style="--d:2.76s" d="M522 100 C550 100 550 100 578 100"/>
-      <path class="wire wire--obj" pathLength="1" style="--d:2.76s" d="M522 120 C550 120 550 120 578 120"/>
-      <path class="wire wire--exec" pathLength="1" style="--d:3.04s" d="M162 278 C195 278 195 278 228 278"/>
-      <path class="wire wire--exec" pathLength="1" style="--d:3.2s" d="M362 278 C385 278 385 278 408 278"/>
-      <path class="wire wire--exec" pathLength="1" style="--d:3.36s" d="M542 278 C560 278 560 278 578 278"/>
-
-      <!-- Row 1: pickup -->
-      <g transform="translate(20 60)"><g class="node" style="--d:2.05s">
-        <rect class="body" width="150" height="76" rx="6"/>
-        <path class="h-event" d="M0 6a6 6 0 0 1 6-6h138a6 6 0 0 1 6 6v18H0z"/>
-        <text class="title" x="10" y="16">Event · Flag touched</text>
-        <text class="pin-label" x="104" y="44">Exec</text><path class="exec" d="M136 34l9 6-9 6z"/>
-        <text class="pin-label" x="78" y="64">Other actor</text><circle class="obj" cx="141" cy="60" r="4.5"/>
+      <!-- Verified execution and data connections; positions adapted for the hero. -->
+      <path class="wire wire--exec" pathLength="1" style="--d:2.2s" d="M214 94 C240 94 240 94 280 94"/>
+      <path class="wire wire--exec" pathLength="1" style="--d:2.4s" d="M446 94 C475 94 475 94 520 94"/>
+      <path class="wire wire--exec" pathLength="1" style="--d:2.65s" d="M214 174 C240 174 240 174 280 174"/>
+      <path class="wire wire--exec" pathLength="1" style="--d:2.85s" d="M446 174 C475 174 475 174 520 174"/>
+      <path class="wire wire--exec" pathLength="1" style="--d:3.15s" d="M214 254 C310 254 420 254 520 254"/>
+      <path class="wire wire--obj" pathLength="1" style="--d:2.3s" d="M214 317 C250 317 244 282 244 254 L244 154 C244 132 258 118 280 118"/>
+      <path class="wire wire--obj" pathLength="1" style="--d:2.7s" d="M244 234 C244 212 258 198 280 198"/>
+      <g transform="translate(20 54)"><g class="node" style="--d:2.05s">
+        <rect class="body" width="204" height="62" rx="6"/><path class="h-event" d="M0 6a6 6 0 0 1 6-6h192a6 6 0 0 1 6 6v18H0z"/>
+        <text class="title" x="10" y="16">Event OnPickedUpEvent</text><text class="pin-label" x="154" y="44">then</text><path class="exec" d="M194 34l9 6-9 6z"/>
       </g></g>
-
-      <g transform="translate(200 60)"><g class="node" style="--d:2.32s">
-        <rect class="body" width="150" height="80" rx="6"/>
-        <path class="h-flow" d="M0 6a6 6 0 0 1 6-6h138a6 6 0 0 1 6 6v18H0z"/>
-        <text class="title" x="10" y="16">Switch Has Authority</text>
-        <path class="exec" d="M5 34l9 6-9 6z"/>
-        <text class="pin-label" x="86" y="44">Authority</text><path class="exec" d="M136 34l9 6-9 6z"/>
-        <text class="pin-label" x="92" y="66">Remote</text><path class="exec" d="M136 56l9 6-9 6z"/>
+      <g transform="translate(270 54)"><g class="node" style="--d:2.25s">
+        <rect class="body" width="186" height="70" rx="6"/><path class="h-func" d="M0 6a6 6 0 0 1 6-6h174a6 6 0 0 1 6 6v18H0z"/>
+        <text class="title" x="10" y="16">Set Visibility</text><path class="exec" d="M5 34l9 6-9 6z"/><path class="exec" d="M176 34l9 6-9 6z"/>
+        <text class="pin-label" x="24" y="44">New Visibility: false</text><circle class="obj" cx="10" cy="64" r="4.5"/><text class="pin-label" x="24" y="64">Target · children: true</text>
       </g></g>
-
-      <g transform="translate(380 60)"><g class="node" style="--d:2.6s">
-        <rect class="body" width="150" height="76" rx="6"/>
-        <path class="h-func" d="M0 6a6 6 0 0 1 6-6h138a6 6 0 0 1 6 6v18H0z"/>
-        <text class="title" x="10" y="16">Validate pickup</text>
-        <path class="exec" d="M5 34l9 6-9 6z"/><path class="exec" d="M136 34l9 6-9 6z"/>
-        <text class="pin-label" x="94" y="64">Carrier</text><circle class="obj" cx="141" cy="60" r="4.5"/>
+      <g transform="translate(510 54)"><g class="node" style="--d:2.45s">
+        <rect class="body" width="230" height="62" rx="6"/><path class="h-func" d="M0 6a6 6 0 0 1 6-6h218a6 6 0 0 1 6 6v18H0z"/>
+        <text class="title" x="10" y="16">PostEvent</text><path class="exec" d="M5 34l9 6-9 6z"/><text class="pin-label" x="24" y="44">E_Flag_StateChange_OnPickup</text>
       </g></g>
-
-      <g transform="translate(570 60)"><g class="node" style="--d:2.88s">
-        <rect class="body" width="172" height="76" rx="6"/>
-        <path class="h-var" d="M0 6a6 6 0 0 1 6-6h160a6 6 0 0 1 6 6v18H0z"/>
-        <text class="title" x="10" y="16">Set Carrier</text>
-        <text class="rep" x="104" y="16">REPLICATED</text>
-        <path class="exec" d="M5 34l9 6-9 6z"/>
-        <circle class="obj" cx="10" cy="60" r="4.5"/><text class="pin-label" x="20" y="64">Carrier</text>
+      <g transform="translate(20 134)"><g class="node" style="--d:2.5s">
+        <rect class="body" width="204" height="62" rx="6"/><path class="h-event" d="M0 6a6 6 0 0 1 6-6h192a6 6 0 0 1 6 6v18H0z"/>
+        <text class="title" x="10" y="16">Event OnRespawnEvent</text><text class="pin-label" x="154" y="44">then</text><path class="exec" d="M194 34l9 6-9 6z"/>
       </g></g>
-
-      <g transform="translate(382 152)"><g class="node node--ghost" style="--d:2.7s">
-        <rect class="body" width="214" height="40" rx="6"/>
-        <text class="title" x="12" y="24">Remote: no change, show replicated state</text>
+      <g transform="translate(270 134)"><g class="node" style="--d:2.7s">
+        <rect class="body" width="186" height="70" rx="6"/><path class="h-func" d="M0 6a6 6 0 0 1 6-6h174a6 6 0 0 1 6 6v18H0z"/>
+        <text class="title" x="10" y="16">Set Visibility</text><path class="exec" d="M5 34l9 6-9 6z"/><path class="exec" d="M176 34l9 6-9 6z"/>
+        <text class="pin-label" x="24" y="44">New Visibility: true</text><circle class="obj" cx="10" cy="64" r="4.5"/><text class="pin-label" x="24" y="64">Target · children: true</text>
       </g></g>
-
-      <!-- Row 2: capture -->
-      <g transform="translate(20 238)"><g class="node" style="--d:2.95s">
-        <rect class="body" width="150" height="62" rx="6"/>
-        <path class="h-event" d="M0 6a6 6 0 0 1 6-6h138a6 6 0 0 1 6 6v18H0z"/>
-        <text class="title" x="10" y="16">Event · Capture zone</text>
-        <text class="sub" x="10" y="50">Server only</text>
-        <path class="exec" d="M136 34l9 6-9 6z"/>
+      <g transform="translate(510 134)"><g class="node" style="--d:2.9s">
+        <rect class="body" width="230" height="62" rx="6"/><path class="h-func" d="M0 6a6 6 0 0 1 6-6h218a6 6 0 0 1 6 6v18H0z"/>
+        <text class="title" x="10" y="16">PostEvent</text><path class="exec" d="M5 34l9 6-9 6z"/><text class="pin-label" x="24" y="44">E_Flag_StateChange_OnDrop</text>
       </g></g>
-
-      <g transform="translate(220 238)"><g class="node" style="--d:3.12s">
-        <rect class="body" width="150" height="62" rx="6"/>
-        <path class="h-func" d="M0 6a6 6 0 0 1 6-6h138a6 6 0 0 1 6 6v18H0z"/>
-        <text class="title" x="10" y="16">Validate capture</text>
-        <text class="sub" x="22" y="50">Server-side check</text>
-        <path class="exec" d="M5 34l9 6-9 6z"/><path class="exec" d="M136 34l9 6-9 6z"/>
+      <g transform="translate(20 214)"><g class="node" style="--d:3s">
+        <rect class="body" width="204" height="62" rx="6"/><path class="h-event" d="M0 6a6 6 0 0 1 6-6h192a6 6 0 0 1 6 6v18H0z"/>
+        <text class="title" x="10" y="16">Event OnFlagReturnedHome</text><text class="pin-label" x="154" y="44">then</text><path class="exec" d="M194 34l9 6-9 6z"/>
       </g></g>
-
-      <g transform="translate(400 238)"><g class="node" style="--d:3.28s">
-        <rect class="body" width="150" height="62" rx="6"/>
-        <path class="h-func" d="M0 6a6 6 0 0 1 6-6h138a6 6 0 0 1 6 6v18H0z"/>
-        <text class="title" x="10" y="16">Add score</text>
-        <text class="rep" x="22" y="50">REPLICATED</text>
-        <path class="exec" d="M5 34l9 6-9 6z"/><path class="exec" d="M136 34l9 6-9 6z"/>
+      <g transform="translate(510 214)"><g class="node" style="--d:3.3s">
+        <rect class="body" width="230" height="62" rx="6"/><path class="h-func" d="M0 6a6 6 0 0 1 6-6h218a6 6 0 0 1 6 6v18H0z"/>
+        <text class="title" x="10" y="16">PostEvent</text><path class="exec" d="M5 34l9 6-9 6z"/><text class="pin-label" x="24" y="44">E_Flag_StateChange_OnSecure</text>
       </g></g>
-
-      <g transform="translate(570 238)"><g class="node" style="--d:3.44s">
-        <rect class="body" width="172" height="62" rx="6"/>
-        <path class="h-func" d="M0 6a6 6 0 0 1 6-6h160a6 6 0 0 1 6 6v18H0z"/>
-        <text class="title" x="10" y="16">Reset flag</text>
-        <text class="sub" x="22" y="50">Back to home position</text>
-        <path class="exec" d="M5 34l9 6-9 6z"/>
+      <g transform="translate(38 294)"><g class="node" style="--d:2.1s">
+        <rect class="body" width="186" height="38" rx="6"/><text class="title" x="10" y="24">Get CollisionComp</text><circle class="obj" cx="176" cy="23" r="4.5"/>
       </g></g>
     </svg>
     </div>
     <p class="graph-hint">Scroll the graph sideways →</p>
 
     <figure class="code">
-      <figcaption><span><b>UOnsetQuestComponent.cpp</b> · Onset · lines 148–161</span><span>C++ · public repo</span></figcaption>
-      <div class="code__scroll"><pre><code><span class="ln" data-n="148"><span class="k">void</span> <span class="t">UOnsetQuestComponent</span>::<span class="f">ReportObjectiveProgress</span>(</span><span class="ln ln--wrap" data-n="">        <span class="t">EOnsetQuestObjectiveType</span> Type, <span class="t">FName</span> Target, <span class="t">int32</span> Amount)</span><span class="ln" data-n="149">{</span><span class="ln ln--hit" data-n="150">    <span class="k">if</span> (!<span class="f">GetOwner</span>() || !<span class="f">GetOwner</span>()-&gt;<span class="f">HasAuthority</span>() || Amount &lt;= 0)</span><span class="ln" data-n="151">    {</span><span class="ln" data-n="152">        <span class="k">return</span>;</span><span class="ln" data-n="153">    }</span><span class="ln" data-n="154"> </span><span class="ln" data-n="155">    <span class="k">const bool</span> bChanged = <span class="f">ApplyProgress</span>(Type, Target, Amount);</span><span class="ln" data-n="156">    <span class="k">if</span> (bChanged)</span><span class="ln" data-n="157">    {</span><span class="ln" data-n="158">        <span class="f">RecomputeCompletion</span>();</span><span class="ln" data-n="159">        OnQuestsChanged.<span class="f">Broadcast</span>();</span><span class="ln" data-n="160">    }</span><span class="ln" data-n="161">}</span></code></pre></div>
-      <p class="code__note">Same rule in C++: quest progress only changes on the server.</p>
+      <figcaption><span><b>KyotoPickupFlag.cpp</b> · Kyoto Conflict</span><span>C++ · GivePickupTo</span></figcaption>
+      <div class="code__scroll"><pre><code><span class="ln"><span class="k">void</span> <span class="t">AKyotoPickupFlag</span>::<span class="f">GivePickupTo</span>(<span class="k">class</span> <span class="t">AKyotoCharacter</span>* player)</span><span class="ln">{</span><span class="ln">    <span class="k">if</span> (<span class="t">AKyotoGameState_TeamCTF</span>* state =</span><span class="ln">        <span class="f">Cast</span>&lt;<span class="t">AKyotoGameState_TeamCTF</span>&gt;(<span class="f">GetWorld</span>()-&gt;<span class="f">GetGameState</span>()))</span><span class="ln">    {</span><span class="ln ln--hit" style="--hit-delay:4.1s">        state-&gt;<span class="f">SetFlagStatus</span>(<span class="t">EKyotoFlagStatus</span>::Held);</span><span class="ln">        state-&gt;<span class="f">OnRepFlagUpdate</span>();</span><span class="ln">        state-&gt;<span class="f">LastMinuteAudio</span>();</span><span class="ln">    }</span><span class="ln"> </span><span class="ln">    <span class="f">Cast</span>&lt;<span class="t">AKyotoPlayerState_TeamCTF</span>&gt;(player-&gt;<span class="f">GetPlayerState</span>())</span><span class="ln ln--hit" style="--hit-delay:4.6s">        -&gt;<span class="f">ServerRPC_SetHasFlag</span>(<span class="k">true</span>);</span><span class="ln">    FlagHolder = <span class="f">TWeakObjectPtr</span>(player);</span><span class="ln ln--hit" style="--hit-delay:5.1s">    FlagHolder-&gt;DropFlagDelegate.<span class="f">BindUFunction</span>(<span class="k">this</span>, <span class="s">"DropFlag"</span>);</span><span class="ln">    bIsActive = <span class="k">false</span>;</span><span class="ln">    bShouldRotate = <span class="k">true</span>;</span><span class="ln">}</span></code></pre></div>
+      <p class="code__note">Update flag state, assign the carrier, and bind drop handling.</p>
     </figure>
   </div>
 
@@ -321,24 +282,24 @@ body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f
 <section class="notes" aria-label="Study notes">
   <div>
     <h2>What it says</h2>
-    <p>The game frame is what the player sees. The wipe reveals what Max builds underneath: the Capture the Flag flow as a Blueprint graph, then the same authority rule in his C++. A recruiter reads "programmer" before they read the copy.</p>
+    <p>The game frame is what the player sees. The wipe reveals what Max builds underneath: his flag feedback Blueprint, then the C++ that updates flag state, assigns its carrier, and binds drop handling. A recruiter reads "programmer" before they read the copy.</p>
   </div>
   <div>
     <h2>Sequence, once</h2>
     <ol>
       <li>0.15s headline accent, 0.55s role highlight</li>
       <li>1.0s scan wipe opens the system view</li>
-      <li>2.0–3.5s pickup row, then capture row; wires follow the exec order</li>
-      <li>3.55s C++ excerpt rises; the authority check highlights</li>
-      <li>4.4s view toggle appears, then everything holds still</li>
+      <li>2.0–3.5s pickup, respawn, and return-home feedback; wires follow the verified connections</li>
+      <li>3.55s C++ function rises; flag state, possession, and drop binding highlight in sequence</li>
+      <li>4.4s view toggle appears; the final code highlight begins at 5.1s</li>
     </ol>
   </div>
   <div>
     <h2>What is real</h2>
     <ul>
-      <li>The graph is a conceptual view drawn from the verified case-study steps. Node names describe behaviour, not exact Blueprint function names.</li>
-      <li>The C++ is verbatim from the public PortfolioTutorial repo.</li>
-      <li>A screenshot of the actual CTF Blueprint could replace the drawn graph.</li>
+      <li>The graph recreates the actual PickupFlag events, execution wires, and shared CollisionComp target. Layout and pin labels are condensed for readability.</li>
+      <li>The full GivePickupTo function is from the Kyoto Conflict implementation authored by Max. Only whitespace and line wrapping have changed.</li>
+      <li>Blueprint visibility and Wwise audio connections were verified in Unreal Editor through MCP. This excerpt shows state and carrier handling; it does not establish a server-only pickup path.</li>
     </ul>
   </div>
 </section>
