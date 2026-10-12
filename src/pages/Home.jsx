@@ -1,12 +1,14 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ArrowDown, ArrowUpRight, Play } from 'lucide-react';
 import SEO from '../components/SEO';
+import KyotoHeroSystems from '../components/KyotoHeroSystems';
 import useRouteLanguage from '../hooks/useRouteLanguage';
 import './Home.css';
 import './Home.motion.css';
 import './Home.light.css';
+import './Home.systems.css';
 
 const TagList = ({ items }) => (
   <ul className="project-tags" aria-label="Technologies">
@@ -18,6 +20,9 @@ export default function Home() {
   const { t } = useTranslation();
   const { prefix } = useRouteLanguage();
   const pageRef = useRef(null);
+  const [showSystem, setShowSystem] = useState(true);
+  const [hasToggled, setHasToggled] = useState(false);
+  const changeHeroView = (value) => { setHasToggled(true); setShowSystem(value); };
 
   // Size the "under pressure." accent to the last rendered line of the phrase,
   // so it never overshoots when the headline wraps (any language, any width).
@@ -77,7 +82,7 @@ export default function Home() {
         url={prefix || '/'}
       />
 
-      <section className="cinematic-hero" aria-labelledby="home-title">
+      <section className={`cinematic-hero has-systems${showSystem ? '' : ' is-player'}`} aria-labelledby="home-title">
         <img className="cinematic-hero__image" src="/images/kyoto-conflict-2400.jpg" srcSet="/images/kyoto-conflict-1280.jpg 1280w, /images/kyoto-conflict-2400.jpg 2400w" sizes="100vw" width="2400" height="1350" alt="" fetchPriority="high" />
         <div className="cinematic-hero__grain" aria-hidden="true" />
         <div className="cinematic-hero__copy">
@@ -97,9 +102,7 @@ export default function Home() {
             <div><dt>{t('home.redesign.kyotoProofSpawn')}</dt><dd>{t('home.redesign.kyotoProofSpawnDetail')}</dd></div>
           </dl>
         </div>
-        <div className="system-note system-note--spawn"><span aria-hidden="true" />{t('home.redesign.kyotoNoteSpawn')}</div>
-        <div className="system-note system-note--flag"><span aria-hidden="true" />{t('home.redesign.kyotoNoteFlag')}</div>
-        <div className="featured-label"><small>{t('home.redesign.featured')}</small><strong>Kyoto Conflict</strong></div>
+        <KyotoHeroSystems showSystem={showSystem} hasToggled={hasToggled} onViewChange={changeHeroView} />
         <a className="hero-scroll" href="#onset"><span>{t('home.redesign.explore')}</span><ArrowDown aria-hidden="true" /></a>
       </section>
 

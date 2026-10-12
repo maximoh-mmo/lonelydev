@@ -59,10 +59,10 @@ body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f
 
 .hero__copy { position: absolute; left: clamp(24px, 6vw, 96px); bottom: clamp(70px, 9vh, 120px); z-index: 4; width: min(600px, 40%); }
 .kicker { margin: 0 0 1.1rem; color: var(--accent); font: 600 .7rem/1.4 var(--font-mono); letter-spacing: .18em; text-transform: uppercase; }
-.hero h1 { margin: 0; font-size: clamp(3.4rem, 6.6vw, 7.4rem); font-weight: 700; line-height: .86; letter-spacing: -.07em; text-wrap: balance; }
-.hero h1 .echo { position: relative; display: block; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,.75); text-shadow: 0 0 .3em rgba(3,5,7,.85); }
-.hero h1 .echo span { position: relative; display: inline-block; }
-.hero h1 .echo span::after { content: ''; position: absolute; left: .02em; right: .02em; bottom: -.06em; height: 2px; background: var(--accent); transform-origin: left; animation: draw-x .8s cubic-bezier(.65,0,.35,1) .15s both; }
+.hero h1 { font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; text-rendering: optimizeLegibility; margin: 0; font-size: clamp(3.4rem, 6.6vw, 7.4rem); font-weight: 700; line-height: .84; letter-spacing: -.075em; text-wrap: balance; }
+.hero h1 .echo { position: relative; display: block; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,.72); }
+.hero h1 .echo__text { display: inline; text-shadow: 0 0 .32em rgba(3,5,7,.85), 0 0 .08em rgba(3,5,7,.9); }
+.hero h1 .echo::after { content: ''; position: absolute; left: var(--echo-left, .02em); width: var(--echo-width, calc(100% - .04em)); bottom: -.08em; height: 2px; background: var(--accent); opacity: .9; transform-origin: left; animation: draw-x .8s cubic-bezier(.65,0,.35,1) .15s both; }
 .intro { max-width: 34rem; margin: 1.4rem 0 0; color: #d3d0c9; font-size: clamp(1rem, 1.25vw, 1.15rem); line-height: 1.65; }
 .intro mark { color: inherit; background: linear-gradient(rgba(102,241,242,.2), rgba(102,241,242,.2)) no-repeat left 92% / 100% 42%; animation: mark-in .65s cubic-bezier(.22,1,.36,1) .55s both; }
 .actions { display: flex; flex-wrap: wrap; gap: 1.4rem; margin-top: 1.5rem; }
@@ -191,7 +191,7 @@ body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f
 
   <div class="hero__copy">
     <p class="kicker">Game programmer · C++ · Unreal Engine</p>
-    <h1 id="hero-title">Systems that hold <span class="echo">under <span>pressure.</span></span></h1>
+    <h1 id="hero-title">Systems that hold <span class="echo"><span class="echo__text">under pressure.</span></span></h1>
     <p class="intro">I build <mark>gameplay, multiplayer, and tools</mark> where clear structure matters as much as what the player sees.</p>
     <div class="actions">
       <a class="action action--primary" href="/projects/kyoto-conflict">View the CTF case study ↗</a>
@@ -312,6 +312,19 @@ body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f
   const system = document.getElementById('view-system');
   const reduced = document.getElementById('reduced');
 
+  const echo = hero.querySelector('.echo');
+  const echoText = echo.querySelector('.echo__text');
+  const measureEcho = () => {
+    const rects = echoText.getClientRects();
+    const last = rects[rects.length - 1];
+    if (!last) return;
+    const box = echo.getBoundingClientRect();
+    echo.style.setProperty('--echo-left', `${last.left - box.left}px`);
+    echo.style.setProperty('--echo-width', `${last.width}px`);
+  };
+  measureEcho();
+  document.fonts?.ready.then(measureEcho);
+  if ('ResizeObserver' in window) new ResizeObserver(measureEcho).observe(echo);
   const setView = (showSystem) => {
     xray.classList.add('was-toggled');
     hero.classList.toggle('is-player', !showSystem);
