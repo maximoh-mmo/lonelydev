@@ -597,3 +597,10 @@ html.home-scroll-snap .portfolio-home > section {
   .text-action::after,
   .text-action svg { transition: none; }
 }
+
+@media (max-width: 620px) {
+  .cinematic-hero h1 .headline-echo__text {
+    -webkit-text-stroke-width: .75px;
+    text-shadow: 0 0 .24em rgba(3, 5, 7, .85), 0 0 .06em rgba(3, 5, 7, .9);
+  }
+}
