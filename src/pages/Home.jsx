@@ -83,7 +83,7 @@ export default function Home() {
       />
 
       <section className={`cinematic-hero has-systems${showSystem ? '' : ' is-player'}`} aria-labelledby="home-title">
-        <img className="cinematic-hero__image" src="/images/kyoto-conflict-2400.jpg" srcSet="/images/kyoto-conflict-1280.jpg 1280w, /images/kyoto-conflict-2400.jpg 2400w" sizes="100vw" width="2400" height="1350" alt="" fetchPriority="high" />
+        <img className="cinematic-hero__image" src="/images/kyoto-conflict-2400.webp" srcSet="/images/kyoto-conflict-1280.webp 1280w, /images/kyoto-conflict-2400.webp 2400w" sizes="100vw" width="2400" height="1350" alt="" decoding="async" fetchPriority="high" />
         <div className="cinematic-hero__grain" aria-hidden="true" />
         <div className="cinematic-hero__copy">
           <p className="section-kicker">{t('home.redesign.kicker')}</p>
@@ -157,7 +157,7 @@ export default function Home() {
           <p>{t('home.redesign.photoDescription')}</p>
         </div>
         <div className="photoboss-media" data-reveal>
-          <img src="/images/photoboss/dark_mode_preview.png" alt={t('home.redesign.photoAlt')} loading="lazy" />
+          <img src="/images/photoboss/dark_mode_preview.webp" srcSet="/images/photoboss/dark_mode_preview-640.webp 640w, /images/photoboss/dark_mode_preview.webp 1191w" sizes="(max-width: 620px) 100vw, 90vw" width="1191" height="871" alt={t('home.redesign.photoAlt')} loading="lazy" decoding="async" />
           <div className="photoboss-media__shade" aria-hidden="true" />
           <div className="photoboss-title"><small>C++ · Qt · SQLite</small><strong>PhotoBoss</strong></div>
           <p className="photoboss-note">{t('home.redesign.photoNote')}</p>

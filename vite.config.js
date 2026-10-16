@@ -62,7 +62,6 @@ export default async () => defineConfig({
       output: {
         manualChunks: {
           'vendor': ['react', 'react-dom', 'react-router-dom', 'i18next'],
-          'markdown': ['react-markdown', 'remark-gfm', 'rehype-raw'],
         }
       }
     }

@@ -1,7 +1,7 @@
 export default {
   id: 'photoboss',
   title: 'PhotoBoss',
-  imageUrl: '/images/photoboss/dark_mode_preview.png',
+  imageUrl: '/images/photoboss/dark_mode_preview.webp',
   shortDescription: 'A local-first C++ and Qt workflow for finding, reviewing, and resolving duplicate image groups at scale.',
   description: 'PhotoBoss is a local-first desktop tool built with C++, Qt, and SQLite. It scans image libraries, builds comparable file identities, groups likely duplicates, and supports a deliberate review workflow before any destructive choice is made. Its published build log records the architecture, performance work, UI refactors, and platform-specific decisions across the project.',
   contributions: [

@@ -6,7 +6,7 @@ export default function Keyboard() {
   const { prefix } = useRouteLanguage();
   return (
     <main className="page legacy-page" lang="en">
-      <SEO title="Wireless Charybdis Keyboard" description="A hardware and firmware project spanning PCB design, ZMK, Bluetooth, RGB, and custom SPI drivers." image="https://maxheinze.com/images/keyboard.jpg" url={prefix + '/keyboard'} />
+      <SEO title="Wireless Charybdis Keyboard" description="A hardware and firmware project spanning PCB design, ZMK, Bluetooth, RGB, and custom SPI drivers." image="https://maxheinze.com/images/keyboard.webp" url="/keyboard" noindex={Boolean(prefix)} localized={false} />
       <EnglishContentNotice />
       <header className="legacy-page__header">
         <p className="eyebrow">Hardware · Firmware · Toolmaking</p>
@@ -45,6 +45,10 @@ export default function Keyboard() {
         <figure className="my-6">
           <img
             src="/images/keyboard-schematic.png"
+            width="2377"
+            height="1663"
+            decoding="async"
+            loading="lazy"
             alt="EasyEDA PCB view of the Charybdis redesign"
             className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
           />
@@ -55,6 +59,10 @@ export default function Keyboard() {
         <figure className="my-6">
           <img
             src="/images/trackball-schematic.png"
+            width="2318"
+            height="811"
+            decoding="async"
+            loading="lazy"
             alt="EasyEDA PCB view of the Trackball redesign"
             className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
           />
@@ -76,7 +84,13 @@ export default function Keyboard() {
         </ul>
         <figure className="my-6">
           <img
-            src="/images/keyboard-rgb.jpg"
+            src="/images/keyboard-rgb.webp"
+            srcSet="/images/keyboard-rgb-800.webp 800w, /images/keyboard-rgb-1200.webp 1200w, /images/keyboard-rgb.webp 2000w"
+            sizes="(max-width: 1040px) calc(100vw - 2.5rem), 1000px"
+            width="2000"
+            height="1506"
+            decoding="async"
+            loading="lazy"
             alt="Per-key RGB lighting on the custom wireless Charybdis"
             className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
           />
@@ -100,6 +114,10 @@ export default function Keyboard() {
         <figure className="my-6">
           <img
             src="/images/zmk.png"
+            width="1758"
+            height="1497"
+            decoding="async"
+            loading="lazy"
             alt="ZMK firmware configuration screenshot"
             className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
           />
@@ -135,6 +153,10 @@ export default function Keyboard() {
         <figure className="my-6">
           <img
             src="/images/trackball-pcb-layout.png"
+            width="1620"
+            height="1395"
+            decoding="async"
+            loading="lazy"
             alt="Custom trackball PCB and sensor module"
             className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
           />
@@ -190,7 +212,13 @@ export default function Keyboard() {
         <div className="space-y-8">
           <figure>
             <img
-              src="/images/keyboard.jpg"
+              src="/images/keyboard.webp"
+              srcSet="/images/keyboard-800.webp 800w, /images/keyboard-1200.webp 1200w, /images/keyboard.webp 2000w"
+              sizes="(max-width: 1040px) calc(100vw - 2.5rem), 1000px"
+              width="2000"
+              height="918"
+              decoding="async"
+              loading="lazy"
               alt="Finished wireless RGB Charybdis keyboard"
               className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
             />
@@ -201,6 +229,10 @@ export default function Keyboard() {
           <figure>
             <img
               src="/images/keyboard-main-pcb.png"
+              width="1167"
+              height="1384"
+              decoding="async"
+              loading="lazy"
               alt="Firmware debugging output"
               className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
             />
@@ -210,7 +242,13 @@ export default function Keyboard() {
           </figure>
           <figure>
             <img
-              src="/images/keyboard-wiring.jpg"
+              src="/images/keyboard-wiring.webp"
+              srcSet="/images/keyboard-wiring-800.webp 800w, /images/keyboard-wiring-1200.webp 1200w, /images/keyboard-wiring.webp 2000w"
+              sizes="(max-width: 1040px) calc(100vw - 2.5rem), 1000px"
+              width="2000"
+              height="1506"
+              decoding="async"
+              loading="lazy"
               alt="Firmware debugging output"
               className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
             />
@@ -220,7 +258,13 @@ export default function Keyboard() {
           </figure>
           <figure>
             <img
-              src="/images/trackball-prototype.jpg"
+              src="/images/trackball-prototype.webp"
+              srcSet="/images/trackball-prototype-800.webp 800w, /images/trackball-prototype-1200.webp 1200w, /images/trackball-prototype.webp 2000w"
+              sizes="(max-width: 1040px) calc(100vw - 2.5rem), 1000px"
+              width="2000"
+              height="1506"
+              decoding="async"
+              loading="lazy"
               alt="Firmware debugging output"
               className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
             />

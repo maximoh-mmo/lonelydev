@@ -29,7 +29,7 @@ export default function Climbing() {
 
   return (
     <main className="page legacy-page" lang="en">
-      <SEO title="Climbing: Craft, Challenge, and Creative Flow" description="Climbing as a practice in focus, iteration, problem-solving, and trust." image="https://maxheinze.com/images/climbing-banner.jpg" url={prefix + '/climbing'} />
+      <SEO title="Climbing: Craft, Challenge, and Creative Flow" description="Climbing as a practice in focus, iteration, problem-solving, and trust." image="https://maxheinze.com/images/climbing-banner.webp" url="/climbing" noindex={Boolean(prefix)} localized={false} />
       <EnglishContentNotice />
       {/* Hero Section */}
       <div className="legacy-hero-media">
@@ -39,7 +39,13 @@ export default function Climbing() {
           </div>
         ) : (
           <img
-            src="/images/climbing-banner.jpg"
+            src="/images/climbing-banner.webp"
+            srcSet="/images/climbing-banner-800.webp 800w, /images/climbing-banner-1200.webp 1200w, /images/climbing-banner.webp 2000w"
+            sizes="(max-width: 1040px) calc(100vw - 2.5rem), 1000px"
+            width="2000"
+            height="789"
+            decoding="async"
+            fetchPriority="high"
             alt="Alpine Vista"
             className="w-full h-full object-cover"
             onError={() => handleImageError('banner')}
@@ -80,7 +86,13 @@ export default function Climbing() {
             </div>
           ) : (
             <img
-              src="/images/bouldering.jpg"
+              src="/images/bouldering.webp"
+              srcSet="/images/bouldering-800.webp 800w, /images/bouldering-1200.webp 1200w, /images/bouldering.webp 1506w"
+              sizes="(max-width: 1040px) calc(100vw - 2.5rem), 1000px"
+              width="1506"
+              height="2000"
+              decoding="async"
+              loading="lazy"
               alt="Indoor bouldering session"
               className="w-full h-full object-cover"
               onError={() => handleImageError('bouldering')}
@@ -130,7 +142,13 @@ export default function Climbing() {
             </div>
           ) : (
             <img
-              src="/images/iceclimb.jpg"
+              src="/images/iceclimb.webp"
+              srcSet="/images/iceclimb-800.webp 800w, /images/iceclimb-1200.webp 1200w, /images/iceclimb.webp 2000w"
+              sizes="(max-width: 1040px) calc(100vw - 2.5rem), 1000px"
+              width="2000"
+              height="1125"
+              decoding="async"
+              loading="lazy"
               alt="Ice climbing in alpine environment"
               className="w-full h-full object-cover"
               onError={() => handleImageError('iceclimb')}
@@ -148,9 +166,9 @@ export default function Climbing() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {/* Gallery images with error handling */}
           {[
-            { id: 'climb1', src: '/images/climb1.jpg', alt: 'Climbing 1' },
-            { id: 'climb2', src: '/images/climb2.jpg', alt: 'Climbing 2' },
-            { id: 'climb3', src: '/images/climb3.jpg', alt: 'Climbing 3' }
+            { id: 'climb1', src: '/images/climb1.webp', srcSet: '/images/climb1-800.webp 800w, /images/climb1-1200.webp 1200w, /images/climb1.webp 1506w', alt: 'Climbing 1', width: 1506, height: 2000 },
+            { id: 'climb2', src: '/images/climb2.webp', srcSet: '/images/climb2-800.webp 800w, /images/climb2-1200.webp 1200w, /images/climb2.webp 2000w', alt: 'Climbing 2', width: 2000, height: 1125 },
+            { id: 'climb3', src: '/images/climb3.webp', srcSet: '/images/climb3-800.webp 800w, /images/climb3.webp 1200w', alt: 'Climbing 3', width: 1200, height: 1600 }
           ].map((image) => (
             imageErrors[image.id] ? (
               <div
@@ -164,7 +182,13 @@ export default function Climbing() {
               <img
                 key={image.id}
                 src={image.src}
+                srcSet={image.srcSet}
+                sizes="(max-width: 640px) calc(100vw - 2.5rem), 33vw"
                 alt={image.alt}
+                width={image.width}
+                height={image.height}
+                loading="lazy"
+                decoding="async"
                 className="rounded-lg shadow-md object-cover w-full h-64 transform transition duration-300"
                 onError={() => handleImageError(image.id)}
               />

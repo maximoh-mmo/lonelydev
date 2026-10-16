@@ -29,7 +29,7 @@ export default function ProjectDetail() {
       </header>
       <div className="project-media">{project.videoId
         ? <VideoEmbed videoId={project.videoId} title={text('title', project.title)} />
-        : <img src={project.imageUrl} alt={project.title} />}
+        : <img src={project.imageUrl} alt={project.title} decoding="async" fetchPriority="high" />}
       </div>
       <CaseStudy projectId={project.id} />
       {project.contributions?.length > 0 && <section className="editorial-section"><div className="section-label"><h2>{t('projects.contributions')}</h2></div><dl className="contribution-list">{project.contributions.map(([title, description], index) => <div key={index}><dt>{text('contributions.' + index + '.title', title)}</dt><dd>{text('contributions.' + index + '.description', description)}</dd></div>)}</dl></section>}

@@ -42,7 +42,7 @@ export default function CVViewer() {
 
   return (
     <dialog ref={dialogRef} className="cv-viewer" aria-labelledby="cv-title" onCancel={event => { event.preventDefault(); close(); }}>
-      <SEO title={t('nav.cv')} url={prefix + '/cv'} />
+      <SEO title={t('nav.cv')} url={prefix + '/cv'} noindex />
       <div className="cv-viewer__toolbar">
         <h1 id="cv-title">{t('cv.viewerTitle')}</h1>
         <div>

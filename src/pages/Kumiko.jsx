@@ -6,7 +6,7 @@ export default function Kumiko() {
   const { prefix } = useRouteLanguage();
   return (
     <main className="page legacy-page" lang="en">
-      <SEO title="Kumiko Joinery" description="A hands-on study of precision, iteration, and traditional wooden pattern-making." image="https://maxheinze.com/images/small-panel.jpg" url={prefix + '/kumiko'} />
+      <SEO title="Kumiko Joinery" description="A hands-on study of precision, iteration, and traditional wooden pattern-making." image="https://maxheinze.com/images/small-panel.webp" url="/kumiko" noindex={Boolean(prefix)} localized={false} />
       <EnglishContentNotice />
       <p className="eyebrow">Personal practice · Woodwork</p>
       <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-10">
@@ -50,7 +50,13 @@ export default function Kumiko() {
 
       <figure className="mb-12">
         <img
-          src="/images/first-attempt.jpg"
+          src="/images/first-attempt.webp"
+          srcSet="/images/first-attempt-800.webp 800w, /images/first-attempt-1200.webp 1200w, /images/first-attempt.webp 2000w"
+          sizes="(max-width: 1040px) calc(100vw - 2.5rem), 1000px"
+          width="2000"
+          height="1861"
+          decoding="async"
+          loading="lazy"
           alt="First attempt — square-grid Asanoha pattern cut from basswood scrap."
           className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
         />
@@ -78,7 +84,13 @@ export default function Kumiko() {
 
       <figure className="mb-12">
         <img
-          src="/images/small-panel-wip.jpg"
+          src="/images/small-panel-wip.webp"
+          srcSet="/images/small-panel-wip-800.webp 800w, /images/small-panel-wip-1200.webp 1200w, /images/small-panel-wip.webp 1816w"
+          sizes="(max-width: 1040px) calc(100vw - 2.5rem), 1000px"
+          width="1816"
+          height="2000"
+          decoding="async"
+          loading="lazy"
           alt="Small panel work in progress — switching to limewood and testing precision fit."
           className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
         />
@@ -106,7 +118,13 @@ export default function Kumiko() {
 
       <figure className="mb-12">
         <img
-          src="/images/small-panel.jpg"
+          src="/images/small-panel.webp"
+          srcSet="/images/small-panel-800.webp 800w, /images/small-panel-1200.webp 1200w, /images/small-panel.webp 2000w"
+          sizes="(max-width: 1040px) calc(100vw - 2.5rem), 1000px"
+          width="2000"
+          height="1506"
+          decoding="async"
+          loading="lazy"
           alt="Small panel nearing completion — precise hand-fit lattice."
           className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
         />
@@ -132,7 +150,13 @@ export default function Kumiko() {
       </p>
       <figure className="mb-12">
         <img
-          src="/images/small-frame.jpg"
+          src="/images/small-frame.webp"
+          srcSet="/images/small-frame-800.webp 800w, /images/small-frame-1200.webp 1200w, /images/small-frame.webp 2000w"
+          sizes="(max-width: 1040px) calc(100vw - 2.5rem), 1000px"
+          width="2000"
+          height="1506"
+          decoding="async"
+          loading="lazy"
           alt="Custom frame assembly — miter joints and color contrast."
           className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
         />
@@ -143,7 +167,13 @@ export default function Kumiko() {
 
       <figure className="mb-12">
         <img
-          src="/images/small-panel-framed.jpg"
+          src="/images/small-panel-framed.webp"
+          srcSet="/images/small-panel-framed-800.webp 800w, /images/small-panel-framed-1200.webp 1200w, /images/small-panel-framed.webp 1506w"
+          sizes="(max-width: 1040px) calc(100vw - 2.5rem), 1000px"
+          width="1506"
+          height="2000"
+          decoding="async"
+          loading="lazy"
           alt="Final framed Kumiko panel — precise geometry and warm tone balance."
           className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
         />
@@ -165,7 +195,13 @@ export default function Kumiko() {
 
       <figure className="mb-12">
         <img
-          src="/images/wall-panel-wip.jpg"
+          src="/images/wall-panel-wip.webp"
+          srcSet="/images/wall-panel-wip-800.webp 800w, /images/wall-panel-wip-1200.webp 1200w, /images/wall-panel-wip.webp 1644w"
+          sizes="(max-width: 1040px) calc(100vw - 2.5rem), 1000px"
+          width="1644"
+          height="2000"
+          decoding="async"
+          loading="lazy"
           alt="Larger wall panel — work in progress, sub-grids preparation for assembly."
           className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
         />
@@ -176,7 +212,13 @@ export default function Kumiko() {
 
       <figure className="mb-12">
         <img
-          src="/images/wall-panel-detail.jpg"
+          src="/images/wall-panel-detail.webp"
+          srcSet="/images/wall-panel-detail-800.webp 800w, /images/wall-panel-detail-1200.webp 1200w, /images/wall-panel-detail.webp 1506w"
+          sizes="(max-width: 1040px) calc(100vw - 2.5rem), 1000px"
+          width="1506"
+          height="2000"
+          decoding="async"
+          loading="lazy"
           alt="Larger wall panel — detail showing contrasting wood selections."
           className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
         />
@@ -187,7 +229,13 @@ export default function Kumiko() {
 
       <figure className="mb-12">
         <img
-          src="/images/wall-panel.jpg"
+          src="/images/wall-panel.webp"
+          srcSet="/images/wall-panel-800.webp 800w, /images/wall-panel-1200.webp 1200w, /images/wall-panel.webp 1906w"
+          sizes="(max-width: 1040px) calc(100vw - 2.5rem), 1000px"
+          width="1906"
+          height="2000"
+          decoding="async"
+          loading="lazy"
           alt="Larger wall panel — finished, unframed, untrimmed wall panel."
           className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
         />
@@ -213,22 +261,46 @@ export default function Kumiko() {
 
       <div className="grid sm:grid-cols-2 gap-6 mb-12">
         <img
-          src="/images/box-sides.jpg"
+          src="/images/box-sides.webp"
+          srcSet="/images/box-sides-800.webp 800w, /images/box-sides-1200.webp 1200w, /images/box-sides.webp 2000w"
+          sizes="(max-width: 1040px) calc(100vw - 2.5rem), 1000px"
+          width="2000"
+          height="1398"
+          decoding="async"
+          loading="lazy"
           alt="Box body — work in progress, box body."
           className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
         />
         <img
-          src="/images/box-lid-wip.jpg"
+          src="/images/box-lid-wip.webp"
+          srcSet="/images/box-lid-wip-800.webp 800w, /images/box-lid-wip-1200.webp 1200w, /images/box-lid-wip.webp 2000w"
+          sizes="(max-width: 1040px) calc(100vw - 2.5rem), 1000px"
+          width="2000"
+          height="1470"
+          decoding="async"
+          loading="lazy"
           alt="Box lid — adding contrasting elements."
           className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
         />
         <img
-          src="/images/box-kumiko-wip.jpg"
+          src="/images/box-kumiko-wip.webp"
+          srcSet="/images/box-kumiko-wip-800.webp 800w, /images/box-kumiko-wip-1200.webp 1200w, /images/box-kumiko-wip.webp 2000w"
+          sizes="(max-width: 1040px) calc(100vw - 2.5rem), 1000px"
+          width="2000"
+          height="1405"
+          decoding="async"
+          loading="lazy"
           alt="Box body — work in progress, kumiko pattern."
           className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
         />
         <img
-          src="/images/box-finished.jpg"
+          src="/images/box-finished.webp"
+          srcSet="/images/box-finished-800.webp 800w, /images/box-finished-1200.webp 1200w, /images/box-finished.webp 2000w"
+          sizes="(max-width: 1040px) calc(100vw - 2.5rem), 1000px"
+          width="2000"
+          height="1472"
+          decoding="async"
+          loading="lazy"
           alt="Box finished — kumiko pattern on lid, box body."
           className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
         />
@@ -236,7 +308,13 @@ export default function Kumiko() {
 
       <figure className="mb-12">
         <img
-          src="/images/box-wip.jpg"
+          src="/images/box-wip.webp"
+          srcSet="/images/box-wip-800.webp 800w, /images/box-wip-1200.webp 1200w, /images/box-wip.webp 2000w"
+          sizes="(max-width: 1040px) calc(100vw - 2.5rem), 1000px"
+          width="2000"
+          height="1506"
+          decoding="async"
+          loading="lazy"
           alt="Workbench view — box assembly surrounded by hand tools and templates."
           className="rounded-xl shadow-md mx-auto transform transition-transform duration-300"
         />

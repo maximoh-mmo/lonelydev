@@ -18,7 +18,7 @@ export default function MarkdownRenderer({ content }) {
         img: props => {
           const attributes = domProps(props);
           const logo = attributes.src?.startsWith('/logos/') || attributes.src?.includes('svg-api');
-          return <img {...attributes} className={logo ? 'inline-icon' : undefined} loading="lazy" />;
+          return <img {...attributes} className={logo ? 'inline-icon' : undefined} loading="lazy" decoding="async" />;
         },
         a: props => {
           const attributes = domProps(props);

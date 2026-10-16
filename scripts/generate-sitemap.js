@@ -38,7 +38,9 @@ try {
 
   // Combine all routes
   const routes = [...staticRoutes, ...projectRoutes, ...postRoutes];
-  const allRoutes = [...routes, ...routes.map(route => '/de' + (route === '/' ? '' : route))];
+  const englishOnlyRoutes = new Set(['/kumiko', '/keyboard', '/climbing']);
+  const localizedRoutes = routes.filter(route => !englishOnlyRoutes.has(route));
+  const allRoutes = [...routes, ...localizedRoutes.map(route => '/de' + (route === '/' ? '' : route))];
 
   // Generate XML
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
@@ -57,6 +59,17 @@ ${allRoutes
     fs.mkdirSync(publicDir);
   }
   fs.writeFileSync(path.join(publicDir, 'sitemap.xml'), sitemap, 'utf-8');
+
+  // Cloudflare Pages serves 404.html for unknown paths. Rewrite only known
+  // client-side routes to the SPA shell so real pages return HTTP 200 while
+  // genuinely missing URLs retain a proper 404 status.
+  const redirects = [
+    '# Generated from the public route manifest. Unknown paths use 404.html.',
+    ...allRoutes
+      .filter(route => route !== '/')
+      .map(route => `${route} /index.html 200`),
+  ].join('\n') + '\n';
+  fs.writeFileSync(path.join(publicDir, '_redirects'), redirects, 'utf-8');
 
   console.log(`✅ Sitemap generated successfully with ${allRoutes.length} routes.`);
 } catch (error) {
