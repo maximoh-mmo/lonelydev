@@ -91,7 +91,7 @@ export default function Contact() {
   return (
     <main className="page contact-page">
       <SEO title={t('contact.title')} description={t('contact.subtitle')} url={prefix + '/contact'} />
-      <header className="page-header"><p className="eyebrow">{t('ui.contactIntro')}</p><h1>{t('contact.title')}</h1><p className="page-lead">{t('contact.subtitle')}</p><CareerActions /></header>
+      <header className="page-header"><p className="eyebrow">{t('ui.contactIntro')}</p><h1>{t('contact.title')}</h1><p className="page-lead">{t('contact.subtitle')}</p><CareerActions directEmail /></header>
       <ul className="contact-list">{contactLinks.map(link => <li key={link.name}><a href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined} download={link.isDownload || undefined}>
         <span className="contact-icon" aria-hidden="true">{link.icon}</span><div><h2>{link.name}</h2><p>{link.value}</p></div>{link.isDownload && <Download aria-hidden="true" />}
       </a></li>)}</ul>

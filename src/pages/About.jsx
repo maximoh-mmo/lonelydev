@@ -41,7 +41,7 @@ export default function About() {
         <section className="editorial-section" aria-labelledby="about-making">
           <div className="section-label"><span aria-hidden="true">03 /</span><h2 id="about-making">{t('ui.beyondScreen')}</h2></div>
           <div className="prose">
-            <p><Trans i18nKey="about.intro" components={{ kumiko: <TextLink to={prefix + '/kumiko'} />, keyboard: <TextLink to={prefix + '/keyboard'} /> }} /></p>
+            <p><Trans i18nKey="about.intro" components={{ kumiko: <TextLink to={prefix + '/kumiko'} />, keyboard: <TextLink to={prefix + '/keyboard'} />, climbing: <TextLink to={prefix + '/climbing'} /> }} /></p>
             <p>{t('about.hobbies')}</p>
           </div>
         </section>
