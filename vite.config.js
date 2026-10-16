@@ -18,9 +18,24 @@ function copyCloudflareFiles() {
       if (fs.existsSync(indexPath)) {
         fs.copyFileSync(indexPath, notFoundPath);
         console.log('✔ Copied index.html to 404.html');
+
+        const sitemapPath = resolve(__dirname, 'public/sitemap.xml');
+        if (fs.existsSync(sitemapPath)) {
+          const sitemap = fs.readFileSync(sitemapPath, 'utf8');
+          const routes = [...sitemap.matchAll(/<loc>https:\/\/maxheinze\.com([^<]*)<\/loc>/g)]
+            .map((match) => match[1])
+            .filter((route) => route && route !== '/');
+
+          routes.forEach((route) => {
+            const routePath = resolve(__dirname, `dist${route}.html`);
+            fs.mkdirSync(dirname(routePath), { recursive: true });
+            fs.copyFileSync(indexPath, routePath);
+          });
+          console.log(`✔ Generated ${routes.length} static route entry files`);
+        }
       }
 
-      const files = ['_redirects', '_headers'];
+      const files = ['_headers'];
       files.forEach(file => {
         const src = resolve(__dirname, 'public', file);
         const dest = resolve(__dirname, 'dist', file);
