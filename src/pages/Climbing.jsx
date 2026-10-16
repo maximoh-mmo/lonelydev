@@ -1,7 +1,11 @@
 import EnglishContentNotice from '../components/EnglishContentNotice';
+import SEO from '../components/SEO';
+import CareerActions from '../components/CareerActions';
+import useRouteLanguage from '../hooks/useRouteLanguage';
 import { useState } from 'react';
 
 export default function Climbing() {
+  const { prefix } = useRouteLanguage();
   // State to track image loading errors
   const [imageErrors, setImageErrors] = useState({});
 
@@ -15,19 +19,20 @@ export default function Climbing() {
 
   // Fallback image or placeholder
   const fallbackImageStyle = {
-    backgroundColor: '#f3f4f6',
+    backgroundColor: 'var(--surface-subtle)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    color: '#9ca3af',
+    color: 'var(--muted)',
     fontStyle: 'italic'
   };
 
   return (
     <main className="page legacy-page" lang="en">
+      <SEO title="Climbing: Craft, Challenge, and Creative Flow" description="Climbing as a practice in focus, iteration, problem-solving, and trust." image="https://maxheinze.com/images/climbing-banner.jpg" url={prefix + '/climbing'} />
       <EnglishContentNotice />
       {/* Hero Section */}
-      <div className="aspect-[3/1] overflow-hidden rounded-2xl shadow-lg mb-12">
+      <div className="legacy-hero-media">
         {imageErrors.banner ? (
           <div style={fallbackImageStyle} className="w-full h-full">
             <p>Climbing image unavailable</p>
@@ -43,16 +48,17 @@ export default function Climbing() {
       </div>
 
       {/* Intro */}
-      <section className="text-center mb-12">
+      <header className="legacy-page__header">
+        <p className="eyebrow">Personal practice · Movement</p>
         <h1 className="text-4xl sm:text-5xl font-extrabold mb-10 text-gray-900">
           Climbing: Craft, Challenge, and Creative Flow
         </h1>
-        <p className="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto">
+        <p className="page-lead">
           Whether scaling icy alpine slopes or solving bouldering problems indoors, climbing has become one of my
           most meaningful pursuits. It's a practice that blends physical challenge, mental focus, and creative
           problem-solving — much like game development.
         </p>
-      </section>
+      </header>
 
       {/* Why I Climb */}
       <section className="mb-16">
@@ -166,6 +172,10 @@ export default function Climbing() {
           ))}
         </div>
       </section>
+      <footer className="legacy-page__cta">
+        <p>Climbing is part of how I practise focus, iteration, and calm problem-solving away from the screen.</p>
+        <CareerActions />
+      </footer>
     </main>
   );
 }

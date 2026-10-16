@@ -5,6 +5,7 @@ import { localizedPost } from '../../data/blog';
 import { useTranslation } from 'react-i18next';
 import useRouteLanguage from '../../hooks/useRouteLanguage';
 import SEO from '../../components/SEO';
+import { displayTitle } from '../../utils/displayTitle';
 
 export default function DevBlogIndex({ posts }) {
   const { t } = useTranslation();
@@ -45,7 +46,7 @@ export default function DevBlogIndex({ posts }) {
               {import.meta.env.DEV && post.status === 'draft' && <span className="status-badge">{t('ui.draft')}</span>}
               {import.meta.env.DEV && post.date > new Date().toISOString().slice(0, 10) && <span className="status-badge">{t('ui.scheduled')}</span>}
             </div>
-            <div className="blog-entry__copy" lang={post.contentLanguage}><h2>{post.title}</h2><p>{post.summary}</p><ul className="tags">{post.tags.map(tag => <li key={tag}>{tag}</li>)}</ul></div>
+            <div className="blog-entry__copy" lang={post.contentLanguage}><h2>{displayTitle(post.title)}</h2><p>{post.summary}</p><ul className="tags">{post.tags.map(tag => <li key={tag}>{tag}</li>)}</ul></div>
             <ArrowUpRight className="entry-arrow" aria-hidden="true" />
           </Link>
         </li>)}

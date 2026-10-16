@@ -1,8 +1,14 @@
 import EnglishContentNotice from '../components/EnglishContentNotice';
+import SEO from '../components/SEO';
+import CareerActions from '../components/CareerActions';
+import useRouteLanguage from '../hooks/useRouteLanguage';
 export default function Kumiko() {
+  const { prefix } = useRouteLanguage();
   return (
     <main className="page legacy-page" lang="en">
+      <SEO title="Kumiko Joinery" description="A hands-on study of precision, iteration, and traditional wooden pattern-making." image="https://maxheinze.com/images/small-panel.jpg" url={prefix + '/kumiko'} />
       <EnglishContentNotice />
+      <p className="eyebrow">Personal practice · Woodwork</p>
       <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-10">
         Precision in Pattern: Exploring Kumiko Joinery
       </h1>
@@ -268,6 +274,10 @@ export default function Kumiko() {
         small decision affects the whole. Whether it’s code, circuits, or wood, I’m
         drawn to the same challenge — <strong>bringing order and beauty out of complexity.</strong>
       </p>
+      <footer className="legacy-page__cta">
+        <p>Making these pieces exercises the same patience, tooling, and systems thinking I bring to technical work.</p>
+        <CareerActions />
+      </footer>
     </main>
   );
 }

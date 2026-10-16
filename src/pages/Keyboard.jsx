@@ -1,13 +1,19 @@
 import EnglishContentNotice from '../components/EnglishContentNotice';
+import SEO from '../components/SEO';
+import CareerActions from '../components/CareerActions';
+import useRouteLanguage from '../hooks/useRouteLanguage';
 export default function Keyboard() {
+  const { prefix } = useRouteLanguage();
   return (
     <main className="page legacy-page" lang="en">
+      <SEO title="Wireless Charybdis Keyboard" description="A hardware and firmware project spanning PCB design, ZMK, Bluetooth, RGB, and custom SPI drivers." image="https://maxheinze.com/images/keyboard.jpg" url={prefix + '/keyboard'} />
       <EnglishContentNotice />
-      <header className="text-center mb-12">
+      <header className="legacy-page__header">
+        <p className="eyebrow">Hardware · Firmware · Toolmaking</p>
         <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-10">
           Making the Charybdis Wireless — and Then Taking It Further
         </h1>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+        <p className="page-lead">
           A personal hardware–software adventure: building a wireless, per-key RGB keyboard and writing custom firmware drivers.
         </p>
       </header>
@@ -225,11 +231,12 @@ export default function Keyboard() {
         </div>
       </section>
 
-      <footer className="border-t border-gray-200 pt-8 mt-12 text-center">
+      <footer className="legacy-page__cta">
         <p className="italic text-gray-600">
           What started as “can I make this keyboard wireless?” evolved into writing my own firmware drivers,
           rethinking power design, and bridging hardware with software — exactly the kind of curiosity and persistence I aim to bring to game development.
         </p>
+        <CareerActions />
       </footer>
     </main>
   );

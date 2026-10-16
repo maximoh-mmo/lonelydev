@@ -5,6 +5,7 @@ import SEO from '../components/SEO';
 import useRouteLanguage from '../hooks/useRouteLanguage';
 import CaseStudy from '../components/CaseStudy';
 import CareerActions from '../components/CareerActions';
+import VideoEmbed from '../components/VideoEmbed';
 
 export default function ProjectDetail() {
   const { projectId } = useParams();
@@ -23,10 +24,11 @@ export default function ProjectDetail() {
           {project.itchLink && <a className="action-button" href={project.itchLink} target="_blank" rel="noopener noreferrer">{t('ui.viewItch')}<span className="sr-only"> {t('ui.newTab')}</span></a>}
           {project.itchLink && text('playNote', '') && <p className="action-note">{text('playNote', '')}</p>}
           {project.githubLink && <a className="action-link" href={project.githubLink} target="_blank" rel="noopener noreferrer">{t('ui.viewGitHub')}<span className="sr-only"> {t('ui.newTab')}</span></a>}
+          {project.blogProject && <Link className="action-link" to={prefix + '/dev-blog?project=' + encodeURIComponent(project.blogProject)}>{project.id === 'photoboss' ? t('home.redesign.readBuildLog') : t('home.redesign.readNotes')}</Link>}
         </div>
       </header>
       <div className="project-media">{project.videoId
-        ? <iframe src={'https://www.youtube.com/embed/' + project.videoId} title={project.title + ' video'} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+        ? <VideoEmbed videoId={project.videoId} title={text('title', project.title)} />
         : <img src={project.imageUrl} alt={project.title} />}
       </div>
       <CaseStudy projectId={project.id} />

@@ -112,7 +112,10 @@ export default function Home() {
           <h2 id="onset-title">Onset</h2>
           <p>{t('home.redesign.onsetDescription')}</p>
           <TagList items={['Unreal Engine 5.8', t('home.redesign.onsetGenre'), t('home.redesign.inDevelopment')]} />
-          <Link className="text-action" to={prefix + '/dev-blog?project=Onset'}>{t('home.redesign.readNotes')} <ArrowUpRight aria-hidden="true" /></Link>
+          <div className="hero-actions">
+            <Link className="text-action text-action--primary" to={prefix + '/projects/onset'}>{t('projects.viewProject')} <ArrowUpRight aria-hidden="true" /></Link>
+            <Link className="text-action text-action--quiet" to={prefix + '/dev-blog?project=Onset'}>{t('home.redesign.readNotes')} <ArrowUpRight aria-hidden="true" /></Link>
+          </div>
         </div>
         <div className="system-map" role="img" aria-label={t('home.redesign.onsetDiagramAlt')} data-reveal>
           <span className="system-map__grid" aria-hidden="true" />
@@ -161,7 +164,10 @@ export default function Home() {
         </div>
         <div className="chapter-footer" data-reveal>
           <TagList items={['C++', 'Qt', 'SQLite', 'Windows 11']} />
-          <Link className="text-action" to={prefix + '/dev-blog?project=PhotoBoss'}>{t('home.redesign.readBuildLog')} <ArrowUpRight aria-hidden="true" /></Link>
+          <div className="hero-actions">
+            <Link className="text-action text-action--primary" to={prefix + '/projects/photoboss'}>{t('projects.viewProject')} <ArrowUpRight aria-hidden="true" /></Link>
+            <Link className="text-action text-action--quiet" to={prefix + '/dev-blog?project=PhotoBoss'}>{t('home.redesign.readBuildLog')} <ArrowUpRight aria-hidden="true" /></Link>
+          </div>
         </div>
       </section>
 

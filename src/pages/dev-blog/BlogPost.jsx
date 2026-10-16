@@ -7,6 +7,7 @@ import SEO from '../../components/SEO';
 import CareerActions from '../../components/CareerActions';
 import useRouteLanguage from '../../hooks/useRouteLanguage';
 import { localizedPost } from '../../data/blog';
+import { displayTitle } from '../../utils/displayTitle';
 import { ChevronLeft, Calendar, Folder } from 'lucide-react';
 
 // For loading the content lazily
@@ -62,14 +63,15 @@ export default function BlogPost({ posts }) {
 
   if (loading) return <main className="page article-page" aria-busy="true"><p className="page-lead" role="status">{t('ui.loading')}</p></main>;
   if (error || !post) return <main className="page"><header className="page-header"><h1>{t('blog.notFound', 'Post not found')}</h1><Link className="action-link" to={prefix + '/dev-blog'}>{t('nav.devBlog')}</Link></header></main>;
+  const visibleTitle = displayTitle(post.title);
   return (
     <main className="page article-page">
-      <SEO title={post.seoTitle || post.title} description={post.summary} url={prefix + '/dev-blog/' + id} />
+      <SEO title={post.seoTitle || visibleTitle} description={post.summary} url={prefix + '/dev-blog/' + id} />
       <Link className="action-link article-back" to={prefix + '/dev-blog'}><ChevronLeft aria-hidden="true" />{t('nav.devBlog')}</Link>
       <article>
         <header className="page-header">
           <p className="eyebrow">{post.project}</p>
-          <h1 lang={post.contentLanguage}>{post.title}</h1>
+          <h1 lang={post.contentLanguage}>{visibleTitle}</h1>
           <div className="article-meta">
             <span><Calendar aria-hidden="true" /><time dateTime={post.date}>{new Date(post.date).toLocaleDateString(language === 'de' ? 'de-DE' : 'en-GB', { day: '2-digit', month: 'long', year: 'numeric', timeZone: 'UTC' })}</time></span>
             <span><Folder aria-hidden="true" />{t('blog.categories.' + post.category, { defaultValue: post.category })}</span>
