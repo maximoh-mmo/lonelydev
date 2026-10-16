@@ -203,12 +203,6 @@ html.home-scroll-snap {
   scroll-snap-type: y mandatory;
 }
 
-/* The footer is the final snap destination after PhotoBoss. */
-html.home-scroll-snap .site-footer {
-  scroll-snap-align: end;
-  scroll-snap-stop: normal;
-}
-
 html.home-scroll-snap .portfolio-home > section {
   scroll-snap-align: start;
   scroll-snap-stop: always;

@@ -169,12 +169,6 @@ button, a, select, input, textarea, [tabindex] { outline-offset: 5px; }
 .translation-notice p { margin: 0; font-size: .9rem; line-height: 1.7; }
 .translation-notice svg { display: inline; width: 1rem; height: 1rem; margin-right: .5rem; color: var(--accent); }
 
-.site-footer { padding: clamp(3rem, 7vw, 6rem) var(--page-gutter); border-top: 1px solid var(--line); color: var(--ink); background: var(--surface-chrome); text-align: center; }
-.site-footer > p { margin: 0 0 1rem; color: var(--muted); font-size: .9rem; }
-.site-footer__email { color: var(--ink); font-size: clamp(1.3rem, 4vw, 3.5rem); letter-spacing: -.045em; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .2em; overflow-wrap: anywhere; }
-.site-footer__links { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem 2rem; margin-top: 1.5rem; }
-.site-footer__links a { display: inline-flex; align-items: center; min-height: 44px; color: var(--muted); font-size: .8rem; text-decoration: underline; text-underline-offset: .3em; }
-.site-footer__links a:hover { color: var(--accent); }
 
 .cv-viewer { position: fixed; inset: 0; width: 100%; max-width: none; height: 100%; max-height: none; margin: 0; padding: .8rem; border: 0; color: var(--ink); background: var(--canvas); }
 .cv-viewer[open] { display: grid; grid-template-rows: auto auto minmax(0, 1fr); gap: .65rem; }

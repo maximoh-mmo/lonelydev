@@ -3,7 +3,6 @@ import { lazy, Suspense, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Navbar from './components/Navbar';
 import CVViewer from './components/CVViewer';
-import SiteFooter from './components/SiteFooter';
 import NotFound from './pages/NotFound';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { posts } from './data/posts';
@@ -72,7 +71,6 @@ function App() {
         </Suspense>
       </ErrorBoundary>
       </div>
-      <SiteFooter />
     </div>
   );
 }

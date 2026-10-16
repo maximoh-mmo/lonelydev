@@ -55,7 +55,7 @@ export default function Navbar() {
     setIsOpen(false);
   };
   const navLinks = [
-    { name: t('nav.work'), path: prefix + '/' },
+    { name: t('nav.work'), path: prefix + '/projects' },
     { name: t('nav.about'), path: prefix + '/about' },
     { name: t('nav.devBlog'), path: prefix + '/dev-blog' },
   ];
