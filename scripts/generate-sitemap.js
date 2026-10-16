@@ -67,7 +67,7 @@ ${allRoutes
     '# Generated from the public route manifest. Unknown paths use 404.html.',
     ...allRoutes
       .filter(route => route !== '/')
-      .map(route => `${route} /index.html 200`),
+      .map(route => `${route} / 200`),
   ].join('\n') + '\n';
   fs.writeFileSync(path.join(publicDir, '_redirects'), redirects, 'utf-8');
 
