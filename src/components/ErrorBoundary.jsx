@@ -17,20 +17,16 @@ export class ErrorBoundary extends Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="max-w-4xl mx-auto px-6 py-20 text-center">
-          <h1 className="text-3xl font-bold text-gray-800 mb-4">
-            Something went wrong
-          </h1>
-          <p className="text-gray-600 mb-8">
-            We encountered an error loading this page.
-          </p>
-          <button
-            onClick={() => window.location.reload()}
-            className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            Reload Page
-          </button>
-        </div>
+        <main className="page error-page" role="alert">
+          <header className="page-header">
+            <p className="eyebrow">Error</p>
+            <h1>Something went wrong</h1>
+            <p className="page-lead">We encountered an error loading this page.</p>
+            <div className="action-group">
+              <button type="button" onClick={() => window.location.reload()} className="action-button">Reload page</button>
+            </div>
+          </header>
+        </main>
       );
     }
 

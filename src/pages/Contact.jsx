@@ -11,8 +11,8 @@ export default function Contact() {
   const contactLinks = [
     {
       name: "Email",
-      value: "maxheinze@googlemail.com",
-      href: "mailto:maxheinze@googlemail.com",
+      value: "maxheinze@gmail.com",
+      href: "mailto:maxheinze@gmail.com",
       icon: <Mail className="w-8 h-8" />,
       color: "bg-blue-50 text-blue-600 hover:bg-blue-100",
       isDownload: false,
