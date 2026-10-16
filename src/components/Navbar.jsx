@@ -69,6 +69,10 @@ export default function Navbar() {
         </ul>
         <a className="site-nav__email" href="mailto:maxheinze@gmail.com"><AtSign aria-hidden="true" /><span>{t('nav.email')}</span></a>
         <div className="site-nav__settings">
+          <div className="legal-links">
+            <Link to={prefix + '/impressum'} aria-current={location.pathname === prefix + '/impressum' ? 'page' : undefined}>{t('nav.impressum')}</Link>
+            <Link to={prefix + '/privacy'} aria-current={location.pathname === prefix + '/privacy' ? 'page' : undefined}>{t('nav.privacy')}</Link>
+          </div>
           <div className="language-switch" role="group" aria-label={t('nav.language')}>
             <button type="button" aria-pressed={language === 'en'} className={language === 'en' ? 'is-active' : ''} onClick={() => changeLanguage('en')}>EN</button>
             <span aria-hidden="true">/</span>

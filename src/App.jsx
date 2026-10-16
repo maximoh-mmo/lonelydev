@@ -15,6 +15,8 @@ const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
 const Kumiko = lazy(() => import('./pages/Kumiko'));
 const Keyboard = lazy(() => import('./pages/Keyboard'));
 const Climbing = lazy(() => import('./pages/Climbing'));
+const Impressum = lazy(() => import('./pages/Impressum'));
+const Privacy = lazy(() => import('./pages/Privacy'));
 const DevBlogIndex = lazy(() => import('./pages/dev-blog/index'));
 const BlogPost = lazy(() => import('./pages/dev-blog/BlogPost'));
 
@@ -47,6 +49,8 @@ const routeDefinitions = (prefix = '') => (
     <Route path={`${prefix}/kumiko`} element={<Kumiko />} />
     <Route path={`${prefix}/keyboard`} element={<Keyboard />} />
     <Route path={`${prefix}/climbing`} element={<Climbing />} />
+    <Route path={`${prefix}/impressum`} element={<Impressum />} />
+    <Route path={`${prefix}/privacy`} element={<Privacy />} />
     <Route path={`${prefix}/dev-blog`} element={<DevBlogIndex posts={posts} />} />
     <Route path={`${prefix}/dev-blog/:id`} element={<BlogPost posts={posts} />} />
   </>

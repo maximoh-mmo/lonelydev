@@ -53,6 +53,8 @@
     "theme_system": "System",
     "theme_light": "Light",
     "theme_dark": "Dark",
+    "impressum": "Imprint",
+    "privacy": "Privacy",
     "menu": "Toggle menu"
   },
   "home": {

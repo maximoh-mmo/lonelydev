@@ -18,6 +18,8 @@ const staticRoutes = [
   '/kumiko',
   '/keyboard',
   '/climbing',
+  '/impressum',
+  '/privacy',
   '/dev-blog',
 ];
 
