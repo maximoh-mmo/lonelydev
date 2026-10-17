@@ -88,6 +88,21 @@ export default function Home() {
         <div className="cinematic-hero__copy">
           <p className="section-kicker">{t('home.redesign.kicker')}</p>
           <h1 id="home-title">{t('home.redesign.headlineLead')}<span className="headline-echo"><span className="headline-echo__text">{t('home.redesign.headlineEcho')}</span></span></h1>
+          <svg width="0" height="0" style={{ position: 'absolute', pointerEvents: 'none', opacity: 0 }} aria-hidden="true">
+            <defs>
+              <filter id="echo-outline" x="-30%" y="-30%" width="160%" height="160%">
+                <feMorphology in="SourceAlpha" operator="dilate" radius="1.25" result="dilated" />
+                <feComposite in="dilated" in2="SourceAlpha" operator="out" result="strokeMask" />
+                <feFlood floodColor="#f3f0e9" floodOpacity="1" result="strokeColor" />
+                <feComposite in="strokeColor" in2="strokeMask" operator="in" result="stroke" />
+                <feDropShadow in="stroke" dx="0" dy="0" stdDeviation="3" floodColor="#030507" floodOpacity="0.9" result="shadow" />
+                <feMerge>
+                  <feMergeNode in="shadow" />
+                  <feMergeNode in="stroke" />
+                </feMerge>
+              </filter>
+            </defs>
+          </svg>
           <p className="cinematic-hero__intro">{t('home.redesign.introLead')}<mark>{t('home.redesign.introFocus')}</mark>{t('home.redesign.introTail')}</p>
           <div className="hero-actions">
             <Link className="text-action text-action--primary" to={`${prefix}/projects/kyoto-conflict`}>

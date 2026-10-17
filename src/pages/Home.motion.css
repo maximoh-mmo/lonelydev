@@ -22,13 +22,12 @@
 
 .cinematic-hero h1 .headline-echo__text {
   display: inline;
-  color: rgba(243, 240, 233, .76);
-  -webkit-text-fill-color: rgba(243, 240, 233, .76);
+  color: #f3f0e9;
+  -webkit-text-fill-color: #f3f0e9;
   -webkit-text-stroke-width: 0;
-  font-weight: 420;
+  font-weight: 700;
   font-kerning: normal;
-  /* Dark halo keeps the outlined words legible over the key art. */
-  text-shadow: 0 0 .32em rgba(3, 5, 7, .85), 0 0 .08em rgba(3, 5, 7, .9);
+  filter: url(#echo-outline);
 }
 
 /* Accent under the last line of the phrase. Width comes from Home.jsx; the
@@ -602,6 +601,4 @@ html.home-scroll-snap .portfolio-home > section {
   .headline-echo {
     letter-spacing: -.015em;
   }
-
-  .cinematic-hero h1 .headline-echo__text { text-shadow: 0 0 .24em rgba(3, 5, 7, .85), 0 0 .06em rgba(3, 5, 7, .9); }
 }
