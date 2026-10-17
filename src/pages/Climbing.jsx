@@ -79,26 +79,32 @@ export default function Climbing() {
           nuance, and the resilience it builds. It's not just about reaching the top — it's about how you get there.
         </p>
 
-        <div className="aspect-video overflow-hidden rounded-xl shadow-md">
+        <figure className="my-10 w-full">
           {imageErrors.bouldering ? (
-            <div style={fallbackImageStyle} className="w-full h-full">
+            <div style={fallbackImageStyle} className="w-full aspect-[16/10] rounded-xl border border-line">
               <p>Bouldering image unavailable</p>
             </div>
           ) : (
-            <img
-              src="/images/bouldering.webp"
-              srcSet="/images/bouldering-800.webp 800w, /images/bouldering-1200.webp 1200w, /images/bouldering.webp 1506w"
-              sizes="(max-width: 1040px) calc(100vw - 2.5rem), 1000px"
-              width="1506"
-              height="2000"
-              decoding="async"
-              loading="lazy"
-              alt="Indoor bouldering session"
-              className="w-full h-full object-cover"
-              onError={() => handleImageError('bouldering')}
-            />
+            <div className="aspect-[16/10] overflow-hidden rounded-xl shadow-md bg-surface-subtle border border-line">
+              <img
+                src="/images/bouldering.webp"
+                srcSet="/images/bouldering-800.webp 800w, /images/bouldering-1200.webp 1200w, /images/bouldering.webp 1506w"
+                sizes="(max-width: 1040px) calc(100vw - 2.5rem), 1000px"
+                width="1506"
+                height="2000"
+                decoding="async"
+                loading="lazy"
+                alt="Indoor bouldering session at 7a+ Potsdam"
+                className="w-full h-full object-cover"
+                style={{ height: '100%', objectPosition: 'center 56%', border: 'none' }}
+                onError={() => handleImageError('bouldering')}
+              />
+            </div>
           )}
-        </div>
+          <figcaption>
+            Indoor bouldering problem at 7a+ Potsdam — reading the route, body positioning, and dynamic movement.
+          </figcaption>
+        </figure>
       </section>
 
       {/* Parallels with Programming */}
@@ -135,26 +141,32 @@ export default function Climbing() {
           </li>
         </ul>
 
-        <div className="aspect-video overflow-hidden rounded-xl shadow-md mt-10">
+        <figure className="my-10 w-full">
           {imageErrors.iceclimb ? (
-            <div style={fallbackImageStyle} className="w-full h-full">
+            <div style={fallbackImageStyle} className="w-full aspect-[16/10] rounded-xl border border-line">
               <p>Ice climbing image unavailable</p>
             </div>
           ) : (
-            <img
-              src="/images/iceclimb.webp"
-              srcSet="/images/iceclimb-800.webp 800w, /images/iceclimb-1200.webp 1200w, /images/iceclimb.webp 2000w"
-              sizes="(max-width: 1040px) calc(100vw - 2.5rem), 1000px"
-              width="2000"
-              height="1125"
-              decoding="async"
-              loading="lazy"
-              alt="Ice climbing in alpine environment"
-              className="w-full h-full object-cover"
-              onError={() => handleImageError('iceclimb')}
-            />
+            <div className="aspect-[16/10] overflow-hidden rounded-xl shadow-md bg-surface-subtle border border-line">
+              <img
+                src="/images/iceclimb.webp"
+                srcSet="/images/iceclimb-800.webp 800w, /images/iceclimb-1200.webp 1200w, /images/iceclimb.webp 1125w"
+                sizes="(max-width: 1040px) calc(100vw - 2.5rem), 1000px"
+                width="1125"
+                height="2000"
+                decoding="async"
+                loading="lazy"
+                alt="High-alpine knife-edge ridge traverse in alpine snow and ice"
+                className="w-full h-full object-cover"
+                style={{ height: '100%', objectPosition: 'center 52%', border: 'none' }}
+                onError={() => handleImageError('iceclimb')}
+              />
+            </div>
           )}
-        </div>
+          <figcaption>
+            High-alpine ridge traverse — navigating exposed terrain, managing rope teams, and adapting to mountain conditions.
+          </figcaption>
+        </figure>
       </section>
 
       {/* Gallery */}
@@ -163,35 +175,37 @@ export default function Climbing() {
           Moments from the Wall
         </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
           {/* Gallery images with error handling */}
           {[
-            { id: 'climb1', src: '/images/climb1.webp', srcSet: '/images/climb1-800.webp 800w, /images/climb1-1200.webp 1200w, /images/climb1.webp 1506w', alt: 'Climbing 1', width: 1506, height: 2000 },
-            { id: 'climb2', src: '/images/climb2.webp', srcSet: '/images/climb2-800.webp 800w, /images/climb2-1200.webp 1200w, /images/climb2.webp 2000w', alt: 'Climbing 2', width: 2000, height: 1125 },
-            { id: 'climb3', src: '/images/climb3.webp', srcSet: '/images/climb3-800.webp 800w, /images/climb3.webp 1200w', alt: 'Climbing 3', width: 1200, height: 1600 }
+            { id: 'climb1', src: '/images/climb1.webp', srcSet: '/images/climb1-800.webp 800w, /images/climb1-1200.webp 1200w, /images/climb1.webp 1506w', alt: 'Indoor lead climbing session', width: 1506, height: 2000 },
+            { id: 'climb2', src: '/images/climb2.webp', srcSet: '/images/climb2-800.webp 800w, /images/climb2-1200.webp 1200w, /images/climb2.webp 1125w', alt: 'Glacier mountaineering with crampons and ice axe', width: 1125, height: 2000 },
+            { id: 'climb3', src: '/images/climb3.webp', srcSet: '/images/climb3-800.webp 800w, /images/climb3.webp 1200w', alt: 'Outdoor climbing tower session', width: 1200, height: 1600 }
           ].map((image) => (
             imageErrors[image.id] ? (
               <div
                 key={image.id}
                 style={fallbackImageStyle}
-                className="rounded-lg shadow-md w-full h-64 flex items-center justify-center"
+                className="rounded-xl aspect-[3/4] flex items-center justify-center"
               >
                 <p>{image.alt} unavailable</p>
               </div>
             ) : (
-              <img
-                key={image.id}
-                src={image.src}
-                srcSet={image.srcSet}
-                sizes="(max-width: 640px) calc(100vw - 2.5rem), 33vw"
-                alt={image.alt}
-                width={image.width}
-                height={image.height}
-                loading="lazy"
-                decoding="async"
-                className="rounded-lg shadow-md object-cover w-full h-64 transform transition duration-300"
-                onError={() => handleImageError(image.id)}
-              />
+              <div key={image.id} className="aspect-[3/4] overflow-hidden rounded-xl bg-surface-subtle border border-line">
+                <img
+                  src={image.src}
+                  srcSet={image.srcSet}
+                  sizes="(max-width: 640px) calc(100vw - 2.5rem), 33vw"
+                  alt={image.alt}
+                  width={image.width}
+                  height={image.height}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover object-center transform transition duration-300 hover:scale-105"
+                  style={{ border: 'none' }}
+                  onError={() => handleImageError(image.id)}
+                />
+              </div>
             )
           ))}
         </div>
