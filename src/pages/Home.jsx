@@ -93,18 +93,12 @@ export default function Home() {
               <filter id="echo-outline" x="-30%" y="-30%" width="160%" height="160%">
                 <feMorphology in="SourceAlpha" operator="dilate" radius="1.25" result="dilated" />
                 <feComposite in="dilated" in2="SourceAlpha" operator="out" result="strokeMask" />
-                <feFlood floodColor="#f3f0e9" floodOpacity="0.88" result="strokeColor" />
+                <feFlood floodColor="#ffffff" floodOpacity="1" result="strokeColor" />
                 <feComposite in="strokeColor" in2="strokeMask" operator="in" result="stroke" />
-                <feFlood floodColor="#f3f0e9" floodOpacity="0.14" result="fillColor" />
-                <feComposite in="fillColor" in2="SourceAlpha" operator="in" result="fill" />
-                <feMerge result="letter">
-                  <feMergeNode in="fill" />
-                  <feMergeNode in="stroke" />
-                </feMerge>
-                <feDropShadow in="letter" dx="0" dy="0" stdDeviation="5" floodColor="#030507" floodOpacity="0.95" result="shadow" />
+                <feDropShadow in="stroke" dx="0" dy="0" stdDeviation="3" floodColor="#030507" floodOpacity="0.9" result="shadow" />
                 <feMerge>
                   <feMergeNode in="shadow" />
-                  <feMergeNode in="letter" />
+                  <feMergeNode in="stroke" />
                 </feMerge>
               </filter>
             </defs>

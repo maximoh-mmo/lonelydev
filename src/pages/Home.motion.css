@@ -601,6 +601,4 @@ html.home-scroll-snap .portfolio-home > section {
   .headline-echo {
     letter-spacing: -.015em;
   }
-
-  .cinematic-hero h1 .headline-echo__text { text-shadow: 0 0 .24em rgba(3, 5, 7, .85), 0 0 .06em rgba(3, 5, 7, .9); }
 }
