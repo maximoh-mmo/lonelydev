@@ -1,6 +1,9 @@
 import { visiblePosts } from './post-visibility.js';
 
 export const allPosts = [
+  { id: 'onset28', date: '2026-11-20', status: 'scheduled' },
+  { id: 'onset27', date: '2026-11-16', status: 'scheduled' },
+  { id: 'onset26', date: '2026-11-13', status: 'scheduled' },
   { id: 'onset25', date: '2026-11-09', status: 'scheduled' },
   { id: 'onset24', date: '2026-11-06', status: 'scheduled' },
   { id: 'onset23', date: '2026-11-02', status: 'scheduled' },
