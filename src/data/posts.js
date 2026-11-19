@@ -1,6 +1,14 @@
 import { visiblePosts } from './post-visibility.js';
 
 export const allPosts = [
+  { id: 'achi3', date: '2026-12-18', status: 'scheduled' },
+  { id: 'achi2', date: '2026-12-14', status: 'scheduled' },
+  { id: 'achi1', date: '2026-12-11', status: 'scheduled' },
+  { id: 'website2', date: '2026-12-07', status: 'scheduled' },
+  { id: 'website1', date: '2026-12-04', status: 'scheduled' },
+  { id: 'jts3d2', date: '2026-11-30', status: 'scheduled' },
+  { id: 'jts3d1', date: '2026-11-27', status: 'scheduled' },
+  { id: 'onset29', date: '2026-11-23', status: 'scheduled' },
   { id: 'onset28', date: '2026-11-20', status: 'scheduled' },
   { id: 'onset27', date: '2026-11-16', status: 'scheduled' },
   { id: 'onset26', date: '2026-11-13', status: 'scheduled' },

@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 400" role="img" aria-labelledby="title desc">
+  <title id="title">16-Bit PCM Procedural Knock Synthesis Envelope</title>
+  <desc id="desc">Diagram showing how SoundManager synthesizes distinct Circle (270Hz to 175Hz) and Rounded Square (225Hz to 145Hz) wooden knocks at 44,100 Hz by layering a pitch-dropping body oscillator with an exponential click transient.</desc>
+  <rect width="920" height="400" rx="14" fill="#16181D"/>
+  <rect x="16" y="16" width="888" height="368" rx="10" fill="none" stroke="#2B313C" stroke-width="1.5"/>
+
+  <text x="460" y="52" fill="#E4E7EC" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="700" text-anchor="middle">Zero-Asset 16-Bit PCM Synthesis (44,100 Hz Mono)</text>
+  <text x="460" y="74" fill="#9AA0A6" font-family="Inter, system-ui, sans-serif" font-size="13" text-anchor="middle">Two-layer acoustic model: fast cavity pitch drop + high-frequency click transient</text>
+
+  <!-- Left Plot: Envelopes & Pitch Drop -->
+  <g transform="translate(55, 105)">
+    <text x="180" y="0" fill="#E4E7EC" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="700" text-anchor="middle">Amplitude &amp; Pitch Drop Envelopes</text>
+    <!-- Axes -->
+    <line x1="0" y1="210" x2="365" y2="210" stroke="#4B5563" stroke-width="1.5"/>
+    <line x1="0" y1="25" x2="0" y2="210" stroke="#4B5563" stroke-width="1.5"/>
+    <text x="180" y="232" fill="#9AA0A6" font-family="ui-monospace, Consolas, monospace" font-size="11" text-anchor="middle">Normalized Time (0.0 → 1.0 · ~85ms)</text>
+
+    <!-- Body Envelope exp(-norm_t * 6.8) -->
+    <path d="M 0 210 L 10 40 C 50 55, 120 155, 220 192 C 280 205, 330 208, 360 209" fill="none" stroke="#3B9EFF" stroke-width="3"/>
+    <!-- Transient Envelope exp(-norm_t * 24.0) -->
+    <path d="M 0 210 L 8 40 C 20 95, 45 178, 95 207 L 360 210" fill="none" stroke="#FF8A3D" stroke-width="3"/>
+    <!-- Pitch Drop Curve -->
+    <path d="M 0 58 L 150 165 L 360 165" fill="none" stroke="#66F1F2" stroke-width="2" stroke-dasharray="6 4"/>
+
+    <!-- Labels -->
+    <text x="125" y="96" fill="#3B9EFF" font-family="ui-monospace, Consolas, monospace" font-size="11">Body: exp(-t * 6.8)</text>
+    <text x="58" y="150" fill="#FF8A3D" font-family="ui-monospace, Consolas, monospace" font-size="11">Click: exp(-t * 24.0)</text>
+    <text x="200" y="156" fill="#66F1F2" font-family="ui-monospace, Consolas, monospace" font-size="11">f_start → f_end (first 35ms)</text>
+  </g>
+
+  <!-- Divider -->
+  <line x1="465" y1="100" x2="465" y2="355" stroke="#2B313C" stroke-width="1.5" stroke-dasharray="6 6"/>
+
+  <!-- Right Panel: Acoustic Silhouettes -->
+  <g transform="translate(500, 105)">
+    <text x="190" y="0" fill="#E4E7EC" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="700" text-anchor="middle">Distinct Acoustic Profiles by Token Shape</text>
+
+    <!-- Circle Token Row -->
+    <g transform="translate(0, 30)">
+      <rect width="380" height="82" rx="10" fill="#1E2229" stroke="#3B9EFF" stroke-width="1.5"/>
+      <circle cx="38" cy="41" r="18" fill="#E4E7EC"/><circle cx="38" cy="41" r="14" fill="#3B9EFF"/><circle cx="38" cy="41" r="7" fill="#1E2229"/>
+      <text x="74" y="30" fill="#E4E7EC" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="700">Player 1 Circle (●) — Bright Wood</text>
+      <text x="74" y="50" fill="#66F1F2" font-family="ui-monospace, Consolas, monospace" font-size="12">Body: 270 Hz → 175 Hz (+0.30 × 2nd harmonic)</text>
+      <text x="74" y="68" fill="#9AA0A6" font-family="ui-monospace, Consolas, monospace" font-size="11">Click transient + 16-bit PCM sample clamping</text>
+    </g>
+
+    <!-- Square Token Row -->
+    <g transform="translate(0, 130)">
+      <rect width="380" height="82" rx="10" fill="#1E2229" stroke="#FF8A3D" stroke-width="1.5"/>
+      <rect x="20" y="23" width="36" height="36" rx="8" fill="#E4E7EC"/><rect x="24" y="27" width="28" height="28" rx="6" fill="#FF8A3D"/>
+      <text x="74" y="30" fill="#E4E7EC" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="700">Player 2 Square (■) — Deep Wood</text>
+      <text x="74" y="50" fill="#FF8A3D" font-family="ui-monospace, Consolas, monospace" font-size="12">Body: 225 Hz → 145 Hz (+0.30 × 2nd harmonic)</text>
+      <text x="74" y="68" fill="#9AA0A6" font-family="ui-monospace, Consolas, monospace" font-size="11">Lower resonance distinguishes opponent turns by ear</text>
+    </g>
+
+    <text x="190" y="242" fill="#9AA0A6" font-family="ui-monospace, Consolas, monospace" font-size="12" text-anchor="middle">Total external audio assets bundled: 0 KB</text>
+  </g>
+</svg>
